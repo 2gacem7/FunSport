@@ -12,13 +12,4 @@ constructor(private authService: AuthService) {}
     return this.authService.login(req.user);
   }
 
-  @Get('google')
-  @UseGuards(AuthGuard('google'))
-  async googleAuth(@Request() req) {}
-
-  @Get('google/redirect')
-  @UseGuards(AuthGuard('google'))
-  googleAuthRedirect(@Request() req) {
-    return this.authService.googleLogin(req)
-  }
 }

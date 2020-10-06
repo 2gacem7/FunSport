@@ -4,8 +4,11 @@ const passwordRegex = new RegExp('^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0
 
 export class UpdateUserDto {
 
-  @MinLength(3)
-  name: string;
+  @MinLength(1)
+  firstName: string;
+
+  @MinLength(1)
+  lastName: string;
 
   @IsEmail()
   email: string;

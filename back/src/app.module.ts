@@ -8,7 +8,7 @@ import { WidgetsController } from './widgets/widgets.controller';
 import { WidgetsModule } from './widgets/widgets.module';
 import { AboutController } from './about/about.controller';
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/dashboard'), UsersModule, AuthModule, WidgetsModule],
+  imports: [MongooseModule.forRoot('mongodb://localhost/funsport'), UsersModule, AuthModule, WidgetsModule],
   controllers: [AppController, WidgetsController,AboutController],
   providers: [AppService],
 })
