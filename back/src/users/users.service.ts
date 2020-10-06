@@ -2,10 +2,8 @@ import { Model, Mongoose, model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../schemas/user.schema';
-import { Service } from '../schemas/service.schema';
 import { Widget } from '../schemas/widget.schema';
 
-import { CreateServiceDto } from '../dto/create-service.dto';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 
@@ -15,7 +13,6 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>,
-  @InjectModel(Service.name) private serviceModel: Model<Service>,
   @InjectModel(Widget.name) private widgetModel: Model<Widget>) {
   }
 
@@ -51,8 +48,6 @@ export class UsersService {
     const name = createUserDto.name;
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     const createdUser = await new this.userModel({ name: name,email: email, password: hashedPassword });
-    const createdService = await new this.serviceModel({userId: createdUser._id, services : []})
-    createdService.save();
     return createdUser.save();
   }
 
