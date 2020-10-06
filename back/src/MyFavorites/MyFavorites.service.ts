@@ -11,20 +11,20 @@ export class MyFavoritesService {
     constructor( @InjectModel(MyFavorite.name) private myFavoriteModel: Model<MyFavorite>){}
 
     async getMyFavorites(userId){
-        const widgets = await this.myFavoriteModel.find({'userId':userId}).exec();
-        return widgets;
+        const favorites = await this.myFavoriteModel.find({'userId':userId}).exec();
+        return favorites;
     }
 
     async addMyFavorite(userId,favoriteId){
-        const newWidget = await this.myFavoriteModel.create({'userId':userId, sportFavoriteId:favoriteId,data:[]})
-        newWidget.save()
-        return newWidget
+        const newFavorite = await this.myFavoriteModel.create({'userId':userId, sportFavoriteId:favoriteId,data:[]})
+        newFavorite.save()
+        return newFavorite
     }
 
     async delMyFavorite(id){
         await this.myFavoriteModel.findByIdAndDelete(id);
         return {
-            message: "Update ok"
+            message: "Deleted"
         };
     }
 }
