@@ -27,8 +27,6 @@ export class AuthService {
                       firstName: user[0].firstName,
                       lastName: user[0].lastName ,
                       isAdmin: user[0].isAdmin,
-                      mySports: user[0].mySports,
-                      myFavorites: user[0].myFavorites
                     };
     const access_token = this.jwtService.sign(payload)
     return {

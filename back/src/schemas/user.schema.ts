@@ -18,11 +18,6 @@ export class User extends Document {
   @Prop()
   isAdmin: boolean;
 
-  @Prop()
-  mySports: string[];
-
-  @Prop()
-  myFavorites: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

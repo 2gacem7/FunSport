@@ -19,9 +19,4 @@ export class CreateUserDto {
   @IsOptional()
   isAdmin: boolean;
 
-  @IsOptional()
-  mySports: string[];
-
-  @IsOptional()
-  myFavorite: string[];
 }
