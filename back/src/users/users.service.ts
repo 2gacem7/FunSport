@@ -28,20 +28,7 @@ export class UsersService {
   }
 
 
-  async update(id, updateUserDto: UpdateUserDto): Promise<User>{
-    const userToUpdate = await this.userModel.findById(id);
-     if (updateUserDto['password'] == ""){
-      updateUserDto['password'] = userToUpdate.password;
-    } else if (!await bcrypt.compare( updateUserDto['password'], userToUpdate.password)){
-      const hashedPassword = await bcrypt.hash(updateUserDto['password'], 10);
-      updateUserDto['password'] = hashedPassword;
-    } else {
-      updateUserDto['password'] = userToUpdate.password;
-    }
-    const updatedUser = await this.userModel.findByIdAndUpdate(id,updateUserDto,{new:true,useFindAndModify:false})
-    return updatedUser;
-
-  }
+ 
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const email = createUserDto.email;
@@ -63,6 +50,34 @@ export class UsersService {
 
   async deleteUser(id) : Promise<void>{
     this.userModel.deleteOne({'_id':id}).exec();
+  }
+
+ 
+  async update(id, body): Promise<any>{
+    const user = await this.userModel.findById(id);
+    let userUpdated = user;
+    let updated = "nothing updated";
+    
+    if (body.hasOwnProperty("firstName")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"firstName": body.firstName},{new:true,useFindAndModify:false}) 
+      updated = "user updated"
+    }
+    if (body.hasOwnProperty("lastName")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"lastName": body.lastName},{new:true,useFindAndModify:false}) 
+      updated = "user updated"
+    }
+    if (body.hasOwnProperty("email")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"email": body.email},{new:true,useFindAndModify:false}) 
+      updated = "user updated"
+    } 
+    if (body.hasOwnProperty("password")){
+      const hashedPassword = await bcrypt.hash(body.password, 10);
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"password": hashedPassword},{new:true,useFindAndModify:false}) 
+      updated = "user updated"
+    } 
+  
+   
+    return [userUpdated, updated]
   }
 
 

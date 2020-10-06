@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Put, Post, Param, Delete, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Put, Post, Param, Delete, Patch, UseGuards, Request} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 import { User } from '../schemas/user.schema';
 import { HttpException, HttpStatus , HttpCode} from '@nestjs/common'
@@ -35,6 +36,13 @@ constructor(private readonly usersService: UsersService) {}
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<any> {
     return this.usersService.findOne(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch()
+  async update(@Request() req, @Body() body) {
+    const id = req.user.id
+    return this.usersService.update(id, body);
   }
 
 
