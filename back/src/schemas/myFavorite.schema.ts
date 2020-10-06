@@ -7,10 +7,10 @@ export class MyFavorite extends Document {
   userId: string;
 
   @Prop()
-  favoriteId: string;
+  sportFavoriteId: string;
 
   @Prop()
-  data: string[];
+  data: [string];
 
 
 }

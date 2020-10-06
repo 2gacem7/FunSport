@@ -4,7 +4,7 @@ export class CreateMyFavoriteDto {
 
   userId: string;
 
-  favoriteId: string;
+  sportFavoriteId: string;
 
   data: string[];
 

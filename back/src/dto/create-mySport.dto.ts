@@ -4,7 +4,7 @@ export class CreateMySportDto {
 
   userId: string;
 
-  sportId: string;
+  sportFavoriteId: string;
 
   data: [string];
 

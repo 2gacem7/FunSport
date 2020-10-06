@@ -14,7 +14,7 @@ export class MySportsService {
         // Populate the data with the API TODO
         // :userId
         // return Model<MySport>
-        const datas = await this.mySportModel.findById(userId);
+        const datas = await this.mySportModel.find({userId :userId}).exec();
         // for(let i =0; i<datas.length;i++){
             // TODO
         // }

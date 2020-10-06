@@ -4,26 +4,26 @@ import { MyFavoritesService } from './MyFavorites.service';
 
 @Controller('myfavorites')
 export class MyFavoritesController {
-    constructor(private readonly widgetsService: MyFavoritesService) {}
+    constructor(private readonly myFavoritesService: MyFavoritesService) {}
 
     @UseGuards(JwtAuthGuard)
     @Get()
     async getWidget(@Request() req) {
-      const list = await this.widgetsService.getMyFavorites(req.user.id)
+      const list = await this.myFavoritesService.getMyFavorites(req.user.id)
       return list;
     }
 
     @UseGuards(JwtAuthGuard)
     @Post()
     async addWidget(@Request() req) {
-      const list = await this.widgetsService.addMyFavorite(req.user.id, req.body.widgetId, req.body.typeWidget)
+      const list = await this.myFavoritesService.addMyFavorite(req.user.id, req.body.sportFavoriteId)
       return list;
     }
 
     @UseGuards(JwtAuthGuard)
     @Delete()
     async delWidget(@Request() req) {
-       await this.widgetsService.delMyFavorite(req.body.widgetId)
+       await this.myFavoritesService.delMyFavorite(req.body.widgetId)
        return {
         message: "Update ok"
     };
