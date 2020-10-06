@@ -3,13 +3,15 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';;
 import { User, UserSchema } from '../schemas/user.schema';
-import { Widget, WidgetSchema } from '../schemas/widget.schema';
+import { MySport, MySportSchema } from '../schemas/mySport.schema';
+import { MyFavorite, MyFavoriteSchema } from '../schemas/myFavorite.schema';
 
 
 @Module({
     imports: [
       MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-      MongooseModule.forFeature([{ name: Widget.name, schema: WidgetSchema }])
+      MongooseModule.forFeature([{ name: MySport.name, schema: MySportSchema }]),
+      MongooseModule.forFeature([{ name: MyFavorite.name, schema: MyFavoriteSchema }])
 
     ],
     controllers: [UsersController],
