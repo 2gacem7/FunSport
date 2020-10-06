@@ -24,9 +24,6 @@ export class UsersService {
     return true;
   }
 
-  async updateToken(id , token){
-    await this.userModel.updateOne({'_id':id},{ 'token': token})
-  }
 
   async update(id, updateUserDto: UpdateUserDto): Promise<User>{
     const userToUpdate = await this.userModel.findById(id);
@@ -45,9 +42,10 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const email = createUserDto.email;
-    const name = createUserDto.name;
+    const firstName = createUserDto.firstName;
+    const lastName = createUserDto.lastName;
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-    const createdUser = await new this.userModel({ name: name,email: email, password: hashedPassword });
+    const createdUser = await new this.userModel({ firstName: firstName, lastName: lastName,email: email, password: hashedPassword ,isAdmin: false });
     return createdUser.save();
   }
 

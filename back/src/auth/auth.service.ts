@@ -21,22 +21,19 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { email: user[0].email, id: user[0]._id };
+    const payload = { 
+                      email: user[0].email,
+                      id: user[0]._id ,
+                      firstName: user[0].firstName,
+                      lastName: user[0].lastName ,
+                      isAdmin: user[0].isAdmin,
+                      mySports: user[0].mySports,
+                      myFavorites: user[0].myFavorites
+                    };
     const access_token = this.jwtService.sign(payload)
-    await this.usersService.updateToken( user[0]._id, access_token);
     return {
       access_token: access_token,
     };
     }
 
-    googleLogin(req) {
-      if (!req.user) {
-        return 'No user from google'
-      }
-  
-      return {
-        message: 'User information from google',
-        user: req.user
-      }
-    }
 }
