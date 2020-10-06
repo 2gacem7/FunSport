@@ -2,7 +2,8 @@ import { Model, Mongoose, model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../schemas/user.schema';
-import { Widget } from '../schemas/widget.schema';
+import { MySport } from '../schemas/mySport.schema';
+import { MyFavorite } from '../schemas/myFavorite.schema';
 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -13,7 +14,9 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>,
-  @InjectModel(Widget.name) private widgetModel: Model<Widget>) {
+  @InjectModel(MySport.name) private mySportModel: Model<MySport>,
+  @InjectModel(MyFavorite.name) private myFavoriteModel: Model<MyFavorite>,
+  ) {
   }
 
   async userExists(createUserDTO: CreateUserDto): Promise<any> {

@@ -2,7 +2,7 @@ import { Model, Mongoose, model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { MySport } from '../schemas/mySport.schema';
-import { CreateWidgetDto } from '../dto/create-myFavorite.dto';
+import { CreateMySportDto } from '../dto/create-mySport.dto';
 
 
 @Injectable()

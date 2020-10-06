@@ -2,7 +2,7 @@ import { Model, Mongoose, model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { MyFavorite } from '../schemas/myFavorite.schema';
-import { CreateWidgetDto } from '../dto/create-myFavorite.dto';
+import { CreateMyFavoriteDto } from '../dto/create-myFavorite.dto';
 
 
 
@@ -15,8 +15,8 @@ export class MyFavoritesService {
         return widgets;
     }
 
-    async addMyFavorite(userId,widgetId, typeWidget){
-        const newWidget = await this.myFavoriteModel.create({'userId':userId, widgetId: widgetId,typeWidget:typeWidget});
+    async addMyFavorite(userId,favoriteId, typeWidget){
+        const newWidget = await this.myFavoriteModel.create({'userId':userId, favoriteId:favoriteId,data:[]})
         newWidget.save()
         return newWidget
     }
