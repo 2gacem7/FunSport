@@ -7,10 +7,10 @@ export class MyFavorite extends Document {
   userId: string;
 
   @Prop()
-  widgetId: string;
+  favoriteId: string;
 
   @Prop()
-  typeWidget: string;
+  data: string[];
 
 
 }
