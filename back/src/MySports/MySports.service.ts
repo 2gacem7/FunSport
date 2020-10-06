@@ -21,12 +21,12 @@ export class MySportsService {
         return datas;
     }
 
-    async addMySport(userId,sportId){
+    async addMySport(userId){
         // add a sport in your mySports array.
         // :userId
         // :sportId = id extract to the API
         // return Model<MySport>
-        const newMySport = await this.mySportModel.create({'userId':userId, 'sportId': sportId, 'data':[]});
+        const newMySport = await this.mySportModel.create({'userId':userId, 'data':[]});
         newMySport.save()
         return newMySport
     }
@@ -35,7 +35,7 @@ export class MySportsService {
         // del a sport in your mySports array.
         // :sportId = id extract to the API
         // return JSON
-        await this.mySportModel.deleteOne({'sportId':sportId});
+        await this.mySportModel.findByIdAndDelete(sportId);
         return {
             message: "Deleted ok"
         };

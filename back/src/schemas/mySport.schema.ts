@@ -7,9 +7,6 @@ export class MySport extends Document {
   userId: string;
 
   @Prop()
-  sportId: string;
-
-  @Prop()
   data: [string];
 }
 
