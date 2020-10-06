@@ -15,14 +15,14 @@ export class MyFavoritesService {
         return widgets;
     }
 
-    async addMyFavorite(userId,favoriteId, typeWidget){
-        const newWidget = await this.myFavoriteModel.create({'userId':userId, favoriteId:favoriteId,data:[]})
-        newWidget.save()
-        return newWidget
+    async addMyFavorite(userId,sportFavoriteId){
+        const newMyFavorite = await this.myFavoriteModel.create({'userId':userId, sportFavoriteId:sportFavoriteId, data:[]})
+        newMyFavorite.save()
+        return MyFavorite
     }
 
-    async delMyFavorite(widgetId){
-        await this.myFavoriteModel.deleteOne({'widgetId':widgetId});
+    async delMyFavorite(sportFavoriteId){
+        await this.myFavoriteModel.deleteOne({'sportFavoriteId':sportFavoriteId});
         return {
             message: "Update ok"
         };

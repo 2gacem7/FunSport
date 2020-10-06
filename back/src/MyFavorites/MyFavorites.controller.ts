@@ -4,28 +4,37 @@ import { MyFavoritesService } from './MyFavorites.service';
 
 @Controller('myfavorites')
 export class MyFavoritesController {
-    constructor(private readonly widgetsService: MyFavoritesService) {}
+    constructor(private readonly myFavoritesService: MyFavoritesService) {}
 
     @UseGuards(JwtAuthGuard)
     @Get()
-    async getWidget(@Request() req) {
-      const list = await this.widgetsService.getMyFavorites(req.user.id)
+    async getMyFavorite(@Request() req) {
+      const list = await this.myFavoritesService.getMyFavorites(req.user.id)
       return list;
     }
 
     @UseGuards(JwtAuthGuard)
     @Post()
-    async addWidget(@Request() req) {
-      const list = await this.widgetsService.addMyFavorite(req.user.id, req.body.widgetId, req.body.typeWidget)
+    async addMyFavorite(@Request() req) {
+      let list 
+      if(req.body.sportFavoriteId){
+        list = await this.myFavoritesService.addMyFavorite(req.user.id, req.body.sportFavoriteId)
+      } else{
+        list = {error:"sportFavoriteId is mandatory"}
+      }
       return list;
     }
 
     @UseGuards(JwtAuthGuard)
     @Delete()
-    async delWidget(@Request() req) {
-       await this.widgetsService.delMyFavorite(req.body.widgetId)
-       return {
-        message: "Update ok"
-    };
+    async delMyFavorite(@Request() req) {
+      if (req.body.sportFavoriteId){
+        return await this.myFavoritesService.delMyFavorite(req.body.sportFavoriteId)
+      } else {
+        return {
+          error: "sportFavoriteId is mandatory"
+        }
+       
+    }
     }
 }
