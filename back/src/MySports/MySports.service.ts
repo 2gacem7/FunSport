@@ -21,12 +21,12 @@ export class MySportsService {
         return datas;
     }
 
-    async addMySport(userId){
+    async addMySport(userId, sportId){
         // add a sport in your mySports array.
         // :userId
         // :sportId = id extract to the API
         // return Model<MySport>
-        const newMySport = await this.mySportModel.create({'userId':userId, 'data':[]});
+        const newMySport = await this.mySportModel.create({userId:userId, sportId:sportId, data:[]});
         newMySport.save()
         return newMySport
     }

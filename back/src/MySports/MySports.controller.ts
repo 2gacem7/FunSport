@@ -16,19 +16,28 @@ export class MySportsController {
     @UseGuards(JwtAuthGuard)
     @Post()
     async addMySport(@Request() req) {
-      const list = await this.mySportsService.addMySport(req.user.id)
+      let list
+      if (req.body.sportId){
+        list = await this.mySportsService.addMySport(req.user.id, req.body.sportId)
+
+      }
+       else {
+         list = {
+           error: "SportId is mandatory"
+         }
+       }
       return list;
     }
 
     @UseGuards(JwtAuthGuard)
     @Delete()
     async delMySport(@Request() req) {
-      if (req.body.sportId){
-        return await this.mySportsService.delMySport(req.body.sportId)
+      if (req.body.id){
+        return await this.mySportsService.delMySport(req.body.id)
 
       } else {
         return {
-          error: "sportId is mandatory"
+          error: "id is mandatory"
         }
       }
     }

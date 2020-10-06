@@ -4,6 +4,8 @@ export class CreateMySportDto {
 
   userId: string;
 
+  sportId: string;
+
   data: [string];
 
 }
