@@ -2,6 +2,7 @@
   <div class="home">
     <Navbar />
     <TabBar/>
+    <AddMySport />
     CSGO
   </div>
 </template>
@@ -10,11 +11,14 @@
   import Navbar from "@/components/NavBar.vue";
       import TabBar from "@/components/TabBar.vue";
 
+      import AddMySport from "@/components/AddMySport.vue";
+
   export default {
     name: "Home",
     components: {
       Navbar,
-      TabBar
+      TabBar,
+      AddMySport
     },
     data() {
       return {

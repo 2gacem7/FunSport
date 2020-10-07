@@ -9,7 +9,7 @@
           @click="go(sport.id)"
           >{{ sport.name }}</a
         >
-        <a v-else class="nav-link" href="#" @click="go(sport.id)">{{
+        <a v-else class="nav-link" href="#" @click="go(sport.id, sport.name)">{{
           sport.name
         }}</a>
       </li>
@@ -32,17 +32,17 @@ export default {
   components: {},
 
   methods: {
-    go(idTab){
-        this.$store.state.tabSelected = idTab
+    go(idTab, nameTab){
+        this.$store.state.tabSelected = {id:idTab, name:nameTab}
         this.$router.push({name:this.$store.state.sports[idTab].name})
       },
       goMyProfile(){
-        this.$store.state.tabSelected = 'MyProfile'
+        this.$store.state.tabSelected = {id:99,name:'MyProfile'}
 
         this.$router.push({name:'MyProfile'})
       },
       goMyDashboard(){
-        this.$store.state.tabSelected = 'Dashboard'
+        this.$store.state.tabSelected = {id:100, name:'Dashboard'}
 
         this.$router.push({name:'Dashboard'})
       },
