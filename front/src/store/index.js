@@ -8,7 +8,8 @@ export default new Vuex.Store({
       id: "",
       email: "",
       firstName:"",
-      lastName: ""
+      lastName: "",
+      phone: ""
     },
   },
   mutations: {
@@ -34,6 +35,7 @@ export default new Vuex.Store({
             this.state.UserData.email = profile.email;
             this.state.UserData.firstName = profile.firstName;
             this.state.UserData.lastName = profile.lastName;
+            this.state.UserData.phone = profile.phone;
           }
         }
       }

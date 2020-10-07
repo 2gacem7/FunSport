@@ -173,7 +173,7 @@
                     this.msg['phone'] = '';
                     this.validator['phone'] = true;
                 } else {
-                    this.msg['phone'] = 'Votre numero doit etre sous la forme 00 00 00 00 00';
+                    this.msg['phone'] = 'Your number must be like 00 00 00 00 00';
                     this.validator['phone'] = false;
                 }
             },
@@ -182,7 +182,7 @@
                     this.msg['password'] = '';
                 } else {
                     this.msg['password'] =
-                        'Votre mot de passe doit posseder minimum 8 caracteres (1 majuscule, 1 minuscule, 1 chiffre, 1 caractere spécial au minimum)';
+                        'Your password must have a minimum of 8 characters (1 uppercase, 1 lowercase, 1 number, 1 special character minimum)';
                 }
             },
             validatePasswordComfirme(value) {
@@ -190,7 +190,7 @@
                     this.msg['passwordComfirme'] = '';
                     this.validator['password'] = true;
                 } else {
-                    this.msg['passwordComfirme'] = 'Comfirmation differente du mot de passe';
+                    this.msg['passwordComfirme'] = 'Comfirmation dosen\'t match';
                     this.validator['password'] = false;
                 }
             },

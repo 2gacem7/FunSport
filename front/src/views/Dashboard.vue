@@ -8,43 +8,48 @@
                 </div>
                 <div class="card-body w-100 mx-auto">
                     <div class="row mt-3" v-if="info === true">
-                        <span class="text-danger" v-if="msg.general" style="background-color:#f4f4f4e3;">{{ msg.general }}</span>
+                        <span class="text-danger" v-if="msg.general"
+                            style="background-color:#f4f4f4e3;">{{ msg.general }}</span>
                     </div>
                     <div class="row mt-2">
                         <label>firstName</label>
                     </div>
                     <div class="row mt-2">
-                        <input type="text" name="name" required placeholder="firstName" v-model="firstName">
+                        <input type="text" name="name" required :placeholder="firstName" v-model="newFirstName">
                     </div>
                     <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.firstName" style="background-color:#f4f4f4e3;">{{msg.firstName}}</span>
+                        <span class="text-danger" v-if="msg.firstName"
+                            style="background-color:#f4f4f4e3;">{{msg.firstName}}</span>
                     </div>
                     <div class="row mt-2">
                         <label>LastName</label>
                     </div>
                     <div class="row mt-2">
-                        <input type="text" name="name" required placeholder="LastName" v-model="lastName">
+                        <input type="text" name="name" required :placeholder="lastName" v-model="newLastName">
                     </div>
                     <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.lastName" style="background-color:#f4f4f4e3;">{{msg.lastName}}</span>
+                        <span class="text-danger" v-if="msg.lastName"
+                            style="background-color:#f4f4f4e3;">{{msg.lastName}}</span>
                     </div>
                     <div class="row mt-2">
                         <label>Phone</label>
                     </div>
                     <div class="row mt-2">
-                        <input type="text" name="phone" required placeholder="phone" v-model="phone">
+                        <input type="text" name="phone" required :placeholder="phone" v-model="newPhone">
                     </div>
                     <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.phone" style="background-color:#f4f4f4e3;">{{msg.phone}}</span>
+                        <span class="text-danger" v-if="msg.phone"
+                            style="background-color:#f4f4f4e3;">{{msg.phone}}</span>
                     </div>
                     <div class="row mt-2">
                         <label>Mail Adress</label>
                     </div>
                     <div class="row mt-2">
-                        <input type="text" name="email" required placeholder="email" v-model="email">
+                        <input type="text" name="email" required :placeholder="email" v-model="newEmail">
                     </div>
                     <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.email" style="background-color:#f4f4f4e3;">{{msg.email}}</span>
+                        <span class="text-danger" v-if="msg.email"
+                            style="background-color:#f4f4f4e3;">{{msg.email}}</span>
                     </div>
                     <div class="row mt-2">
                         <label>Password</label>
@@ -53,7 +58,8 @@
                         <input type="password" name="password" required v-model="password">
                     </div>
                     <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.password" style="background-color:#f4f4f4e3;">{{msg.password}}</span>
+                        <span class="text-danger" v-if="msg.password"
+                            style="background-color:#f4f4f4e3;">{{msg.password}}</span>
                     </div>
                     <div class="row mt-2">
                         <label>Password Confirm</label>
@@ -62,10 +68,11 @@
                         <input type="password" name="passwordComfirme" required v-model="passwordComfirme">
                     </div>
                     <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.passwordComfirme" style="background-color:#f4f4f4e3;">{{msg.passwordComfirme}}</span>
+                        <span class="text-danger" v-if="msg.passwordComfirme"
+                            style="background-color:#f4f4f4e3;">{{msg.passwordComfirme}}</span>
                     </div>
                     <div class="row mt-2">
-                        <button class="btn btn-info" @click="register()">Sign Up</button>
+                        <button class="btn btn-info" @click="update()">Update my account</button>
                     </div>
                 </div>
             </div>
@@ -84,9 +91,13 @@
         data() {
             return {
                 firstName: "",
+                newFirstName: "",
                 lastName: "",
+                newLastName: "",
                 phone: "",
+                newPhone: "",
                 email: "",
+                newEmail: "",
                 password: "",
                 passwordComfirme: "",
                 msg: [],
@@ -95,20 +106,20 @@
             }
         },
         watch: {
-            email(value) {
-                this.email = value;
+            newEmail(value) {
+                this.newEmail = value;
                 this.validateEmail(value);
             },
-            firstName(value) {
-                this.firstName = value;
+            newFirstName(value) {
+                this.newFirstName = value;
                 this.validateFirstName(value);
             },
-            lastName(value) {
-                this.lastName = value;
+            newLastName(value) {
+                this.newLastName = value;
                 this.validateLastName(value);
             },
-            phone(value) {
-                this.phone = value;
+            newPhone(value) {
+                this.newPhone = value;
                 this.validatePhone(value);
             },
             password(value) {
@@ -121,16 +132,10 @@
             },
         },
         async mounted() {
-            if (document.cookie.length > 0) {
-                let cookieArray = document.cookie.split(';');
-                for (let i = 0; i < cookieArray.length; i++) {
-                    if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
-                        this.$router.push({
-                            path: '/'
-                        });
-                    }
-                }
-            }
+            this.firstName = this.$store.state.UserData.firstName;
+            this.lastName = this.$store.state.UserData.lastName;
+            this.phone = this.$store.state.UserData.phone;
+            this.email = this.$store.state.UserData.email;
             this.validator['email'] = false;
             this.validator['firstName'] = false;
             this.validator['lastName'] = false;
@@ -171,7 +176,7 @@
                     this.msg['phone'] = '';
                     this.validator['phone'] = true;
                 } else {
-                    this.msg['phone'] = 'Votre numero doit etre sous la forme 00 00 00 00 00';
+                    this.msg['phone'] = 'Your number must be like 00 00 00 00 00';
                     this.validator['phone'] = false;
                 }
             },
@@ -180,7 +185,7 @@
                     this.msg['password'] = '';
                 } else {
                     this.msg['password'] =
-                        'Votre mot de passe doit posseder minimum 8 caracteres (1 majuscule, 1 minuscule, 1 chiffre, 1 caractere spécial au minimum)';
+                        'Your password must have a minimum of 8 characters (1 uppercase, 1 lowercase, 1 number, 1 special character minimum)';
                 }
             },
             validatePasswordComfirme(value) {
@@ -188,56 +193,61 @@
                     this.msg['passwordComfirme'] = '';
                     this.validator['password'] = true;
                 } else {
-                    this.msg['passwordComfirme'] = 'Comfirmation differente du mot de passe';
+                    this.msg['passwordComfirme'] = 'Comfirmation dosen\'t match';
                     this.validator['password'] = false;
                 }
             },
-            async register() {
-                if (this.validator.firstName === true && this.validator.lastName === true && this.validator.email === true && this.validator.phone && this.validator.password ===
-                    true) {
-                    let body = {
-                        firstName: this.firstName,
-                        lastName: this.lastName,
-                        email: this.email,
-                        phone: this.phone,
-                        password: this.password
+            async update() {
+                let body = {};
+                if (this.validator.phone === true) {
+                    body.phone = this.newPhone;
+                    this.$store.state.UserData.phone = this.newPhone;
+                };
+                if (this.validator.password === true) {
+                    body.password = this.password;
+                }
+                if (this.validator.firstName === true) {
+                    body.firstName = this.newFirstName;
+                    this.$store.state.UserData.firstName = this.newFirstName;
+                }
+                if (this.validator.lastName === true) {
+                    body.lastName = this.newLastName;
+                    this.$store.state.UserData.lastName = this.newLastName;
+                }
+                if (this.validator.email === true) {
+                    body.email = this.newEmail;
+                    this.$store.state.UserData.email = this.newEmail;
+                }
+                if (document.cookie.length > 0) {
+                    let cookieArray = document.cookie.split(';');
+                    for (let i = 0; i < cookieArray.length; i++) {
+                        if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
+                            const cookiename = "My_FunSport_Token=";
+                            const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
+                            let requestStatus;
+                            await fetch("http://localhost:3000/users", {
+                                    "method": "PATCH",
+                                    "headers": {
+                                        "authorization": "Bearer " + access_token,
+                                        "content-type": "application/json"
+                                    },
+                                    "body": JSON.stringify(body)
+                                })
+                                .then(res => {
+                                    requestStatus = res.status
+                                })
+                            if (requestStatus === 500) {
+                                this.badRequest = true;
+                                this.info = false;
+                                this.msg.general = "Please Check the form errors";
+                            } else {
+                                this.msg.general = "User Updated";
+                                this.info = true;
+                                this.badRequest = false;
+                            }
+
+                        }
                     }
-                    let requestStatus;
-                    await fetch("http://localhost:3000/users", {
-                            "method": "POST",
-                            "headers": {
-                                "content-type": "application/json"
-                            },
-                            "body": JSON.stringify(body)
-                        })
-                        .then(res => {
-                            requestStatus = res.status
-                        })
-                    if (requestStatus === 400) {
-                        this.info = true;
-                        this.msg['general'] = "Account existing for " + this.email;
-                    } else {
-                        let userData = {};
-                        await fetch("http://localhost:3000/auth/login/", {
-                                "method": "Post",
-                                "headers": {
-                                    "content-type": "application/json"
-                                },
-                                "body": JSON.stringify(body)
-                            })
-                            .then(res => res.clone().json())
-                            .then(json => userData = json);
-                        const date = new Date(Date.now() + 86400000)
-                        document.cookie = "My_FunSport_Token=" + userData.access_token + "; expires=" + date +
-                            "; path=/;SameSite=LAX;";
-                        this.$store.dispatch('getUserData');
-                        this.$router.push({
-                            path: '/'
-                        });
-                    }
-                } else {
-                    this.info = true;
-                    this.msg['general'] = "Information missing in the form";
                 }
             }
 
@@ -246,13 +256,15 @@
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-.card-body{
-  background-color: rgb(72, 99, 255);
-  font-family: 'Roboto Mono', monospace;
-}
-.card-header{
-  background-color: rgba(72, 99, 255, 0.515);
-  font-family: 'Roboto Mono', monospace;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+    .card-body {
+        background-color: rgb(72, 99, 255);
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    .card-header {
+        background-color: rgba(72, 99, 255, 0.515);
+        font-family: 'Roboto Mono', monospace;
+    }
 </style>
