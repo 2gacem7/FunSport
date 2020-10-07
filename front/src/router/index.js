@@ -27,16 +27,6 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/about.json',
-    name: 'About',
-    component: About
-  },
-  {
-    path: '/about',
-    name: 'AboutJSON',
-    component: AboutJSON
-  }
 ]
 
 const router = new VueRouter({

@@ -1,5 +1,5 @@
 <template>
-  <div id="zapp">
+  <div id="app">
     <router-view/>
   </div>
 </template>

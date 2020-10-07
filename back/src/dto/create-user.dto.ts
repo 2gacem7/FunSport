@@ -13,6 +13,9 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
+  @MinLength(10)
+  phone: string;
+
   @Matches(passwordRegex)
   password: string;
 

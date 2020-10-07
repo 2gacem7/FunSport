@@ -34,8 +34,9 @@ export class UsersService {
     const email = createUserDto.email;
     const firstName = createUserDto.firstName;
     const lastName = createUserDto.lastName;
+    const phone = createUserDto.phone;
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-    const createdUser = await new this.userModel({ firstName: firstName, lastName: lastName,email: email, password: hashedPassword ,isAdmin: false });
+    const createdUser = await new this.userModel({ firstName: firstName, lastName: lastName, phone: phone, email: email, password: hashedPassword ,isAdmin: false });
     return createdUser.save();
   }
 
@@ -75,8 +76,10 @@ export class UsersService {
       userUpdated = await this.userModel.findByIdAndUpdate( id,{"password": hashedPassword},{new:true,useFindAndModify:false}) 
       updated = "user updated"
     } 
-  
-   
+    if (body.hasOwnProperty("phone")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"phone": body.phone},{new:true,useFindAndModify:false}) 
+      updated = "user updated"
+    } 
     return [userUpdated, updated]
   }
 

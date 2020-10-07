@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light text-black">
-      <router-link class="text-black font-weight-bold" :to="{name: 'Home'}">Welcome to Your Dashboard</router-link>
+      <router-link class="text-black font-weight-bold" :to="{name: 'Home'}">FunSport</router-link>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,11 +11,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'Login'}" v-if="this.$store.state.UserData[0].id == ''">Login
+            <router-link class="nav-link" :to="{name: 'Login'}" v-if="this.$store.state.UserData.id == ''">Login
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'Register'}" v-if="this.$store.state.UserData[0].id == ''">
+            <router-link class="nav-link" :to="{name: 'Register'}" v-if="this.$store.state.UserData.id == ''">
               Register</router-link>
           </li>
           <li class="nav-item">
@@ -23,7 +23,7 @@
           </li>
           <li class="nav-item">
             <button class="btn btn-danger nav-link" @click="logout()"
-              v-if="this.$store.state.UserData[0].id != ''">Logout</button>
+              v-if="this.$store.state.UserData.id != ''">Logout</button>
           </li>
         </ul>
       </div>
@@ -42,7 +42,7 @@
     },
     methods: {
       logout() {
-        document.cookie = "My_Dashboard_Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=LAX;";
+        document.cookie = "My_FunSport_Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=LAX;";
         document.location.reload(true);
       }
     }
