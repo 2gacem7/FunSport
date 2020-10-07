@@ -68,12 +68,6 @@
   color: #d61e00
 }
   .navbar {
-    z-index: 1;
-    position: fixed;
-    width: 100%;
-    height: 70px;
-    left: 0;
-    overflow-x: hidden;
     background-color: whitesmoke !important;
   }
 </style>

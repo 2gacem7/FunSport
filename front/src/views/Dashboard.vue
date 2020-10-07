@@ -1,79 +1,104 @@
 <template>
     <div id="Dashboard">
         <Navbar />
-        <div class="container pt-3">
-            <div class="card" style="background-color:#f4f4f4e3;margin-top:100px">
-                <div class="card-header">
-                    <h1>My Account</h1>
+        <div class="container-fluid p-3">
+            <div class="card-deck">
+                <div class="card" style="background-color:#f4f4f4e3;">
+                    <div class="card-header">
+                        <h1 class="text text-center">My Account</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mt-3 justify-content-center" v-if="info === true">
+                            <span class="text-danger text-center" v-if="msg.general"
+                                style="background-color:#f4f4f4e3;">{{ msg.general }}</span>
+                        </div>
+                        <div class="row mt-2  justify-content-center">
+                            <label class="card-text text-center">FirstName</label>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <input type="text" name="name" required :placeholder="firstName" v-model="newFirstName">
+                        </div>
+                        <div class="row mt-3 justify-content-center">
+                            <span class="card-text text-center" v-if="msg.firstName"
+                                style="background-color:#f4f4f4e3;">{{msg.firstName}}</span>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <label class="card-text text-center">LastName</label>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <input type="text" name="name" required :placeholder="lastName" v-model="newLastName">
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <span class="card-text text-center" v-if="msg.lastName"
+                                style="background-color:#f4f4f4e3;">{{msg.lastName}}</span>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <label>Phone</label>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <input type="text" name="phone" required :placeholder="phone" v-model="newPhone">
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <span class="text-danger" v-if="msg.phone"
+                                style="background-color:#f4f4f4e3;">{{msg.phone}}</span>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <label>Mail Adress</label>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <input type="text" name="email" required :placeholder="email" v-model="newEmail">
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <span class="text-danger" v-if="msg.email"
+                                style="background-color:#f4f4f4e3;">{{msg.email}}</span>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <label>Password</label>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <input type="password" name="password" required v-model="password">
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <span class="text-danger" v-if="msg.password"
+                                style="background-color:#f4f4f4e3;">{{msg.password}}</span>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <label>Password Confirm</label>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <input type="password" name="passwordComfirme" required v-model="passwordComfirme">
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <span class="text-danger" v-if="msg.passwordComfirme"
+                                style="background-color:#f4f4f4e3;">{{msg.passwordComfirme}}</span>
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            <button class="btn btn-info" @click="update()">Update my account</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body w-100 mx-auto">
-                    <div class="row mt-3" v-if="info === true">
-                        <span class="text-danger" v-if="msg.general"
-                            style="background-color:#f4f4f4e3;">{{ msg.general }}</span>
+                <div class="card" style="background-color:#f4f4f4e3">
+                    <div class="card-header">
+                        <h1 class="text text-center">My Favorite Sports</h1>
                     </div>
-                    <div class="row mt-2">
-                        <label>firstName</label>
+                    <div class="card-body">
+                        <div v-if="mySports.length == 0" class="row mt-2  justify-content-center">
+                            <label class="card-text text-center">No favorite sports added</label>
+                        </div>
+                        <div v-else >
+                            <div v-for="sport in mySports" v-bind:key="sport.name" class="row mt-2  justify-content-center">
+                                <h3 class="card-text text-center">{{ sport.name }}</h3>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row mt-2">
-                        <input type="text" name="name" required :placeholder="firstName" v-model="newFirstName">
-                    </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.firstName"
-                            style="background-color:#f4f4f4e3;">{{msg.firstName}}</span>
-                    </div>
-                    <div class="row mt-2">
-                        <label>LastName</label>
-                    </div>
-                    <div class="row mt-2">
-                        <input type="text" name="name" required :placeholder="lastName" v-model="newLastName">
-                    </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.lastName"
-                            style="background-color:#f4f4f4e3;">{{msg.lastName}}</span>
-                    </div>
-                    <div class="row mt-2">
-                        <label>Phone</label>
-                    </div>
-                    <div class="row mt-2">
-                        <input type="text" name="phone" required :placeholder="phone" v-model="newPhone">
-                    </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.phone"
-                            style="background-color:#f4f4f4e3;">{{msg.phone}}</span>
-                    </div>
-                    <div class="row mt-2">
-                        <label>Mail Adress</label>
-                    </div>
-                    <div class="row mt-2">
-                        <input type="text" name="email" required :placeholder="email" v-model="newEmail">
-                    </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.email"
-                            style="background-color:#f4f4f4e3;">{{msg.email}}</span>
-                    </div>
-                    <div class="row mt-2">
-                        <label>Password</label>
-                    </div>
-                    <div class="row mt-2">
-                        <input type="password" name="password" required v-model="password">
-                    </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.password"
-                            style="background-color:#f4f4f4e3;">{{msg.password}}</span>
-                    </div>
-                    <div class="row mt-2">
-                        <label>Password Confirm</label>
-                    </div>
-                    <div class="row mt-2">
-                        <input type="password" name="passwordComfirme" required v-model="passwordComfirme">
-                    </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.passwordComfirme"
-                            style="background-color:#f4f4f4e3;">{{msg.passwordComfirme}}</span>
-                    </div>
-                    <div class="row mt-2">
-                        <button class="btn btn-info" @click="update()">Update my account</button>
-                    </div>
+                </div>
+            </div>
+            <div class="card m-3" style="background-color:#f4f4f4e3">
+                <div class="card-header">
+                    <h1 class="text text-center">My Favorites</h1>
+                </div>
+                <div class="card-body">
+
                 </div>
             </div>
         </div>
@@ -103,6 +128,7 @@
                 msg: [],
                 validator: [],
                 info: false,
+                mySports: []
             }
         },
         watch: {
@@ -131,7 +157,12 @@
                 this.validatePasswordComfirme(value);
             },
         },
-        async created() {
+        async mounted() {
+            if (this.$store.state.UserData.id == '') {
+                this.$router.push({
+                    path: '/login'
+                });
+            }
             this.firstName = this.$store.state.UserData.firstName;
             this.lastName = this.$store.state.UserData.lastName;
             this.phone = this.$store.state.UserData.phone;
@@ -141,6 +172,40 @@
             this.validator['lastName'] = false;
             this.validator['phone'] = false;
             this.validator['password'] = false;
+            if (document.cookie.length > 0) {
+                let cookieArray = document.cookie.split(';');
+                for (let i = 0; i < cookieArray.length; i++) {
+                    if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
+                        const cookiename = "My_FunSport_Token=";
+                        const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
+                        let mySport = [];
+                        await fetch("http://localhost:3000/mysports", {
+                                "method": "GET",
+                                "headers": {
+                                    "authorization": "Bearer " + access_token
+                                }
+                            })
+                            .then(res => res.clone().json())
+                            .then(json => mySport = json);
+                        let myFinalSports = [];
+                        mySport.forEach(async sport => {
+                            let tmp = null;
+                            await fetch("http://localhost:3000/sports/"+sport.sportId, {
+                                "method": "GET",
+                                "headers": {
+                                    "authorization": "Bearer " + access_token
+                                }
+                            })
+                            .then(res => res.clone().json())
+                            .then(json => tmp = json);
+                            myFinalSports.push(tmp)
+                        })
+                        this.mySports = myFinalSports;
+                        this.$store.state.MySports = myFinalSports;
+                    }
+                }
+            }
+
         },
         methods: {
             validateEmail(value) {
