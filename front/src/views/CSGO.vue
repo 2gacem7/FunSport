@@ -4,12 +4,14 @@
     <TabBar/>
     <AddMySport />
     CSGO
+    <b-card class=" col-md-4"><CalendarCsgo /></b-card>
   </div>
 </template>
 
 <script>
   import Navbar from "@/components/NavBar.vue";
       import TabBar from "@/components/TabBar.vue";
+        import CalendarCsgo from "@/components/CalendarCsgo.vue";
 
       import AddMySport from "@/components/AddMySport.vue";
 
@@ -18,7 +20,8 @@
     components: {
       Navbar,
       TabBar,
-      AddMySport
+      AddMySport,
+      CalendarCsgo
     },
     data() {
       return {
