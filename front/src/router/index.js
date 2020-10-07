@@ -3,7 +3,12 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
+import MyProfile from '../views/MyProfile.vue'
 import Dashboard from '../views/Dashboard.vue'
+
+import LOL from '../views/LOL.vue'
+import CSGO from '../views/CSGO.vue'
+
 
 Vue.use(VueRouter)
 
@@ -24,9 +29,24 @@ const routes = [
     component: Dashboard
   },
   {
+    path: '/myprofile',
+    name: 'MyProfile',
+    component: MyProfile
+  },
+  {
     path: '/',
     name: 'Home',
-    component: Home
+    component: CSGO
+  },
+  {
+    path: '/csgo',
+    name: 'CS-GO',
+    component: CSGO
+  },
+  {
+    path: '/lol',
+    name: 'LOL',
+    component: LOL
   },
 ]
 

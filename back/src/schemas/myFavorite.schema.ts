@@ -12,7 +12,6 @@ export class MyFavorite extends Document {
   @Prop()
   data: [string];
 
-
 }
 
 export const MyFavoriteSchema = SchemaFactory.createForClass(MyFavorite);

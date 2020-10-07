@@ -1,28 +1,20 @@
 <template>
   <div class="home">
     <Navbar />
-    <TabBar />
-  <CSGO v-if="$store.state.tabSelected == 'CS-GO'" />
-
-
+    <TabBar/>
+    CSGO
   </div>
 </template>
 
 <script>
   import Navbar from "@/components/NavBar.vue";
-    import TabBar from "@/components/TabBar.vue";
-        import CSGO from "@/views/CSGO.vue";
-                import LOL from "@/views/LOL.vue";
-
-
+      import TabBar from "@/components/TabBar.vue";
 
   export default {
     name: "Home",
     components: {
       Navbar,
-       TabBar,
-       LOL,
-       CSGO
+      TabBar
     },
     data() {
       return {
@@ -33,7 +25,10 @@
       this.tabSelected = this.$store.state.sports[0].id
     },
     methods: {
-
+      go(idTab){
+        this.tabSelected = idTab
+        this.$router.push({name:this.$store.state.sports[idTab].name})
+      },
       getCookie() {
         let access_token = "";
         if (document.cookie.length > 0) {

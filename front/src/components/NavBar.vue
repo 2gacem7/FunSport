@@ -19,10 +19,6 @@
               Register</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'Dashboard'}" v-if="this.$store.state.UserData.id != ''">
-              Dashboard</router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Home'}">Home</router-link>
           </li>
           <li class="nav-item">
@@ -47,7 +43,13 @@
     methods: {
       logout() {
         document.cookie = "My_FunSport_Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=LAX;";
+        this.$store.state.tabSelected = this.$store.state.sports[0].name
+        this.$router.push({name:this.$store.state.sports[0].name})
         document.location.reload(true);
+
+
+
+
       }
     }
   };
