@@ -43,16 +43,16 @@ création d'articles en texte riche, avec la possibilité d’inclure les donné
 
 ### API proposée
 
--https://www.api-football.com/pricing
--https://developer.sportradar.com/docs/read/Home#getting-started
--https://rapidapi.com/api-sports/api/api-nba
--https://rapidapi.com/sportcontentapi/api/tennis-live-data/endpoints
+-https://www.api-football.com/pricing  
+-https://developer.sportradar.com/docs/read/Home#getting-started  
+-https://rapidapi.com/api-sports/api/api-nba  
+-https://rapidapi.com/sportcontentapi/api/tennis-live-data/endpoints  
 
 ## Délai
 
 Le projet est réalisé en 3 semaines
 
-## Méthode utilisé pour le développement : méthode agile 3 sprints de prévu
+## Méthode utilisée pour le développement : méthode agile en 3 sprints
 ### Sprint 1/3 (1 semaine)
 L’utilisateur doit pouvoir créer un compte et se connecter.
 Il a accès à sa page profil (login avec email) ou il peut voir et modifier :
