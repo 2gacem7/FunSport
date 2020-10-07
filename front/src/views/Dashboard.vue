@@ -1,7 +1,7 @@
 <template>
     <div id="Dashboard">
         <Navbar />
-        <div class="container pt-3" style="padding-bottom:100vh;">
+        <div class="container pt-3">
             <div class="card" style="background-color:#f4f4f4e3;margin-top:100px">
                 <div class="card-header">
                     <h1>My Account</h1>
@@ -131,7 +131,7 @@
                 this.validatePasswordComfirme(value);
             },
         },
-        async mounted() {
+        async created() {
             this.firstName = this.$store.state.UserData.firstName;
             this.lastName = this.$store.state.UserData.lastName;
             this.phone = this.$store.state.UserData.phone;
@@ -141,7 +141,6 @@
             this.validator['lastName'] = false;
             this.validator['phone'] = false;
             this.validator['password'] = false;
-
         },
         methods: {
             validateEmail(value) {
