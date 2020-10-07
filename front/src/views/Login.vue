@@ -1,9 +1,8 @@
 <template>
   <div id="login">
     <Navbar />
-
     <form class="login" @submit.prevent="login">
-      <div class="container pt-3" style="padding-bottom:100vh">
+      <div class="container pt-3">
         <div class="card " style="background-color:#f4f4f4e3;margin-top:100px">
           <div class="card-header">
             <h1>Login</h1>
@@ -39,14 +38,10 @@
 
 <script>
   import Navbar from "@/components/NavBar.vue"
-
   export default {
-
     name: 'Login',
     components: {
-
       Navbar,
-
     },
     data() {
       return {
@@ -59,7 +54,7 @@
       if (document.cookie.length > 0) {
         let cookieArray = document.cookie.split(';');
         for (let i = 0; i < cookieArray.length; i++) {
-          if (cookieArray[i].indexOf("My_Dashboard_Token") != -1) {
+          if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
             this.$router.push({
               path: '/'
             });
@@ -83,7 +78,6 @@
       },
       async login() {
         let response = {};
-        let list = [];
         let profile = {};
         const body = {
           email: this.email,
@@ -99,7 +93,7 @@
           .then(res => res.clone().json())
           .then(json => response = json);
         const date = new Date(Date.now() + 86400000)
-        document.cookie = "My_Dashboard_Token=" + response.access_token + "; expires=" + date +
+        document.cookie = "My_FunSport_Token=" + response.access_token + "; expires=" + date +
           "; path=/;SameSite=LAX;";
 
          await fetch("http://localhost:3000/profile", {
@@ -110,19 +104,10 @@
         })
         .then(res => res.clone().json())
         .then(json => profile = json);
-        this.$store.state.UserData[0].id = profile.id;
-        this.$store.state.UserData[0].email = profile.email;
-
-        await fetch("http://localhost:3000/services", {
-          "method": "GET",
-          "headers": {
-            "authorization": "Bearer " + response.access_token
-          }
-        })
-        .then(res => res.clone().json())
-        .then(json => list = json);
-        this.$store.state.UserData[0].services = list;
-        this.$store.dispatch('getUserData');
+        this.$store.state.UserData.id = profile.id;
+        this.$store.state.UserData.email = profile.email;
+        this.$store.state.UserData.firstName = profile.firstName;
+        this.$store.state.UserData.lastName = profile.lastName;
         this.$router.push({
           path: '/'
         });

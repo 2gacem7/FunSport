@@ -13,6 +13,9 @@ export class UpdateUserDto {
   @IsEmail()
   email: string;
 
+  @MinLength(10)
+  phone: string;
+
   @Matches(passwordRegex)
   @ValidateIf( p => p.password !== "")
   password: string;
