@@ -39,12 +39,14 @@ Pour chaque championnat Possibilité de trier les classements en fonction des in
 création d'articles en texte riche, avec la possibilité d’inclure les données sportives dansses articles en les récupérant de l’API)ex: article sur les 10 meilleurs buteurs de Ligue 1 Uber Eats en récupérant les info viaAPI.
 
 ## API proposée
+
 -https://www.api-football.com/pricing
 -https://developer.sportradar.com/docs/read/Home#getting-started
 -https://rapidapi.com/api-sports/api/api-nba
 -https://rapidapi.com/sportcontentapi/api/tennis-live-data/endpoints
 
 ## Délai
+
 Le projet est réalisé en 3 semaines
 
 ## Méthode utilisé pour le développement : méthode agile 3 sprints de prévu
@@ -79,3 +81,34 @@ Backend : Nestjs
 Frontend : Vuejs
 Base de donnée : Mongodb
 
+## Comment l'exécuter
+
+Clone the repo où vous voulez
+`git clone git@github.com:YohannEpitech/FunSport.git`
+Aller à l'intérieur du dossier cloné
+`cd FunSport`
+Renommer le fichier env.config.js.example en env.config.js et remplacer "Your CLIENT_ID" par votre api_sportradar
+`module.exports = {
+    CLIENT_ID : "Your CLIENT_ID"
+};`
+
+Installer les dépendances de Nodejs (commande à exécuter dans le dossier back et front)
+`npm install`
+
+Lancer le serveur front 
+`cd front`
+`npm run serve`
+
+Lancer le serveur back
+`cd back`
+`npm start`
+
+## L'équipe
+
+Vous êtes curieux de savoir qui a travaillé sur le projet
+YohannEpitech
+Kevin Bridonneau
+
+## License
+
+Ce projet est sous licence GNU3.
