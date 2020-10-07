@@ -19,11 +19,10 @@ export class MySportsController {
       let list
       if (req.body.sportId){
         list = await this.mySportsService.addMySport(req.user.id, req.body.sportId)
-
       }
        else {
          list = {
-           error: "SportId is mandatory"
+           error: "sportId is mandatory"
          }
        }
       return list;
@@ -34,7 +33,6 @@ export class MySportsController {
     async delMySport(@Request() req) {
       if (req.body.id){
         return await this.mySportsService.delMySport(req.body.id)
-
       } else {
         return {
           error: "id is mandatory"
