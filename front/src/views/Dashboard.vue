@@ -1,10 +1,10 @@
 <template>
-    <div id="register">
+    <div id="Dashboard">
         <Navbar />
         <div class="container pt-3" style="padding-bottom:100vh;">
             <div class="card" style="background-color:#f4f4f4e3;margin-top:100px">
                 <div class="card-header">
-                    <h1>Register</h1>
+                    <h1>My Account</h1>
                 </div>
                 <div class="card-body w-100 mx-auto">
                     <div class="row mt-3" v-if="info === true">
@@ -77,11 +77,9 @@
     import Navbar from "@/components/NavBar.vue"
 
     export default {
-        name: 'Register',
+        name: 'Dashboard',
         components: {
-
             Navbar,
-
         },
         data() {
             return {

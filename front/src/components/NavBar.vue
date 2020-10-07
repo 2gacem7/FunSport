@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light text-black">
-      <router-link class="text-black font-weight-bold" :to="{name: 'Home'}">FunSport</router-link>
+      <router-link class="brand font-weight-bold" :to="{name: 'Home'}">FunSport</router-link>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,6 +17,10 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Register'}" v-if="this.$store.state.UserData.id == ''">
               Register</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{name: 'Dashboard'}" v-if="this.$store.state.UserData.id != ''">
+              Dashboard</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Home'}">Home</router-link>
@@ -49,6 +53,7 @@
   };
 </script>
 <style>
+@font-face {font-family: "LEQUIPE Regular"; src: url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.eot"); src: url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.woff") format("woff"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.svg#LEQUIPE Regular") format("svg"); }
   a {
     text-decoration: none;
     color: black;
@@ -57,7 +62,11 @@
   a:link {
     text-decoration: none;
   }
-
+.brand{
+  font-family: LEQUIPE Regular,sans-serif;
+  font-size: 30px;
+  color: #d61e00
+}
   .navbar {
     z-index: 1;
     position: fixed;
@@ -65,6 +74,6 @@
     height: 70px;
     left: 0;
     overflow-x: hidden;
-    background-color: #91f288 !important;
+    background-color: whitesmoke !important;
   }
 </style>

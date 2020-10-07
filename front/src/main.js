@@ -18,7 +18,7 @@ new Vue({
     await this.$store.dispatch('getUserData');
   },
   created: function (){
-    document.title = 'My Dashboard !';
+    document.title = 'FunSport !';
   },
   render: function (h) { return h(App) }
 }).$mount('#app')
