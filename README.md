@@ -106,9 +106,11 @@ Lancer le serveur back
 ## L'équipe
 
 Vous êtes curieux de savoir qui a travaillé sur le projet
+Lotfi Doucanef
+Gacem Ben ayad
 YohannEpitech
 Kevin Bridonneau
 
-## License
+## Licence
 
 Ce projet est sous licence GNU3.
