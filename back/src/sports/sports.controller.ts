@@ -15,6 +15,13 @@ export class SportsController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Get()
+    async getSports() {
+      const sports = await this.SportsService.getSports()
+      return sports;
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post()
     async addSport(@Request() req) {
       let list

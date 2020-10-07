@@ -3,23 +3,41 @@
     <ul class="nav nav-tabs align-items-center bg-light">
       <li v-for="sport in $store.state.sports" :key="sport.id" class="nav-item">
         <a
-          v-if="sport.id == $store.state.tabSelected"
+          v-if="sport.name == $store.state.tabSelected.name"
           class="nav-link active"
           href="#"
-          @click="go(sport.id)"
+          @click="go(sport._id, sport.name)"
           >{{ sport.name }}</a
         >
-        <a v-else class="nav-link" href="#" @click="go(sport.id, sport.name)">{{
-          sport.name
-        }}</a>
+        <a
+          v-else
+          class="nav-link"
+          href="#"
+          @click="go(sport._id, sport.name)"
+          >{{ sport.name }}</a
+        >
       </li>
       <li v-show="$store.state.UserData.id != ''" class="nav-item">
-        <a v-if="$store.state.tabSelected == 'Dashboard'" class="nav-link active" href="#" @click="goMyDashboard">My dashboard</a>
-        <a v-else class="nav-link " href="#" @click="goMyDashboard">My dashboard</a>
+        <a
+          v-if="$store.state.tabSelected.name == 'Dashboard'"
+          class="nav-link active"
+          href="#"
+          @click="goMyDashboard"
+          >My dashboard</a
+        >
+        <a v-else class="nav-link" href="#" @click="goMyDashboard"
+          >My dashboard</a
+        >
       </li>
       <li v-show="$store.state.UserData.id != ''" class="nav-item">
-        <a v-if="$store.state.tabSelected == 'MyProfile'" class="nav-link active" href="#" @click="goMyProfile">My profile</a>
-        <a v-else class="nav-link " href="#" @click="goMyProfile">My profile</a>
+        <a
+          v-if="$store.state.tabSelected.name == 'MyProfile'"
+          class="nav-link active"
+          href="#"
+          @click="goMyProfile"
+          >My profile</a
+        >
+        <a v-else class="nav-link" href="#" @click="goMyProfile">My profile</a>
       </li>
     </ul>
   </div>
@@ -27,26 +45,23 @@
 
 <script>
 export default {
-      name: "TabBar",
+  name: "TabBar",
 
   components: {},
 
   methods: {
-    go(idTab, nameTab){
-        this.$store.state.tabSelected = {id:idTab, name:nameTab}
-        this.$router.push({name:this.$store.state.sports[idTab].name})
-      },
-      goMyProfile(){
-        this.$store.state.tabSelected = {id:99,name:'MyProfile'}
-
-        this.$router.push({name:'MyProfile'})
-      },
-      goMyDashboard(){
-        this.$store.state.tabSelected = {id:100, name:'Dashboard'}
-
-        this.$router.push({name:'Dashboard'})
-      },
-
+    go(idTab, nameTab) {
+      this.$store.commit("setTabSelected", { id: idTab, name: nameTab });
+      this.$router.push({ name: nameTab });
+    },
+    goMyProfile() {
+      this.$store.commit("setTabSelected", { id: 99, name: "MyProfile" });
+      this.$router.push({ name: "MyProfile" });
+    },
+    goMyDashboard() {
+      this.$store.commit("setTabSelected", { id: 100, name: "Dashboard" });
+      this.$router.push({ name: "Dashboard" });
+    },
   },
 };
 </script>

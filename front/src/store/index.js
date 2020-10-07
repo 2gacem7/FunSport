@@ -23,8 +23,23 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setSports(state, payload){
+      state.sports = payload
+    },
+    setTabSelected(state, payload){
+      state.tabSelected = payload
+    }
   },
   actions: {
+    async getSports(){
+      await fetch("http://localhost:3000/sports", {
+        "headers": {
+          "authorization": "Bearer " + this.state.access_token
+        }
+      })
+        .then(res => res.json())
+        .then(res => this.commit('setSports',res));
+    },
     async getUserData() {
       let profile = null;
       if (document.cookie.length > 0) {

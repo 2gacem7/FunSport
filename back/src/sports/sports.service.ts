@@ -21,6 +21,12 @@ export class SportsService {
         }
     }
 
+    async getSports(){
+            const sport = await this.SportModel.find({});
+            return sport;
+
+    }
+
     async addSport(name){
         const newSport = await this.SportModel.create({name: name});
         newSport.save()
