@@ -14,8 +14,12 @@
         }}</a>
       </li>
       <li v-if="$store.state.UserData.id != ''" class="nav-item">
-        <a v-if="$store.state.tabSelected == 'Dashboard'" class="nav-link active" href="#" @click="goMyProfile">My dashboard</a>
-        <a v-else class="nav-link " href="#" @click="goMyProfile">My dashboard</a>
+        <a v-if="$store.state.tabSelected == 'Dashboard'" class="nav-link active" href="#" @click="goMyDashboard">My dashboard</a>
+        <a v-else class="nav-link " href="#" @click="goMyDashboard">My dashboard</a>
+      </li>
+      <li v-if="$store.state.UserData.id != ''" class="nav-item">
+        <a v-if="$store.state.tabSelected == 'MyProfile'" class="nav-link active" href="#" @click="goMyProfile">My profile</a>
+        <a v-else class="nav-link " href="#" @click="goMyProfile">My profile</a>
       </li>
     </ul>
   </div>
@@ -33,6 +37,11 @@ export default {
         this.$router.push({name:this.$store.state.sports[idTab].name})
       },
       goMyProfile(){
+        this.$store.state.tabSelected = 'MyProfile'
+
+        this.$router.push({name:'MyProfile'})
+      },
+      goMyDashboard(){
         this.$store.state.tabSelected = 'Dashboard'
 
         this.$router.push({name:'Dashboard'})

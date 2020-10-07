@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
+import MyProfile from '../views/MyProfile.vue'
 import Dashboard from '../views/Dashboard.vue'
 
 import LOL from '../views/LOL.vue'
@@ -26,6 +27,11 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/myprofile',
+    name: 'MyProfile',
+    component: MyProfile
   },
   {
     path: '/',
