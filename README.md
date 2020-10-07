@@ -5,7 +5,7 @@
 
 ### Objectifs du projet
 
-L’objectif de ce projet est de créer un site permettant d’avoir un suivi sur plusieurs sports, ​ycompris les sports féminins (autant que possible)​ :
+L’objectif de ce projet est de créer un site permettant d’avoir un suivi sur plusieurs sports, y compris les sports féminins (autant que possible) :
 - News des sports suivis,
 - Compétitions nationales et internationales,
 - Classement des championnats,
@@ -80,8 +80,8 @@ L’utilisateur aura la capacité d’ajouter un article, modifier supprimé.
 - Gestion des bugs
 
 ## Technologies utilisées
-Backend : Nestjs
-Frontend : Vuejs
+Backend : Nestjs  
+Frontend : Vuejs  
 Base de donnée : Mongodb
 
 ## Comment l'exécuter
