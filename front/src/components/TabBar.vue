@@ -13,11 +13,11 @@
           sport.name
         }}</a>
       </li>
-      <li v-if="$store.state.UserData.id != ''" class="nav-item">
+      <li v-show="$store.state.UserData.id != ''" class="nav-item">
         <a v-if="$store.state.tabSelected == 'Dashboard'" class="nav-link active" href="#" @click="goMyDashboard">My dashboard</a>
         <a v-else class="nav-link " href="#" @click="goMyDashboard">My dashboard</a>
       </li>
-      <li v-if="$store.state.UserData.id != ''" class="nav-item">
+      <li v-show="$store.state.UserData.id != ''" class="nav-item">
         <a v-if="$store.state.tabSelected == 'MyProfile'" class="nav-link active" href="#" @click="goMyProfile">My profile</a>
         <a v-else class="nav-link " href="#" @click="goMyProfile">My profile</a>
       </li>
