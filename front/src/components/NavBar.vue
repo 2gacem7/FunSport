@@ -47,7 +47,8 @@
     methods: {
       logout() {
         document.cookie = "My_FunSport_Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=LAX;";
-        document.location.reload(true);
+        this.$store.state.tabSelected = this.$store.state.sports[0].name
+        this.$router.push({name:this.$store.state.sports[0].name})
       }
     }
   };
