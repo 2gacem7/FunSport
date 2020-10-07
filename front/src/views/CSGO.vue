@@ -2,19 +2,21 @@
   <div class="home">
     <Navbar />
     <TabBar/>
-    CSGO
+    <b-card class=" col-md-4"><CalendarCsgo /></b-card>
   </div>
 </template>
 
 <script>
   import Navbar from "@/components/NavBar.vue";
       import TabBar from "@/components/TabBar.vue";
+        import CalendarCsgo from "@/components/CalendarCsgo.vue";
 
   export default {
     name: "Home",
     components: {
       Navbar,
-      TabBar
+      TabBar,
+      CalendarCsgo
     },
     data() {
       return {
