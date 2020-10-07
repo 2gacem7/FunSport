@@ -9,8 +9,9 @@ import { MySportsModule } from './MySports/MySports.module';
 import { MyFavoritesController } from './MyFavorites/MyFavorites.controller';
 import { MyFavoritesModule } from './MyFavorites/MyFavorites.module';
 import { AboutController } from './about/about.controller';
+import { SportsModule } from './sports/sports.module';
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/funsport'), UsersModule, AuthModule,MySportsModule, MyFavoritesModule],
+  imports: [MongooseModule.forRoot('mongodb://localhost/funsport'), UsersModule, AuthModule,MySportsModule, MyFavoritesModule, SportsModule],
   controllers: [AppController,MySportsController,MyFavoritesController],
   providers: [AppService],
 })

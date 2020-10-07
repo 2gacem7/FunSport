@@ -11,6 +11,7 @@ export default new Vuex.Store({
       lastName: "",
       phone: ""
     },
+    MySports: [],
     sports:[
       {id:0, name:"CS-GO"},
       {id:1, name:"LOL"}

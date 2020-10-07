@@ -19,10 +19,6 @@
               Register</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'Dashboard'}" v-if="this.$store.state.UserData.id != ''">
-              Dashboard</router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Home'}">Home</router-link>
           </li>
           <li class="nav-item">
@@ -74,7 +70,6 @@
   color: #d61e00
 }
   .navbar {
-
     background-color: whitesmoke !important;
   }
 </style>

@@ -1,79 +1,78 @@
 <template>
     <div id="MyProfile">
         <Navbar />
-            <TabBar />
-
-        <div class="container pt-3" style="padding-bottom:100vh;">
-            <div class="card" style="background-color:#f4f4f4e3;margin-top:100px">
+        <TabBar />
+        <div class="container pt-3">
+            <div class="card" style="background-color:#f4f4f4e3;">
                 <div class="card-header">
-                    <h1>My Account</h1>
+                    <h1 class="text text-center">My Account</h1>
                 </div>
-                <div class="card-body w-100 mx-auto">
-                    <div class="row mt-3" v-if="info === true">
-                        <span class="text-danger" v-if="msg.general"
+                <div class="card-body">
+                    <div class="row mt-3 justify-content-center" v-if="info === true">
+                        <span class="text-danger text-center" v-if="msg.general"
                             style="background-color:#f4f4f4e3;">{{ msg.general }}</span>
                     </div>
-                    <div class="row mt-2">
-                        <label>firstName</label>
+                    <div class="row mt-2  justify-content-center">
+                        <label class="card-text text-center">FirstName</label>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <input type="text" name="name" required :placeholder="firstName" v-model="newFirstName">
                     </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.firstName"
+                    <div class="row mt-3 justify-content-center">
+                        <span class="card-text text-center" v-if="msg.firstName"
                             style="background-color:#f4f4f4e3;">{{msg.firstName}}</span>
                     </div>
-                    <div class="row mt-2">
-                        <label>LastName</label>
+                    <div class="row mt-2 justify-content-center">
+                        <label class="card-text text-center">LastName</label>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <input type="text" name="name" required :placeholder="lastName" v-model="newLastName">
                     </div>
-                    <div class="row mt-3">
-                        <span class="text-danger" v-if="msg.lastName"
+                    <div class="row mt-2 justify-content-center">
+                        <span class="card-text text-center" v-if="msg.lastName"
                             style="background-color:#f4f4f4e3;">{{msg.lastName}}</span>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <label>Phone</label>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <input type="text" name="phone" required :placeholder="phone" v-model="newPhone">
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mt-2 justify-content-center">
                         <span class="text-danger" v-if="msg.phone"
                             style="background-color:#f4f4f4e3;">{{msg.phone}}</span>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <label>Mail Adress</label>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <input type="text" name="email" required :placeholder="email" v-model="newEmail">
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mt-2 justify-content-center">
                         <span class="text-danger" v-if="msg.email"
                             style="background-color:#f4f4f4e3;">{{msg.email}}</span>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <label>Password</label>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <input type="password" name="password" required v-model="password">
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mt-2 justify-content-center">
                         <span class="text-danger" v-if="msg.password"
                             style="background-color:#f4f4f4e3;">{{msg.password}}</span>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <label>Password Confirm</label>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <input type="password" name="passwordComfirme" required v-model="passwordComfirme">
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mt-2 justify-content-center">
                         <span class="text-danger" v-if="msg.passwordComfirme"
                             style="background-color:#f4f4f4e3;">{{msg.passwordComfirme}}</span>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 justify-content-center">
                         <button class="btn btn-info" @click="update()">Update my account</button>
                     </div>
                 </div>
