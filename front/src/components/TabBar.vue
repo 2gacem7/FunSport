@@ -14,7 +14,8 @@
         }}</a>
       </li>
       <li v-if="$store.state.UserData.id != ''" class="nav-item">
-        <a class="nav-link" href="#">My dashboard</a>
+        <a v-if="$store.state.tabSelected == 'Dashboard'" class="nav-link active" href="#" @click="goMyProfile">My dashboard</a>
+        <a v-else class="nav-link " href="#" @click="goMyProfile">My dashboard</a>
       </li>
     </ul>
   </div>
@@ -30,6 +31,11 @@ export default {
     go(idTab){
         this.$store.state.tabSelected = idTab
         this.$router.push({name:this.$store.state.sports[idTab].name})
+      },
+      goMyProfile(){
+        this.$store.state.tabSelected = 'Dashboard'
+
+        this.$router.push({name:'Dashboard'})
       },
 
   },

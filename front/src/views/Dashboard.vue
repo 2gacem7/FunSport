@@ -1,6 +1,8 @@
 <template>
     <div id="Dashboard">
         <Navbar />
+            <TabBar />
+
         <div class="container pt-3" style="padding-bottom:100vh;">
             <div class="card" style="background-color:#f4f4f4e3;margin-top:100px">
                 <div class="card-header">
@@ -82,11 +84,13 @@
 
 <script>
     import Navbar from "@/components/NavBar.vue"
+    import TabBar from "@/components/TabBar.vue";
 
     export default {
         name: 'Dashboard',
         components: {
             Navbar,
+            TabBar
         },
         data() {
             return {

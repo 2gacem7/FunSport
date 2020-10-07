@@ -30,7 +30,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: CSGO
   },
   {
     path: '/csgo',

@@ -2,6 +2,8 @@
   <div class="home">
     <Navbar />
     <TabBar />
+  <CSGO v-if="$store.state.tabSelected == 'CS-GO'" />
+
 
   </div>
 </template>
@@ -9,12 +11,18 @@
 <script>
   import Navbar from "@/components/NavBar.vue";
     import TabBar from "@/components/TabBar.vue";
+        import CSGO from "@/views/CSGO.vue";
+                import LOL from "@/views/LOL.vue";
+
+
 
   export default {
     name: "Home",
     components: {
       Navbar,
        TabBar,
+       LOL,
+       CSGO
     },
     data() {
       return {
