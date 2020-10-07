@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-if="isInMySport == true" class="btn btn-primary" @click="addToMySports">
+    <button v-if="!isInMySport() == true" class="btn btn-primary" @click="addToMySports">
       Add this sport
     </button>
   </div>
@@ -17,8 +17,9 @@ export default {
     isInMySport() {
       for (let i = 0; i < this.$store.state.MySports.length; i++) {
         console.log(this.$store.state.tabSelected)
+        console.log(this.$store.state.MySports)
         if (
-          this.$store.state.tabSelected.id == this.$store.state.MySports[i]._id
+          this.$store.state.tabSelected.id == this.$store.state.MySports[i].sportId
         ) {
           return true;
         } else {
@@ -34,7 +35,7 @@ export default {
           authorization: "Bearer " + this.$store.state.access_token,
         },
         body: JSON.stringify({
-          sportId: "5f7e14307eb1dabe4a077857",
+          sportId: this.$store.state.tabSelected.id,
         }),
       }).then(() => {
         this.$store.dispatch("getMySports");

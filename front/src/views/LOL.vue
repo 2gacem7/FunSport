@@ -25,13 +25,9 @@ export default {
     };
   },
   mounted() {
-    this.tabSelected = this.$store.state.sports[0].id;
   },
   methods: {
-    go(idTab) {
-      this.tabSelected = idTab;
-      this.$router.push({ name: this.$store.state.sports[idTab].name });
-    },
+
     getCookie() {
       let access_token = "";
       if (document.cookie.length > 0) {
