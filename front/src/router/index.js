@@ -5,6 +5,10 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 
+import LOL from '../views/LOL.vue'
+import CSGO from '../views/CSGO.vue'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +31,16 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/csgo',
+    name: 'CS-GO',
+    component: CSGO
+  },
+  {
+    path: '/lol',
+    name: 'LOL',
+    component: LOL
   },
 ]
 

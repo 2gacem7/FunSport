@@ -11,6 +11,11 @@ export default new Vuex.Store({
       lastName: "",
       phone: ""
     },
+    sports:[
+      {id:0, name:"CS-GO"},
+      {id:1, name:"LOL"}
+    ],
+    tabSelected:0
   },
   mutations: {
   },

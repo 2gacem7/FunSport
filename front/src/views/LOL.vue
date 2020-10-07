@@ -2,19 +2,19 @@
   <div class="home">
     <Navbar />
     <TabBar />
-
+    LOL
   </div>
 </template>
 
 <script>
   import Navbar from "@/components/NavBar.vue";
-    import TabBar from "@/components/TabBar.vue";
+      import TabBar from "@/components/TabBar.vue";
 
   export default {
     name: "Home",
     components: {
       Navbar,
-       TabBar,
+      TabBar
     },
     data() {
       return {
@@ -25,7 +25,10 @@
       this.tabSelected = this.$store.state.sports[0].id
     },
     methods: {
-
+      go(idTab){
+        this.tabSelected = idTab
+        this.$router.push({name:this.$store.state.sports[idTab].name})
+      },
       getCookie() {
         let access_token = "";
         if (document.cookie.length > 0) {
