@@ -11,6 +11,7 @@ export default new Vuex.Store({
       lastName: "",
       phone: ""
     },
+    access_token: "",
     MySports: [],
     sports:[
       {id:0, name:"CS-GO"},
@@ -29,6 +30,7 @@ export default new Vuex.Store({
           if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
             const cookiename = "My_FunSport_Token=";
             const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
+            this.state.access_token = access_token;
             await fetch("http://localhost:3000/profile", {
               "method": "GET",
               "headers": {
@@ -46,6 +48,39 @@ export default new Vuex.Store({
         }
       }
     },
+    async getMySports(){
+      if (document.cookie.length > 0) {
+        let cookieArray = document.cookie.split(';');
+        for (let i = 0; i < cookieArray.length; i++) {
+            if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
+                const cookiename = "My_FunSport_Token=";
+                const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
+                let mySports = [];
+                await fetch("http://localhost:3000/mysports", {
+                        "method": "GET",
+                        "headers": {
+                            "authorization": "Bearer " + access_token
+                        }
+                    })
+                    .then(res => res.clone().json())
+                    .then(json => mySports = json);
+                for(let i = 0; i < mySports.length; i++){
+                    let tmp = null;
+                    await fetch("http://localhost:3000/sports/" + mySports[i].sportId, {
+                            "method": "GET",
+                            "headers": {
+                                "authorization": "Bearer " + access_token
+                            }
+                        })
+                        .then(res => res.clone().json())
+                        .then(json => tmp = json);
+                    mySports[i].name = tmp.name
+                }
+                this.state.MySports = mySports;
+            }
+        }
+    }
+    }
 
   },
   modules: {},
