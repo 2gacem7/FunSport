@@ -2,10 +2,9 @@
   <div class="home">
     <Navbar />
     <TabBar />
-    <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
-      <h4>CSGO Team's </h4>
+    
+
       <Listcsgo />
-    </b-card>
     <AddMySport />
     CSGO
     <b-card class="col-md-4">

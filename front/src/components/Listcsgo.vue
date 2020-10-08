@@ -1,24 +1,34 @@
 <template>
-  <div class="container-fluid mt-4">
-    <div id="table-wrapper">
-      <div id="table-scroll">
+  <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
+    <div class="card-header justify-content-between">
+      <button class="btn btn-success font-weight-bold">+ favori</button>
+      <h3 class="text-dark text-center">Team</h3>
+    </div>
+    <div class="card-body m-0 p-0 w-100">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="h5 font-weight-bold text-center">Team</th>
+            <th class="h5 font-weight-bold text-center">Country</th>
+          </tr>
+        </thead>
+      </table>
+      <div class="card overflow-auto m-0 p-0 w-100" style="max-height: 32rem">
         <table class="table">
-          <thead class="thead-light">
-            <tr>
-              <th>Team</th>
-              <th>Country</th>
-            </tr>
-          </thead>
           <tbody v-for="item in info" :key="item.id">
             <tr>
-              <td v-text="item.name"></td>
-              <td v-text="item.location"></td>
+              <td class="text-center">{{item.name}}</td>
+              <td class="text-center">{{item.location}}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+      
+
+    
 </template>
 
 <script>
@@ -64,11 +74,21 @@
 
 <style scoped>
   tbody {
-    color: white;
+    color: black;
+    font-family: counter-strike;
   }
 
   thead {
     font-family: counter-strike;
     font-size: 25px
+  }
+
+  th {
+    font-family: counter-strike;
+    color: black;
+  }
+  h3 {
+    font-family: counter-strike;
+    color: black;
   }
 </style>
