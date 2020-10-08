@@ -17,10 +17,10 @@ export class MyFavoritesController {
     @Post()
     async addMyFavorite(@Request() req) {
       let list
-      if(req.body.sportFavoriteId){
-        list = await this.myFavoritesService.addMyFavorite(req.user.id, req.body.sportFavoriteId)
+      if(req.body.sportFavoriteId, req.body.data){
+        list = await this.myFavoritesService.addMyFavorite(req.user.id, req.body.sportFavoriteId, req.body.data)
       } else{
-        list = {error:"sportFavoriteId is mandatory"}
+        list = {error:"sportFavoriteId and data are mandatory"}
       }
       return list;
     }
