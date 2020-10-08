@@ -45,16 +45,15 @@
 
 
 <script>
-//import API_SPORT_RADAR_CSGO from "@/env.config"
+    //import API_SPORT_RADAR_CSGO from "@/env.config"
     export default {
         name: "CalendarCsgo",
 
         beforeMount() {
-    this.getInfos();
-  },
+            this.getInfos();
+        },
 
         methods: {
-
             async getInfos() {
 //                 const header = new Headers()
 //                 header.append("Access-Control-Allow-Origin","*")
