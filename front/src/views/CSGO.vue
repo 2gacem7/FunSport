@@ -1,16 +1,14 @@
 <template>
   <div class="home">
     <Navbar />
-    <TabBar />
-    
-
-      <Listcsgo />
+    <TabBar/>
     <AddMySport />
-    CSGO
-    <b-card class="col-md-4">
+    <div class="card-deck">
       <CalendarCsgo />
-    </b-card>
+      <LastResultsCsgo />
+      <Listcsgo />
     <LiveCSGO />
+    </div>
   </div>
 </template>
 
@@ -22,6 +20,7 @@
   import AddMySport from "@/components/AddMySport.vue";
   import ENV from "../../env.config";
   import LiveCSGO from "@/components/LiveCSGO.vue"
+  import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
 
 
   export default {
@@ -32,7 +31,8 @@
       AddMySport,
       CalendarCsgo,
       LiveCSGO,
-      Listcsgo
+      Listcsgo,
+      LastResultsCsgo
     },
     data() {
       return {};
