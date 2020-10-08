@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-if="!isInMySport() == true && $store.state.UserData.id !=''" class="btn btn-primary" @click="addToMySports">
+    <button v-if="!isInMySport() && $store.state.UserData.id !=''" class="btn btn-primary" @click="addToMySports">
       Add this sport
     </button>
   </div>

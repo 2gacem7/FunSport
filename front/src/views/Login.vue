@@ -108,6 +108,7 @@
         this.$store.state.UserData.email = profile.email;
         this.$store.state.UserData.firstName = profile.firstName;
         this.$store.state.UserData.lastName = profile.lastName;
+        this.$store.dispatch('getMySports')
         this.$router.push({
           path: '/'
         });
