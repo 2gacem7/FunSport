@@ -45,35 +45,24 @@
 
 
 <script>
-//import API_SPORT_RADAR_CSGO from "@/env.config"
+    //import API_SPORT_RADAR_CSGO from "@/env.config"
     export default {
         name: "CalendarCsgo",
 
         beforeMount() {
-    this.getInfos();
-  },
+            this.getInfos();
+        },
 
         methods: {
-
             async getInfos() {
-                  var myHeaders = new Headers();
-                  myHeaders.append("Authorization", "Bearer " + this.myToken);
-
-                  var requestOptions = {
-                    method: 'GET',
-                    headers: myHeaders,
-                    redirect: 'follow'
-                  };
-
-                  await fetch("https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz", requestOptions)
-                .then(response => response.text())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
-
-                    console.log(response)
-              
-              
-              },
+                let res = await fetch("https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz", {
+                            "method": "GET",
+                            "headers": {
+                                'Access-Control-Allow-Origin' : '*'
+                            }
+                        })
+                    console.log(res)
+            },
 
         }
 
