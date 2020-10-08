@@ -1,42 +1,32 @@
 <template>
     <div>
-        <div data-v-3acb992b="" class="CalendarTable">
-            <div>
-                <table class="table table--twoLines">
-                    <thead>
-                        <tr class="table__row table__row--head">
-                            <th class="table__col table__col--date">Date</th>
-                            <th class="table__col table__col--name">Nom de la compétition</th>
+        <button class="btn-success font-weight-bold">+ favori</button>
+        <h3 class="text-dark text-center">Calendar matches</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="h5 font-weight-bold">Dates</th>
+                    <th class="h5 font-weight-bold">Leagues</th>
+                    <th class="h5 font-weight-bold"> Matches</th>
+                    <th class="h5 font-weight-bold"> Streams</th>
+                </tr>
+            </thead>
+            <tbody v-for="item in info" :key="item.id">
+                <tr>
+                    <td>
+                        <p :src="return_Date(item)"> Start: {{item.begin_at}}</p>
+                        <p> End: {{item.end_at}}</p>
+                    </td>
+                    <td>{{item.league.name}} <img :src="return_Link(item)" style="max-width:7rem"></td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.live_url}}</td>
+                </tr>
 
-                            <th class="table__col">
-                                Cat.
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table__row">
-                            <td class="table__col table__col--date">
-                                <div>
-                                    1 oct.
-                                </div>
-                            </td>
-                            <td class="table__col table__col--name table__col--etape">
-                                <p>
-                                    Coppa Bernocchi
-                                </p>
 
-                            </td>
-                            <td class="table__col">
-                                <span tag="span">
-                                    1.Pro
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
 
-                </table>
-            </div>
-        </div>
+            </tbody>
+
+        </table>
 
     </div>
 
@@ -49,33 +39,55 @@
     export default {
         name: "CalendarCsgo",
 
+        data() {
+
+            return {
+                info: {},
+            }
+
+        },
+
         beforeMount() {
             this.getInfos();
         },
 
         methods: {
             async getInfos() {
-//                 const header = new Headers()
-//                 header.append("Access-Control-Allow-Origin","*")
-//                 // header.append("Content-type","application/json")
 
-// var myInit = { method: 'GET',
-//                headers: header,
-//                mode: 'cors',
-//                cache: 'default' };
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Bearer 9iph8bGmiI4n69l_HcOATG7FsQLI5RIgHxakEY9F5tZaKr_3CWo");
 
-//                 const datas = await fetch("https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz", myInit)
-//                 console.log(datas)
+                var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                };
 
-//                 const json = await datas.json()
-//                 if (datas.ok){
-//                 console.log(json)
+                await fetch("https://api.pandascore.co/csgo/matches", requestOptions)
+                    .then(response => response.json())
+                    .then(result => this.info = result)
+                    .catch(error => console.log('error', error));
 
-//                 } else {
-//                     console.log("Down")
-//                 }
+            },
 
-              },
+            return_Link(item) {
+                return item.league.image_url
+            },
+
+            return_Date(item) {
+                if (item.begin_at == null) {
+
+                    item.begin_at = "unkonwn"
+                }
+
+                if (item.end_at == null) {
+
+                    item.end_at = "unkonwn"
+                }
+
+            },
+
+
         }
     }
 </script>
@@ -85,5 +97,10 @@
     .CalendarTable {
         background-color: white;
         color: black;
+    }
+
+    thead {
+        font-family: counter-strike;
+        font-size: 25px
     }
 </style>
