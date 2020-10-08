@@ -5,6 +5,7 @@
     <AddMySport />
     CSGO
     <b-card class="col-md-4"><CalendarCsgo /></b-card>
+    <LiveCSGO />
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import CalendarCsgo from "@/components/CalendarCsgo.vue";
+import LiveCSGO from "@/components/LiveCSGO.vue";
 
 import AddMySport from "@/components/AddMySport.vue";
 import ENV from "../../env.config";
@@ -23,6 +25,7 @@ export default {
     TabBar,
     AddMySport,
     CalendarCsgo,
+    LiveCSGO,
   },
   data() {
     return {};
