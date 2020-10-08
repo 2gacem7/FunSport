@@ -14,7 +14,6 @@ export class SportsController {
       return sport;
     }
 
-    @UseGuards(JwtAuthGuard)
     @Get()
     async getSports() {
       const sports = await this.SportsService.getSports()
