@@ -16,8 +16,6 @@ export default {
   methods: {
     isInMySport() {
       for (let i = 0; i < this.$store.state.MySports.length; i++) {
-        console.log(this.$store.state.tabSelected)
-        console.log(this.$store.state.MySports)
         if (
           this.$store.state.tabSelected.id == this.$store.state.MySports[i].sportId
         ) {
