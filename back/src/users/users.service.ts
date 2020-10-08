@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../schemas/user.schema';
 import { MySport } from '../schemas/mySport.schema';
 import { MyFavorite } from '../schemas/myFavorite.schema';
+import { HttpException, HttpStatus , HttpCode} from '@nestjs/common'
 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -19,6 +20,15 @@ export class UsersService {
   ) {
   }
 
+  async isAdmin(id) : Promise<boolean> {
+    const user = await this.userModel.findById(id);
+    if (!isNull(user)){
+      return user.isAdmin
+    }
+    return false;
+  }
+
+
   async userExists(createUserDTO: CreateUserDto): Promise<any> {
     const user = await this.userModel.findOne({ email: createUserDTO.email });
     if(isNull(user)){
@@ -26,9 +36,6 @@ export class UsersService {
     }
     return true;
   }
-
-
- 
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const email = createUserDto.email;
@@ -40,6 +47,7 @@ export class UsersService {
     return createdUser.save();
   }
 
+
   async findAll(): Promise<User[]>  {
     return this.userModel.find().exec();
   }
@@ -49,38 +57,108 @@ export class UsersService {
    return user;
   }
 
-  async deleteUser(id) : Promise<void>{
-    this.userModel.deleteOne({'_id':id}).exec();
+  async findUserById(id: string): Promise<any> {
+    const user = await this.userModel.findById(id);
+    return user;
+  }
+
+  async deleteUser(id) : Promise<any>{
+    const result = await this.userModel.deleteOne({'_id':id}).exec();
+    if(result.deletedCount === 0){
+      throw new HttpException({
+        message: 'No user deleted',
+      }, HttpStatus.BAD_REQUEST);
+    }
+    else return {
+      message : "User Deleted !",
+    }
   }
 
  
   async update(id, body): Promise<any>{
     const user = await this.userModel.findById(id);
     let userUpdated = user;
-    let updated = "nothing updated";
+    let updated = true;
     
     if (body.hasOwnProperty("firstName")){
-      userUpdated = await this.userModel.findByIdAndUpdate( id,{"firstName": body.firstName},{new:true,useFindAndModify:false}) 
-      updated = "user updated"
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"firstName": body.firstName},{new:true,useFindAndModify:false}); 
+      updated = true;
     }
     if (body.hasOwnProperty("lastName")){
-      userUpdated = await this.userModel.findByIdAndUpdate( id,{"lastName": body.lastName},{new:true,useFindAndModify:false}) 
-      updated = "user updated"
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"lastName": body.lastName},{new:true,useFindAndModify:false});
+      updated = true;
     }
     if (body.hasOwnProperty("email")){
-      userUpdated = await this.userModel.findByIdAndUpdate( id,{"email": body.email},{new:true,useFindAndModify:false}) 
-      updated = "user updated"
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"email": body.email},{new:true,useFindAndModify:false}); 
+      updated = true;
     } 
     if (body.hasOwnProperty("password")){
       const hashedPassword = await bcrypt.hash(body.password, 10);
-      userUpdated = await this.userModel.findByIdAndUpdate( id,{"password": hashedPassword},{new:true,useFindAndModify:false}) 
-      updated = "user updated"
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"password": hashedPassword},{new:true,useFindAndModify:false}); 
+      updated = true;
     } 
     if (body.hasOwnProperty("phone")){
-      userUpdated = await this.userModel.findByIdAndUpdate( id,{"phone": body.phone},{new:true,useFindAndModify:false}) 
-      updated = "user updated"
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"phone": body.phone},{new:true,useFindAndModify:false});
+      updated = true;
     } 
-    return [userUpdated, updated]
+    if(updated){
+      return userUpdated;
+    }
+    else{
+      throw new HttpException({
+        message: 'Nothing Updated',
+      }, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async adminCreate(createUserDto: CreateUserDto): Promise<User> {
+    const email = createUserDto.email;
+    const firstName = createUserDto.firstName;
+    const lastName = createUserDto.lastName;
+    const phone = createUserDto.phone;
+    const isAdmin = createUserDto.isAdmin;
+    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    const createdUser = await new this.userModel({ firstName: firstName, lastName: lastName, phone: phone, email: email, password: hashedPassword ,isAdmin: isAdmin });
+    return createdUser.save();
+  }
+
+  async adminUpdate(id, body): Promise<any>{
+    const user = await this.userModel.findById(id);
+    let userUpdated = user;
+    let updated = false;
+    if (body.hasOwnProperty("firstName")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"firstName": body.firstName},{new:true,useFindAndModify:false});
+      updated = true;
+    }
+    if (body.hasOwnProperty("lastName")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"lastName": body.lastName},{new:true,useFindAndModify:false});
+      updated = true;
+    }
+    if (body.hasOwnProperty("email")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"email": body.email},{new:true,useFindAndModify:false}); 
+      updated = true;
+    } 
+    if (body.hasOwnProperty("password")){
+      const hashedPassword = await bcrypt.hash(body.password, 10);
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"password": hashedPassword},{new:true,useFindAndModify:false});
+      updated = true;
+    } 
+    if (body.hasOwnProperty("phone")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"phone": body.phone},{new:true,useFindAndModify:false});
+      updated = true;
+    } 
+    if (body.hasOwnProperty("isAdmin")){
+      userUpdated = await this.userModel.findByIdAndUpdate( id,{"isAdmin": body.isAdmin},{new:true,useFindAndModify:false});
+      updated = true;
+    } 
+    if(updated){
+      return userUpdated;
+    }
+    else{
+      throw new HttpException({
+        message: 'Nothing Updated',
+      }, HttpStatus.BAD_REQUEST);
+    }
   }
 
 
