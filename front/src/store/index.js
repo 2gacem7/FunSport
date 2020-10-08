@@ -13,6 +13,7 @@ export default new Vuex.Store({
     },
     access_token: "",
     MySports: [],
+    MyFavorites:[],
     sports: [
       { id: 0, name: "CS-GO" },
       { id: 1, name: "LOL" }
@@ -31,13 +32,67 @@ export default new Vuex.Store({
     },
     setTabSelected(state, payload){
       state.tabSelected = payload
-    }
+    },
+    setMyFavorites(state, payload){
+      state.MyFavorites = payload
+    },
+    setAccessToken(state){
+
+    },
   },
   actions: {
     async getSports(context){
       await fetch("http://localhost:3000/sports")
         .then(res => res.json())
         .then(res => context.commit('setSports',res));
+    },
+    async getFavorites(context){
+      if (document.cookie.length > 0) {
+        let cookieArray = document.cookie.split(';');
+        for (let i = 0; i < cookieArray.length; i++) {
+          if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
+            const cookiename = "My_FunSport_Token=";
+            const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
+            this.state.access_token = access_token;
+            await fetch("http://localhost:3000/myfavorites",
+              {
+              "method": "GET",
+              "headers": {
+                "authorization": "Bearer " + access_token
+              }
+              }
+              )
+              .then(res => res.json())
+              .then(res => context.commit('setMyFavorites',res));
+    
+          }
+        }
+      }
+    },
+    async addFavorites(context,value){
+      if (document.cookie.length > 0) {
+        let cookieArray = document.cookie.split(';');
+        for (let i = 0; i < cookieArray.length; i++) {
+          if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
+            const cookiename = "My_FunSport_Token=";
+            const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
+            await fetch("http://localhost:3000/myfavorites", {
+              method: "Post",
+              headers: {
+                "content-type": "application/json",
+                "authorization": "Bearer " + access_token
+
+              },
+              body: JSON.stringify(value),
+            })
+            .then((res) => context.dispatch('getFavorites'));
+          }
+        }
+      }
+    
+
+    },
+    getAccess_Token(){
     },
     async getUserData() {
       let profile = null;
