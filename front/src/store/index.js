@@ -25,20 +25,19 @@ export default new Vuex.Store({
   mutations: {
     setSports(state, payload){
       state.sports = payload
+      state.tabSelected={id:state.sports[0]._id,
+        name:state.sports[0].name}
+
     },
     setTabSelected(state, payload){
       state.tabSelected = payload
     }
   },
   actions: {
-    async getSports(){
-      await fetch("http://localhost:3000/sports", {
-        "headers": {
-          "authorization": "Bearer " + this.state.access_token
-        }
-      })
+    async getSports(context){
+      await fetch("http://localhost:3000/sports")
         .then(res => res.json())
-        .then(res => this.commit('setSports',res));
+        .then(res => context.commit('setSports',res));
     },
     async getUserData() {
       let profile = null;

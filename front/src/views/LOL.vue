@@ -12,6 +12,7 @@
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import AddMySport from "@/components/AddMySport.vue";
+import ENV from "../../env.config";
 
 export default {
   name: "Home",

@@ -15,8 +15,11 @@ new Vue({
   router,
   store,
   async beforeCreate(){
-    await this.$store.dispatch('getUserData');
     await this.$store.dispatch('getSports');
+
+    await this.$store.dispatch('getUserData');
+    await this.$store.dispatch('getMySports');
+
 
   },
   created: function (){
