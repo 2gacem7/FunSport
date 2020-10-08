@@ -39,6 +39,16 @@
         >
         <a v-else class="nav-link" href="#" @click="goMyProfile">My profile</a>
       </li>
+      <li v-show="$store.state.UserData.isAdmin === true" class="nav-item">
+        <a
+          v-if="$store.state.tabSelected.name == 'ManageUsers'"
+          class="nav-link active"
+          href="#"
+          @click="goManageUsers"
+          >Manage Users</a
+        >
+        <a v-else class="nav-link" href="#" @click="goManageUsers">Manage Users</a>
+      </li>
     </ul>
   </div>
 </template>
@@ -62,6 +72,10 @@ export default {
       this.$store.commit("setTabSelected", { id: 100, name: "Dashboard" });
       this.$router.push({ name: "Dashboard" });
     },
+    goManageUsers(){
+      this.$store.commit("setTabSelected", { id: 101, name: "ManageUsers" });
+      this.$router.push({ name: "ManageUsers" });
+    }
   },
 };
 </script>
