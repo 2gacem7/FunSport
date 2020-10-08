@@ -1,11 +1,14 @@
 <template>
   <div class="home">
     <Navbar />
-    <TabBar />
+    <TabBar/>
     <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
      <h4>CSGO Team's </h4>
       <Listcsgo />
     </b-card>
+    <AddMySport />
+    CSGO
+    <b-card class=" col-md-4"><CalendarCsgo /></b-card>
   </div>
 </template>
 
@@ -14,27 +17,29 @@
   import TabBar from "@/components/TabBar.vue";
   import Listcsgo from "@/components/Listcsgo.vue";
 
+      
+        import CalendarCsgo from "@/components/CalendarCsgo.vue";
+
+      import AddMySport from "@/components/AddMySport.vue";
 
   export default {
-    name: "Home",
+    name: "CSGO",
     components: {
       Navbar,
       TabBar,
-      Listcsgo
+      Listcsgo,
+      AddMySport,
+      CalendarCsgo
     },
     data() {
       return {
-        tabSelected:""
       };
     },
     mounted() {
-      this.tabSelected = this.$store.state.sports[0].id
+
     },
     methods: {
-      go(idTab){
-        this.tabSelected = idTab
-        this.$router.push({name:this.$store.state.sports[idTab].name})
-      },
+
       getCookie() {
         let access_token = "";
         if (document.cookie.length > 0) {

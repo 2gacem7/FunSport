@@ -1,6 +1,6 @@
 import { Controller, Get, Delete,Post,Request, UseGuards,Put, Param } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { SportsService } from './Sports.service';
+import { SportsService } from './sports.service';
 
 import { HttpException, HttpStatus , HttpCode} from '@nestjs/common'
 
@@ -12,6 +12,12 @@ export class SportsController {
     async getSport(@Param('id') id: string) {
       const sport = await this.SportsService.getSport(id)
       return sport;
+    }
+
+    @Get()
+    async getSports() {
+      const sports = await this.SportsService.getSports()
+      return sports;
     }
 
     @UseGuards(JwtAuthGuard)

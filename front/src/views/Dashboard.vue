@@ -11,8 +11,9 @@
                     <label class="card-text text-center">No favorite sports added</label>
                 </div>
                 <div v-else>
-                    <div v-for="sport in mySports" v-bind:key="sport.name" class="row mt-2  justify-content-center">
+                    <div v-for="sport in mySports" v-bind:key="sport.name" class="row mt-2  p-3  justify-content-center">
                         <h3 class="card-text text-center">{{ sport.name }}</h3>
+                        <button class="btn btn-danger btn-sm rounded-circle ml-5 mb-2 " @click="deleteSport(sport._id)">Del</button>
                     </div>
                 </div>
             </div>
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-    import Navbar from "@/components/NavBar.vue"
+    import Navbar from "@/components/NavBar.vue";
     import TabBar from "@/components/TabBar.vue";
 
     export default {
@@ -40,52 +41,42 @@
         },
         data() {
             return {
-                mySports: []
+                access_token:""
             }
         },
-
         async mounted() {
             if (this.$store.state.UserData.id == '') {
                 this.$router.push({
                     path: '/login'
                 });
             }
-            if (document.cookie.length > 0) {
-                let cookieArray = document.cookie.split(';');
-                for (let i = 0; i < cookieArray.length; i++) {
-                    if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
-                        const cookiename = "My_FunSport_Token=";
-                        const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
-                        let mySport = [];
-                        await fetch("http://localhost:3000/mysports", {
-                                "method": "GET",
-                                "headers": {
-                                    "authorization": "Bearer " + access_token
-                                }
-                            })
-                            .then(res => res.clone().json())
-                            .then(json => mySport = json);
-                        let myFinalSports = [];
-                        mySport.forEach(async sport => {
-                            let tmp = null;
-                            await fetch("http://localhost:3000/sports/" + sport.sportId, {
-                                    "method": "GET",
-                                    "headers": {
-                                        "authorization": "Bearer " + access_token
-                                    }
-                                })
-                                .then(res => res.clone().json())
-                                .then(json => tmp = json);
-                            myFinalSports.push(tmp)
-                        })
-                        this.mySports = myFinalSports;
-                        this.$store.state.MySports = myFinalSports;
-                    }
-                }
-            }
+            this.$store.dispatch('getMySports');
 
         },
-        methods: {}
+        computed: {
+            mySports: function (){
+                return this.$store.state.MySports;
+            }
+        },
+        methods: {
+            async deleteSport(id){
+                const body = {
+                    id: id
+                }
+                let mySports = [];
+                await fetch("http://localhost:3000/mysports", {
+                        "method": "DELETE",
+                        "headers": {
+                            "content-type": "application/json",
+                            "authorization": "Bearer " + this.$store.state.access_token
+                        },
+                        "body": JSON.stringify(body)
+                    })
+                    .then(res => res.clone().json())
+                    .then(json => mySports = json);
+                this.$store.dispatch('getMySports');
+            }
+        }
     }
 </script>
 

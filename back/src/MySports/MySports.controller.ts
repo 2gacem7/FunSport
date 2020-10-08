@@ -1,6 +1,7 @@
-import { Controller, Get, Delete,Post,Request, UseGuards,Put } from '@nestjs/common';
+import { Controller, Get, Delete,Post,Request, UseGuards,Put, Body } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { MySportsService } from './MySports.service';
+import { HttpException, HttpStatus , HttpCode} from '@nestjs/common'
 
 @Controller('mysports')
 export class MySportsController {
@@ -34,9 +35,9 @@ export class MySportsController {
       if (req.body.id){
         return await this.mySportsService.delMySport(req.body.id)
       } else {
-        return {
-          error: "id is mandatory"
-        }
+        throw new HttpException({
+          message: 'Id is Mandatory',
+        }, HttpStatus.BAD_REQUEST);
       }
     }
 }
