@@ -2,11 +2,9 @@
   <div class="home">
     <Navbar />
     <TabBar/>
-    <div class="container-fluid row">
-      <div class="ml-5 mt-5 card overflow-auto" style="min-width: 30rem; max-height: 40rem"><CalendarCsgo /></div>
-      <div class=" mt-5 ml-5 card" style="min-width: 30rem; max-height: 40rem"><LastResultsCsgo /></div>
-    </div>
-    
+    <AddMySport />
+    CSGO
+    <b-card class=" col-md-4"><CalendarCsgo /></b-card>
   </div>
 </template>
 
@@ -16,27 +14,25 @@
         import CalendarCsgo from "@/components/CalendarCsgo.vue";
         import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
 
+      import AddMySport from "@/components/AddMySport.vue";
+
   export default {
-    name: "Home",
+    name: "CSGO",
     components: {
       Navbar,
       TabBar,
-      CalendarCsgo,
-      LastResultsCsgo
+      AddMySport,
+      CalendarCsgo
     },
     data() {
       return {
-        tabSelected:""
       };
     },
     mounted() {
-      this.tabSelected = this.$store.state.sports[0].id
+
     },
     methods: {
-      go(idTab){
-        this.tabSelected = idTab
-        this.$router.push({name:this.$store.state.sports[idTab].name})
-      },
+
       getCookie() {
         let access_token = "";
         if (document.cookie.length > 0) {

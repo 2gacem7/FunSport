@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import Navbar from "@/components/NavBar.vue"
+    import Navbar from "@/components/NavBar.vue";
     import TabBar from "@/components/TabBar.vue";
 
     export default {

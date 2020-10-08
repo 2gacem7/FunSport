@@ -30,7 +30,8 @@
       };
     },
     mounted() {
-      this.tabSelected = this.$store.state.sports[0].id
+
+      this.$store.commit("setTabSelected", { id: this.$store.state.sports[0].id, name: this.$store.state.sports[0].name });
     },
     methods: {
 

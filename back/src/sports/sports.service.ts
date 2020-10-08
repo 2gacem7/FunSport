@@ -1,7 +1,7 @@
 import { Model, Mongoose, model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Sport } from '../schemas/Sport.schema';
+import { Sport } from '../schemas/sport.schema';
 import { CreateMySportDto } from '../dto/create-mySport.dto';
 import { HttpException, HttpStatus , HttpCode} from '@nestjs/common'
 
@@ -19,6 +19,12 @@ export class SportsService {
                 message: 'Invalid Sport ID',
               }, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    async getSports(){
+            const sport = await this.SportModel.find({});
+            return sport;
+
     }
 
     async addSport(name){

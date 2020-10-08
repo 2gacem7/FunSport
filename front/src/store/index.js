@@ -7,21 +7,39 @@ export default new Vuex.Store({
     UserData: {
       id: "",
       email: "",
-      firstName:"",
+      firstName: "",
       lastName: "",
       phone: ""
     },
     access_token: "",
     MySports: [],
-    sports:[
-      {id:0, name:"CS-GO"},
-      {id:1, name:"LOL"}
+    sports: [
+      { id: 0, name: "CS-GO" },
+      { id: 1, name: "LOL" }
     ],
-    tabSelected:0
+    tabSelected: {
+      id: "",
+      name: ""
+    }
   },
   mutations: {
+    setSports(state, payload){
+      state.sports = payload
+    },
+    setTabSelected(state, payload){
+      state.tabSelected = payload
+    }
   },
   actions: {
+    async getSports(){
+      await fetch("http://localhost:3000/sports", {
+        "headers": {
+          "authorization": "Bearer " + this.state.access_token
+        }
+      })
+        .then(res => res.json())
+        .then(res => this.commit('setSports',res));
+    },
     async getUserData() {
       let profile = null;
       if (document.cookie.length > 0) {
@@ -48,38 +66,38 @@ export default new Vuex.Store({
         }
       }
     },
-    async getMySports(){
+    async getMySports() {
       if (document.cookie.length > 0) {
         let cookieArray = document.cookie.split(';');
         for (let i = 0; i < cookieArray.length; i++) {
-            if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
-                const cookiename = "My_FunSport_Token=";
-                const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
-                let mySports = [];
-                await fetch("http://localhost:3000/mysports", {
-                        "method": "GET",
-                        "headers": {
-                            "authorization": "Bearer " + access_token
-                        }
-                    })
-                    .then(res => res.clone().json())
-                    .then(json => mySports = json);
-                for(let i = 0; i < mySports.length; i++){
-                    let tmp = null;
-                    await fetch("http://localhost:3000/sports/" + mySports[i].sportId, {
-                            "method": "GET",
-                            "headers": {
-                                "authorization": "Bearer " + access_token
-                            }
-                        })
-                        .then(res => res.clone().json())
-                        .then(json => tmp = json);
-                    mySports[i].name = tmp.name
+          if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
+            const cookiename = "My_FunSport_Token=";
+            const access_token = cookieArray[i].substring(cookiename.length, cookieArray[i].length);
+            let mySports = [];
+            await fetch("http://localhost:3000/mysports", {
+              "method": "GET",
+              "headers": {
+                "authorization": "Bearer " + access_token
+              }
+            })
+              .then(res => res.clone().json())
+              .then(json => mySports = json);
+            for (let i = 0; i < mySports.length; i++) {
+              let tmp = null;
+              await fetch("http://localhost:3000/sports/" + mySports[i].sportId, {
+                "method": "GET",
+                "headers": {
+                  "authorization": "Bearer " + access_token
                 }
-                this.state.MySports = mySports;
+              })
+                .then(res => res.clone().json())
+                .then(json => tmp = json);
+              mySports[i].name = tmp.name
             }
+            this.state.MySports = mySports;
+          }
         }
-    }
+      }
     }
 
   },

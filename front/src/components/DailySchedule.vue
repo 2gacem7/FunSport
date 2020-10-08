@@ -4,7 +4,7 @@
     <table class="table">
       <thead >
         <tr >
-          <th class="h5 font-weight-bold">Season</th>
+          <th class="h5 font-weight-bold">Date</th>
           <th class="h5 font-weight-bold">Tournament</th>
           <th class="h5 font-weight-bold">Competitors</th>
           <th class="h5 font-weight-bold">Results</th>

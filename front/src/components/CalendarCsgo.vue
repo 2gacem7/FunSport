@@ -94,36 +94,29 @@
         },
 
         methods: {
-
             async getInfos() {
-                var myHeaders = new Headers();
-                myHeaders.append("Authorization", "Bearer " + this.myToken);
+//                 const header = new Headers()
+//                 header.append("Access-Control-Allow-Origin","*")
+//                 // header.append("Content-type","application/json")
 
-                var requestOptions = {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'
-                    },
+// var myInit = { method: 'GET',
+//                headers: header,
+//                mode: 'cors',
+//                cache: 'default' };
 
-                    redirect: 'follow'
-                };
+//                 const datas = await fetch("https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz", myInit)
+//                 console.log(datas)
 
-                await fetch(
-                        "https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz",
-                        requestOptions)
-                    .then(response => response.json())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));
+//                 const json = await datas.json()
+//                 if (datas.ok){
+//                 console.log(json)
 
-                console.log(response)
+//                 } else {
+//                     console.log("Down")
+//                 }
 
-
-            },
-
+              },
         }
-
     }
 </script>
 
