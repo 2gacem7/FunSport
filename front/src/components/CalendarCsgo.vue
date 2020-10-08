@@ -55,17 +55,28 @@
 
         methods: {
             async getInfos() {
-                let res = await fetch("https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz", {
-                            "method": "GET",
-                            "headers": {
-                                'Access-Control-Allow-Origin' : '*'
-                            }
-                        })
-                    console.log(res)
-            },
+//                 const header = new Headers()
+//                 header.append("Access-Control-Allow-Origin","*")
+//                 // header.append("Content-type","application/json")
 
+// var myInit = { method: 'GET',
+//                headers: header,
+//                mode: 'cors',
+//                cache: 'default' };
+
+//                 const datas = await fetch("https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz", myInit)
+//                 console.log(datas)
+
+//                 const json = await datas.json()
+//                 if (datas.ok){
+//                 console.log(json)
+
+//                 } else {
+//                     console.log("Down")
+//                 }
+
+              },
         }
-
     }
 </script>
 
