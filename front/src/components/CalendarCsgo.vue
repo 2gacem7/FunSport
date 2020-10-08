@@ -1,79 +1,29 @@
 <template>
     <div>
         <button class="btn-success font-weight-bold">+ favori</button>
-        <h3 class="text-dark text-center">Calendar competition</h3>
+        <h3 class="text-dark text-center">Calendar matches</h3>
         <table class="table">
             <thead>
                 <tr>
                     <th class="h5 font-weight-bold">Dates</th>
-                    <th class="h5 font-weight-bold">Tournaments</th>
-                    <th class="h5 font-weight-bold"> Competitors</th>
+                    <th class="h5 font-weight-bold">Leagues</th>
+                    <th class="h5 font-weight-bold"> Matches</th>
                     <th class="h5 font-weight-bold"> Streams</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-for="item in info" :key="item.id">
                 <tr>
                     <td>
-                        <p>15/02/2020 </p>
-                        <p>15/02/2020 </p>
+                        <p :src="return_Date(item)"> Start: {{item.begin_at}}</p>
+                        <p> End: {{item.end_at}}</p>
                     </td>
-                    <td>Twitch challenge</td>
-                    <td>tocard vs cool</td>
-                    <td>https://www.twitch.tv/team/esl</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>15/09/2020</p>
-                        <p> 15/11/2021</p>
-                    </td>
-                    <td>??? anonyme</td>
-                    <td>tocard vs cool</td>
-                    <td>www.youtube.fr/....</td>
+                    <td>{{item.league.name}} <img :src="return_Link(item)" style="max-width:7rem"></td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.live_url}}</td>
                 </tr>
 
-                <tr>
-                    <td>
-                        <p>15/09/2020</p>
-                        <p> 15/11/2021</p>
-                    </td>
-                    <td>??? anonyme</td>
-                    <td>tocard vs cool</td>
-                    <td>www.youtube.fr/....</td>
-                </tr>
 
-                <tr>
-                    <td>
-                        <p>15/09/2020</p>
-                        <p> 15/11/2021</p>
-                    </td>
-                    <td>??? anonyme</td>
-                    <td>tocard vs cool</td>
-                    <td>www.youtube.fr/....</td>
-                </tr>
 
-                <tr>
-                    <td>
-                        <p>15/09/2020</p>
-                        <p> 15/11/2021</p>
-                    </td>
-                    <td>??? anonyme</td>
-                    <td>tocard vs cool</td>
-                    <td>www.youtube.fr/....</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <p>15/09/2020</p>
-                        <p> 15/11/2021</p>
-                    </td>
-                    <td>??? anonyme</td>
-                    <td>tocard vs cool</td>
-                    <td>www.youtube.fr/....</td>
-                </tr>
-                
-
-                
-                
             </tbody>
 
         </table>
@@ -89,33 +39,55 @@
     export default {
         name: "CalendarCsgo",
 
+        data() {
+
+            return {
+                info: {},
+            }
+
+        },
+
         beforeMount() {
             this.getInfos();
         },
 
         methods: {
             async getInfos() {
-//                 const header = new Headers()
-//                 header.append("Access-Control-Allow-Origin","*")
-//                 // header.append("Content-type","application/json")
 
-// var myInit = { method: 'GET',
-//                headers: header,
-//                mode: 'cors',
-//                cache: 'default' };
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Bearer 9iph8bGmiI4n69l_HcOATG7FsQLI5RIgHxakEY9F5tZaKr_3CWo");
 
-//                 const datas = await fetch("https://api.sportradar.us/csgo-t1/us/schedules/2020-10-07/schedule.json?api_key=m2xmrw2gf62v42anfjngmjqz", myInit)
-//                 console.log(datas)
+                var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                };
 
-//                 const json = await datas.json()
-//                 if (datas.ok){
-//                 console.log(json)
+                await fetch("https://api.pandascore.co/csgo/matches", requestOptions)
+                    .then(response => response.json())
+                    .then(result => this.info = result)
+                    .catch(error => console.log('error', error));
 
-//                 } else {
-//                     console.log("Down")
-//                 }
+            },
 
-              },
+            return_Link(item) {
+                return item.league.image_url
+            },
+
+            return_Date(item) {
+                if (item.begin_at == null) {
+
+                    item.begin_at = "unkonwn"
+                }
+
+                if (item.end_at == null) {
+
+                    item.end_at = "unkonwn"
+                }
+
+            },
+
+
         }
     }
 </script>
@@ -131,7 +103,4 @@
         font-family: counter-strike;
         font-size: 25px
     }
-
-
-
 </style>
