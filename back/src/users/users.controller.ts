@@ -21,9 +21,11 @@ constructor(private readonly usersService: UsersService) {}
     return await this.usersService.create(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise<User[]> {
-    if(false){
+  async findAll(@Request() req): Promise<User[]> {
+    const isAdmin = await this.usersService.isAdmin(req.user.id);
+    if(!isAdmin){
       throw new HttpException({
         message: 'Unauthorized Access',
       }, HttpStatus.UNAUTHORIZED);
@@ -33,9 +35,32 @@ constructor(private readonly usersService: UsersService) {}
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<any> {
-    return this.usersService.findOne(id);
+  async findOne(@Request() req, @Param('id') id: string): Promise<any> {
+    const isAdmin = await this.usersService.isAdmin(req.user.id);
+    if(!isAdmin){
+      throw new HttpException({
+        message: 'Unauthorized Access',
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else{
+      return this.usersService.findUserById(id);
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async delete(@Request() req, @Param('id') id: string): Promise<any> {
+    const isAdmin = await this.usersService.isAdmin(req.user.id);
+    if(!isAdmin){
+      throw new HttpException({
+        message: 'Unauthorized Access',
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else{
+      return this.usersService.deleteUser(id);
+    }
   }
 
   @UseGuards(JwtAuthGuard)
@@ -43,6 +68,40 @@ constructor(private readonly usersService: UsersService) {}
   async update(@Request() req, @Body() body) {
     const id = req.user.id
     return this.usersService.update(id, body);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('admin/createUser')
+  async adminCreate(@Request() req,@Body() createUserDto: CreateUserDto) {
+    const isAdmin = await this.usersService.isAdmin(req.user.id);
+    if(!isAdmin){
+      throw new HttpException({
+        message: 'Unauthorized Access',
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else{
+      if(await this.usersService.userExists(createUserDto)){
+        throw new HttpException({
+          message: 'User already Exist',
+        }, HttpStatus.BAD_REQUEST);
+      }
+      return await this.usersService.adminCreate(createUserDto);
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('admin/updateUser')
+  async adminUpdate(@Request() req, @Body() body) {
+    const id = req.user.id
+    const isAdmin = await this.usersService.isAdmin(req.user.id);
+    if(!isAdmin){
+      throw new HttpException({
+        message: 'Unauthorized Access',
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else{
+      return this.usersService.adminUpdate(body.id, body);
+    }
   }
 
 

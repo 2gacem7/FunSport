@@ -8,7 +8,7 @@
     </b-card>
     <AddMySport />
     CSGO
-    <b-card class=" col-md-4"><CalendarCsgo /></b-card>
+    <b-card class="col-md-4"><CalendarCsgo /></b-card>
   </div>
 </template>
 
@@ -16,11 +16,9 @@
   import Navbar from "@/components/NavBar.vue";
   import TabBar from "@/components/TabBar.vue";
   import Listcsgo from "@/components/Listcsgo.vue";
-
-      
-        import CalendarCsgo from "@/components/CalendarCsgo.vue";
-
-      import AddMySport from "@/components/AddMySport.vue";
+  import CalendarCsgo from "@/components/CalendarCsgo.vue";
+  import AddMySport from "@/components/AddMySport.vue";
+  import ENV from "../../env.config";
 
   export default {
     name: "CSGO",
@@ -55,20 +53,22 @@
           }
         }
         return access_token;
-      },
+      }
+      
     },
-  };
-</script>
-<style>
-  .content {
-    padding-top: 70px;
-    padding-left: 220px;
   }
 
-  body {
-    background-color: rgb(29, 28, 28);
-    color: white;
-  }
+</script>
+<style>
+.content {
+  padding-top: 70px;
+  padding-left: 220px;
+}
+
+body {
+  background-color: rgb(29, 28, 28);
+  color: white;
+}
 
   .update {
     font-size: 0.75rem !important;
