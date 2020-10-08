@@ -2,7 +2,11 @@
   <div class="home">
     <Navbar />
     <TabBar/>
-    <b-card class=" col-md-4"><CalendarCsgo /></b-card>
+    <div class="container-fluid row">
+      <div class="ml-5 mt-5 card overflow-auto" style="min-width: 30rem; max-height: 40rem"><CalendarCsgo /></div>
+      <div class=" mt-5 ml-5 card" style="min-width: 30rem; max-height: 40rem"><LastResultsCsgo /></div>
+    </div>
+    
   </div>
 </template>
 
@@ -10,13 +14,15 @@
   import Navbar from "@/components/NavBar.vue";
       import TabBar from "@/components/TabBar.vue";
         import CalendarCsgo from "@/components/CalendarCsgo.vue";
+        import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
 
   export default {
     name: "Home",
     components: {
       Navbar,
       TabBar,
-      CalendarCsgo
+      CalendarCsgo,
+      LastResultsCsgo
     },
     data() {
       return {
@@ -64,4 +70,5 @@
   .update {
     font-size: 0.75rem !important;
   }
+
 </style>
