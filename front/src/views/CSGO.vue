@@ -2,9 +2,11 @@
   <div class="home">
     <Navbar />
     <TabBar/>
-    <AddMySport />
-    CSGO
-    <b-card class=" col-md-4"><CalendarCsgo /></b-card>
+    <div class="container-fluid row">
+      <div class="ml-5 mt-5 card overflow-auto" style="min-width: 30rem; max-height: 40rem"><CalendarCsgo /></div>
+      <div class=" mt-5 ml-5 card" style="min-width: 30rem; max-height: 40rem"><LastResultsCsgo /></div>
+    </div>
+    
   </div>
 </template>
 
@@ -21,8 +23,8 @@
     components: {
       Navbar,
       TabBar,
-      AddMySport,
-      CalendarCsgo
+      CalendarCsgo,
+      LastResultsCsgo
     },
     data() {
       return {
