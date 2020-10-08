@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-if="!isInMySport() == true" class="btn btn-primary" @click="addToMySports">
+    <button v-if="!isInMySport() == true && $store.state.UserData.id !=''" class="btn btn-primary" @click="addToMySports">
       Add this sport
     </button>
   </div>
@@ -22,10 +22,9 @@ export default {
           this.$store.state.tabSelected.id == this.$store.state.MySports[i].sportId
         ) {
           return true;
-        } else {
-          return false;
         }
       }
+      return false;
     },
     async addToMySports() {
       await fetch("http://localhost:3000/mysports", {
