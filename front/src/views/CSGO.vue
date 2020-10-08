@@ -7,7 +7,7 @@
       <CalendarCsgo />
       <LastResultsCsgo />
       <Listcsgo />
-    <LiveCSGO />
+      <LiveCSGO />
     </div>
   </div>
 </template>
@@ -76,7 +76,10 @@
   }
 
   h4 {
-    font-family: counter-strike;
+    font-family: "counter-strike";
     color: white;
+  }
+  .card-deck{
+    font-family: "counter-strike";
   }
 </style>
