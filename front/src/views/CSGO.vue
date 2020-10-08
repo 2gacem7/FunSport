@@ -1,14 +1,17 @@
 <template>
   <div class="home">
     <Navbar />
-    <TabBar/>
+    <TabBar />
     <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
-     <h4>CSGO Team's </h4>
+      <h4>CSGO Team's </h4>
       <Listcsgo />
     </b-card>
     <AddMySport />
     CSGO
-    <b-card class="col-md-4"><CalendarCsgo /></b-card>
+    <b-card class="col-md-4">
+      <CalendarCsgo />
+    </b-card>
+    <LiveCSGO />
   </div>
 </template>
 
@@ -19,25 +22,25 @@
   import CalendarCsgo from "@/components/CalendarCsgo.vue";
   import AddMySport from "@/components/AddMySport.vue";
   import ENV from "../../env.config";
+  import LiveCSGO from "@/components/LiveCSGO.vue"
+
 
   export default {
     name: "CSGO",
     components: {
       Navbar,
       TabBar,
-      Listcsgo,
       AddMySport,
-      CalendarCsgo
+      CalendarCsgo,
+      LiveCSGO,
+      Listcsgo
     },
     data() {
-      return {
-      };
+      return {};
     },
-    mounted() {
+    mounted() {},
 
-    },
     methods: {
-
       getCookie() {
         let access_token = "";
         if (document.cookie.length > 0) {
@@ -51,31 +54,30 @@
               );
             }
           }
+          return access_token;
         }
-        return access_token;
-      }
-      
-    },
-  }
 
+      },
+    }
+  }
 </script>
 <style>
-.content {
-  padding-top: 70px;
-  padding-left: 220px;
-}
+  .content {
+    padding-top: 70px;
+    padding-left: 220px;
+  }
 
-body {
-  background-color: rgb(29, 28, 28);
-  color: white;
-}
+  body {
+    background-color: rgb(29, 28, 28);
+    color: white;
+  }
 
   .update {
     font-size: 0.75rem !important;
   }
-  h4{
-  font-family: counter-strike;
-  color:white;
-}
 
+  h4 {
+    font-family: counter-strike;
+    color: white;
+  }
 </style>
