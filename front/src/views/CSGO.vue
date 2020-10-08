@@ -1,20 +1,26 @@
 <template>
   <div class="home">
     <Navbar />
-    <TabBar/>
-    CSGO
+    <TabBar />
+    <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
+     <h4>CSGO Team's </h4>
+      <Listcsgo />
+    </b-card>
   </div>
 </template>
 
 <script>
   import Navbar from "@/components/NavBar.vue";
-      import TabBar from "@/components/TabBar.vue";
+  import TabBar from "@/components/TabBar.vue";
+  import Listcsgo from "@/components/Listcsgo.vue";
+
 
   export default {
     name: "Home",
     components: {
       Navbar,
-      TabBar
+      TabBar,
+      Listcsgo
     },
     data() {
       return {
@@ -62,4 +68,9 @@
   .update {
     font-size: 0.75rem !important;
   }
+  h4{
+  font-family: counter-strike;
+  color:white;
+}
+
 </style>
