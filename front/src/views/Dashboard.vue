@@ -34,7 +34,7 @@
       <div class="card-header">
         <h1 class="text text-center">My Favorites</h1>
       </div>
-      <div class="card-body card-deck">
+      <div class="card-body card-deck m-0">
         <div v-for="favorite in myFavorites" :key="favorite.id">
           <Live
             v-if="
