@@ -1,5 +1,5 @@
 <template>
-  <div class="m-3 card" style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
+  <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header justify-content-between">
       <button class="btn btn-success font-weight-bold">+ favori</button>
       <h3 class="text-dark text-center">Team</h3>
