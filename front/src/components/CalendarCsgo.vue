@@ -7,7 +7,7 @@
       >
         + favori
       </button>
-      <h3 class="text-dark text-center">Calendar matches</h3>
+      <h3 class="text-dark text-center">{{ sport }} Calendar matches</h3>
       <button
         v-if="delButton"
         class="btn btn-danger font-weight-bold mb-2"

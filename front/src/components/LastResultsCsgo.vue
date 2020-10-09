@@ -7,7 +7,7 @@
       >
         + favori
       </button>
-      <h3 class="text-dark text-center">Last results</h3>
+      <h3 class="text-dark text-center">{{ sport }} Last results</h3>
       <button
         v-if="delButton"
         class="btn btn-danger font-weight-bold mb-2"
