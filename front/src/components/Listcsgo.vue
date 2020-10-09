@@ -1,13 +1,20 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header justify-content-between">
-      <button
+      <button v-if="!delButton"
         class="btn btn-success font-weight-bold"
         @click="addToMyFavorites"
       >
         + favori
       </button>
       <h3 class="text-dark text-center">Team</h3>
+      <button
+        v-if="delButton"
+        class="btn btn-danger font-weight-bold mb-2"
+        @click="delToMyFavorites"
+      >
+        - favori
+      </button>
     </div>
     <div class="card-body m-0 p-0 w-100">
       <table class="table m-0">
@@ -51,14 +58,14 @@ export default {
   },
 
   methods: {
-    delToMyFavorites() {
-      this.$store.dispatch("delToMyFavorites");
-    },
     addToMyFavorites() {
       this.$store.dispatch("addToMyFavorites", {
         id: this.$store.state.tabSelected.id,
         data: { sport: "CS-GO", type: "component", name: "listTeam" },
       });
+    },
+    delToMyFavorites() {
+      this.$emit("delfavorite", this.id);
     },
     async getInfos() {
       var myHeaders = new Headers();
@@ -80,8 +87,6 @@ export default {
         .then((response) => response.json())
         .then((result) => (this.info = result))
         .catch((error) => console.log("error", error));
-
-      console.log(this.info);
     },
   },
 };

@@ -1,13 +1,20 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
     <div class="card-header justify-content-between">
-      <button
+      <button v-if="!delButton"
         class="btn btn-success font-weight-bold mb-2"
         @click="addToMyFavorites"
       >
         + favori
       </button>
       <h3 class="text-dark text-center">Calendar matches</h3>
+      <button
+        v-if="delButton"
+        class="btn btn-danger font-weight-bold mb-2"
+        @click="delToMyFavorites"
+      >
+        - favori
+      </button>
     </div>
     <div class="card-body m-0 p-0 w-100 overflow-auto">
       <table class="table">
@@ -78,7 +85,7 @@ export default {
       });
     },
     delToMyFavorites() {
-      this.$store.dispatch("delToMyFavorites");
+      this.$emit("delfavorite", this.id);
     },
     async getInfos() {
       var myHeaders = new Headers();
