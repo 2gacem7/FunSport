@@ -1,8 +1,7 @@
 <template>
   <div class="card bg-light" style="max-height: 30rem; min-width: 20rem; max-width: 20rem">
       <div class="card-header justify-content-between">
-        {{ isInMyFavorite}}
-        <button v-if="!isInMyFavorite"
+        <button
           class="btn btn-success font-weight-bold mb-2"
           @click="addToMyFavorites"
         >
@@ -74,7 +73,6 @@
         <button class="btn btn-danger" @click="getInfos">Refresh</button>
       </div>
     </div>
-  </div>
 </template>
 
 
@@ -98,19 +96,20 @@ export default {
   mounted(){
     this.getInfos()
   },
-  computed:{
-    isInMyFavorite:function(){
-      for(let favorite in this.$store.state.MyFavorites){
+  methods: {
+    isInMyFavorite(){
+      console.log(this.$store.state.MyFavorites)
+      this.$store.state.MyFavorites.forEach(function(favorite){
+        console.log(favorite)
         if (favorite.sport == this.sport && favorite.type == 'component' && favorite.name==this.apiName){
           return true
         }
-      }
+      })
       return false
-    }
-  },
-  methods: {
+    },
     delToMyFavorites() {
       clearInterval(this.setTimer);
+      this.$store.dispatch('delToMyFavorites')
     },
     addToMyFavorites() {
       this.$store.dispatch("addToMyFavorites", {
@@ -140,9 +139,9 @@ export default {
         this.isLoading = false;
         this.lastUpdate = Date.now();
         if (this.setTimer == ""){
-        this.setTimer = setInterval(() => {
-          this.getInfos();
-        }, this.timer);
+        // this.setTimer = setInterval(() => {
+        //   this.getInfos();
+        // }, this.timer);
         }
       } else {
         console.log("Down");
