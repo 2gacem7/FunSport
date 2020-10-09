@@ -79,7 +79,6 @@ export default new Vuex.Store({
       }
     },
     async addToMyFavorites(context,value) {
-      console.log(value)
       context.commit('setAccessToken')
       if (context.state.access_token != '') {
         await fetch("http://localhost:3000/myfavorites", {

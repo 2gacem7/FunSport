@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
+  <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 40rem">
     <div class="card-header justify-content-between">
       <button class="btn btn-success font-weight-bold" @click="addToMyFavorites">+ favori</button>
       <h3 class="text-dark text-center">Last results</h3>
@@ -15,7 +15,7 @@
           </tr>
         </thead>
       </table>
-      <div class="card overflow-auto m-0 p-0 w-100" style="max-height: 32rem">
+      <div class="card overflow-auto m-0 p-0 w-100" style="max-height: 30rem; min-width: 30rem; max-width: 40rem">
         <table class="table">
           <tbody v-for="item in info" :key="item.id">
             <tr>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+  import ENV from "../../env.config"
   export default {
     name: "LastResultsCsgo",
     data() {
@@ -59,7 +60,7 @@
       async getPastInfos() {
 
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer 9iph8bGmiI4n69l_HcOATG7FsQLI5RIgHxakEY9F5tZaKr_3CWo");
+        myHeaders.append("Authorization", ENV.API_PANDA_SPORT);
 
         var requestOptions = {
           method: 'GET',
