@@ -38,7 +38,6 @@ export default new Vuex.Store({
     },
     setMyFavorites(state, payload) {
       state.MyFavorites = payload
-      console.log(state.MyFavorites)
     },
     setAccessToken(state) {
       let access_token = ""

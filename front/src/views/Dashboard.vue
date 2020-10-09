@@ -55,6 +55,9 @@
               favorite.data[0].sport == 'CS-GO'
             "
             :id="favorite._id"
+            :sport="favorite.data[0].sport"
+            :apiName="favorite.data[0].apiName"
+            :delButton="true"
             v-on:delfavorite="delToMyFavorites"
           />
           <CalendarCsgo
@@ -64,6 +67,9 @@
               favorite.data[0].sport == 'CS-GO'
             "
             :id="favorite._id"
+            :sport="favorite.data[0].sport"
+            :apiName="favorite.data[0].apiName"
+            :delButton="true"
             v-on:delfavorite="delToMyFavorites"
           />
           <Listcsgo
@@ -73,6 +79,9 @@
               favorite.data[0].sport == 'CS-GO'
             "
             :id="favorite._id"
+            :sport="favorite.data[0].sport"
+            :apiName="favorite.data[0].apiName"
+            :delButton="true"
             v-on:delfavorite="delToMyFavorites"
           />
         </div>
@@ -142,7 +151,6 @@ export default {
     },
     async delToMyFavorites(id) {
       this.$store.commit("setAccessToken");
-      console.log("delFavorites do nothing", id);
       if (this.$store.state.access_token != '') {
         await fetch("http://localhost:3000/myfavorites", {
           method: "DELETE",

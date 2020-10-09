@@ -112,9 +112,7 @@ export default {
   },
   methods: {
     isInMyFavorite() {
-      console.log(this.$store.state.MyFavorites);
       this.$store.state.MyFavorites.forEach(function (favorite) {
-        console.log(favorite);
         if (
           favorite.sport == this.sport &&
           favorite.type == "component" &&
