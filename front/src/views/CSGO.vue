@@ -3,11 +3,12 @@
     <Navbar />
     <TabBar/>
     <AddMySport />
-    <div class="card-deck">
-      <CalendarCsgo />
-      <LastResultsCsgo />
+    <div class="card-deck m-0 p-0">
+
       <Listcsgo />
-      <LiveCSGO />
+    <CalendarCsgo />
+    <LastResultsCsgo />
+    <Live sport="CS-GO" apiName="cs-go"/>
     </div>
   </div>
 </template>
@@ -19,7 +20,7 @@
   import CalendarCsgo from "@/components/CalendarCsgo.vue";
   import AddMySport from "@/components/AddMySport.vue";
   import ENV from "../../env.config";
-  import LiveCSGO from "@/components/LiveCSGO.vue"
+  import Live from "@/components/Live.vue"
   import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
 
 
@@ -30,7 +31,7 @@
       TabBar,
       AddMySport,
       CalendarCsgo,
-      LiveCSGO,
+      Live,
       Listcsgo,
       LastResultsCsgo
     },

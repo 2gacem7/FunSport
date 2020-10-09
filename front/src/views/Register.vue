@@ -233,6 +233,7 @@
                         document.cookie = "My_FunSport_Token=" + userData.access_token + "; expires=" + date +
                             "; path=/;SameSite=LAX;";
                         this.$store.dispatch('getUserData');
+                        this.$store.dispatch("getMySports");
                         this.$router.push({
                             path: '/'
                         });

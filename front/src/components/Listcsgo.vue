@@ -1,11 +1,11 @@
 <template>
-  <div class="ml-5 card" style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
+  <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header justify-content-between">
       <button class="btn btn-success font-weight-bold mb-2">+ favori</button>
       <h3 class="text-dark text-center">Team</h3>
     </div>
-    <div class="table card-body m-0 p-0 w-100">
-      <table class="table">
+    <div class="card-body m-0 p-0 w-100">
+      <table class="table m-0">
         <thead>
           <tr>
             <th class="h5 font-weight-bold text-center">Team</th>
@@ -13,18 +13,17 @@
           </tr>
         </thead>
       </table>
-      <div class="card overflow-auto m-0 p-0 w-100" style="max-height: 32rem">
-        <table class="table">
-          <tbody v-for="item in info" :key="item.id">
-            <tr>
-              <td class="text-center">{{item.name}}</td>
-              <td class="text-center">{{item.location}}</td>
+        <table class="table" >
+          <tbody  class="card m-0 p-0 overflow-auto" style="max-height: 20rem">
+            <tr v-for="item in info" :key="item.id"  class="w-100" >
+              <td  style="width: 100%">{{item.name}}</td>
+              <td  >{{item.location}}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
+  
 
 
 
@@ -70,7 +69,7 @@
           redirect: 'follow'
         };
 
-        await fetch("https://api.pandascore.co/csgo/teams?page[size]=20", requestOptions)
+        await fetch("https://api.pandascore.co/csgo/teams", requestOptions)
           .then(response => response.json())
           .then(result => this.info = result)
           .catch(error => console.log('error', error));

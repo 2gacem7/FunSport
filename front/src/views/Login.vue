@@ -126,7 +126,7 @@ export default {
       this.$store.state.UserData.firstName = profile.firstName;
       this.$store.state.UserData.lastName = profile.lastName;
       this.$store.state.UserData.phone = profile.phone;
-
+      this.$store.state.UserData.isAdmin= profile.isAdmin;
       this.$store.dispatch("getMySports");
       this.$router.push({
         path: "/",
