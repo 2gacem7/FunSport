@@ -4,14 +4,14 @@
     <TabBar/>
     <AddMySport />
     <div class="card-deck">
-      <CalendarCsgo />
-      <LastResultsCsgo />
+
 
     <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
       <h4>CSGO Team's </h4>
       <Listcsgo />
     </b-card>
-
+    <CalendarCsgo />
+    <LastResultsCsgo />
     <LiveCSGO />
     </div>
   </div>
