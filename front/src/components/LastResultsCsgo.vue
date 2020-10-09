@@ -47,6 +47,10 @@
     beforeMount() {
       this.getPastInfos();
     },
+    props: {
+    id: "",
+
+  },
 
     methods: {
       addToMyFavorites() {

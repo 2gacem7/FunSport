@@ -38,6 +38,7 @@ export default new Vuex.Store({
     },
     setMyFavorites(state, payload) {
       state.MyFavorites = payload
+      console.log(state.MyFavorites)
     },
     setAccessToken(state) {
       let access_token = ""
@@ -93,24 +94,7 @@ export default new Vuex.Store({
           .then(context.dispatch('getMyFavorites'));
       }
     },
-    async delToMyFavorites(context){
-      context.commit('setAccessToken')
-      console.log('delFavorites do nothing')
-      // if (context.state.access_token != '') {
-      //   let id
-      //   await fetch("http://localhost:3000/myfavorites", {
-      //     method: "DELETE",
-      //     headers: {
-      //       "content-type": "application/json",
-      //       "authorization": "Bearer " + context.state.access_token
-      //     },
-      //     mode:'cors',
-      //     body: JSON.stringify({sportFavoriteId:id}),
-      //   })
-      //   .then(context.dispatch('getFavorites'));
-      // }
 
-    },
     async getUserData() {
       let profile = null;
       if (document.cookie.length > 0) {

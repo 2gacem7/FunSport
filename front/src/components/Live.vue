@@ -1,82 +1,90 @@
 <template>
   <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
-      <div class="card-header justify-content-between">
-        <button v-if="!delButton"
-          class="btn btn-success font-weight-bold mb-2"
-          @click="addToMyFavorites"
-        >
-          + favori
-        </button>
-        <h3 class="text-dark text-center">{{ sport }} En live</h3>
-        <button v-if="delButton"
-          class="btn btn-danger font-weight-bold mb-2"
-          @click="delToMyFavorites"
-        >
-          - favori
-        </button>
-      </div>
-      <div class="card-body m-0 p-0 overflow-auto">
-        <div v-if="isLoading" class="text-dark text-center">
-      Chargement en cours
+    <div class="card-header justify-content-between">
+      <button
+        v-if="!delButton"
+        class="btn btn-success font-weight-bold mb-2"
+        @click="addToMyFavorites"
+      >
+        + favori
+      </button>
+      <h3 class="text-dark text-center">{{ sport }} En live</h3>
+      <button
+        v-if="delButton"
+        class="btn btn-danger font-weight-bold mb-2"
+        @click="delToMyFavorites"
+      >
+        - favori
+      </button>
     </div>
-        <div class="text-dark text-center font-weight-bold" v-else-if="infos.length == 0">No live available</div>
-        <div
-          v-else
-          class="card text-dark m-0 p-0"
-          v-for="oneMatch in infos"
-          :key="oneMatch.id"
-           style="max-height: 32rem;border-bottom:1px solid red"
-        >
-          <div class="card-header">
-            Begin at : {{ oneMatch.match.begin_at  | moment("MMMM Do YYYY, h:mm:ss")}}
+    <div class="card-body m-0 p-0 overflow-auto">
+      <div v-if="isLoading" class="text-dark text-center">
+        Chargement en cours
+      </div>
+      <div
+        class="text-dark text-center font-weight-bold"
+        v-else-if="infos.length == 0"
+      >
+        No live available
+      </div>
+      <div
+        v-else
+        class="card text-dark m-0 p-0"
+        v-for="oneMatch in infos"
+        :key="oneMatch.id"
+        style="max-height: 32rem; border-bottom: 1px solid red"
+      >
+        <div class="card-header">
+          Begin at :
+          {{ oneMatch.match.begin_at | moment("MMMM Do YYYY, h:mm:ss") }}
+        </div>
+        <div class="card-body">
+          <div>ChampionShip : {{ oneMatch.match.league.slug }}</div>
+          <img
+            :src="oneMatch.match.league.image_url"
+            alt="Image League"
+            width="100"
+          />
+          <div>Status : {{ oneMatch.match.status }}</div>
+          <div>Match :</div>
+          <div class="row">
+            <span
+              class="col-6 text-center"
+              v-for="team in oneMatch.match.opponents"
+              :key="team.id"
+            >
+              {{ team.opponent.name }}
+              <img
+                :src="team.opponent.image_url"
+                alt="Image Team"
+                height="100"
+              />
+            </span>
           </div>
-          <div class="card-body">
-            <div>ChampionShip : {{ oneMatch.match.league.slug }}</div>
-            <img
-              :src="oneMatch.match.league.image_url"
-              alt="Image League"
-              width="100"
-            />
-            <div>Status : {{ oneMatch.match.status }}</div>
-            <div>Match :</div>
-            <div class="row">
-              <span
-                class="col-6 text-center"
-                v-for="team in oneMatch.match.opponents"
-                :key="team.id"
-              >
-                {{ team.opponent.name }}
-                <img
-                  :src="team.opponent.image_url"
-                  alt="Image Team"
-                  height="100"
-                />
-              </span>
-            </div>
-            <div class="row">
-              <span
-                class="col-6 text-center"
-                v-for="result in oneMatch.match.results"
-                :key="result.id"
-              >
-                {{ result.score }}
-              </span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a
-              class="btn btn-secondary"
-              :href="oneMatch.match.official_stream_url"
-              >View in direct
-            </a>
+          <div class="row">
+            <span
+              class="col-6 text-center"
+              v-for="result in oneMatch.match.results"
+              :key="result.id"
+            >
+              {{ result.score }}
+            </span>
           </div>
         </div>
-      </div>
-      <div class="card-footer text-dark">
-        Last update {{ lastUpdate | moment("MMMM Do YYYY, h:mm:ss")}}
-        <button class="btn btn-danger" @click="getInfos">Refresh</button>
+        <div class="card-footer">
+          <a
+            class="btn btn-secondary"
+            :href="oneMatch.match.official_stream_url"
+            >View in direct
+          </a>
+        </div>
       </div>
     </div>
+    <div class="card-footer text-dark">
+      Last update {{ lastUpdate | moment("MMMM Do YYYY, h:mm:ss") }}
+      <button class="btn btn-danger" @click="getInfos">Refresh</button>
+    </div>
+  </div>
 </template>
 
 
@@ -94,32 +102,42 @@ export default {
     };
   },
   props: {
+    id: "",
     sport: String, // String display in the header
     apiName: String, // String used to search info for 1 sport in getInfos
-    delButton: Boolean
+    delButton: Boolean,
   },
-  mounted(){
-    this.getInfos()
+  mounted() {
+    this.getInfos();
   },
   methods: {
-    isInMyFavorite(){
-      console.log(this.$store.state.MyFavorites)
-      this.$store.state.MyFavorites.forEach(function(favorite){
-        console.log(favorite)
-        if (favorite.sport == this.sport && favorite.type == 'component' && favorite.name==this.apiName){
-          return true
+    isInMyFavorite() {
+      console.log(this.$store.state.MyFavorites);
+      this.$store.state.MyFavorites.forEach(function (favorite) {
+        console.log(favorite);
+        if (
+          favorite.sport == this.sport &&
+          favorite.type == "component" &&
+          favorite.name == this.apiName
+        ) {
+          return true;
         }
-      })
-      return false
+      });
+      return false;
     },
     delToMyFavorites() {
       clearInterval(this.setTimer);
-      this.$store.dispatch('delToMyFavorites')
+      this.$emit("delfavorite", this.id);
     },
     addToMyFavorites() {
       this.$store.dispatch("addToMyFavorites", {
         id: this.$store.state.tabSelected.id,
-        data: { sport: this.sport, type: "component", name: "live", apiName:this.apiName },
+        data: {
+          sport: this.sport,
+          type: "component",
+          name: "live",
+          apiName: this.apiName,
+        },
       });
     },
     async getInfos() {
@@ -143,10 +161,10 @@ export default {
         });
         this.isLoading = false;
         this.lastUpdate = Date.now();
-        if (this.setTimer == ""){
-        this.setTimer = setInterval(() => {
-          this.getInfos();
-        }, this.timer);
+        if (this.setTimer == "") {
+          this.setTimer = setInterval(() => {
+            this.getInfos();
+          }, this.timer);
         }
       } else {
         console.log("Down");

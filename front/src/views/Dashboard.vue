@@ -41,9 +41,11 @@
               favorite.data[0].type == 'component' &&
               favorite.data[0].name == 'live'
             "
+            :id="favorite._id"
             :sport="favorite.data[0].sport"
             :apiName="favorite.data[0].apiName"
             :delButton="true"
+            v-on:delfavorite="delToMyFavorites"
           />
 
           <LastResultsCsgo
@@ -52,7 +54,8 @@
               favorite.data[0].name == 'lastResult' &&
               favorite.data[0].sport == 'CS-GO'
             "
-
+            :id="favorite._id"
+            v-on:delfavorite="delToMyFavorites"
           />
           <CalendarCsgo
             v-if="
@@ -60,7 +63,8 @@
               favorite.data[0].name == 'calendar' &&
               favorite.data[0].sport == 'CS-GO'
             "
-
+            :id="favorite._id"
+            v-on:delfavorite="delToMyFavorites"
           />
           <Listcsgo
             v-if="
@@ -68,7 +72,8 @@
               favorite.data[0].name == 'listTeam' &&
               favorite.data[0].sport == 'CS-GO'
             "
-
+            :id="favorite._id"
+            v-on:delfavorite="delToMyFavorites"
           />
         </div>
       </div>
@@ -83,9 +88,7 @@ import TabBar from "@/components/TabBar.vue";
 import Live from "@/components/Live.vue";
 import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
 import CalendarCsgo from "@/components/CalendarCsgo.vue";
-  import Listcsgo from "@/components/Listcsgo.vue";
-
-
+import Listcsgo from "@/components/Listcsgo.vue";
 
 export default {
   name: "Dashboard",
@@ -95,8 +98,7 @@ export default {
     Live,
     LastResultsCsgo,
     CalendarCsgo,
-    Listcsgo
-
+    Listcsgo,
   },
   data() {
     return {
@@ -137,6 +139,22 @@ export default {
         .then((res) => res.clone().json())
         .then((json) => (mySports = json));
       this.$store.dispatch("getMySports");
+    },
+    async delToMyFavorites(id) {
+      this.$store.commit("setAccessToken");
+      console.log("delFavorites do nothing", id);
+      if (this.$store.state.access_token != '') {
+        await fetch("http://localhost:3000/myfavorites", {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+            "authorization": "Bearer " + this.$store.state.access_token
+          },
+          mode:'cors',
+          body: JSON.stringify({sportFavoriteId:id}),
+        })
+        .then(this.$store.dispatch('getMyFavorites'));
+      }
     },
   },
 };

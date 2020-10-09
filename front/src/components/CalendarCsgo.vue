@@ -44,7 +44,10 @@
             }
 
         },
+props: {
+    id: "",
 
+  },
         beforeMount() {
             this.getInfos();
         },
