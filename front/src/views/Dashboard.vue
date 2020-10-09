@@ -45,7 +45,31 @@
             :apiName="favorite.data[0].apiName"
             :delButton="true"
           />
-          {{ favorite}}
+
+          <LastResultsCsgo
+            v-if="
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'lastResult' &&
+              favorite.data[0].sport == 'CS-GO'
+            "
+
+          />
+          <CalendarCsgo
+            v-if="
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'calendar' &&
+              favorite.data[0].sport == 'CS-GO'
+            "
+
+          />
+          <Listcsgo
+            v-if="
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'listTeam' &&
+              favorite.data[0].sport == 'CS-GO'
+            "
+
+          />
         </div>
       </div>
     </div>
@@ -55,7 +79,13 @@
 <script>
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
+
 import Live from "@/components/Live.vue";
+import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
+import CalendarCsgo from "@/components/CalendarCsgo.vue";
+  import Listcsgo from "@/components/Listcsgo.vue";
+
+
 
 export default {
   name: "Dashboard",
@@ -63,6 +93,10 @@ export default {
     Navbar,
     TabBar,
     Live,
+    LastResultsCsgo,
+    CalendarCsgo,
+    Listcsgo
+
   },
   data() {
     return {
