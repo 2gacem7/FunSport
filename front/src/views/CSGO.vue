@@ -7,12 +7,12 @@
       <div class="ml-5 mt-5 card overflow-auto" style="min-width: 30rem; max-width: 35rem; max-height: 40rem"><CalendarCsgo /></div>
       <div class=" mt-5 ml-5 card overflow-auto" style="min-width: 30rem; max-width: 35rem; max-height: 40rem"><LastResultsCsgo /></div>
     </div>
-    
+
     <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
       <h4>CSGO Team's </h4>
       <Listcsgo />
     </b-card>
-    
+
     CSGO
     <LiveCSGO />
   </div>
@@ -46,23 +46,7 @@
     mounted() {},
 
     methods: {
-      getCookie() {
-        let access_token = "";
-        if (document.cookie.length > 0) {
-          let cookieArray = document.cookie.split(";");
-          for (let i = 0; i < cookieArray.length; i++) {
-            if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
-              const cookiename = "My_FunSport_Token=";
-              access_token = cookieArray[i].substring(
-                cookiename.length,
-                cookieArray[i].length
-              );
-            }
-          }
-          return access_token;
-        }
 
-      },
     }
   }
 </script>

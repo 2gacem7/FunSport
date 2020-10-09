@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn-success font-weight-bold">+ favori</button>
+    <button class="btn-success font-weight-bold" @click="addToMyFavorites">+ favori</button>
     <h3 class="text-dark text-center">Last results</h3>
     <table class="table">
       <thead>
@@ -45,6 +45,9 @@
     },
 
     methods: {
+      addToMyFavorites(){
+        this.$store.dispatch('addToMyFavorites',{id:this.$store.state.tabSelected.id,data:{sport:"CSGO", type:"LastResult", name:""}})
+      },
       async getPastInfos() {
 
         var myHeaders = new Headers();
