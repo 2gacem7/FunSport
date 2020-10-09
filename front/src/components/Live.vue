@@ -1,14 +1,19 @@
 <template>
   <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
       <div class="card-header justify-content-between">
-        {{ isInMyFavorite}}
-        <button v-if="!isInMyFavorite"
+        <button v-if="!delButton"
           class="btn btn-success font-weight-bold mb-2"
           @click="addToMyFavorites"
         >
           + favori
         </button>
         <h3 class="text-dark text-center">{{ sport }} En live</h3>
+        <button v-if="delButton"
+          class="btn btn-danger font-weight-bold mb-2"
+          @click="delToMyFavorites"
+        >
+          - favori
+        </button>
       </div>
       <div class="card-body m-0 p-0 overflow-auto">
         <div v-if="isLoading" class="text-dark text-center">
@@ -91,28 +96,30 @@ export default {
   props: {
     sport: String, // String display in the header
     apiName: String, // String used to search info for 1 sport in getInfos
+    delButton: Boolean
   },
   mounted(){
     this.getInfos()
   },
-  computed:{
-    isInMyFavorite:function(){
-      for(let favorite in this.$store.state.MyFavorites){
+  methods: {
+    isInMyFavorite(){
+      console.log(this.$store.state.MyFavorites)
+      this.$store.state.MyFavorites.forEach(function(favorite){
+        console.log(favorite)
         if (favorite.sport == this.sport && favorite.type == 'component' && favorite.name==this.apiName){
           return true
         }
-      }
+      })
       return false
-    }
-  },
-  methods: {
+    },
     delToMyFavorites() {
       clearInterval(this.setTimer);
+      this.$store.dispatch('delToMyFavorites')
     },
     addToMyFavorites() {
       this.$store.dispatch("addToMyFavorites", {
         id: this.$store.state.tabSelected.id,
-        data: { sport: "CSGO", type: "component", name: "live" },
+        data: { sport: this.sport, type: "component", name: "live", apiName:this.apiName },
       });
     },
     async getInfos() {
@@ -137,9 +144,9 @@ export default {
         this.isLoading = false;
         this.lastUpdate = Date.now();
         if (this.setTimer == ""){
-        this.setTimer = setInterval(() => {
-          this.getInfos();
-        }, this.timer);
+        // this.setTimer = setInterval(() => {
+        //   this.getInfos();
+        // }, this.timer);
         }
       } else {
         console.log("Down");
