@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  //import API_SPORT_RADAR_CSGO from "@/env.config"
+  import ENV from "../../env.config"
   export default {
     name: "Listcsgo",
 
@@ -52,7 +52,7 @@
       async getInfos() {
 
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer UAX3kpsYwC0Na8XT0UsdoL3czT_UNFlv2VGqGerKTYmc4ndZXAU");
+        myHeaders.append("Authorization", ENV.API_PANDA_SPORT);
 
         var requestOptions = {
           method: 'GET',

@@ -74,7 +74,6 @@
         <button class="btn btn-danger" @click="getInfos">Refresh</button>
       </div>
     </div>
-  </div>
 </template>
 
 

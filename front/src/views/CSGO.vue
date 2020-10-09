@@ -5,7 +5,7 @@
     <AddMySport />
     <div class="card-deck">
 
-      <Listcsgo />
+    <Listcsgo />
     <CalendarCsgo />
     <LastResultsCsgo />
     <Live sport="CS-GO" apiName="cs-go"/>
