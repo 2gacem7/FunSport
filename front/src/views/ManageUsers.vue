@@ -14,8 +14,8 @@
                         <h5 class="m-2"> <span style="font-style:italic;"></span> email : {{ user.email }}</h5>
                         <p class="m-2">Admin: {{ user.isAdmin }} </p>
                     </div>
-                    <button class="btn btn-success mr-2" @click="updateUser(user)">Modifier</button>
-                    <button class="btn btn-danger mr-2" @click="deleteUser(user.id)">Supprimer</button>
+                    <button class="btn btn-success mr-2" @click="updateUser(user)">Update</button>
+                    <button class="btn btn-danger mr-2" @click="deleteUser(user._id)">Delete</button>
                 </div>
             </div>
         </div>
@@ -52,15 +52,17 @@
         },
 
         async mounted() {
+            this.$store.dispatch('getUserData');
+            this.$store.dispatch("getMySports");
             let list = [];
             await fetch("http://localhost:3000/users", {
-                "method": "GET",
-                "headers": {
-                    "authorization": "Bearer " + this.$store.state.access_token
-                }
-            })
-            .then(res => res.clone().json())
-            .then(json => list = json);
+                    "method": "GET",
+                    "headers": {
+                        "authorization": "Bearer " + this.$store.state.access_token
+                    }
+                })
+                .then(res => res.clone().json())
+                .then(json => list = json);
             this.listUser = list;
         },
         methods: {
@@ -69,13 +71,25 @@
                 this.updateButton = true;
             },
             async deleteUser(id) {
-                let body = {
-                    id: this.$store.state.userData.id,
-                    token: this.$store.state.userData.remember_token
-                }
-                let res = await auth.deleteUser(id);
-                res = await auth.listUser(body);
-                this.listUser = res.data.list;
+                await fetch("http://localhost:3000/users/"+id, {
+                        "method": "DELETE",
+                        "headers": {
+                            "authorization": "Bearer " + this.$store.state.access_token
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+                let list = [];
+                await fetch("http://localhost:3000/users", {
+                        "method": "GET",
+                        "headers": {
+                            "authorization": "Bearer " + this.$store.state.access_token
+                        }
+                    })
+                    .then(res => res.clone().json())
+                    .then(json => list = json);
+                this.listUser = list;
             },
             createUser() {
                 this.createButton = true;

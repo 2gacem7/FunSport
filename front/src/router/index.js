@@ -46,7 +46,7 @@ const routes = [
   },
   {
     path: '/csgo',
-    name: 'CS-GO',
+    name: 'CSGO',
     component: CSGO
   },
   {
