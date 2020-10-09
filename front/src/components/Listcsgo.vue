@@ -78,7 +78,7 @@
           data: {
             sport: "CS-GO",
             type: "component",
-            name: "listTeam"
+            name: "list"
           },
         });
       },
