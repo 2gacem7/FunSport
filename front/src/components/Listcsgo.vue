@@ -1,7 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header justify-content-between">
-      <button class="btn btn-success font-weight-bold">+ favori</button>
+      <button class="btn btn-success font-weight-bold"  @click="addToMyFavorites">+ favori</button>
       <h3 class="text-dark text-center">Team</h3>
     </div>
     <div class="card-body m-0 p-0 w-100">
@@ -43,6 +43,15 @@
     },
 
     methods: {
+      delToMyFavorites() {
+        this.$store.dispatch('delToMyFavorites')
+      },
+      addToMyFavorites() {
+        this.$store.dispatch("addToMyFavorites", {
+          id: this.$store.state.tabSelected.id,
+          data: { sport: "CS-GO", type: "component", name: "listTeam" },
+        });
+      },
       async getInfos() {
 
         var myHeaders = new Headers();
