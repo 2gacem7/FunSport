@@ -15,8 +15,8 @@ export class MyFavoritesService {
         return favorites;
     }
 
-    async addMyFavorite(userId,favoriteId){
-        const newFavorite = await this.myFavoriteModel.create({'userId':userId, sportFavoriteId:favoriteId,data:[]})
+    async addMyFavorite(userId,favoriteId, data){
+        const newFavorite = await this.myFavoriteModel.create({'userId':userId, sportFavoriteId:favoriteId,data:data})
         newFavorite.save()
         return newFavorite
     }

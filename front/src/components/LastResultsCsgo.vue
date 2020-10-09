@@ -1,7 +1,7 @@
 <template>
   <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
     <div class="card-header justify-content-between">
-      <button class="btn btn-success font-weight-bold">+ favori</button>
+      <button class="btn btn-success font-weight-bold" @click="addToMyFavorites">+ favori</button>
       <h3 class="text-dark text-center">Last results</h3>
     </div>
     <div class="card-body m-0 p-0 w-100">
@@ -53,6 +53,9 @@
     },
 
     methods: {
+      addToMyFavorites(){
+        this.$store.dispatch('addToMyFavorites',{id:this.$store.state.tabSelected.id,data:{sport:"CSGO", type:"component", name:"lastResult"}})
+      },
       async getPastInfos() {
 
         var myHeaders = new Headers();

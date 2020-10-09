@@ -4,14 +4,14 @@
     <TabBar/>
     <AddMySport />
     <div class="card-deck">
-      <CalendarCsgo />
-      <LastResultsCsgo />
-   
+
+
     <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
       <h4>CSGO Team's </h4>
       <Listcsgo />
     </b-card>
-    
+    <CalendarCsgo />
+    <LastResultsCsgo />
     <LiveCSGO />
     </div>
   </div>
@@ -45,23 +45,7 @@
     mounted() {},
 
     methods: {
-      getCookie() {
-        let access_token = "";
-        if (document.cookie.length > 0) {
-          let cookieArray = document.cookie.split(";");
-          for (let i = 0; i < cookieArray.length; i++) {
-            if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
-              const cookiename = "My_FunSport_Token=";
-              access_token = cookieArray[i].substring(
-                cookiename.length,
-                cookieArray[i].length
-              );
-            }
-          }
-          return access_token;
-        }
 
-      },
     }
   }
 </script>
