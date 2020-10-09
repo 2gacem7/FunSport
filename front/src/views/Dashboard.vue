@@ -168,7 +168,6 @@ export default {
       this.$store.dispatch("getMySports");
     },
     async delToMyFavorites(id) {
-      console.log(id);
       this.$store.commit("setAccessToken");
       if (this.$store.state.access_token != "") {
         await fetch("http://localhost:3000/myfavorites", {
