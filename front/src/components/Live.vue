@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-light" style="max-height: 30rem; min-width: 20rem; max-width: 20rem">
+  <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
       <div class="card-header justify-content-between">
         <button
           class="btn btn-success font-weight-bold mb-2"
@@ -9,19 +9,17 @@
         </button>
         <h3 class="text-dark text-center">{{ sport }} En live</h3>
       </div>
-
-      <div class="card-body">
+      <div class="card-body m-0 p-0 overflow-auto">
         <div v-if="isLoading" class="text-dark text-center">
       Chargement en cours
     </div>
         <div class="text-dark text-center font-weight-bold" v-else-if="infos.length == 0">No live available</div>
-
         <div
           v-else
-          class="card text-dark"
+          class="card text-dark m-0 p-0"
           v-for="oneMatch in infos"
           :key="oneMatch.id"
-           style="max-height: 32rem"
+           style="max-height: 32rem;border-bottom:1px solid red"
         >
           <div class="card-header">
             Begin at : {{ oneMatch.match.begin_at }}

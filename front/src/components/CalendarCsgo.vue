@@ -1,11 +1,10 @@
 <template>
-    <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
+    <div class="m-3 card " style="max-height: 30rem; max-width: 50rem">
         <div class="card-header justify-content-between">
-            <button class="btn btn-success font-weight-bold mb-2"  @click="addToMyFavorites">+ favori</button>
+            <button class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">+ favori</button>
             <h3 class="text-dark text-center">Calendar matches</h3>
         </div>
-        <div class="table card-body m-0 p-0 w-100">
-
+        <div class="card-body m-0 p-0 w-100 overflow-auto">
             <table class="table">
                 <thead >
                     <tr>
@@ -15,27 +14,21 @@
                         <th class="h5 font-weight-bold text-center"> Streams</th>
                     </tr>
                 </thead>
+                <tbody >
+                    <tr  v-for="item in info" :key="item.id"  class="w-100">
+                        <td scope="col" class="text-center"  style="width: 20%">
+                            <p :src="return_Date(item)"> Start: {{item.begin_at}}</p>
+                            <p> End: {{item.end_at}}</p>
+                        </td>
+                        <td  scope="col" class="text-center">{{item.league.name}} <img :src="return_Link(item)"
+                                style="max-width:7rem"></td>
+                        <td scope="col" class="text-center" >{{item.name}}</td>
+                        <td v-if="item.live_url" scope="col" class="text-center" style="width: 20%"><a :href="item.live_url">{{item.live_url}}</a></td>
+                    </tr>
+                </tbody>
             </table>
-            <div class="card overflow-auto m-0 p-0 w-100" style="max-height: 32rem">
-            <table class="table">
-                    <tbody v-for="item in info" :key="item.id">
-                        <tr>
-                            <td class="text-center">
-                                <p :src="return_Date(item)"> Start: {{item.begin_at}}</p>
-                                <p> End: {{item.end_at}}</p>
-                            </td >
-                            <td class="text-center">{{item.league.name}} <img :src="return_Link(item)" style="max-width:7rem"></td>
-                            <td class="text-center">{{item.name}}</td>
-                            <td class="text-center">{{item.live_url}}</td>
-                        </tr>
-
-                    </tbody>
-            </table>
-            </div>
         </div>
     </div>
-
-
 </template>
 
 
@@ -57,9 +50,16 @@
         },
 
         methods: {
-            addToMyFavorites(){
-        this.$store.dispatch('addToMyFavorites',{id:this.$store.state.tabSelected.id,data:{sport:"CSGO", type:"component", name:"calendar"}})
-      },
+            addToMyFavorites() {
+                this.$store.dispatch('addToMyFavorites', {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: "CSGO",
+                        type: "component",
+                        name: "calendar"
+                    }
+                })
+            },
             async getInfos() {
 
                 var myHeaders = new Headers();
@@ -112,7 +112,4 @@
         font-size: 25px;
 
     }
-
-
-
 </style>

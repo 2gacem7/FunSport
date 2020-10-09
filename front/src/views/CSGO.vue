@@ -3,7 +3,7 @@
     <Navbar />
     <TabBar/>
     <AddMySport />
-    <div class="card-deck">
+    <div class="card-deck m-0 p-0">
 
       <Listcsgo />
     <CalendarCsgo />
