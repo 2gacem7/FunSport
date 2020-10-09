@@ -1,7 +1,8 @@
 <template>
   <div class="card bg-light" style="max-height: 30rem; min-width: 20rem; max-width: 20rem">
       <div class="card-header justify-content-between">
-        <button
+        {{ isInMyFavorite}}
+        <button v-if="!isInMyFavorite"
           class="btn btn-success font-weight-bold mb-2"
           @click="addToMyFavorites"
         >
@@ -97,6 +98,16 @@ export default {
   mounted(){
     this.getInfos()
   },
+  computed:{
+    isInMyFavorite:function(){
+      for(let favorite in this.$store.state.MyFavorites){
+        if (favorite.sport == this.sport && favorite.type == 'component' && favorite.name==this.apiName){
+          return true
+        }
+      }
+      return false
+    }
+  },
   methods: {
     delToMyFavorites() {
       clearInterval(this.setTimer);
@@ -128,9 +139,11 @@ export default {
         });
         this.isLoading = false;
         this.lastUpdate = Date.now();
+        if (this.setTimer == ""){
         this.setTimer = setInterval(() => {
           this.getInfos();
         }, this.timer);
+        }
       } else {
         console.log("Down");
       }
@@ -145,3 +158,4 @@ export default {
   background-color: white;
   color: black;
 }
+</style>
