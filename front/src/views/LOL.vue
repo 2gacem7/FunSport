@@ -3,9 +3,14 @@
     <Navbar />
     <TabBar />
     <AddMySport />
+    <div class="card-deck m-0 p-0">
+      <Listcsgo sport="LOL" apiName="lol" />
 
-    <Live sport="LOL" apiName="league-of-legends" :delButton="false"/>
+      <LastResults sport="LOL" apiName="lol" />
+      <CalendarCsgo sport="LOL" apiName="lol" />
 
+      <Live sport="LOL" apiName="lol" :delButton="false" />
+    </div>
   </div>
 </template>
 
@@ -14,25 +19,29 @@ import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import AddMySport from "@/components/AddMySport.vue";
 import ENV from "../../env.config";
-import Live from "@/components/Live.vue"
+import Live from "@/components/Live.vue";
+import LastResults from "@/components/LastResults.vue";
+import Listcsgo from "@/components/Listcsgo.vue";
+  import CalendarCsgo from "@/components/CalendarCsgo.vue";
 
 
 export default {
-  name: "Home",
+  name: "Lol",
   components: {
     Navbar,
     TabBar,
     AddMySport,
-    Live
+    Live,
+    LastResults,
+          CalendarCsgo,
+
+    Listcsgo,
   },
   data() {
-    return {
-    };
+    return {};
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
-
     getCookie() {
       let access_token = "";
       if (document.cookie.length > 0) {

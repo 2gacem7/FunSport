@@ -49,12 +49,11 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
-
-            <LastResultsCsgo
+            <LastResults
               v-if="
                 favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'lastResult' &&
-                favorite.data[0].sport == 'CS-GO'
+                favorite.data[0].name == 'lastResult'
+
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -65,8 +64,7 @@
             <CalendarCsgo
               v-if="
                 favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'calendar' &&
-                favorite.data[0].sport == 'CS-GO'
+                favorite.data[0].name == 'calendar'
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -77,8 +75,7 @@
             <Listcsgo
               v-if="
                 favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'list' &&
-                favorite.data[0].sport == 'CS-GO'
+                favorite.data[0].name == 'list'
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -108,7 +105,7 @@ import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 
 import Live from "@/components/Live.vue";
-import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
+import LastResults from "@/components/LastResults.vue";
 import CalendarCsgo from "@/components/CalendarCsgo.vue";
 import Listcsgo from "@/components/Listcsgo.vue";
 import TeamCSGO from "@/components/TeamCSGO.vue";
@@ -121,7 +118,7 @@ export default {
     Navbar,
     TabBar,
     Live,
-    LastResultsCsgo,
+    LastResults,
     CalendarCsgo,
     Listcsgo,
     TeamCSGO

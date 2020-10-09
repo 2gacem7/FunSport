@@ -5,9 +5,9 @@
     <AddMySport />
     <div class="card-deck m-0 p-0">
 
-      <Listcsgo />
-    <CalendarCsgo />
-    <LastResultsCsgo />
+    <Listcsgo sport="CS-GO" apiName="csgo" />
+    <CalendarCsgo sport="CS-GO" apiName="csgo"/>
+    <LastResults sport="CS-GO" apiName="csgo" />
     <Live sport="CS-GO" apiName="cs-go" :delButton="false" />
     </div>
   </div>
@@ -21,7 +21,7 @@
   import AddMySport from "@/components/AddMySport.vue";
   import ENV from "../../env.config";
   import Live from "@/components/Live.vue"
-  import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
+  import LastResults from "@/components/LastResults.vue";
 
 
   export default {
@@ -33,7 +33,7 @@
       CalendarCsgo,
       Live,
       Listcsgo,
-      LastResultsCsgo
+      LastResults
     },
     data() {
       return {};

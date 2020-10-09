@@ -65,7 +65,7 @@
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
           data: {
-            sport: "CS-GO",
+            sport: this.sport,
             type: "team",
             name: teamSlug
           },
@@ -79,9 +79,10 @@
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
           data: {
-            sport: "CS-GO",
+            sport: this.sport,
             type: "component",
-            name: "list"
+            name: "list",
+            apiName: this.apiName,
           },
         });
       },
@@ -94,7 +95,7 @@
           headers: myHeaders,
           redirect: 'follow'
         };
-        await fetch("https://api.pandascore.co/csgo/teams?sort=name&per_page=100", requestOptions)
+        await fetch(`https://api.pandascore.co/${this.apiName}/teams?sort=name&per_page=100`, requestOptions)
           .then(response => response.json())
           .then(result => this.info = result)
           .catch(error => console.log('error', error));

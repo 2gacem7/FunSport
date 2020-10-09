@@ -53,8 +53,10 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
+
 export default {
-  name: "LastResultsCsgo",
+  name: "LastResults",
   data() {
     return {
       info: {},
@@ -76,9 +78,10 @@ export default {
       this.$store.dispatch("addToMyFavorites", {
         id: this.$store.state.tabSelected.id,
         data: {
-          sport: "CS-GO",
+          sport: this.sport,
           type: "component",
           name: "lastResult",
+          apiName: this.apiName,
         },
       });
     },
@@ -89,7 +92,7 @@ export default {
       var myHeaders = new Headers();
       myHeaders.append(
         "Authorization",
-        "Bearer 9iph8bGmiI4n69l_HcOATG7FsQLI5RIgHxakEY9F5tZaKr_3CWo"
+        "Bearer "+ENV.API_PANDA_SPORT
       );
 
       var requestOptions = {
@@ -97,8 +100,8 @@ export default {
         headers: myHeaders,
         redirect: "follow",
       };
-
-      await fetch("https://api.pandascore.co/csgo/matches/past", requestOptions)
+console.log(this.apiName)
+      await fetch(`https://api.pandascore.co/${this.apiName}/matches/past`, requestOptions)
         .then((response) => response.json())
         .then((result) => (this.info = result))
         .catch((error) => console.log("error", error));

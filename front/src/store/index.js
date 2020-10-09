@@ -31,7 +31,6 @@ export default new Vuex.Store({
         id: state.sports[0]._id,
         name: state.sports[0].name
       }
-
     },
     setTabSelected(state, payload) {
       state.tabSelected = payload

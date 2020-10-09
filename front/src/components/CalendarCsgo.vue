@@ -57,7 +57,8 @@
 
 
 <script>
-//import API_SPORT_RADAR_CSGO from "@/env.config"
+import ENV from "../../env.config";
+
 export default {
   name: "CalendarCsgo",
 
@@ -81,9 +82,10 @@ export default {
       this.$store.dispatch("addToMyFavorites", {
         id: this.$store.state.tabSelected.id,
         data: {
-          sport: "CS-GO",
+          sport: this.sport,
           type: "component",
           name: "calendar",
+          apiName: this.apiName,
         },
       });
     },
@@ -94,7 +96,7 @@ export default {
       var myHeaders = new Headers();
       myHeaders.append(
         "Authorization",
-        "Bearer 9iph8bGmiI4n69l_HcOATG7FsQLI5RIgHxakEY9F5tZaKr_3CWo"
+        "Bearer "+ENV.API_PANDA_SPORT
       );
 
       var requestOptions = {
@@ -103,7 +105,7 @@ export default {
         redirect: "follow",
       };
 
-      await fetch("https://api.pandascore.co/csgo/matches", requestOptions)
+      await fetch(`https://api.pandascore.co/${this.apiName}/matches`, requestOptions)
         .then((response) => response.json())
         .then((result) => (this.info = result))
         .catch((error) => console.log("error", error));
