@@ -28,7 +28,7 @@
            style="max-height: 32rem;border-bottom:1px solid red"
         >
           <div class="card-header">
-            Begin at : {{ oneMatch.match.begin_at }}
+            Begin at : {{ oneMatch.match.begin_at  | moment("MMMM Do YYYY, h:mm:ss")}}
           </div>
           <div class="card-body">
             <div>ChampionShip : {{ oneMatch.match.league.slug }}</div>
