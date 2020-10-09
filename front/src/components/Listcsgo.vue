@@ -16,7 +16,10 @@
         <table class="table" >
           <tbody  class="card m-0 p-0 overflow-auto" style="max-height: 20rem">
             <tr v-for="item in info" :key="item.id"  class="w-100" >
-              <td  style="width: 100%">{{item.name}}</td>
+              <td  style="width: 100%" >
+                {{item.name}}
+                <button class="btn btn-success btn-sm rounded-circle ml-5 mb-2" @click="addTeamToMyFavorite(item)">Add</button>
+                </td>
               <td  >{{item.location}}</td>
             </tr>
           </tbody>
@@ -26,7 +29,7 @@
 </template>
 
 <script>
-  //import API_SPORT_RADAR_CSGO from "@/env.config"
+  import ENV from "../../env.config";
   export default {
     name: "Listcsgo",
 
@@ -43,6 +46,14 @@
     },
 
     methods: {
+      addTeamToMyFavorite(item){
+        const teamSlug = item.slug;
+         this.$store.dispatch("addToMyFavorites", {
+          id: this.$store.state.tabSelected.id,
+          data: { sport: "CS-GO", type: "team", name: teamSlug },
+        });
+
+      },
       delToMyFavorites() {
         this.$store.dispatch('delToMyFavorites')
       },
@@ -53,23 +64,18 @@
         });
       },
       async getInfos() {
-
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer UAX3kpsYwC0Na8XT0UsdoL3czT_UNFlv2VGqGerKTYmc4ndZXAU");
+        myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
 
         var requestOptions = {
           method: 'GET',
           headers: myHeaders,
           redirect: 'follow'
         };
-
-        await fetch("https://api.pandascore.co/csgo/teams?page[size]=20", requestOptions)
+        await fetch("https://api.pandascore.co/csgo/teams?sort=name&per_page=100", requestOptions)
           .then(response => response.json())
           .then(result => this.info = result)
           .catch(error => console.log('error', error));
-
-        console.log(this.info)
-
       },
     }
   }
@@ -78,7 +84,7 @@
 <style scoped>
   tbody {
     color: black;
-    font-family: counter-strike;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   thead {

@@ -70,6 +70,14 @@
             "
 
           />
+          <TeamCSGO
+            v-if="
+              favorite.data[0].type == 'team' &&
+              favorite.data[0].sport == 'CS-GO'
+            "
+            :name="favorite.data[0].name"
+
+          />
         </div>
       </div>
     </div>
@@ -83,7 +91,8 @@ import TabBar from "@/components/TabBar.vue";
 import Live from "@/components/Live.vue";
 import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
 import CalendarCsgo from "@/components/CalendarCsgo.vue";
-  import Listcsgo from "@/components/Listcsgo.vue";
+import Listcsgo from "@/components/Listcsgo.vue";
+import TeamCSGO from "@/components/TeamCSGO.vue";
 
 
 
@@ -95,7 +104,8 @@ export default {
     Live,
     LastResultsCsgo,
     CalendarCsgo,
-    Listcsgo
+    Listcsgo,
+    TeamCSGO
 
   },
   data() {
