@@ -8,7 +8,7 @@
     <Listcsgo />
     <CalendarCsgo />
     <LastResultsCsgo />
-    <Live sport="CS-GO" apiName="cs-go"/>
+    <Live sport="CS-GO" apiName="cs-go" :delButton="false" />
     </div>
   </div>
 </template>

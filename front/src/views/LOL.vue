@@ -4,7 +4,7 @@
     <TabBar />
     <AddMySport />
 
-        <Live sport="LOL" apiName="league-of-legends"/>
+    <Live sport="LOL" apiName="league-of-legends" :delButton="false"/>
 
   </div>
 </template>

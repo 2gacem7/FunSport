@@ -54,7 +54,7 @@
         this.$store.dispatch('addToMyFavorites', {
           id: this.$store.state.tabSelected.id,
           data: {
-            sport: "CSGO",
+            sport: "CS-GO",
             type: "component",
             name: "lastResult"
           }
