@@ -62,7 +62,7 @@
 
     methods: {
       addToMyFavorites(){
-        this.$store.dispatch('addToMyFavorites',{id:this.$store.state.tabSelected.id,data:{sport:"CSGO", type:"Live", name:""}})
+        this.$store.dispatch('addToMyFavorites',{id:this.$store.state.tabSelected.id,data:{sport:"CSGO", type:"component", name:"live"}})
       },
       async getInfos() {
         const header = new Headers()
