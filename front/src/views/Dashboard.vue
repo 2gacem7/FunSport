@@ -41,7 +41,8 @@
             <Live
               v-if="
                 favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'live'
+                favorite.data[0].name == 'live' &&
+                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -52,7 +53,9 @@
             <LastResults
               v-if="
                 favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'lastResult'
+                favorite.data[0].name == 'lastResult' &&
+                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+
 
               "
               :id="favorite._id"
@@ -64,7 +67,9 @@
             <CalendarCsgo
               v-if="
                 favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'calendar'
+                favorite.data[0].name == 'calendar' &&
+                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -75,7 +80,9 @@
             <Listcsgo
               v-if="
                 favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'list'
+                favorite.data[0].name == 'list' &&
+                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
