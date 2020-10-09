@@ -1,10 +1,10 @@
 <template>
-  <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 40rem">
+  <div class="m-3 card " style="max-height: 30rem; max-width: 50rem">
     <div class="card-header justify-content-between">
       <button class="btn btn-success font-weight-bold" @click="addToMyFavorites">+ favori</button>
       <h3 class="text-dark text-center">Last results</h3>
     </div>
-    <div class="card-body m-0 p-0 w-100">
+    <div class="card-body m-0 p-0 w-100 overflow-auto">
       <table class="table">
         <thead>
           <tr>
@@ -14,25 +14,21 @@
             <th class="h5 font-weight-bold text-center">Winner</th>
           </tr>
         </thead>
+        <tbody v-for="item in info" :key="item.id">
+          <tr>
+            <td class="text-center">
+              <p :src="return_Date(item)"> {{item.begin_at}}</p>
+              <p>{{item.end_at}}</p>
+            </td>
+            <td class="text-center">
+              {{item.league.name}}
+              <img :src="return_Link(item)" style="max-width:7rem" class="mb-5" />
+            </td>
+            <td class="text-center">{{item.name}}</td>
+            <td class="text-center">{{item.winner.name}}</td>
+          </tr>
+        </tbody>
       </table>
-      <div class="card overflow-auto m-0 p-0 w-100" style="max-height: 30rem; min-width: 30rem; max-width: 40rem">
-        <table class="table">
-          <tbody v-for="item in info" :key="item.id">
-            <tr>
-              <td class="text-center">
-                <p :src="return_Date(item)"> {{item.begin_at}}</p>
-                <p>{{item.end_at}}</p>
-              </td>
-              <td class="text-center">
-                {{item.league.name}}
-                <img :src="return_Link(item)" style="max-width:7rem" class="mb-5" />
-              </td>
-              <td class="text-center">{{item.name}}</td>
-              <td class="text-center">{{item.winner.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>
 </template>
@@ -54,8 +50,15 @@
     },
 
     methods: {
-      addToMyFavorites(){
-        this.$store.dispatch('addToMyFavorites',{id:this.$store.state.tabSelected.id,data:{sport:"CSGO", type:"component", name:"lastResult"}})
+      addToMyFavorites() {
+        this.$store.dispatch('addToMyFavorites', {
+          id: this.$store.state.tabSelected.id,
+          data: {
+            sport: "CSGO",
+            type: "component",
+            name: "lastResult"
+          }
+        })
       },
       async getPastInfos() {
 

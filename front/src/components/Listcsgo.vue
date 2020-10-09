@@ -1,11 +1,11 @@
 <template>
-  <div class="ml-5 card" style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
+  <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header justify-content-between">
       <button class="btn btn-success font-weight-bold">+ favori</button>
       <h3 class="text-dark text-center">Team</h3>
     </div>
-    <div class="card-body m-0p-0 w-100">
-      <table class="table">
+    <div class="card-body m-0 p-0 w-100">
+      <table class="table m-0">
         <thead>
           <tr>
             <th class="h5 font-weight-bold text-center">Team</th>
@@ -13,22 +13,16 @@
           </tr>
         </thead>
       </table>
-      <div class="card overflow-auto m-0 p-0 w-100" style="max-height: 32rem">
-        <table class="table">
-          <tbody v-for="item in info" :key="item.id">
-            <tr>
-              <td class="text-center">{{item.name}}</td>
-              <td class="text-center">{{item.location}}</td>
+        <table class="table" >
+          <tbody  class="card m-0 p-0 overflow-auto" style="max-height: 20rem">
+            <tr v-for="item in info" :key="item.id"  class="w-100" >
+              <td  style="width: 100%">{{item.name}}</td>
+              <td  >{{item.location}}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
-
-      
-
-    
 </template>
 
 <script>
@@ -84,6 +78,7 @@
     font-family: counter-strike;
     color: black;
   }
+
   h3 {
     font-family: counter-strike;
     color: black;
