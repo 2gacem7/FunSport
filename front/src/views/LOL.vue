@@ -4,7 +4,8 @@
     <TabBar />
     <AddMySport />
 
-    LOL
+        <Live sport="LOL" apiName="league-of-legends"/>
+
   </div>
 </template>
 
@@ -13,6 +14,8 @@ import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import AddMySport from "@/components/AddMySport.vue";
 import ENV from "../../env.config";
+import Live from "@/components/Live.vue"
+
 
 export default {
   name: "Home",
@@ -20,7 +23,7 @@ export default {
     Navbar,
     TabBar,
     AddMySport,
-    
+    Live
   },
   data() {
     return {
