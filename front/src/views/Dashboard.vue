@@ -35,17 +35,58 @@
         <h1 class="text text-center">My Favorites</h1>
       </div>
       <div class="card-body card-deck m-0">
-        <div v-for="favorite in myFavorites" :key="favorite.id">
-          <Live
-            v-if="
-              favorite.data[0].type == 'component' &&
-              favorite.data[0].name == 'live'
-            "
-            :sport="favorite.data[0].sport"
-            :apiName="favorite.data[0].apiName"
-            :delButton="true"
-          />
-          {{ favorite}}
+        <div v-if="myFavorites.length == 0">You don't have favorite</div>
+        <div v-else>
+          <div v-for="favorite in myFavorites" :key="favorite.id">
+            <Live
+              v-if="
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'live'
+              "
+              :id="favorite._id"
+              :sport="favorite.data[0].sport"
+              :apiName="favorite.data[0].apiName"
+              :delButton="true"
+              v-on:delfavorite="delToMyFavorites"
+            />
+
+            <LastResultsCsgo
+              v-if="
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'lastResult' &&
+                favorite.data[0].sport == 'CS-GO'
+              "
+              :id="favorite._id"
+              :sport="favorite.data[0].sport"
+              :apiName="favorite.data[0].apiName"
+              :delButton="true"
+              v-on:delfavorite="delToMyFavorites"
+            />
+            <CalendarCsgo
+              v-if="
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'calendar' &&
+                favorite.data[0].sport == 'CS-GO'
+              "
+              :id="favorite._id"
+              :sport="favorite.data[0].sport"
+              :apiName="favorite.data[0].apiName"
+              :delButton="true"
+              v-on:delfavorite="delToMyFavorites"
+            />
+            <Listcsgo
+              v-if="
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'list' &&
+                favorite.data[0].sport == 'CS-GO'
+              "
+              :id="favorite._id"
+              :sport="favorite.data[0].sport"
+              :apiName="favorite.data[0].apiName"
+              :delButton="true"
+              v-on:delfavorite="delToMyFavorites"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -55,7 +96,11 @@
 <script>
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
+
 import Live from "@/components/Live.vue";
+import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
+import CalendarCsgo from "@/components/CalendarCsgo.vue";
+import Listcsgo from "@/components/Listcsgo.vue";
 
 export default {
   name: "Dashboard",
@@ -63,6 +108,9 @@ export default {
     Navbar,
     TabBar,
     Live,
+    LastResultsCsgo,
+    CalendarCsgo,
+    Listcsgo,
   },
   data() {
     return {
@@ -103,6 +151,21 @@ export default {
         .then((res) => res.clone().json())
         .then((json) => (mySports = json));
       this.$store.dispatch("getMySports");
+    },
+    async delToMyFavorites(id) {
+      console.log(id);
+      this.$store.commit("setAccessToken");
+      if (this.$store.state.access_token != "") {
+        await fetch("http://localhost:3000/myfavorites", {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+            authorization: "Bearer " + this.$store.state.access_token,
+          },
+          mode: "cors",
+          body: JSON.stringify({ sportFavoriteId: id }),
+        }).then(this.$store.dispatch("getMyFavorites"));
+      }
     },
   },
 };
