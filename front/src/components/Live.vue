@@ -144,9 +144,9 @@ export default {
         this.isLoading = false;
         this.lastUpdate = Date.now();
         if (this.setTimer == ""){
-        // this.setTimer = setInterval(() => {
-        //   this.getInfos();
-        // }, this.timer);
+        this.setTimer = setInterval(() => {
+          this.getInfos();
+        }, this.timer);
         }
       } else {
         console.log("Down");
