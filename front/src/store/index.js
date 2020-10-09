@@ -9,7 +9,8 @@ export default new Vuex.Store({
       email: "",
       firstName: "",
       lastName: "",
-      phone: ""
+      phone: "",
+      isAdmin: ""
     },
     access_token: "",
     MySports: [],
@@ -115,6 +116,7 @@ export default new Vuex.Store({
             this.state.UserData.firstName = profile.firstName;
             this.state.UserData.lastName = profile.lastName;
             this.state.UserData.phone = profile.phone;
+            this.state.UserData.isAdmin= profile.isAdmin;
           }
         }
       }

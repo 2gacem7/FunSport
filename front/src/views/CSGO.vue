@@ -4,10 +4,8 @@
     <TabBar/>
     <AddMySport />
     <div class="card-deck">
-
-
-    <b-card class=" container-fluid listcsgo bg-dark" style="max-width:30rem">
-      <h4>CSGO Team's </h4>
+      <CalendarCsgo />
+      <LastResultsCsgo />
       <Listcsgo />
     </b-card>
     <CalendarCsgo />
@@ -65,7 +63,10 @@
   }
 
   h4 {
-    font-family: counter-strike;
+    font-family: "counter-strike";
     color: white;
+  }
+  .card-deck{
+    font-family: "counter-strike";
   }
 </style>
