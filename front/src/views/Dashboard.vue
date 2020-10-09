@@ -23,7 +23,7 @@
                 <h1 class="text text-center">My Favorites</h1>
             </div>
             <div class="card-body">
-
+{{ myFavorites}}
             </div>
         </div>
     </div>
@@ -51,12 +51,15 @@
                 });
             }
             this.$store.dispatch('getMySports');
-
+            this.$store.dispatch('getMyFavorites');
         },
         computed: {
             mySports: function (){
                 return this.$store.state.MySports;
-            }
+            },
+            myFavorites: function (){
+                return this.$store.state.MyFavorites;
+            },
         },
         methods: {
             async deleteSport(id){
@@ -75,7 +78,25 @@
                     .then(res => res.clone().json())
                     .then(json => mySports = json);
                 this.$store.dispatch('getMySports');
-            }
+            },
+            async delToMyFavorites(context){
+                this.$store.commit('setAccessToken')
+                console.log('delFavorites do nothing')
+                // if (context.state.access_token != '') {
+                //   let id
+                //   await fetch("http://localhost:3000/myfavorites", {
+                //     method: "DELETE",
+                //     headers: {
+                //       "content-type": "application/json",
+                //       "authorization": "Bearer " + context.state.access_token
+                //     },
+                //     mode:'cors',
+                //     body: JSON.stringify({sportFavoriteId:id}),
+                //   })
+                //   .then(context.dispatch('getFavorites'));
+                // }
+
+                },
         }
     }
 </script>
