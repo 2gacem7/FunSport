@@ -1,11 +1,11 @@
 <template>
     <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
         <div class="card-header justify-content-between">
-            <button class="btn btn-success font-weight-bold mb-2">+ favori</button>
+            <button class="btn btn-success font-weight-bold mb-2"  @click="addToMyFavorites">+ favori</button>
             <h3 class="text-dark text-center">Calendar matches</h3>
         </div>
         <div class="table card-body m-0 p-0 w-100">
-            
+
             <table class="table">
                 <thead >
                     <tr>
@@ -57,6 +57,9 @@
         },
 
         methods: {
+            addToMyFavorites(){
+        this.$store.dispatch('addToMyFavorites',{id:this.$store.state.tabSelected.id,data:{sport:"CSGO", type:"component", name:"calendar"}})
+      },
             async getInfos() {
 
                 var myHeaders = new Headers();
@@ -107,9 +110,9 @@
     thead {
         font-family: counter-strike;
         font-size: 25px;
-        
+
     }
 
 
-    
+
 </style>

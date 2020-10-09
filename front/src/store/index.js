@@ -13,6 +13,7 @@ export default new Vuex.Store({
     },
     access_token: "",
     MySports: [],
+    MyFavorites: [],
     sports: [
       { id: 0, name: "CS-GO" },
       { id: 1, name: "LOL" }
@@ -23,21 +24,74 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setSports(state, payload){
+    setSports(state, payload) {
       state.sports = payload
-      state.tabSelected={id:state.sports[0]._id,
-        name:state.sports[0].name}
+      state.tabSelected = {
+        id: state.sports[0]._id,
+        name: state.sports[0].name
+      }
 
     },
-    setTabSelected(state, payload){
+    setTabSelected(state, payload) {
       state.tabSelected = payload
-    }
+    },
+    setMyFavorites(state, payload) {
+      state.MyFavorites = payload
+    },
+    setAccessToken(state) {
+      let access_token = ""
+      if (document.cookie.length > 0) {
+        let cookieArray = document.cookie.split(";")
+        for (let i = 0; i < cookieArray.length; i++) {
+          if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
+            const cookiename = "My_FunSport_Token="
+            access_token = cookieArray[i].substring(
+              cookiename.length,
+              cookieArray[i].length
+            )
+          }
+        }
+      }
+      state.access_token = access_token
+    },
   },
   actions: {
-    async getSports(context){
+    async getSports(context) {
       await fetch("http://localhost:3000/sports")
         .then(res => res.json())
-        .then(res => context.commit('setSports',res));
+        .then(res => context.commit('setSports', res));
+    },
+    async getFavorites(context) {
+      context.commit('setAccessToken')
+      if (context.state.access_token != '') {
+        await fetch("http://localhost:3000/myfavorites",
+          {
+            "method": "GET",
+            "headers": {
+              "authorization": "Bearer " + context.state.access_token
+            },
+            mode:'cors'
+          }
+        )
+          .then(res => res.json())
+          .then(res => context.commit('setMyFavorites', res));
+      }
+    },
+    async addToMyFavorites(context,value) {
+      console.log(value)
+      context.commit('setAccessToken')
+      if (context.state.access_token != '') {
+        await fetch("http://localhost:3000/myfavorites", {
+          method: "Post",
+          headers: {
+            "content-type": "application/json",
+            "authorization": "Bearer " + context.state.access_token
+          },
+          mode:'cors',
+          body: JSON.stringify(value),
+        })
+          .then(context.dispatch('getFavorites'));
+      }
     },
     async getUserData() {
       let profile = null;
