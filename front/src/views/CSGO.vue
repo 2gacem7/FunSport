@@ -4,10 +4,8 @@
     <TabBar/>
     <AddMySport />
     <div class="card-deck">
-      <CalendarCsgo />
-      <LastResultsCsgo />
+
       <Listcsgo />
-    </b-card>
     <CalendarCsgo />
     <LastResultsCsgo />
     <Live sport="CS-GO" apiName="cs-go"/>
