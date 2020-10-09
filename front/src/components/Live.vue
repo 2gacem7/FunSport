@@ -1,13 +1,19 @@
 <template>
   <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
       <div class="card-header justify-content-between">
-        <button
+        <button v-if="!delButton"
           class="btn btn-success font-weight-bold mb-2"
           @click="addToMyFavorites"
         >
           + favori
         </button>
         <h3 class="text-dark text-center">{{ sport }} En live</h3>
+        <button v-if="delButton"
+          class="btn btn-danger font-weight-bold mb-2"
+          @click="delToMyFavorites"
+        >
+          - favori
+        </button>
       </div>
       <div class="card-body m-0 p-0 overflow-auto">
         <div v-if="isLoading" class="text-dark text-center">
@@ -90,6 +96,7 @@ export default {
   props: {
     sport: String, // String display in the header
     apiName: String, // String used to search info for 1 sport in getInfos
+    delButton: Boolean
   },
   mounted(){
     this.getInfos()
@@ -112,7 +119,7 @@ export default {
     addToMyFavorites() {
       this.$store.dispatch("addToMyFavorites", {
         id: this.$store.state.tabSelected.id,
-        data: { sport: "CSGO", type: "component", name: "live" },
+        data: { sport: this.sport, type: "component", name: "live", apiName:this.apiName },
       });
     },
     async getInfos() {
