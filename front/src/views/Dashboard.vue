@@ -34,9 +34,9 @@
       <div class="card-header">
         <h1 class="text text-center">My Favorites</h1>
       </div>
-      <div class="card-body card-deck m-0">
+      <div class="card-body  m-0">
         <div v-if="myFavorites.length == 0">You don't have favorite</div>
-        <div v-else>
+        <div v-else class="card-deck m-0">
           <div v-for="favorite in myFavorites" :key="favorite.id">
             <Live
               v-if="
@@ -86,6 +86,16 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
+            <TeamCSGO
+            v-if="
+              favorite.data[0].type == 'team' &&
+              favorite.data[0].sport == 'CS-GO'
+            "
+            :id="favorite._id"
+            :name="favorite.data[0].name"
+            v-on:delfavorite="delToMyFavorites"
+
+          />
           </div>
         </div>
       </div>
@@ -101,6 +111,9 @@ import Live from "@/components/Live.vue";
 import LastResultsCsgo from "@/components/LastResultsCsgo.vue";
 import CalendarCsgo from "@/components/CalendarCsgo.vue";
 import Listcsgo from "@/components/Listcsgo.vue";
+import TeamCSGO from "@/components/TeamCSGO.vue";
+
+
 
 export default {
   name: "Dashboard",
@@ -111,6 +124,8 @@ export default {
     LastResultsCsgo,
     CalendarCsgo,
     Listcsgo,
+    TeamCSGO
+
   },
   data() {
     return {
@@ -153,7 +168,6 @@ export default {
       this.$store.dispatch("getMySports");
     },
     async delToMyFavorites(id) {
-      console.log(id);
       this.$store.commit("setAccessToken");
       if (this.$store.state.access_token != "") {
         await fetch("http://localhost:3000/myfavorites", {
