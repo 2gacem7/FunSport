@@ -1,10 +1,10 @@
 <template>
-  <div class="ml-5 card " style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
+  <div class="ml-5 card" style="max-height: 30rem; min-width: 30rem; max-width: 30rem">
     <div class="card-header justify-content-between">
       <button class="btn btn-success font-weight-bold">+ favori</button>
       <h3 class="text-dark text-center">Team</h3>
     </div>
-    <div class="card-body m-0 p-0 w-100">
+    <div class="card-body m-0p-0 w-100">
       <table class="table">
         <thead>
           <tr>
