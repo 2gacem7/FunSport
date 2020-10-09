@@ -100,4 +100,8 @@
   background-color: white;
   color: black;
 }
+<<<<<<< HEAD
+                
+=======
 
+>>>>>>> 4951e061c4c27e6b048083d28ce4b383d90af071
