@@ -22,13 +22,6 @@ services:
         ports:
         - 27017:27017
 
-    mongo-express:
-        container_name: mongo-express
-        image: mongo-express
-        restart: always
-        ports:
-        - 8090:8081
-
     back:
         container_name: back
         build:
@@ -54,57 +47,3 @@ services:
         depends_on: 
             - back
 
-    youtube:
-        container_name: youtube
-        build:
-            context: ./services/youtube
-            dockerfile: Dockerfile
-        restart: always
-        ports:
-        - 3003:3003
-        depends_on: 
-            - front
-
-    weather:
-        container_name: weather
-        build:
-            context: ./services/weather
-            dockerfile: Dockerfile
-        restart: always
-        ports:
-        - 3001:3001
-        depends_on: 
-            - front
-
-    todo:
-        container_name: todo
-        build:
-            context: ./services/todo
-            dockerfile: Dockerfile
-        restart: always
-        ports:
-        - 3004:3004
-        depends_on: 
-            - front
-
-    time:
-        container_name: time
-        build:
-            context: ./services/time
-            dockerfile: Dockerfile
-        restart: always
-        ports:
-        - 3002:3002
-        depends_on: 
-            - front
-
-    covid:
-        container_name: covid
-        build:
-            context: ./services/covid-19
-            dockerfile: Dockerfile
-        restart: always
-        ports:
-        - 3005:3005
-        depends_on: 
-            - front
