@@ -1,28 +1,27 @@
 <template>
-  <div class="home">
+  <div id="lol">
     <Navbar />
     <TabBar />
     <AddMySport />
     <div class="card-deck m-0 p-0">
-      <Listcsgo sport="LOL" apiName="lol" />
-
-      <LastResults sport="LOL" apiName="lol" />
-      <CalendarCsgo sport="LOL" apiName="lol" />
-
-      <Live sport="LOL" apiName="lol" :delButton="false" />
+      <DisplayListTeam sport="LOL" apiName="lol" />
+      <DisplayCalendar sport="LOL" apiName="lol" />
+      <DisplayLastResults sport="LOL" apiName="lol" />
+      <DisplayLive sport="LOL" apiName="lol" :delButton="false" />
     </div>
   </div>
 </template>
 
 <script>
+import ENV from "../../env.config";
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import AddMySport from "@/components/AddMySport.vue";
-import ENV from "../../env.config";
-import Live from "@/components/Live.vue";
-import LastResults from "@/components/LastResults.vue";
-import Listcsgo from "@/components/Listcsgo.vue";
-  import CalendarCsgo from "@/components/CalendarCsgo.vue";
+
+import DisplayLive from "@/components/DisplayLive.vue";
+import DisplayLastResults from "@/components/DisplayLastResults.vue";
+import DisplayListTeam from "@/components/DisplayListTeam.vue";
+import DisplayCalendar from "@/components/DisplayCalendar.vue";
 
 
 export default {
@@ -31,11 +30,10 @@ export default {
     Navbar,
     TabBar,
     AddMySport,
-    Live,
-    LastResults,
-          CalendarCsgo,
-
-    Listcsgo,
+    DisplayLive,
+    DisplayLastResults,
+    DisplayCalendar,
+    DisplayListTeam,
   },
   data() {
     return {};

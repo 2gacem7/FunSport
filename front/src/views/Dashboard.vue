@@ -1,5 +1,5 @@
 <template>
-  <div id="Dashboard">
+  <div id="dashboard">
     <Navbar />
     <TabBar />
     <div class="card m-3" style="background-color: #f4f4f4e3">
@@ -38,11 +38,11 @@
         <div v-if="myFavorites.length == 0">You don't have favorite</div>
         <div v-else class="card-deck m-0">
           <div v-for="favorite in myFavorites" :key="favorite.id">
-            <Live
+            <DisplayLive
               v-if="
-                favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'live' &&
-                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'live' &&
+              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -50,13 +50,11 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
-            <LastResults
+            <DisplayLastResults
               v-if="
-                favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'lastResult' &&
-                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
-
-
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'lastResult' &&
+              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -64,12 +62,11 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
-            <CalendarCsgo
+            <DisplayCalendar
               v-if="
-                favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'calendar' &&
-                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
-
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'calendar' &&
+              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -77,12 +74,11 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
-            <Listcsgo
+            <DisplayListTeam
               v-if="
-                favorite.data[0].type == 'component' &&
-                favorite.data[0].name == 'list' &&
-                ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
-
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'list' &&
+              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -91,15 +87,14 @@
               v-on:delfavorite="delToMyFavorites"
             />
             <TeamCSGO
-            v-if="
+              v-if="
               favorite.data[0].type == 'team' &&
               favorite.data[0].sport == 'CS-GO'
-            "
-            :id="favorite._id"
-            :name="favorite.data[0].name"
-            v-on:delfavorite="delToMyFavorites"
-
-          />
+              "
+              :id="favorite._id"
+              :name="favorite.data[0].name"
+              v-on:delfavorite="delToMyFavorites"
+            />
           </div>
         </div>
       </div>
@@ -111,23 +106,22 @@
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 
-import Live from "@/components/Live.vue";
-import LastResults from "@/components/LastResults.vue";
-import CalendarCsgo from "@/components/CalendarCsgo.vue";
-import Listcsgo from "@/components/Listcsgo.vue";
+import DisplayLive from "@/components/DisplayLive.vue";
+import DisplayLastResults from "@/components/DisplayLastResults.vue";
+import DisplayCalendar from "@/components/DisplayCalendar.vue";
+import DisplayListTeam from "@/components/DisplayListTeam.vue";
+
 import TeamCSGO from "@/components/TeamCSGO.vue";
-
-
 
 export default {
   name: "Dashboard",
   components: {
     Navbar,
     TabBar,
-    Live,
-    LastResults,
-    CalendarCsgo,
-    Listcsgo,
+    DisplayLive,
+    DisplayLastResults,
+    DisplayCalendar,
+    DisplayListTeam,
     TeamCSGO
 
   },
