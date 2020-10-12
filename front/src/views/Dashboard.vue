@@ -19,7 +19,7 @@
             v-bind:key="sport.name"
             class="row mt-2 p-3 justify-content-center"
           >
-            <h3 class="card-text text-center">{{ sport.name }}</h3>
+            <a class="btn btn-default" @click="goTo(sport.name)">Go to {{ sport.name }}</a>
             <button
               class="btn btn-danger btn-sm rounded-circle ml-5 mb-2"
               @click="deleteSport(sport._id)"
@@ -148,6 +148,17 @@ export default {
     },
   },
   methods: {
+    goTo(nameTab) {
+      let idTab = ""
+      this.$store.state.sports.forEach((sport)=>{
+        if (sport.name == nameTab)
+        {
+          idTab = sport._id
+        }
+      })
+      this.$store.commit("setTabSelected", { id: idTab, name: nameTab });
+      this.$router.push({ name: nameTab });
+    },
     async deleteSport(id) {
       const body = {
         id: id,
