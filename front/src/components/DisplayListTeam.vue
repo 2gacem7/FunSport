@@ -1,12 +1,15 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
-    <div class="card-header justify-content-between">
+    <div class="card-header  d-flex justify-content-between">
       <button v-if="!delButton" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
         + favori
       </button>
       <h3 class="text-dark text-center">{{ sport }} Team</h3>
       <button v-if="delButton" class="btn btn-danger font-weight-bold mb-2" @click="delToMyFavorites">
-        - favori
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+        </svg>
       </button>
     </div>
     <div class="card-body m-0 p-0 w-100">
@@ -22,8 +25,8 @@
         <tbody class="card m-0 p-0 overflow-auto" style="max-height: 20rem">
           <tr v-for="item in info" :key="item.id" class="w-100">
             <td>
-                <button class="btn btn-success btn-sm rounded-circle mb-2"
-                @click="addTeamToMyFavorite(item)">Add</button>
+              <button class="btn btn-success btn-sm rounded-circle mb-2"
+                      @click="addTeamToMyFavorite(item)">Add</button>
             </td>
             <td style="width: 100%">
               {{item.name}}
@@ -31,7 +34,7 @@
             <td>{{item.location}}</td>
           </tr>
         </tbody>
-        </table>
+      </table>
     </div>
   </div>
   
@@ -44,7 +47,7 @@
 <script>
   import ENV from "../../env.config";
   export default {
-    name: "Listcsgo",
+    name: "DisplayListTeam",
 
     data() {
       return {
@@ -67,7 +70,7 @@
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
           data: {
-            sport: "CS-GO",
+            sport: this.sport,
             type: "team",
             name: teamSlug
           },
@@ -81,9 +84,10 @@
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
           data: {
-            sport: "CS-GO",
+            sport: this.sport,
             type: "component",
-            name: "list"
+            name: "list",
+            apiName: this.apiName,
           },
         });
       },
@@ -96,7 +100,7 @@
           headers: myHeaders,
           redirect: 'follow'
         };
-        await fetch("https://api.pandascore.co/csgo/teams?sort=name&per_page=100", requestOptions)
+        await fetch(`https://api.pandascore.co/${this.apiName}/teams?sort=name&per_page=100`, requestOptions)
           .then(response => response.json())
           .then(result => this.info = result)
           .catch(error => console.log('error', error));
@@ -106,10 +110,10 @@
 </script>
 
 <style scoped>
-  tbody {
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+tbody {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
   thead {
     font-family: counter-strike;
