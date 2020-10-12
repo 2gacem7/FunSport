@@ -1,13 +1,13 @@
 {
-  "name": "FunServer",
+  "name": "FunESport",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "GNU3",
   "scripts": {
     "prebuild": "rimraf dist",
-    "compodoc": "compodoc -p tsconfig.json src",
+    "compodoc": "compodoc --hideGenerator --theme [Readthedocs] -p tsconfig.json -n FunESport ",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
