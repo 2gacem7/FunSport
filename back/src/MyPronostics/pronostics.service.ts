@@ -11,9 +11,9 @@ export class PronosticsService {
   constructor(@InjectModel(Pronostic.name) private pronosticModel: Model<Pronostic>
   ) {
   }
-  async create(createPronosticDto: CreatePronosticDto): Promise<Pronostic> {
+  async create(userId:Number, createPronosticDto: CreatePronosticDto): Promise<Pronostic> {
     const createdPronostic = await new this.pronosticModel({
-      userId: createPronosticDto.userId,
+      userId: userId,
       matchId: createPronosticDto.matchId,
       winnerId: createPronosticDto.winnerId,
       commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : "")
@@ -42,8 +42,8 @@ export class PronosticsService {
     }
   }
 
-  async updateOne(createPronosticDto): Promise<any> {
-    const newPronostic = await this.pronosticModel.findOne({ userId: createPronosticDto.userId, matchId: createPronosticDto.matchId });
+  async updateOne(userId, createPronosticDto): Promise<any> {
+    const newPronostic = await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId });
     newPronostic.winnerId = createPronosticDto.winnerId
     newPronostic.commentary = (createPronosticDto.commentary ? createPronosticDto.commentary : "")
     return newPronostic.save();

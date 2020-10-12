@@ -20,13 +20,14 @@ export class PronosticsController {
   // Create a pronostic if the matchId userId doesn't exists in the pronostic
   // or Update the matchId userId if the association exists
   // return : Pronostic
-  async create(@Body() createPronosticDto: CreatePronosticDto) {
-    if (createPronosticDto.userId && createPronosticDto.matchId && createPronosticDto.winnerId && createPronosticDto.type){
-      const matchesUserIdMatchId = await this.pronosticModel.find({userId:createPronosticDto.userId, matchId:createPronosticDto.matchId});
+  async create(@Request() req, @Body() createPronosticDto: CreatePronosticDto) {
+    const user  = req.user.id
+    if (createPronosticDto.matchId && createPronosticDto.winnerId && createPronosticDto.type){
+      const matchesUserIdMatchId = await this.pronosticModel.find({userId:user, matchId:createPronosticDto.matchId});
       if (matchesUserIdMatchId.length!=0){
-        return await this.pronosticsService.updateOne(createPronosticDto);
+        return await this.pronosticsService.updateOne(user, createPronosticDto);
       } else {
-        return await this.pronosticsService.create(createPronosticDto);
+        return await this.pronosticsService.create(user ,createPronosticDto);
       }
     } else {
       throw new HttpException({
