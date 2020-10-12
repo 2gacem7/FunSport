@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -64,6 +64,13 @@
                 <code>mysports</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller used for the route &#39;mysports&#39;</p>
+
+            </p>
 
 
 
@@ -141,14 +148,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/MySports/MySports.controller.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/MySports/MySports.controller.ts:34</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller to add a sport in the model MySports
+You need to be connected to access to this route</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -216,14 +226,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/MySports/MySports.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/MySports/MySports.controller.ts:54</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller to delete a sport to the model MySports</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -291,14 +303,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/MySports/MySports.controller.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="21"
+                            class="link-to-prism">src/MySports/MySports.controller.ts:21</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller to get all MySports for a specific user
+You need to be connected to access to this route</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -344,28 +359,34 @@ import { JwtAuthGuard } from &#x27;../auth/jwt-auth.guard&#x27;;
 import { MySportsService } from &#x27;./MySports.service&#x27;;
 import { HttpException, HttpStatus, HttpCode } from &#x27;@nestjs/common&#x27;
 
+/**
+ * Controller used for the route &#x27;mysports&#x27;
+ */
 @Controller(&#x27;mysports&#x27;)
 export class MySportsController {
   constructor(private readonly mySportsService: MySportsService) { }
 
+  /**
+   * Controller to get all MySports for a specific user
+   * You need to be connected to access to this route
+   * @param req
+   * @return {Model&lt;MySport&gt;[]}
+   */
   @UseGuards(JwtAuthGuard)
   @Get()
-  /** Get all MySports for one user
-* You need to be connected to access to this route
-* @return : {} mySport
-*/
   async getMySports(@Request() req) {
     const list &#x3D; await this.mySportsService.getMySports(req.user.id)
     return list;
   }
 
+  /**
+   * Controller to add a sport in the model MySports
+   * You need to be connected to access to this route
+   * @param req
+   * @return {Model&lt;MySport&gt;}
+   */
   @UseGuards(JwtAuthGuard)
   @Post()
-  /** Add the body structure in the mysports model
-* You need to be connected to access to this route
-* Your body need to have a variable sportId
-* @return : {} MySport
-*/
   async addMySport(@Request() req) {
     let list
     if (req.body.sportId) {
@@ -379,13 +400,13 @@ export class MySportsController {
     return list;
   }
 
+  /**
+   * Controller to delete a sport to the model MySports
+   * @param req
+   * @return {}
+   */
   @UseGuards(JwtAuthGuard)
   @Delete()
-  /** Delete one MySports
-  * You need to be connected to access to this route
-  * Your body need to be a variable sportFavoriteId
-  * @return : {} MySport
-  */
   async delMySport(@Request() req) {
     if (req.body.id) {
       return await this.mySportsService.delMySport(req.body.id)

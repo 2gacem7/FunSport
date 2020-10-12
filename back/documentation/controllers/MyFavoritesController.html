@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -64,6 +64,13 @@
                 <code>myfavorites</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller used for the route &#39;myfavorites&#39;</p>
+
+            </p>
 
 
 
@@ -141,17 +148,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:36</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Add the body structure in the favorite Model
-You need to be connected to access to this route
-Your body need to have a variable sportFavoriteId</p>
+                    <div class="io-description"><p>Controller to add a favorite
+You need to be connected to access to this route</p>
 </div>
 
                     <div class="io-description">
@@ -183,8 +189,7 @@ Your body need to have a variable sportFavoriteId</p>
 
                     </div>
                     <div class="io-description">
-                        <p>: {} myFavorite</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -221,17 +226,16 @@ Your body need to have a variable sportFavoriteId</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:53</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Delete one favorite
-You need to be connected to access to this route
-Your body need to be a variable sportFavoriteId</p>
+                    <div class="io-description"><p>Controller to delete a favorite
+You need to be connected to access to this route</p>
 </div>
 
                     <div class="io-description">
@@ -263,8 +267,7 @@ Your body need to be a variable sportFavoriteId</p>
 
                     </div>
                     <div class="io-description">
-                        <p>: {} JSON</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -301,16 +304,15 @@ Your body need to be a variable sportFavoriteId</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:23</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Get all favorites for one user
-You need to be connected to access to this route</p>
+                    <div class="io-description"><p>Controller to get all favorites for the current user</p>
 </div>
 
                     <div class="io-description">
@@ -342,8 +344,7 @@ You need to be connected to access to this route</p>
 
                     </div>
                     <div class="io-description">
-                        <p>: {} myFavorite</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -357,14 +358,22 @@ You need to be connected to access to this route</p>
 import { JwtAuthGuard } from &#x27;../auth/jwt-auth.guard&#x27;;
 import { MyFavoritesService } from &#x27;./MyFavorites.service&#x27;;
 
+/**
+ * Controller used for the route &#x27;myfavorites&#x27;
+ */
 @Controller(&#x27;myfavorites&#x27;)
 export class MyFavoritesController {
+  /**
+   * Constructor for MyFavorites controller
+   * @param myFavoritesService
+   */
   constructor(private readonly myFavoritesService: MyFavoritesService) { }
 
-  /** Get all favorites for one user
-  * You need to be connected to access to this route
-  * @return : {} myFavorite
-  */
+/**
+ * Controller to get all favorites for the current user
+ * @param req
+ * @return {Model&lt;MyFavorites&gt;}
+ */
   @UseGuards(JwtAuthGuard)
   @Get()
   async getMyFavorite(@Request() req) {
@@ -372,10 +381,11 @@ export class MyFavoritesController {
     return list;
   }
 
-  /** Add the body structure in the favorite Model
+ /**
+  * Controller to add a favorite
   * You need to be connected to access to this route
-  * Your body need to have a variable sportFavoriteId
-  * @return : {} myFavorite
+  * @param req
+  * @return {Model&lt;MyFavorite&gt;}
   */
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -389,10 +399,10 @@ export class MyFavoritesController {
     return list;
   }
 
-  /** Delete one favorite
-  * You need to be connected to access to this route
-  * Your body need to be a variable sportFavoriteId
-  * @return : {} JSON
+  /**
+   * Controller to delete a favorite
+   * You need to be connected to access to this route
+   * @param req
   */
   @UseGuards(JwtAuthGuard)
   @Delete()
@@ -403,7 +413,6 @@ export class MyFavoritesController {
       return {
         error: &quot;sportFavoriteId is mandatory&quot;
       }
-
     }
   }
 }

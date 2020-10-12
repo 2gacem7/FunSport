@@ -16,7 +16,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
         <nav>
             <ul class="list">
                 <li class="title">
-                    <a href="index.html" data-type="index-link">my-show-time documentation</a>
+                    <a href="index.html" data-type="index-link">FunServer documentation</a>
                 </li>
 
                 <li class="divider"></li>
@@ -203,13 +203,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/PronosticsModule.html" data-type="entity-link">PronosticsModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#controllers-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' : 'data-target="#xs-controllers-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' }>
+                                            'data-target="#controllers-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' : 'data-target="#xs-controllers-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' }>
                                             <span class="icon ion-md-swap"></span>
                                             <span>Controllers</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' :
-                                            'id="xs-controllers-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' :
+                                            'id="xs-controllers-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' }>
                                             <li class="link">
                                                 <a href="controllers/PronosticsController.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">PronosticsController</a>
@@ -218,13 +218,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' : 'data-target="#xs-injectables-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' }>
+                                        'data-target="#injectables-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' : 'data-target="#xs-injectables-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' :
-                                        'id="xs-injectables-links-module-PronosticsModule-faa4bde100ef8f2187d93178583a7172"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' :
+                                        'id="xs-injectables-links-module-PronosticsModule-cfc3fd9d7c5cff59ba4b6c73bf10861f"' }>
                                         <li class="link">
                                             <a href="injectables/PronosticsService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PronosticsService</a>

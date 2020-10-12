@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -177,14 +177,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:30</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to add a favorite for the current user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -263,14 +265,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:41</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to delete a specific favorite</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -324,21 +328,23 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getMyFavorites(userId)</code>
+                    <code>getMyFavorites(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:18</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to get all favorites for the current user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -346,12 +352,16 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>userId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -393,17 +403,34 @@ import { CreateMyFavoriteDto } from &#x27;../dto/create-myFavorite.dto&#x27;;
 export class MyFavoritesService {
     constructor( @InjectModel(MyFavorite.name) private myFavoriteModel: Model&lt;MyFavorite&gt;){}
 
-    async getMyFavorites(userId){
+    /**
+     * Service used to get all favorites for the current user
+     * @param {string} userId
+     * @return {Model&lt;MyFavorite&gt;}
+     */
+    async getMyFavorites(userId:string){
         const favorites &#x3D; await this.myFavoriteModel.find({&#x27;userId&#x27;:userId}).exec();
         return favorites;
     }
 
+    /**
+     * Service used to add a favorite for the current user
+     * @param {string} userId
+     * @param {string} favoriteId
+     * @param {string[]}data
+     * @return {Model&lt;MyFavorite&gt;}
+     */
     async addMyFavorite(userId,favoriteId, data){
         const newFavorite &#x3D; await this.myFavoriteModel.create({&#x27;userId&#x27;:userId, sportFavoriteId:favoriteId,data:data})
         newFavorite.save()
         return newFavorite
     }
 
+    /**
+     * Service used to delete a specific favorite
+     * @param {string} id
+     * @return {}
+     */
     async delMyFavorite(id){
         await this.myFavoriteModel.findByIdAndDelete(id);
         return {

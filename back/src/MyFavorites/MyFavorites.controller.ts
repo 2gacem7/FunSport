@@ -2,10 +2,13 @@ import { Controller, Get, Delete, Post, Request, UseGuards, Put } from '@nestjs/
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { MyFavoritesService } from './MyFavorites.service';
 
+/**
+ * Controller used for the route 'myfavorites'
+ */
 @Controller('myfavorites')
 export class MyFavoritesController {
   /**
-   Constructor for MyFavorites controller
+   * Constructor for MyFavorites controller
    * @param myFavoritesService
    */
   constructor(private readonly myFavoritesService: MyFavoritesService) { }
@@ -44,7 +47,6 @@ export class MyFavoritesController {
    * Controller to delete a favorite
    * You need to be connected to access to this route
    * @param req
-   * @return {} JSON
   */
   @UseGuards(JwtAuthGuard)
   @Delete()
@@ -55,7 +57,6 @@ export class MyFavoritesController {
       return {
         error: "sportFavoriteId is mandatory"
       }
-
     }
   }
 }

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -142,7 +142,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/schemas/mySport.schema.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/schemas/mySport.schema.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -178,7 +178,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/schemas/mySport.schema.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/schemas/mySport.schema.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -214,16 +214,10 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/schemas/mySport.schema.ts:9</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/schemas/mySport.schema.ts:13</a></div>
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>This collection collect all the sports followed for users</p>
-</div>
-                    </td>
-                </tr>
 
             </tbody>
         </table>
@@ -243,15 +237,26 @@
 import { Document } from &#x27;mongoose&#x27;;
 
 @Schema()
+/**
+ * This collection collects all sports followed for all users. The propery data is not used
+ */
 export class MySport extends Document {
-  /** This collection collect all the sports followed for users
-  */
+  /**
+   * @property {string} userId
+   */
   @Prop()
   userId: string;
 
+
+  /**
+ * @property {string} sportId
+ */
   @Prop()
   sportId: string;
 
+  /**
+* @property {string[]} data
+*/
   @Prop()
   data: [string];
 }

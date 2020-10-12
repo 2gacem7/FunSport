@@ -8,7 +8,9 @@ import { Model } from 'mongoose';
 import { Pronostic } from '../schemas/pronostic.schema';
 import { HttpException, HttpStatus, HttpCode } from '@nestjs/common'
 
-
+/**
+ * Controller used for the route 'pronostics'
+ */
 @Controller('pronostics')
 export class PronosticsController {
   /**

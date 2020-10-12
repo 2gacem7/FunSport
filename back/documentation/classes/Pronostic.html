@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -148,7 +148,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/schemas/pronostic.schema.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/schemas/pronostic.schema.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -184,7 +184,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/schemas/pronostic.schema.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/schemas/pronostic.schema.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -220,7 +220,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/schemas/pronostic.schema.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/schemas/pronostic.schema.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -256,7 +256,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/schemas/pronostic.schema.ts:7</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/schemas/pronostic.schema.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -292,7 +292,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/schemas/pronostic.schema.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/schemas/pronostic.schema.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -315,6 +315,9 @@
 import { Document } from &#x27;mongoose&#x27;;
 
 @Schema()
+/**
+ * This collection collects all pronotics and the commentary associated
+ */
 export class Pronostic extends Document {
   @Prop()
   userId: string;

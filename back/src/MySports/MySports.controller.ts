@@ -3,6 +3,9 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { MySportsService } from './MySports.service';
 import { HttpException, HttpStatus, HttpCode } from '@nestjs/common'
 
+/**
+ * Controller used for the route 'mysports'
+ */
 @Controller('mysports')
 export class MySportsController {
   constructor(private readonly mySportsService: MySportsService) { }

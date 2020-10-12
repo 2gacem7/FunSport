@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -64,6 +64,13 @@
                 <code>pronostics</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller used for the route &#39;pronostics&#39;</p>
+
+            </p>
 
 
 
@@ -145,18 +152,14 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:36</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Create a pronostic if the matchId userId doesn&#39;t exists in the pronostic
-or Update the matchId userId if the association exists
-You need to be connected to access to this route</p>
-</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -202,8 +205,7 @@ You need to be connected to access to this route</p>
 
                     </div>
                     <div class="io-description">
-                        <p>: Pronostic</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -240,15 +242,15 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:84</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Delete one pronostic
+                    <div class="io-description"><p>Controller delete a specific pronostic
 You need to be connected to access to this route</p>
 </div>
 
@@ -285,8 +287,7 @@ You need to be connected to access to this route</p>
 
                     </div>
                     <div class="io-description">
-                        <p>: {} Pronostic</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -323,15 +324,15 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:60</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Give all pronostics in the database
+                    <div class="io-description"><p>Controller give all pronostics in the database
 You need to be connected to access to this route</p>
 </div>
 
@@ -342,8 +343,7 @@ You need to be connected to access to this route</p>
 
                     </div>
                     <div class="io-description">
-                        <p>: Pronotic array</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -380,15 +380,15 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="60"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:60</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:72</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Give all pronostics for one match id
+                    <div class="io-description"><p>Controller give all pronostics for one match id
 You need to be connected to access to this route</p>
 </div>
 
@@ -425,8 +425,7 @@ You need to be connected to access to this route</p>
 
                     </div>
                     <div class="io-description">
-                        <p>: Pronostic Array</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -446,20 +445,31 @@ import { Model } from &#x27;mongoose&#x27;;
 import { Pronostic } from &#x27;../schemas/pronostic.schema&#x27;;
 import { HttpException, HttpStatus, HttpCode } from &#x27;@nestjs/common&#x27;
 
-
+/**
+ * Controller used for the route &#x27;pronostics&#x27;
+ */
 @Controller(&#x27;pronostics&#x27;)
 export class PronosticsController {
+  /**
+   * Constructor for Pronostics controller
+   * @param pronosticsService
+   * @param {Model&lt;Pronostic&gt;} pronosticModel
+   */
   constructor(private readonly pronosticsService: PronosticsService,
     @InjectModel(Pronostic.name) private pronosticModel: Model&lt;Pronostic&gt;) { }
 
-    /**
-   * Create a pronostic if the matchId userId doesn&#x27;t exists in the pronostic
-   * or Update the matchId userId if the association exists
-   * You need to be connected to access to this route
-   * @return : Pronostic
-   */
+
   @UseGuards(JwtAuthGuard)
   @Post()
+   /**
+  * Controller check if the matchId userId doesn&#x27;t matchs in the pronostics:
+  * - if match : update the matchId userId
+  * - if not : create a new pronostic
+  * You need to be connected to access to this route
+  * @param {Request}
+  * @param {Body} createPronosticDto
+  * @return {Pronostic}
+  */
   async create(@Request() req, @Body() createPronosticDto: CreatePronosticDto) {
     const user &#x3D; req.user.id
     if (createPronosticDto.matchId &amp;&amp; createPronosticDto.winnerId &amp;&amp; createPronosticDto.type) {
@@ -477,9 +487,10 @@ export class PronosticsController {
     }
   }
 
-  /** Give all pronostics in the database
-   *  You need to be connected to access to this route
-   * @return: Pronotic array
+  /**
+   * Controller give all pronostics in the database
+   * You need to be connected to access to this route
+   * @return {Pronotic[]}
    */
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -488,10 +499,10 @@ export class PronosticsController {
   }
 
   /**
-  * Give all pronostics for one match id
+  * Controller give all pronostics for one match id
   * You need to be connected to access to this route
-  * @matchId: string
-  * @return : Pronostic Array
+  * @param {string} matchId
+  * @return {Pronostic[]}
   */
   @UseGuards(JwtAuthGuard)
   @Get(&#x27;:matchId&#x27;)
@@ -499,10 +510,11 @@ export class PronosticsController {
     return this.pronosticsService.findPronosticForOneMatchId(matchId);
   }
 
-  /** Delete one pronostic
+  /**
+   * Controller delete a specific pronostic
    * You need to be connected to access to this route
-  * @property {string} pronostic id
-  * @return : {} Pronostic
+   * @param {string} pronostic id
+   * @return  {}
   */
   @UseGuards(JwtAuthGuard)
   @Delete(&#x27;:id&#x27;)

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -178,21 +178,24 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank">Number</a>, createPronosticDto: <a href="../classes/CreatePronosticDto.html">CreatePronosticDto</a>)</code>
+                    <code>create(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String</a>, createPronosticDto: <a href="../classes/CreatePronosticDto.html">CreatePronosticDto</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:22</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to create a pronostic
+You need to be connected to access to this route</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -208,7 +211,7 @@
                                 <tr>
                                     <td>userId</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank" >Number</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
                                     </td>
 
                                     <td>
@@ -269,14 +272,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="58"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:58</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to delete a specific pronostic
+You need to be connected to access to this route</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -285,6 +291,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -296,6 +303,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>pronostic id</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -337,18 +348,26 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:37</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to give all pronostics in the database
+You need to be connected to access to this route</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -378,14 +397,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:47</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to give all pronostics for a specific match
+You need to be connected to access to this route</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -450,14 +472,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:76</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to update a specific pronostic
+You need to be connected to access to this route</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -466,6 +491,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -477,6 +503,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>id of the user</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>createPronosticDto</td>
@@ -486,6 +516,8 @@
                                     </td>
 
 
+                                    <td>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -522,7 +554,15 @@ export class PronosticsService {
   constructor(@InjectModel(Pronostic.name) private pronosticModel: Model&lt;Pronostic&gt;
   ) {
   }
-  async create(userId:Number, createPronosticDto: CreatePronosticDto): Promise&lt;Pronostic&gt; {
+
+  /**
+   * Service used to create a pronostic
+   * You need to be connected to access to this route
+   * @param {string} userId
+   * @param {CreatePronosticDto} createPronosticDto
+   * @return {Pronostic}
+  */
+  async create(userId: String, createPronosticDto: CreatePronosticDto): Promise&lt;Pronostic&gt; {
     const createdPronostic &#x3D; await new this.pronosticModel({
       userId: userId,
       matchId: createPronosticDto.matchId,
@@ -532,15 +572,32 @@ export class PronosticsService {
     return createdPronostic.save();
   }
 
+  /**
+   * Service used to give all pronostics in the database
+   * You need to be connected to access to this route
+   * @return {Pronotic[]}
+  */
   async findAll(): Promise&lt;any&gt; {
     return this.pronosticModel.find({});
   }
 
+  /**
+   * Service used to give all pronostics for a specific match
+   * You need to be connected to access to this route
+   * @param {string} matchId
+   * @returns {Pronostic[]}
+  */
   async findPronosticForOneMatchId(matchId: string): Promise&lt;any&gt; {
     const pronostic &#x3D; await this.pronosticModel.find({ &#x27;matchId&#x27;: matchId }).exec();
     return pronostic;
   }
 
+  /**
+   * Service used to delete a specific pronostic
+   * You need to be connected to access to this route
+   * @param {string} id pronostic id
+   * @returns  {JSON}
+  */
   async deleteOne(id): Promise&lt;any&gt; {
     const result &#x3D; await this.pronosticModel.findByIdAndDelete(id);
     if (!result) {
@@ -553,6 +610,12 @@ export class PronosticsService {
     }
   }
 
+  /**
+   * Service used to update a specific pronostic
+   * You need to be connected to access to this route
+   * @param {String} userId id of the user
+   * @return  {Pronostic}
+  */
   async updateOne(userId, createPronosticDto): Promise&lt;any&gt; {
     const newPronostic &#x3D; await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId });
     newPronostic.winnerId &#x3D; createPronosticDto.winnerId

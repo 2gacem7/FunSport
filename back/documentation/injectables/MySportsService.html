@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>my-show-time documentation</title>
+        <title>FunServer documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <a href="../" class="navbar-brand">FunServer documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -177,14 +177,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/MySports/MySports.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/MySports/MySports.service.ts:27</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to add a sport in the user&#39;s favorite</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -254,14 +256,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">src/MySports/MySports.service.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/MySports/MySports.service.ts:38</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to delete a sport in the user&#39;s favorite</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -322,14 +326,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/MySports/MySports.service.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">src/MySports/MySports.service.ts:16</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to get all sports for a specific user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -382,33 +388,34 @@ import { CreateMySportDto } from &#x27;../dto/create-mySport.dto&#x27;;
 @Injectable()
 export class MySportsService {
     constructor( @InjectModel(MySport.name) private mySportModel: Model&lt;MySport&gt;){}
-
+    /**
+     * Service used to get all sports for a specific user
+     * @param {string} userId
+     * @return {Model&lt;MySport&gt;[]}
+     */
     async getMySports(userId){
-        // get all sports for a specific userId.
-        // Populate the data with the API TODO
-        // :userId
-        // return Model&lt;MySport&gt;
         const datas &#x3D; await this.mySportModel.find({userId:userId}).exec();
-        // for(let i &#x3D;0; i&lt;datas.length;i++){
-            // TODO
-        // }
         return datas;
     }
 
+    /**
+     * Service used to add a sport in the user&#x27;s favorite
+     * @param {string} userId
+     * @param {string} sportId
+     * @return {Model&lt;MySport&gt;}
+     */
     async addMySport(userId, sportId){
-        // add a sport in your mySports array.
-        // :userId
-        // :sportId &#x3D; id extract to the API
-        // return Model&lt;MySport&gt;
         const newMySport &#x3D; await this.mySportModel.create({userId:userId, sportId:sportId, data:[]});
         newMySport.save()
         return newMySport
     }
 
+    /**
+     * Service used to delete a sport in the user&#x27;s favorite
+     * @param {string} sportId
+     * @return {}
+     */
     async delMySport(sportId){
-        // del a sport in your mySports array.
-        // :sportId &#x3D; id extract to the API
-        // return JSON
         await this.mySportModel.findByIdAndDelete(sportId);
         return {
             message: &quot;Deleted ok&quot;

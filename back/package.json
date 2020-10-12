@@ -1,5 +1,5 @@
 {
-  "name": "my-show-time",
+  "name": "FunServer",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
+    "compodoc": "compodoc -p tsconfig.json src",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
