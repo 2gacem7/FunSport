@@ -1,0 +1,49 @@
+version: '3.1'
+
+services:
+    www:
+        container_name: nginx
+        image: nginx:alpine
+        build:
+           context: .
+           dockerfile: Dockerfile
+        ports:
+          - "80:80"
+        depends_on:
+          - back
+          - front
+
+    mongo:
+        container_name: mongo
+        image: mongo
+        restart: always
+        volumes:
+            - ./bdd/:/data/db
+        ports:
+        - 27017:27017
+
+    back:
+        container_name: back
+        build:
+          args:
+            user: daegon
+            uid: 1000
+          context: ./back
+          dockerfile: Dockerfile
+        restart: always
+        ports:
+        - 3000:3000
+        depends_on: 
+          - mongo
+
+    front:
+        container_name: front
+        build:
+            args:
+                user: daegon
+                uid: 1000
+            context: ./front
+            dockerfile: Dockerfile
+        depends_on: 
+            - back
+

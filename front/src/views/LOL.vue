@@ -1,38 +1,45 @@
 <template>
-  <div class="home">
+  <div id="lol">
     <Navbar />
     <TabBar />
     <AddMySport />
-
-    <Live sport="LOL" apiName="league-of-legends" :delButton="false"/>
-
+    <div class="card-deck m-0 p-0">
+      <DisplayListTeam sport="LOL" apiName="lol" />
+      <DisplayCalendar sport="LOL" apiName="lol" />
+      <DisplayLastResults sport="LOL" apiName="lol" />
+      <DisplayLive sport="LOL" apiName="lol" :delButton="false" />
+    </div>
   </div>
 </template>
 
 <script>
+import ENV from "../../env.config";
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import AddMySport from "@/components/AddMySport.vue";
-import ENV from "../../env.config";
-import Live from "@/components/Live.vue"
+
+import DisplayLive from "@/components/DisplayLive.vue";
+import DisplayLastResults from "@/components/DisplayLastResults.vue";
+import DisplayListTeam from "@/components/DisplayListTeam.vue";
+import DisplayCalendar from "@/components/DisplayCalendar.vue";
 
 
 export default {
-  name: "Home",
+  name: "Lol",
   components: {
     Navbar,
     TabBar,
     AddMySport,
-    Live
+    DisplayLive,
+    DisplayLastResults,
+    DisplayCalendar,
+    DisplayListTeam,
   },
   data() {
-    return {
-    };
+    return {};
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
-
     getCookie() {
       let access_token = "";
       if (document.cookie.length > 0) {
