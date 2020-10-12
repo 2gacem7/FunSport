@@ -8,7 +8,6 @@ import { Pronostic, PronosticSchema } from '../schemas/pronostic.schema';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Pronostic.name, schema: PronosticSchema }]),
-
   ],
   controllers: [PronosticsController],
   providers: [PronosticsService],

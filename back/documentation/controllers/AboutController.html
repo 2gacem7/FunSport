@@ -1,0 +1,317 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>my-show-time documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">my-show-time documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content controller">
+                   <div class="content-data">
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Controllers</li>
+  <li>AboutController</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/about/about.controller.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Prefix</h3>
+            </p>
+            <p class="comment">
+                <code>about</code>
+            </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAboutServices">getAboutServices</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAboutServices"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getAboutServices
+                        </b>
+                        <a href="#getAboutServices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAboutServices(res: Response)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get()<br />@Header(&#x27;Content-type&#x27;, &#x27;application/json&#x27;)<br />@Header(&#x27;Content-disposition&#x27;, &#x27;attachment; filename&#x3D;about.json&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="10"
+                            class="link-to-prism">src/about/about.controller.ts:10</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>res</td>
+                                    <td>
+                                            <code>Response</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Header, Res, Request } from &#x27;@nestjs/common&#x27;;
+import { Response } from &#x27;express&#x27;
+import { createReadStream } from &#x27;fs&#x27;;
+@Controller(&#x27;about&#x27;)
+export class AboutController {
+    @Get()
+    @Header(&#x27;Content-type&#x27;, &#x27;application/json&#x27;)
+    @Header(&#x27;Content-disposition&#x27;, &#x27;attachment; filename&#x3D;about.json&#x27;)
+
+    async getAboutServices(@Res() res:Response): Promise&lt;any&gt; {
+        // let request &#x3D; require(&#x27;request&#x27;);
+        // let customer &#x3D; { host: &quot;&quot; }
+        // let server &#x3D; { current_time: &quot;&quot;, services: [] }
+
+        // let myIp &#x3D; await new Promise(resolve &#x3D;&gt; {
+        //     request({
+        //         url: &#x60;http://api.myip.com/&#x60;,
+        //         method: &quot;&quot;,
+        //         headers: {},
+        //         json: true
+        //     }, function (error, response, body) {
+        //         if (!error){
+        //             resolve(body.ip)
+        //         } else {
+        //             console.error(error)
+        //         }
+        //     })
+        // });
+
+        // customer.host &#x3D; myIp.toString()
+
+        // server.current_time &#x3D; Date.now().toString();
+
+        // for (let port &#x3D; 3001; port &lt; 3006; port++) {
+        //     let test &#x3D; await new Promise(resolve &#x3D;&gt; {
+        //         request({
+        //             url: &#x60;http://localhost:${port}/about&#x60;,
+        //             method: &quot;&quot;,
+        //             headers: {},
+        //             json: true
+        //         }, function (error, response, body) {
+        //             if (!error)
+        //                 resolve(body)
+        //         })
+        //     });
+        //     server.services.push(test);
+        // }
+        let path &#x3D; require(&#x27;path&#x27;);
+
+        // const dataAbout &#x3D; JSON.stringify({customer, server})
+        var fs &#x3D; require(&#x27;fs&#x27;);
+        // const file &#x3D; fs.writeFile(path.join(__dirname)+&#x27;/about.json&#x27;,dataAbout,
+        //     (err) &#x3D;&gt; {
+        //         if (err) throw err;
+        //         console.log(&#x27;JSON écrit !&#x27;)
+        // })
+
+
+        // res.writeHead(201,{&quot;Content-type&quot;:&quot;application/json&quot;,&quot;Content-Disposition&quot;:&quot;attachment; filename&#x3D;&#x27;./about.json&#x27;&quot;})
+     res.sendFile(&#x27;about.json&#x27;,{encoding:&#x27;utf-8&#x27;, root:path.join(__dirname),&#x27;content-type&#x27;:&#x27;application/json&#x27;})
+
+    }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
+            var COMPODOC_CURRENT_PAGE_URL = 'AboutController.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
