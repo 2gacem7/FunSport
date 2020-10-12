@@ -55,72 +55,72 @@
 <script>
   import ENV from "../../env.config";
 
-  export default {
-    name: "DisplayLastResults",
-    data() {
-      return {
-        info: {},
-      };
-    },
-
-    beforeMount() {
-      this.getPastInfos();
-    },
-    props: {
-      id: "",
-      sport: String, // String display in the header
-      apiName: String, // String used to search info for 1 sport in getInfos
-      delButton: Boolean,
-    },
-
-    methods: {
-      addToMyFavorites() {
-        this.$store.dispatch("addToMyFavorites", {
-          id: this.$store.state.tabSelected.id,
-          data: {
-            sport: this.sport,
-            type: "component",
-            name: "lastResult",
-            apiName: this.apiName,
+    export default {
+        name: "DisplayLastResults",
+        data() {
+            return {
+                info: {},
+              };
           },
-        });
-      },
-      delToMyFavorites() {
-        this.$emit("delfavorite", this.id);
-      },
-      async getPastInfos() {
-        var myHeaders = new Headers();
-        myHeaders.append(
-          "Authorization",
-          "Bearer "+ENV.API_PANDA_SPORT
-        );
 
-        var requestOptions = {
-          method: "GET",
-          headers: myHeaders,
-          redirect: "follow",
-        };
-        await fetch(`https://api.pandascore.co/${this.apiName}/matches/past`, requestOptions)
-          .then((response) => response.json())
-          .then((result) => (this.info = result))
-          .catch((error) => console.log("error", error));
-      },
+        beforeMount() {
+            this.getPastInfos();
+          },
+        props: {
+            id: "",
+            sport: String, // String display in the header
+            apiName: String, // String used to search info for 1 sport in getInfos
+            delButton: Boolean,
+          },
 
-      return_Link(item) {
-        return item.league.image_url;
-      },
+        methods: {
+            addToMyFavorites() {
+                this.$store.dispatch("addToMyFavorites", {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: this.sport,
+                        type: "component",
+                        name: "lastResult",
+                        apiName: this.apiName,
+                      },
+                  });
+              },
+            delToMyFavorites() {
+                this.$emit("delfavorite", this.id);
+              },
+            async getPastInfos() {
+                var myHeaders = new Headers();
+                myHeaders.append(
+                    "Authorization",
+                    "Bearer "+ENV.API_PANDA_SPORT
+                  );
 
-      return_Date(item) {
-        if (item.begin_at == null) {
-          item.begin_at = "unknown";
-        }
+                var requestOptions = {
+                    method: "GET",
+                    headers: myHeaders,
+                    redirect: "follow",
+                  };
+                await fetch(`https://api.pandascore.co/${this.apiName}/matches/past`, requestOptions)
+                  .then((response) => response.json())
+                  .then((result) => (this.info = result))
+                  .catch((error) => console.log("error", error));
+              },
 
-        if (item.end_at == null) {
-          item.end_at = "unknown";
-        }
-      },
-    },
-  };
+            return_Link(item) {
+                return item.league.image_url;
+              },
+
+            return_Date(item) {
+                if (item.begin_at == null) {
+                    item.begin_at = "unknown";
+                  }
+
+                if (item.end_at == null) {
+                    item.end_at = "unknown";
+                  }
+              },
+          },
+      };
 </script>
 
 <style>
