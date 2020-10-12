@@ -61,6 +61,13 @@ export class PronosticsController {
   // :id Number
   // return : {} Pronostic
   async delete(@Param('id') id: string): Promise<any> {
-    return this.pronosticsService.deleteOne(id);
+    if (id){
+      return this.pronosticsService.deleteOne(id);
+
+    }
+    throw new HttpException({
+      error:404,
+      message:"id is mandatory"
+    }, HttpStatus.BAD_REQUEST)
   }
 }
