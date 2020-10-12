@@ -12,7 +12,14 @@ export class PronosticsService {
   ) {
   }
   async create(createPronosticDto: CreatePronosticDto): Promise<Pronostic> {
-    const createdPronostic = await new this.pronosticModel(createPronosticDto)
+    const createdPronostic = await new this.pronosticModel({
+        userId:createPronosticDto.userId,
+        matchId:createPronosticDto.matchId,
+        winnerId: createPronosticDto.winnerId,
+        commentary:(createPronosticDto.commentary ? createPronosticDto.commentary : "")
+      })
+
+
     return createdPronostic.save();
   }
 
@@ -40,7 +47,7 @@ export class PronosticsService {
   async updateOne(createPronosticDto): Promise<any> {
     const newPronostic = await this.pronosticModel.findOne({ userId: createPronosticDto.userId, matchId: createPronosticDto.matchId });
     newPronostic.winnerId = createPronosticDto.winnerId
-    newPronostic.commentary = createPronosticDto.commentary
+    newPronostic.commentary =  (createPronosticDto.commentary ? createPronosticDto.commentary : "")
     return newPronostic.save();
   }
 }

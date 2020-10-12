@@ -31,7 +31,7 @@ export class PronosticsController {
     } else {
       throw new HttpException({
         error:404,
-        message:"userId, matchId, winnerId and type are mandatory"
+        message:"userId, matchId, winnerId and type are mandatory. Only commentary is optional"
       }, HttpStatus.BAD_REQUEST)
     }
   }
