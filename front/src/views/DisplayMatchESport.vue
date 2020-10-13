@@ -3,12 +3,11 @@
     <Navbar />
     <TabBar />
     <AddMySport />
+    <button class="btn btn-primary" @click="$router.go(-1)">Back</button>
     <div class="card-deck m-0 p-0">
-      <DisplayListTeam sport="CS-GO" apiName="csgo" />
-      <DisplayCalendar sport="CS-GO" apiName="csgo"/>
-      <DisplayLastResults sport="CS-GO" apiName="csgo" />
-      <DisplayLive sport="CS-GO" apiName="cs-go" :delButton="false" />
+      {{ datas}}
     </div>
+    {{ pronostics}}
   </div>
 </template>
 
@@ -29,44 +28,60 @@ export default {
   },
   props:{
     matchId: string,
-    sportId:string,
+    apiName:string,
   },
   data() {
-    return {};
+    return {
+      datas: [],
+      pronostics:[],
+      isLoading: true,
+    }
   },
-  mounted() {},
+  mounted() {
+    this.getDatas()
+    this.getPronostics()
+  },
 
   methods: {
-      async getDatas() {
-        const header = new Headers();
-        header.append("Authorization", ENV.API_PANDA_SPORT);
-        let options = {
-          method: "GET",
-          headers: header,
-          mode: "cors",
-          cache: "default",
-        };
-
-        const datas = await fetch("https://api.pandascore.co/lives", options);
-        const json = await datas.json();
-        if (datas.ok) {
-          this.infos = [];
-          json.forEach((detail) => {
-            if (detail.event.game == this.apiName) {
-              this.infos.push(detail);
-            }
-          });
-          this.isLoading = false;
-          this.lastUpdate = Date.now();
-          if (this.setTimer == "") {
-            this.setTimer = setInterval(() => {
-              this.getInfos();
-            }, this.timer);
+    async getPronostics() {
+      const header = new Headers();
+      header.append("Authorization", this.$store.state.access_token);
+      let options = {
+        method: "GET",
+        headers: header,
+        mode: "cors",
+        cache: "default",
+      };
+      const datas = await fetch(`http://localhost:3000/pronostics/${this.matchId}`, options);
+      const json = await datas.json();
+      if (datas.ok) {
+            this.pronostics = json;
+      } else {
+        console.log("Down");
+      }
+    },
+    async getDatas() {
+      const header = new Headers();
+      header.append("Authorization", ENV.API_PANDA_SPORT);
+      let options = {
+        method: "GET",
+        headers: header,
+        mode: "cors",
+        cache: "default",
+      };
+      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches`, options);
+      const json = await datas.json();
+      if (datas.ok) {
+        json.forEach(function(match){
+          if (match.id === this.matchId){
+            this.datas = match;
           }
-        } else {
-          console.log("Down");
-        }
-      },
+        })
+        this.isLoading = false;
+      } else {
+        console.log("Down");
+      }
+    },
 
   }
 }
