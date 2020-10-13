@@ -7,6 +7,7 @@
     <div class="card-deck m-0 p-0">
       {{ datas}}
     </div>
+    {{ pronostics}}
   </div>
 </template>
 
@@ -31,39 +32,56 @@ export default {
   },
   data() {
     return {
-        datas: [],
-        isLoading: true,
+      datas: [],
+      pronostics:[],
+      isLoading: true,
     }
   },
   mounted() {
     this.getDatas()
+    this.getPronostics()
   },
 
   methods: {
-      async getDatas() {
-        const header = new Headers();
-        header.append("Authorization", ENV.API_PANDA_SPORT);
-        let options = {
-          method: "GET",
-          headers: header,
-          mode: "cors",
-          cache: "default",
-        };
-
-
-        const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches/${this.matchId}`, options);
-        const json = await datas.json();
-        if (datas.ok) {
-          json.forEach(function(match){
-            if (match.id === this.matchId){
-              this.datas = match;
-            }
-          })
-          this.isLoading = false;
-        } else {
-          console.log("Down");
-        }
-      },
+    async getPronostics() {
+      const header = new Headers();
+      header.append("Authorization", this.$store.state.access_token);
+      let options = {
+        method: "GET",
+        headers: header,
+        mode: "cors",
+        cache: "default",
+      };
+      const datas = await fetch(`http://localhost:3000/pronostics/${this.matchId}`, options);
+      const json = await datas.json();
+      if (datas.ok) {
+            this.pronostics = json;
+      } else {
+        console.log("Down");
+      }
+    },
+    async getDatas() {
+      const header = new Headers();
+      header.append("Authorization", ENV.API_PANDA_SPORT);
+      let options = {
+        method: "GET",
+        headers: header,
+        mode: "cors",
+        cache: "default",
+      };
+      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches`, options);
+      const json = await datas.json();
+      if (datas.ok) {
+        json.forEach(function(match){
+          if (match.id === this.matchId){
+            this.datas = match;
+          }
+        })
+        this.isLoading = false;
+      } else {
+        console.log("Down");
+      }
+    },
 
   }
 }

@@ -4,6 +4,7 @@
     <TabBar />
     <AddMySport />
     <div class="card-deck m-0 p-0">
+      <DisplaySearch apiName="csgo"/>
       <DisplayListTeam sport="CS-GO" apiName="csgo" />
       <DisplayCalendar sport="CS-GO" apiName="csgo"/>
       <DisplayLastResults sport="CS-GO" apiName="csgo" />
@@ -25,6 +26,7 @@ import DisplayLive from "@/components/DisplayLive.vue"
 import DisplayLastResults from "@/components/DisplayLastResults.vue";
 import DisplayRanking from "@/components/DisplayRanking.vue";
 
+import DisplaySearch from "@/components/DisplaySearch.vue";
 
 export default {
   name: "CSGO",
@@ -36,7 +38,8 @@ export default {
     DisplayLive,
     DisplayListTeam,
     DisplayLastResults,
-    DisplayRanking
+    DisplayRanking,
+    DisplaySearch
   },
   data() {
     return {};

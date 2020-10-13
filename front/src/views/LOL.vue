@@ -4,6 +4,7 @@
     <TabBar />
     <AddMySport />
     <div class="card-deck m-0 p-0">
+      <DisplaySearch apiName="lol"/>
       <DisplayListTeam sport="LOL" apiName="lol" />
       <DisplayCalendar sport="LOL" apiName="lol" />
       <DisplayLastResults sport="LOL" apiName="lol" />
@@ -25,6 +26,7 @@ import DisplayListTeam from "@/components/DisplayListTeam.vue";
 import DisplayCalendar from "@/components/DisplayCalendar.vue";
 import DisplayRanking from "@/components/DisplayRanking.vue";
 
+import DisplaySearch from "@/components/DisplaySearch.vue";
 
 export default {
   name: "Lol",
@@ -36,7 +38,8 @@ export default {
     DisplayLastResults,
     DisplayCalendar,
     DisplayListTeam,
-    DisplayRanking
+    DisplayRanking,
+    DisplaySearch
   },
   data() {
     return {};
