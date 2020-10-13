@@ -81,7 +81,7 @@
                     data: {
                         sport: this.sport,
                         type: "component",
-                        name: "calendar",
+                        name: "ranking",
                         apiName: this.apiName,
                     },
                 });
