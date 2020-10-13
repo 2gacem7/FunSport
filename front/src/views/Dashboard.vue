@@ -86,6 +86,18 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
+            <DisplayRanking
+              v-if="
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'ranking' &&
+              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+              "
+              :id="favorite._id"
+              :sport="favorite.data[0].sport"
+              :apiName="favorite.data[0].apiName"
+              :delButton="true"
+              v-on:delfavorite="delToMyFavorites"
+            />
             <TeamCSGO
               v-if="
               favorite.data[0].type == 'team' &&
@@ -110,6 +122,7 @@ import DisplayLive from "@/components/DisplayLive.vue";
 import DisplayLastResults from "@/components/DisplayLastResults.vue";
 import DisplayCalendar from "@/components/DisplayCalendar.vue";
 import DisplayListTeam from "@/components/DisplayListTeam.vue";
+import DisplayRanking from "@/components/DisplayRanking.vue";
 
 import TeamCSGO from "@/components/TeamCSGO.vue";
 
@@ -122,6 +135,7 @@ export default {
     DisplayLastResults,
     DisplayCalendar,
     DisplayListTeam,
+    DisplayRanking,
     TeamCSGO
 
   },
