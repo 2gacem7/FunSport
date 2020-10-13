@@ -36,6 +36,10 @@ $ npm run test:cov
 ```
 
 ## Team
+Lotfi Doucanef  
+Gacem Ben ayad  
+YohannEpitech  
+Kevin Bridonneau  
 
 ## License
 
