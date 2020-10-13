@@ -1,17 +1,7 @@
-# base image
-FROM node
+FROM node:stretch-slim
 
+WORKDIR /usr/src/app
 
-ARG user
-ARG uid
+COPY package*.json ./app/
 
-ADD . /app
-
-WORKDIR /app
-
-RUN npm install @vue/cli@3.7.0 -g
-
-RUN npm install
-
-
-CMD npm run serve
+CMD npm install @vue/cli@3.7.0 -g && npm install && npm run serve
