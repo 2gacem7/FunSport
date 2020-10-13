@@ -1,12 +1,13 @@
 {
-  "name": "my-show-time",
+  "name": "FunESport",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "GNU3",
   "scripts": {
     "prebuild": "rimraf dist",
+    "compodoc": "compodoc --hideGenerator --theme [Readthedocs] -p tsconfig.json -n FunESport ",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -44,6 +45,7 @@
     "rxjs": "^6.5.4"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/cli": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",

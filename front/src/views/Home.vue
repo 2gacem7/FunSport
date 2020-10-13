@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="home">
     <Navbar />
     <TabBar />
@@ -6,6 +7,7 @@
 
 
   </div>
+</div>
 </template>
 
 <script>

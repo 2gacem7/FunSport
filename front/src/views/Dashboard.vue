@@ -19,7 +19,7 @@
             v-bind:key="sport.name"
             class="row mt-2 p-3 justify-content-center"
           >
-            <h3 class="card-text text-center">{{ sport.name }}</h3>
+            <a class="btn btn-default" @click="goTo(sport.name)">Go to {{ sport.name }}</a>
             <button
               class="btn btn-danger btn-sm rounded-circle ml-5 mb-2"
               @click="deleteSport(sport._id)"
@@ -86,6 +86,18 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
+            <DisplayRanking
+              v-if="
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'ranking' &&
+              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+              "
+              :id="favorite._id"
+              :sport="favorite.data[0].sport"
+              :apiName="favorite.data[0].apiName"
+              :delButton="true"
+              v-on:delfavorite="delToMyFavorites"
+            />
             <TeamCSGO
               v-if="
               favorite.data[0].type == 'team' &&
@@ -110,6 +122,7 @@ import DisplayLive from "@/components/DisplayLive.vue";
 import DisplayLastResults from "@/components/DisplayLastResults.vue";
 import DisplayCalendar from "@/components/DisplayCalendar.vue";
 import DisplayListTeam from "@/components/DisplayListTeam.vue";
+import DisplayRanking from "@/components/DisplayRanking.vue";
 
 import TeamCSGO from "@/components/TeamCSGO.vue";
 
@@ -122,6 +135,7 @@ export default {
     DisplayLastResults,
     DisplayCalendar,
     DisplayListTeam,
+    DisplayRanking,
     TeamCSGO
 
   },
@@ -148,6 +162,17 @@ export default {
     },
   },
   methods: {
+    goTo(nameTab) {
+      let idTab = ""
+      this.$store.state.sports.forEach((sport)=>{
+        if (sport.name == nameTab)
+        {
+          idTab = sport._id
+        }
+      })
+      this.$store.commit("setTabSelected", { id: idTab, name: nameTab });
+      this.$router.push({ name: nameTab });
+    },
     async deleteSport(id) {
       const body = {
         id: id,
