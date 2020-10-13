@@ -12,13 +12,13 @@
       <button class="btn btn-primary m-2" @click="launchSearch">
         Search
       </button>
-      <div  class="text-dark pl-2">Results</div>
+      <div  class="h5 bg-light text-dark font-weight-bold text-center">Results</div>
     </div>
     <div class="card-body text-dark overflow-auto p-1">
       <div v-if="type=='matches' && results.length != 0">
         <div class="card m-2" v-for="match in results" :key=match.id>
 
-          <div class="card-header">Scheduled at: {{ match.scheduled_at}}
+          <div class="card-header">Scheduled at: {{ match.scheduled_at| moment("MMMM Do YYYY, h:mm:ss") }}
           </div>
           <div class="card-body">
             <div v-for="(opponent, index) in match.opponents" :key="index">
@@ -48,15 +48,15 @@
 
           </div>
           <div class="card-body">
-            Begin at:{{ competition.begin_at}}<br>
-            End at : {{ competition.end_at}}
+            Begin at:{{ competition.begin_at| moment("MMMM Do YYYY, h:mm:ss") }}<br>
+            End at : {{ competition.end_at| moment("MMMM Do YYYY, h:mm:ss") }}
           </div>
           <div class="card-footer">
             <button class="btn btn-success" @click="goViewMatch(competition.id)"> View</button>
           </div>
         </div>
       </div>
-      <div v-else>No result available. Try again</div>
+      <div v-else class="text-center">No result available. Try again</div>
 
     </div>
   </div>
@@ -81,6 +81,12 @@ export default {
   methods: {
     goViewMatch(matchId){
       console.log(matchId, this.type)
+      if (this.type=='matches'){
+        this.$router.push({name:'match', params:{matchId:matchId, apiname:this.apiName}})
+
+      } else if (this.type == 'competitions'){
+        this.$router.push({name:'competition', params:{competitionId:matchId, apiname: this.apiName}})
+      }
     },
     resetData(){
       this.results=[]

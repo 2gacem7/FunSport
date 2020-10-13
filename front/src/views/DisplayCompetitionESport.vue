@@ -26,12 +26,10 @@ export default {
     TabBar,
     AddMySport,
   },
-  props:{
-  },
   data() {
     return {
+      competitionId:"",
       apiName:"",
-      matchId:"",
       datas: [],
       pronostics:[],
       isLoading: true,
@@ -40,8 +38,6 @@ export default {
   mounted() {
     this.matchId = this.$route.params.matchId
     this.apiName = this.$route.params.apiname
-    console.log(this.matchId)
-    console.log(this.apiName)
     this.getDatas()
     this.getPronostics()
   },
@@ -76,8 +72,8 @@ export default {
       const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches`, options);
       const json = await datas.json();
       if (datas.ok) {
-        json.forEach((match)=>{
-          if (match.id == this.matchId){
+        json.forEach(function(match){
+          if (match.id === this.matchId){
             this.datas = match;
           }
         })
