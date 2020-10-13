@@ -4,7 +4,7 @@
             <button v-if="!delButton" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
                 + favori
             </button>
-            <h3 class="text-dark text-center">{{ sport }} RANKING TEST</h3>
+            <h3 class="text-dark text-center">{{ sport }} Ranking</h3>
             <button v-if="delButton" class="btn btn-danger font-weight-bold mb-2" @click="delToMyFavorites">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@
             </button>
         </div>
 
-        <div>
+        <div> 
             <select v-model="id_tournament" v-on:click="getInfosRanking">
                 <option v-for="item in info" :key="item.id" v-bind:value="item.matches[0].tournament_id">
                     {{item.league.name}}

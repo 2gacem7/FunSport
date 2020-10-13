@@ -36,7 +36,7 @@
           <button class="btn btn-success" @click="goViewMatch(match.id)"> View</button>
         </div>
       </div>
-      <div v-if="type=='competitions' && results.length != 0">
+      <div v-else-if="type=='competitions' && results.length != 0">
         <div class="card m-2" v-for="competition in results" :key=competition.id>
 
           <div class="card-header">{{ competition.league.name}}
