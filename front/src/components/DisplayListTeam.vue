@@ -27,7 +27,7 @@
       <table class="table">
         <tbody class="card m-0 p-0 overflow-auto" style="max-height: 20rem">
           <tr v-for="item in info" :key="item.id" class="w-100">
-            <td v-for ="item in favori" :key="item.id">
+            <td>
               <button class="btn btn-success btn-sm rounded-circle mb-2" @click="addTeamToMyFavorite(item)">Add</button>
             </td>
             <td style="width: 100%">
