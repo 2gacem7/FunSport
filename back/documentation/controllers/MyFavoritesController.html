@@ -149,8 +149,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:37</a></div>
                 </td>
             </tr>
 
@@ -227,8 +227,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:55</a></div>
                 </td>
             </tr>
 
@@ -305,15 +305,16 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.controller.ts:24</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Controller to get all favorites for the current user</p>
+                    <div class="io-description"><p>Controller to get all favorites for the current user
+You need to be connected to access to this route</p>
 </div>
 
                     <div class="io-description">
@@ -366,15 +367,16 @@ import { MyFavoritesService } from &#x27;./MyFavorites.service&#x27;;
 export class MyFavoritesController {
   /**
    * Constructor for MyFavorites controller
-   * @param myFavoritesService
+   * @param {MyFavoritesService} myFavoritesService
    */
   constructor(private readonly myFavoritesService: MyFavoritesService) { }
 
-/**
- * Controller to get all favorites for the current user
- * @param req
- * @return {Model&lt;MyFavorites&gt;}
- */
+  /**
+   * Controller to get all favorites for the current user
+   * You need to be connected to access to this route
+   * @param req
+   * @return {Model&lt;MyFavorites&gt;}
+   */
   @UseGuards(JwtAuthGuard)
   @Get()
   async getMyFavorite(@Request() req) {
@@ -382,12 +384,12 @@ export class MyFavoritesController {
     return list;
   }
 
- /**
-  * Controller to add a favorite
-  * You need to be connected to access to this route
-  * @param req
-  * @return {Model&lt;MyFavorite&gt;}
-  */
+  /**
+   * Controller to add a favorite
+   * You need to be connected to access to this route
+   * @param req
+   * @return {Model&lt;MyFavorite&gt;}
+   */
   @UseGuards(JwtAuthGuard)
   @Post()
   async addMyFavorite(@Request() req) {
@@ -404,7 +406,8 @@ export class MyFavoritesController {
    * Controller to delete a favorite
    * You need to be connected to access to this route
    * @param req
-  */
+   * @return {}
+   */
   @UseGuards(JwtAuthGuard)
   @Delete()
   async delMyFavorite(@Request() req) {

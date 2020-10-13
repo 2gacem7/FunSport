@@ -60,6 +60,13 @@
             <code>src/MySports/MySports.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service used for manage the actions in the Model<MySport></p>
+
+            </p>
 
 
 
@@ -111,12 +118,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/MySports/MySports.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/MySports/MySports.service.ts:11</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for MySPortsService</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -178,8 +187,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/MySports/MySports.service.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/MySports/MySports.service.ts:34</a></div>
                 </td>
             </tr>
 
@@ -257,8 +266,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/MySports/MySports.service.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/MySports/MySports.service.ts:45</a></div>
                 </td>
             </tr>
 
@@ -275,6 +284,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -286,6 +296,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Id presents in the Model<sport></p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -327,8 +341,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/MySports/MySports.service.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/MySports/MySports.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -385,10 +399,17 @@ import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
 import { MySport } from &#x27;../schemas/mySport.schema&#x27;;
 import { CreateMySportDto } from &#x27;../dto/create-mySport.dto&#x27;;
 
-
+/**
+ * Service used for manage the actions in the Model&lt;MySport&gt;
+ */
 @Injectable()
 export class MySportsService {
+    /**
+     * Constructor for MySPortsService
+     * @param {Model&lt;MySport&gt;} mySportModel
+     */
     constructor( @InjectModel(MySport.name) private mySportModel: Model&lt;MySport&gt;){}
+
     /**
      * Service used to get all sports for a specific user
      * @param {string} userId
@@ -413,7 +434,7 @@ export class MySportsService {
 
     /**
      * Service used to delete a sport in the user&#x27;s favorite
-     * @param {string} sportId
+     * @param {string} sportId Id presents in the Model&lt;sport&gt;
      * @return {}
      */
     async delMySport(sportId){
@@ -422,7 +443,8 @@ export class MySportsService {
             message: &quot;Deleted ok&quot;
         };
     }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

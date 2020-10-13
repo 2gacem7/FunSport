@@ -65,6 +65,14 @@
                 <code>sports</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller used for the route &#39;sports&#39;
+This routes are used to add or delete a sport to display</p>
+
+            </p>
 
 
 
@@ -146,14 +154,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/sports/sports.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/sports/sports.controller.ts:47</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to add a sport in the database</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -221,14 +231,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/sports/sports.controller.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="67"
+                            class="link-to-prism">src/sports/sports.controller.ts:67</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to delete a specific sport in the Model<Sport></p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -296,14 +308,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/sports/sports.controller.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/sports/sports.controller.ts:25</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to have all details for a specific sport</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -313,6 +327,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -327,6 +342,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>The id given in the database</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -375,18 +394,25 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/sports/sports.controller.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/sports/sports.controller.ts:35</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to have all sports in the database</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>    <code>{}</code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -402,47 +428,74 @@ import { SportsService } from &#x27;./sports.service&#x27;;
 
 import { HttpException, HttpStatus , HttpCode} from &#x27;@nestjs/common&#x27;
 
+/**
+ * Controller used for the route &#x27;sports&#x27;
+ * This routes are used to add or delete a sport to display
+ */
 @Controller(&#x27;sports&#x27;)
 export class SportsController {
+    /**
+     * Constructor for SportsController
+     */
     constructor(private readonly SportsService: SportsService) {}
+
+    /**
+     * Controller used to have all details for a specific sport
+     * @param {string} id The id given in the database
+     * @return {Model&lt;Sport&gt;}
+     */
     @UseGuards(JwtAuthGuard)
     @Get(&#x27;:id&#x27;)
     async getSport(@Param(&#x27;id&#x27;) id: string) {
-      const sport &#x3D; await this.SportsService.getSport(id)
-      return sport;
+        const sport &#x3D; await this.SportsService.getSport(id)
+        return sport;
     }
 
+    /**
+     * Controller used to have all sports in the database
+     * @return {Model&lt;Sport&gt;[]}
+     */
     @Get()
     async getSports() {
-      const sports &#x3D; await this.SportsService.getSports()
-      return sports;
+        const sports &#x3D; await this.SportsService.getSports()
+        return sports;
     }
 
+    /**
+     * Controller used to add a sport in the database
+     * @param {Request} req
+     * @return {Model&lt;Sport&gt;}
+     */
     @UseGuards(JwtAuthGuard)
     @Post()
     async addSport(@Request() req) {
-      let list
-      if (req.body.name){
-        list &#x3D; await this.SportsService.addSport(req.body.name)
-      }
-       else {
-        throw new HttpException({
-            message: &#x27;Name is Mandatory&#x27;,
-          }, HttpStatus.BAD_REQUEST);
-       }
-      return list;
+        let list
+        if (req.body.name){
+            list &#x3D; await this.SportsService.addSport(req.body.name)
+        }
+        else {
+            throw new HttpException({
+                message: &#x27;Name is Mandatory&#x27;,
+            }, HttpStatus.BAD_REQUEST);
+        }
+        return list;
     }
 
+    /**
+     * Controller used to delete a specific sport in the Model&lt;Sport&gt;
+     * @param {Request} req
+     * @return {}
+     */
     @UseGuards(JwtAuthGuard)
     @Delete()
     async delSport(@Request() req) {
-      if (req.body.id){
-        return await this.SportsService.delSport(req.body.id)
-      } else {
-        throw new HttpException({
-            message: &#x27;Id is Mandatory&#x27;,
-          }, HttpStatus.BAD_REQUEST);
-      }
+        if (req.body.id){
+            return await this.SportsService.delSport(req.body.id)
+        } else {
+            throw new HttpException({
+                message: &#x27;Id is Mandatory&#x27;,
+            }, HttpStatus.BAD_REQUEST);
+        }
     }
 }
 </code></pre>

@@ -64,6 +64,13 @@
             <code>src/schemas/mySport.schema.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This collection collects all sports followed for all users. The propery data is not used</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -147,6 +154,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>data</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -183,6 +196,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>id sport given in the Model<Sport></p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -219,6 +238,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>id user given in the Model<User> </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -237,32 +262,36 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import { Document } from &#x27;mongoose&#x27;;
 
-@Schema()
 /**
  * This collection collects all sports followed for all users. The propery data is not used
  */
+@Schema()
 export class MySport extends Document {
   /**
-   * @property {string} userId
+   * id user given in the Model&lt;User&gt; 
    */
   @Prop()
   userId: string;
 
 
   /**
- * @property {string} sportId
- */
+   * id sport given in the Model&lt;Sport&gt;
+   */
   @Prop()
   sportId: string;
 
   /**
-* @property {string[]} data
-*/
+   *  data
+   */
   @Prop()
   data: [string];
 }
 
-export const MySportSchema &#x3D; SchemaFactory.createForClass(MySport);</code></pre>
+/**
+ * SchemaFactory for the class &lt;MySport&gt;
+ */
+export const MySportSchema &#x3D; SchemaFactory.createForClass(MySport);
+</code></pre>
     </div>
 </div>
 

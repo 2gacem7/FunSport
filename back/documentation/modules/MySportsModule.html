@@ -138,6 +138,13 @@
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>Module used for manage all elements necessary to use Model<MySport></p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -182,6 +189,10 @@ import { MySportsService } from &#x27;./MySports.service&#x27;;
 import { MySportsController } from &#x27;./MySports.controller&#x27;;
 import { MySport, MySportSchema } from &#x27;../schemas/mySport.schema&#x27;;
 import { MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
+
+/**
+ * Module used for manage all elements necessary to use Model&lt;MySport&gt;
+ */
 
 @Module({
   imports:[MongooseModule.forFeature([{ name: MySport.name, schema: MySportSchema }])],

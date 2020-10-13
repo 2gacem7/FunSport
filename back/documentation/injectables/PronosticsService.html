@@ -60,6 +60,13 @@
             <code>src/MyPronostics/pronostics.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service used to manage all action available in PronosticsService</p>
+
+            </p>
 
 
 
@@ -119,12 +126,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/MyPronostics/pronostics.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/MyPronostics/pronostics.service.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for PronosticsService</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -179,15 +188,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String</a>, createPronosticDto: <a href="../classes/CreatePronosticDto.html">CreatePronosticDto</a>)</code>
+                    <code>create(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, createPronosticDto: <a href="../classes/CreatePronosticDto.html">CreatePronosticDto</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:28</a></div>
                 </td>
             </tr>
 
@@ -212,7 +221,7 @@ You need to be connected to access to this route</p>
                                 <tr>
                                     <td>userId</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -273,8 +282,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:64</a></div>
                 </td>
             </tr>
 
@@ -349,8 +358,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:43</a></div>
                 </td>
             </tr>
 
@@ -398,8 +407,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:53</a></div>
                 </td>
             </tr>
 
@@ -473,8 +482,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="76"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:76</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:82</a></div>
                 </td>
             </tr>
 
@@ -550,79 +559,85 @@ import { HttpException, HttpStatus } from &#x27;@nestjs/common&#x27;
 
 import { CreatePronosticDto } from &#x27;../dto/create-pronostic.dto&#x27;;
 
+/**
+ * Service used to manage all action available in PronosticsService
+ */
 @Injectable()
 export class PronosticsService {
+  /**
+   * Constructor for PronosticsService
+   */
   constructor(@InjectModel(Pronostic.name) private pronosticModel: Model&lt;Pronostic&gt;
-  ) {
-  }
+             ) {
+             }
 
-  /**
-   * Service used to create a pronostic
-   * You need to be connected to access to this route
-   * @param {string} userId
-   * @param {CreatePronosticDto} createPronosticDto
-   * @return {Pronostic}
-  */
-  async create(userId: String, createPronosticDto: CreatePronosticDto): Promise&lt;Pronostic&gt; {
-    const createdPronostic &#x3D; await new this.pronosticModel({
-      userId: userId,
-      matchId: createPronosticDto.matchId,
-      winnerId: createPronosticDto.winnerId,
-      commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;)
-    })
-    return createdPronostic.save();
-  }
+             /**
+              * Service used to create a pronostic
+              * You need to be connected to access to this route
+              * @param {string} userId
+              * @param {CreatePronosticDto} createPronosticDto
+              * @return {Pronostic}
+              */
+             async create(userId: string, createPronosticDto: CreatePronosticDto): Promise&lt;Pronostic&gt; {
+               const createdPronostic &#x3D; await new this.pronosticModel({
+                 userId: userId,
+                 matchId: createPronosticDto.matchId,
+                 winnerId: createPronosticDto.winnerId,
+                 commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;)
+               })
+               return createdPronostic.save();
+             }
 
-  /**
-   * Service used to give all pronostics in the database
-   * You need to be connected to access to this route
-   * @return {Pronotic[]}
-  */
-  async findAll(): Promise&lt;any&gt; {
-    return this.pronosticModel.find({});
-  }
+             /**
+              * Service used to give all pronostics in the database
+              * You need to be connected to access to this route
+              * @return {Pronotic[]}
+              */
+             async findAll(): Promise&lt;any&gt; {
+               return this.pronosticModel.find({});
+             }
 
-  /**
-   * Service used to give all pronostics for a specific match
-   * You need to be connected to access to this route
-   * @param {string} matchId
-   * @returns {Pronostic[]}
-  */
-  async findPronosticForOneMatchId(matchId: string): Promise&lt;any&gt; {
-    const pronostic &#x3D; await this.pronosticModel.find({ &#x27;matchId&#x27;: matchId }).exec();
-    return pronostic;
-  }
+             /**
+              * Service used to give all pronostics for a specific match
+              * You need to be connected to access to this route
+              * @param {string} matchId
+              * @returns {Pronostic[]}
+              */
+             async findPronosticForOneMatchId(matchId: string): Promise&lt;any&gt; {
+               const pronostic &#x3D; await this.pronosticModel.find({ &#x27;matchId&#x27;: matchId }).exec();
+               return pronostic;
+             }
 
-  /**
-   * Service used to delete a specific pronostic
-   * You need to be connected to access to this route
-   * @param {string} id pronostic id
-   * @returns  {JSON}
-  */
-  async deleteOne(id): Promise&lt;any&gt; {
-    const result &#x3D; await this.pronosticModel.findByIdAndDelete(id);
-    if (!result) {
-      throw new HttpException({
-        message: &#x27;No pronostic deleted&#x27;,
-      }, HttpStatus.BAD_REQUEST);
-    }
-    else return {
-      message: &quot;Pronostic Deleted !&quot;,
-    }
-  }
+             /**
+              * Service used to delete a specific pronostic
+              * You need to be connected to access to this route
+              * @param {string} id pronostic id
+              * @returns  {JSON}
+              */
+             async deleteOne(id): Promise&lt;any&gt; {
+               const result &#x3D; await this.pronosticModel.findByIdAndDelete(id);
+               if (!result) {
+                 throw new HttpException({
+                   message: &#x27;No pronostic deleted&#x27;,
+                 }, HttpStatus.BAD_REQUEST);
+               }
+               else return {
+                 message: &quot;Pronostic Deleted !&quot;,
+               }
+             }
 
-  /**
-   * Service used to update a specific pronostic
-   * You need to be connected to access to this route
-   * @param {String} userId id of the user
-   * @return  {Pronostic}
-  */
-  async updateOne(userId, createPronosticDto): Promise&lt;any&gt; {
-    const newPronostic &#x3D; await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId });
-    newPronostic.winnerId &#x3D; createPronosticDto.winnerId
-    newPronostic.commentary &#x3D; (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;)
-    return newPronostic.save();
-  }
+             /**
+              * Service used to update a specific pronostic
+              * You need to be connected to access to this route
+              * @param {String} userId id of the user
+              * @return  {Pronostic}
+              */
+             async updateOne(userId, createPronosticDto): Promise&lt;any&gt; {
+               const newPronostic &#x3D; await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId });
+               newPronostic.winnerId &#x3D; createPronosticDto.winnerId
+               newPronostic.commentary &#x3D; (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;)
+               return newPronostic.save();
+             }
 }
 </code></pre>
     </div>

@@ -138,6 +138,13 @@
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>Module for Model<MyFavorite></p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -183,6 +190,9 @@ import { MyFavoritesController } from &#x27;./MyFavorites.controller&#x27;;
 import { MyFavorite, MyFavoriteSchema } from &#x27;../schemas/myFavorite.schema&#x27;;
 import { MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
 
+/**
+ * Module for Model&lt;MyFavorite&gt;
+ */
 @Module({
   imports:[MongooseModule.forFeature([{ name: MyFavorite.name, schema: MyFavoriteSchema }])],
   providers: [MyFavoritesService],
