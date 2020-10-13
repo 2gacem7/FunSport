@@ -64,6 +64,13 @@
             <code>src/schemas/myFavorite.schema.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This collection collects all widgets for all users.</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -147,26 +154,13 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>data</p>
+</div>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="col-md-4">
-                          <div class="io-description">
-                                  <b>Parameters :</b>
-                                  <table class="params">
-                                      <thead>
-                                          <tr>
-                                                <td>Name</td>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                                <tr>
-                                                        <td>data</td>
-                                                </tr>
-                                      </tbody>
-                                  </table>
-                          </div>
-                        </td>
-                    </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -202,31 +196,13 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>sportFavoriteId corresponds to a specific id sport</p>
+</div>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="col-md-4">
-                          <div class="io-description">
-                                  <b>Parameters :</b>
-                                  <table class="params">
-                                      <thead>
-                                          <tr>
-                                                <td>Name</td>
-                                                    <td>Description</td>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                                <tr>
-                                                        <td>sportFavoriteId</td>
-                                                        <td>
-                                                                <code><p>corresponds to a specific id sport</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                      </tbody>
-                                  </table>
-                          </div>
-                        </td>
-                    </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -262,26 +238,13 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>id user given in Model<User></p>
+</div>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="col-md-4">
-                          <div class="io-description">
-                                  <b>Parameters :</b>
-                                  <table class="params">
-                                      <thead>
-                                          <tr>
-                                                <td>Name</td>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                                <tr>
-                                                        <td>userId</td>
-                                                </tr>
-                                      </tbody>
-                                  </table>
-                          </div>
-                        </td>
-                    </tr>
             </tbody>
         </table>
 </section>
@@ -299,32 +262,36 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import { Document } from &#x27;mongoose&#x27;;
 
-@Schema()
 /**
  * This collection collects all widgets for all users.
  */
+@Schema()
 export class MyFavorite extends Document {
   /**
-   * @param {string} userId
+   * id user given in Model&lt;User&gt;
    */
   @Prop()
   userId: string;
 
   /**
-   * @param {string} sportFavoriteId corresponds to a specific id sport
+   * sportFavoriteId corresponds to a specific id sport
    */
   @Prop()
   sportFavoriteId: string;
 
   /**
-   * @param {string[]} data
+   * data
    */
   @Prop()
   data: [string];
 
 }
 
-export const MyFavoriteSchema &#x3D; SchemaFactory.createForClass(MyFavorite);</code></pre>
+/**
+ * SchemaFactory for the class &lt;MyFavorite&gt;
+ */
+export const MyFavoriteSchema &#x3D; SchemaFactory.createForClass(MyFavorite);
+</code></pre>
     </div>
 </div>
 

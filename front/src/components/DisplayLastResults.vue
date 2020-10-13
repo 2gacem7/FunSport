@@ -133,7 +133,4 @@
 </script>
 
 <style>
-  tbody {
-    color: black;
-  }
 </style>

@@ -4,10 +4,17 @@ import { InjectModel } from '@nestjs/mongoose';
 import { MySport } from '../schemas/mySport.schema';
 import { CreateMySportDto } from '../dto/create-mySport.dto';
 
-
+/**
+ * Service used for manage the actions in the Model<MySport>
+ */
 @Injectable()
 export class MySportsService {
+    /**
+     * Constructor for MySPortsService
+     * @param {Model<MySport>} mySportModel
+     */
     constructor( @InjectModel(MySport.name) private mySportModel: Model<MySport>){}
+
     /**
      * Service used to get all sports for a specific user
      * @param {string} userId
@@ -32,7 +39,7 @@ export class MySportsService {
 
     /**
      * Service used to delete a sport in the user's favorite
-     * @param {string} sportId
+     * @param {string} sportId Id presents in the Model<sport>
      * @return {}
      */
     async delMySport(sportId){

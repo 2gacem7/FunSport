@@ -64,6 +64,13 @@
             <code>src/dto/create-pronostic.dto.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This Dto is used to create a new pronostic.</p>
+
+            </p>
 
 
 
@@ -143,10 +150,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/dto/create-pronostic.dto.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/dto/create-pronostic.dto.ts:31</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>User commentary for this pronostic</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -170,10 +183,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/dto/create-pronostic.dto.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/dto/create-pronostic.dto.ts:15</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Id given by the API</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -197,10 +216,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/dto/create-pronostic.dto.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/dto/create-pronostic.dto.ts:20</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Name of the sport</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -224,10 +249,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/dto/create-pronostic.dto.ts:6</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/dto/create-pronostic.dto.ts:10</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Id given in the Model<User></p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -251,10 +282,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/dto/create-pronostic.dto.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/dto/create-pronostic.dto.ts:25</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Name of the pronostic winner</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -272,17 +309,33 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IsEmail, Matches , MinLength, IsOptional} from &#x27;class-validator&#x27;;
 
-
+/**
+ * This Dto is used to create a new pronostic.
+ */
 export class CreatePronosticDto {
-
+  /**
+   * Id given in the Model&lt;User&gt;
+   */
   userId: string;
 
+  /**
+   * Id given by the API
+   */
   matchId: string;
 
+  /**
+   * Name of the sport
+   */
   type: string;
 
+  /**
+   * Name of the pronostic winner
+   */
   winnerId: string;
 
+  /**
+   * User commentary for this pronostic
+   */
   @IsOptional()
   commentary: string;
 

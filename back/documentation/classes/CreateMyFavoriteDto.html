@@ -64,6 +64,13 @@
             <code>src/dto/create-myFavorite.dto.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This Dto is used to create a new MyFavorite.</p>
+
+            </p>
 
 
 
@@ -128,10 +135,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/dto/create-myFavorite.dto.ts:9</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/dto/create-myFavorite.dto.ts:19</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>data </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -155,10 +168,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/dto/create-myFavorite.dto.ts:7</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/dto/create-myFavorite.dto.ts:14</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Id given in the Model<Sport></p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -182,10 +201,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/dto/create-myFavorite.dto.ts:5</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/dto/create-myFavorite.dto.ts:9</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Id given in the Model<User></p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -202,16 +227,27 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IsEmail, Matches , MinLength, IsOptional} from &#x27;class-validator&#x27;;
-
+/**
+ * This Dto is used to create a new MyFavorite.
+ */
 export class CreateMyFavoriteDto {
-
+  /**
+   * Id given in the Model&lt;User&gt;
+   */
   userId: string;
 
+  /**
+   * Id given in the Model&lt;Sport&gt;
+   */
   sportFavoriteId: string;
 
+  /**
+   * data 
+   */
   data: string[];
 
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 

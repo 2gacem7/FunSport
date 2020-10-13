@@ -9,15 +9,16 @@ import { MyFavoritesService } from './MyFavorites.service';
 export class MyFavoritesController {
   /**
    * Constructor for MyFavorites controller
-   * @param myFavoritesService
+   * @param {MyFavoritesService} myFavoritesService
    */
   constructor(private readonly myFavoritesService: MyFavoritesService) { }
 
-/**
- * Controller to get all favorites for the current user
- * @param req
- * @return {Model<MyFavorites>}
- */
+  /**
+   * Controller to get all favorites for the current user
+   * You need to be connected to access to this route
+   * @param req
+   * @return {Model<MyFavorites>}
+   */
   @UseGuards(JwtAuthGuard)
   @Get()
   async getMyFavorite(@Request() req) {
@@ -25,12 +26,12 @@ export class MyFavoritesController {
     return list;
   }
 
- /**
-  * Controller to add a favorite
-  * You need to be connected to access to this route
-  * @param req
-  * @return {Model<MyFavorite>}
-  */
+  /**
+   * Controller to add a favorite
+   * You need to be connected to access to this route
+   * @param req
+   * @return {Model<MyFavorite>}
+   */
   @UseGuards(JwtAuthGuard)
   @Post()
   async addMyFavorite(@Request() req) {
@@ -47,7 +48,8 @@ export class MyFavoritesController {
    * Controller to delete a favorite
    * You need to be connected to access to this route
    * @param req
-  */
+   * @return {}
+   */
   @UseGuards(JwtAuthGuard)
   @Delete()
   async delMyFavorite(@Request() req) {

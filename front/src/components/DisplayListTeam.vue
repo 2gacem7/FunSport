@@ -4,7 +4,7 @@
       <button v-if="!delButton" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
         + favori
       </button>
-      <h3 class="text-dark text-center">{{ sport }} Team</h3>
+      <h3 class="text-center">{{ sport }} Team</h3>
       <button v-if="delButton" class="btn btn-danger font-weight-bold mb-2" @click="delToMyFavorites">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
           xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +25,7 @@
         </thead>
       </table>
       <table class="table">
-        <tbody class="card m-0 p-0 overflow-auto" style="max-height: 20rem">
+        <tbody class="card m-0 p-0 overflow-auto cardInside" style="max-height: 20rem">
           <tr v-for="item in info" :key="item.id" class="w-100">
             <td>
               <button class="btn btn-success btn-sm rounded-circle mb-2" @click="addTeamToMyFavorite(item)">Add</button>
@@ -128,23 +128,14 @@
 </script>
 
 <style scoped>
-  tbody {
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+tbody {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
   thead {
-    font-family: counter-strike;
     font-size: 25px;
   }
-
-  th {
-    font-family: counter-strike;
-    color: black;
-  }
-
-  h3 {
-    font-family: counter-strike;
-    color: black;
+  .cardInside{
+    box-shadow: none!important;
   }
 </style>

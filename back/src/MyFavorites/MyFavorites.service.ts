@@ -5,9 +5,16 @@ import { MyFavorite } from '../schemas/myFavorite.schema';
 import { CreateMyFavoriteDto } from '../dto/create-myFavorite.dto';
 
 
+/**
+ * Service used for managing the actions available in Model<MyFavorite>
+ */
 
 @Injectable()
 export class MyFavoritesService {
+    /**
+     * Constructor of MyFavoritesService
+     * @param {Model<MyFavorite>} myFavoriteModel
+     */
     constructor( @InjectModel(MyFavorite.name) private myFavoriteModel: Model<MyFavorite>){}
 
     /**
@@ -24,7 +31,7 @@ export class MyFavoritesService {
      * Service used to add a favorite for the current user
      * @param {string} userId
      * @param {string} favoriteId
-     * @param {string[]}data
+     * @param {string[]} data
      * @return {Model<MyFavorite>}
      */
     async addMyFavorite(userId,favoriteId, data){

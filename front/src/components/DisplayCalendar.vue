@@ -7,7 +7,7 @@
               >
               + favori
       </button>
-        <h3 class="text-dark text-center">{{ sport }} Calendar matches</h3>
+        <h3 class="text-center">{{ sport }} Calendar matches</h3>
         <button
           v-if="delButton"
           class="btn btn-danger font-weight-bold mb-2"
@@ -132,11 +132,9 @@
 <style>
 .CalendarTable {
   background-color: white;
-  color: black;
 }
 
 thead {
-  font-family: counter-strike;
   font-size: 25px;
 }
 </style>

@@ -1,29 +1,32 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema()
 /**
  * This collection collects all sports followed for all users. The propery data is not used
  */
+@Schema()
 export class MySport extends Document {
   /**
-   * @property {string} userId
+   * id user given in the Model<User> 
    */
   @Prop()
   userId: string;
 
 
   /**
- * @property {string} sportId
- */
+   * id sport given in the Model<Sport>
+   */
   @Prop()
   sportId: string;
 
   /**
-* @property {string[]} data
-*/
+   *  data
+   */
   @Prop()
   data: [string];
 }
 
+/**
+ * SchemaFactory for the class <MySport>
+ */
 export const MySportSchema = SchemaFactory.createForClass(MySport);

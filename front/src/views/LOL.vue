@@ -4,10 +4,12 @@
     <TabBar />
     <AddMySport />
     <div class="card-deck m-0 p-0">
+      <DisplaySearch apiName="lol"/>
       <DisplayListTeam sport="LOL" apiName="lol" />
       <DisplayCalendar sport="LOL" apiName="lol" />
       <DisplayLastResults sport="LOL" apiName="lol" />
       <DisplayLive sport="LOL" apiName="lol" :delButton="false" />
+      <DisplayRanking sport="LOL" apiName="lol" />
     </div>
   </div>
 </template>
@@ -22,7 +24,9 @@ import DisplayLive from "@/components/DisplayLive.vue";
 import DisplayLastResults from "@/components/DisplayLastResults.vue";
 import DisplayListTeam from "@/components/DisplayListTeam.vue";
 import DisplayCalendar from "@/components/DisplayCalendar.vue";
+import DisplayRanking from "@/components/DisplayRanking.vue";
 
+import DisplaySearch from "@/components/DisplaySearch.vue";
 
 export default {
   name: "Lol",
@@ -34,6 +38,8 @@ export default {
     DisplayLastResults,
     DisplayCalendar,
     DisplayListTeam,
+    DisplayRanking,
+    DisplaySearch
   },
   data() {
     return {};
@@ -59,13 +65,13 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .content {
   padding-top: 70px;
   padding-left: 220px;
 }
 
-body {
+body  {
   background-color: rgb(29, 28, 28);
   color: white;
 }

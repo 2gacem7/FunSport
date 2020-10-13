@@ -64,6 +64,13 @@
             <code>src/schemas/pronostic.schema.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This collection collects all pronotics and the commentary associated</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -149,10 +156,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/schemas/pronostic.schema.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/schemas/pronostic.schema.ts:37</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>commentary optional given when a pronostic is send</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -185,10 +198,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/schemas/pronostic.schema.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/schemas/pronostic.schema.ts:19</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>id match given in the API used</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -221,10 +240,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/schemas/pronostic.schema.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/schemas/pronostic.schema.ts:25</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>name of the sport </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -257,10 +282,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/schemas/pronostic.schema.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/schemas/pronostic.schema.ts:13</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>id user given in Model<User></p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -293,10 +324,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/schemas/pronostic.schema.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/schemas/pronostic.schema.ts:31</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>name of the winner</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -315,28 +352,45 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import { Document } from &#x27;mongoose&#x27;;
 
-@Schema()
 /**
  * This collection collects all pronotics and the commentary associated
  */
+@Schema()
 export class Pronostic extends Document {
+  /** 
+   * id user given in Model&lt;User&gt;
+   */
   @Prop()
   userId: string;
 
+  /**
+   * id match given in the API used
+   */
   @Prop()
   matchId: string;
 
+  /**
+   * name of the sport 
+   */
   @Prop()
   type: string;
 
+  /**
+   * name of the winner
+   */
   @Prop()
   winnerId: string;
 
+  /**
+   * commentary optional given when a pronostic is send
+   */
   @Prop()
   commentary: string;
-
 }
 
+/**
+ * SchemaFactory for the class &lt;Pronostic&gt;
+ */
 export const PronosticSchema &#x3D; SchemaFactory.createForClass(Pronostic);
 </code></pre>
     </div>

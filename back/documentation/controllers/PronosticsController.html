@@ -161,6 +161,13 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller check if the matchId userId doesn&#39;t matchs in the pronostics:</p>
+<ul>
+<li>if match : update the matchId userId</li>
+<li>if not : create a new pronostic
+You need to be connected to access to this route</li>
+</ul>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -460,8 +467,6 @@ export class PronosticsController {
     @InjectModel(Pronostic.name) private pronosticModel: Model&lt;Pronostic&gt;) { }
 
 
-  @UseGuards(JwtAuthGuard)
-  @Post()
    /**
   * Controller check if the matchId userId doesn&#x27;t matchs in the pronostics:
   * - if match : update the matchId userId
@@ -471,6 +476,8 @@ export class PronosticsController {
   * @param {Body} createPronosticDto
   * @return {Pronostic}
   */
+  @UseGuards(JwtAuthGuard)
+  @Post()
   async create(@Request() req, @Body() createPronosticDto: CreatePronosticDto) {
     const user &#x3D; req.user.id
     if (createPronosticDto.matchId &amp;&amp; createPronosticDto.winnerId &amp;&amp; createPronosticDto.type) {

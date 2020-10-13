@@ -60,6 +60,13 @@
             <code>src/sports/sports.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service used for managing the actions available in Model<Sport></p>
+
+            </p>
 
 
 
@@ -115,12 +122,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/sports/sports.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/sports/sports.service.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor of SportsService</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -182,14 +191,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/sports/sports.service.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/sports/sports.service.ts:51</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to add a sport</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -250,14 +261,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/sports/sports.service.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/sports/sports.service.ts:62</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to delete a specific sport</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -318,14 +331,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/sports/sports.service.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/sports/sports.service.ts:25</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to get a specific sport</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -386,18 +401,25 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/sports/sports.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/sports/sports.service.ts:40</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to get all sports available in the database</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>    <code>{}</code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -417,10 +439,22 @@ import { CreateMySportDto } from &#x27;../dto/create-mySport.dto&#x27;;
 import { HttpException, HttpStatus , HttpCode} from &#x27;@nestjs/common&#x27;
 
 
+/**
+ * Service used for managing the actions available in Model&lt;Sport&gt;
+ */
 @Injectable()
 export class SportsService {
+    /**
+     * Constructor of SportsService
+     * @param {Model&lt;Sport&gt;} SportModel
+     */
     constructor( @InjectModel(Sport.name) private SportModel: Model&lt;Sport&gt;){}
 
+    /**
+     * Service used to get a specific sport
+     * @param {string} id
+     * @return {Model&lt;Sport&gt;}
+     */
     async getSport(id){
         try {
             const sport &#x3D; await this.SportModel.findById(id).orFail();
@@ -432,22 +466,33 @@ export class SportsService {
         }
     }
 
+    /**
+     * Service used to get all sports available in the database
+     * @return {Model&lt;Sport&gt;[]}
+     */
     async getSports(){
             const sport &#x3D; await this.SportModel.find({});
             return sport;
 
     }
 
+    /**
+     * Service used to add a sport
+     * @param {string} name
+     * @return {Model&lt;Sport&gt;}
+     */
     async addSport(name){
         const newSport &#x3D; await this.SportModel.create({name: name});
         newSport.save()
         return newSport
     }
 
+    /**
+     * Service used to delete a specific sport
+     * @param {string} id
+     * @return {}
+     */
     async delSport(sportId){
-        // del a sport in your mySports array.
-        // :sportId &#x3D; id extract to the API
-        // return JSON
         await this.SportModel.findByIdAndDelete(sportId);
         return {
             message: &quot;Deleted ok&quot;
