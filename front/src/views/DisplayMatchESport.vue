@@ -71,13 +71,15 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches?sort=-begin_at`, options);
+      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches`, options);
       const json = await datas.json();
       if (datas.ok) {
-        json.forEach((match)=>{
+        
+        await json.forEach((match)=>{
           if (match.id == this.matchId){
             this.datas = match;
           }
+
         })
         this.isLoading = false;
       } else {

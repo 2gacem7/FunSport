@@ -83,7 +83,6 @@ export default {
       console.log(matchId, this.type)
       if (this.type=='matches'){
         this.$router.push({name:'match', params:{matchId:matchId, apiname:this.apiName}})
-
       } else if (this.type == 'competitions'){
         this.$router.push({name:'competition', params:{competitionId:matchId, apiname: this.apiName}})
       }
@@ -110,7 +109,7 @@ export default {
         headers: myHeaders,
         redirect: "follow",
       };
-      await fetch(`https://api.pandascore.co/${this.apiName}/matches?search\[name\]=${this.searchValue}&sort=begin_at`, requestOptions)
+      await fetch(`https://api.pandascore.co/${this.apiName}/matches?search\[name\]=${this.searchValue}&sort=-begin_at`, requestOptions)
         .then((response) => response.json())
         .then((response) => (this.results = response))
         .catch((error) => console.log("error", error));
