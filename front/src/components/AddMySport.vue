@@ -1,5 +1,5 @@
 <template>
-  <div class="m-2 text-center">
+  <div class="text-center">
     <button v-if="!isInMySport() && $store.state.UserData.id !=''" class="btn btn-primary" @click="addToMySports">
       Add this sport
     </button>

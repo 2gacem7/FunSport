@@ -52,17 +52,4 @@
 </script>
 
 <style scoped>
-    .card {
-        color: black;
-    }
-
-    h3 {
-        font-family: counter-strike;
-        color: black;
-    }
-
-    h4 {
-        font-family: Arial, Helvetica, sans-serif;
-        color: black;
-    }
 </style>
