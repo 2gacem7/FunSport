@@ -16,7 +16,7 @@
             </button>
         </div>
 
-        <div>
+        <div> 
             <select v-model="id_tournament" v-on:click="getInfosRanking">
                 <option v-for="item in info" :key="item.id" v-bind:value="item.matches[0].tournament_id">
                     {{item.league.name}}

@@ -10,6 +10,7 @@ import ManageUsers from "../views/ManageUsers.vue";
 import LOL from "../views/LOL.vue";
 import CSGO from "../views/CSGO.vue";
 import DOTA2 from "../views/DOTA2.vue";
+import Football from "../views/Football.vue";
 
 Vue.use(VueRouter);
 
@@ -58,6 +59,11 @@ const routes = [
     path: "/dota2",
     name: "DOTA-2",
     component: DOTA2
+  },
+  {
+    path: "/football",
+    name: "FOOTBALL",
+    component: Football
   }
 ];
 
