@@ -64,6 +64,13 @@
             <code>src/schemas/sport.schema.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Schema used to collect all sports available in the application</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -137,10 +144,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/schemas/sport.schema.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/schemas/sport.schema.ts:14</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>name of the sport. </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -159,17 +172,25 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import { Document } from &#x27;mongoose&#x27;;
 
-@Schema()
 /**
- * This collection collects all sports available in the application
+ * Schema used to collect all sports available in the application
  */
+@Schema()
 export class Sport extends Document {
+
+  /**
+   * name of the sport. 
+   */
   @Prop()
   name: string;
 
 }
 
-export const SportSchema &#x3D; SchemaFactory.createForClass(Sport);</code></pre>
+/**
+ * SchemaFactory for the class &lt;Sport&gt;
+ */
+export const SportSchema &#x3D; SchemaFactory.createForClass(Sport);
+</code></pre>
     </div>
 </div>
 

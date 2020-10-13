@@ -4,6 +4,9 @@ import { MyFavoritesController } from './MyFavorites.controller';
 import { MyFavorite, MyFavoriteSchema } from '../schemas/myFavorite.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 
+/**
+ * Module for Model<MyFavorite>
+ */
 @Module({
   imports:[MongooseModule.forFeature([{ name: MyFavorite.name, schema: MyFavoriteSchema }])],
   providers: [MyFavoritesService],

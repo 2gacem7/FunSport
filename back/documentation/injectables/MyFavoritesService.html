@@ -60,6 +60,13 @@
             <code>src/MyFavorites/MyFavorites.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service used for managing the actions available in Model<MyFavorite></p>
+
+            </p>
 
 
 
@@ -111,12 +118,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor of MyFavoritesService</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -178,8 +187,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:37</a></div>
                 </td>
             </tr>
 
@@ -266,8 +275,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:48</a></div>
                 </td>
             </tr>
 
@@ -336,8 +345,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/MyFavorites/MyFavorites.service.ts:25</a></div>
                 </td>
             </tr>
 
@@ -399,9 +408,16 @@ import { MyFavorite } from &#x27;../schemas/myFavorite.schema&#x27;;
 import { CreateMyFavoriteDto } from &#x27;../dto/create-myFavorite.dto&#x27;;
 
 
+/**
+ * Service used for managing the actions available in Model&lt;MyFavorite&gt;
+ */
 
 @Injectable()
 export class MyFavoritesService {
+    /**
+     * Constructor of MyFavoritesService
+     * @param {Model&lt;MyFavorite&gt;} myFavoriteModel
+     */
     constructor( @InjectModel(MyFavorite.name) private myFavoriteModel: Model&lt;MyFavorite&gt;){}
 
     /**
@@ -418,7 +434,7 @@ export class MyFavoritesService {
      * Service used to add a favorite for the current user
      * @param {string} userId
      * @param {string} favoriteId
-     * @param {string[]}data
+     * @param {string[]} data
      * @return {Model&lt;MyFavorite&gt;}
      */
     async addMyFavorite(userId,favoriteId, data){
@@ -438,7 +454,8 @@ export class MyFavoritesService {
             message: &quot;Deleted&quot;
         };
     }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

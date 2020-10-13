@@ -22,8 +22,6 @@ export class PronosticsController {
     @InjectModel(Pronostic.name) private pronosticModel: Model<Pronostic>) { }
 
 
-  @UseGuards(JwtAuthGuard)
-  @Post()
    /**
   * Controller check if the matchId userId doesn't matchs in the pronostics:
   * - if match : update the matchId userId
@@ -33,6 +31,8 @@ export class PronosticsController {
   * @param {Body} createPronosticDto
   * @return {Pronostic}
   */
+  @UseGuards(JwtAuthGuard)
+  @Post()
   async create(@Request() req, @Body() createPronosticDto: CreatePronosticDto) {
     const user = req.user.id
     if (createPronosticDto.matchId && createPronosticDto.winnerId && createPronosticDto.type) {
