@@ -3,11 +3,9 @@
     <Navbar />
     <TabBar />
     <AddMySport />
+    <button class="btn btn-primary" @click="$router.go(-1)">Back</button>
     <div class="card-deck m-0 p-0">
-      <DisplayListTeam sport="CS-GO" apiName="csgo" />
-      <DisplayCalendar sport="CS-GO" apiName="csgo"/>
-      <DisplayLastResults sport="CS-GO" apiName="csgo" />
-      <DisplayLive sport="CS-GO" apiName="cs-go" :delButton="false" />
+      {{ datas}}
     </div>
   </div>
 </template>
@@ -29,12 +27,17 @@ export default {
   },
   props:{
     matchId: string,
-    sportId:string,
+    apiName:string,
   },
   data() {
-    return {};
+    return {
+        datas: [],
+        isLoading: true,
+    }
   },
-  mounted() {},
+  mounted() {
+    this.getDatas()
+  },
 
   methods: {
       async getDatas() {
@@ -47,22 +50,16 @@ export default {
           cache: "default",
         };
 
-        const datas = await fetch("https://api.pandascore.co/lives", options);
+
+        const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches/${this.matchId}`, options);
         const json = await datas.json();
         if (datas.ok) {
-          this.infos = [];
-          json.forEach((detail) => {
-            if (detail.event.game == this.apiName) {
-              this.infos.push(detail);
+          json.forEach(function(match){
+            if (match.id === this.matchId){
+              this.datas = match;
             }
-          });
+          })
           this.isLoading = false;
-          this.lastUpdate = Date.now();
-          if (this.setTimer == "") {
-            this.setTimer = setInterval(() => {
-              this.getInfos();
-            }, this.timer);
-          }
         } else {
           console.log("Down");
         }
