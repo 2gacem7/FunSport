@@ -8,6 +8,7 @@
       <DisplayCalendar sport="LOL" apiName="lol" />
       <DisplayLastResults sport="LOL" apiName="lol" />
       <DisplayLive sport="LOL" apiName="lol" :delButton="false" />
+      <DisplayRanking sport="LOL" apiName="lol" />
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@ import DisplayLive from "@/components/DisplayLive.vue";
 import DisplayLastResults from "@/components/DisplayLastResults.vue";
 import DisplayListTeam from "@/components/DisplayListTeam.vue";
 import DisplayCalendar from "@/components/DisplayCalendar.vue";
+import DisplayRanking from "@/components/DisplayRanking.vue";
 
 
 export default {
@@ -34,6 +36,7 @@ export default {
     DisplayLastResults,
     DisplayCalendar,
     DisplayListTeam,
+    DisplayRanking
   },
   data() {
     return {};

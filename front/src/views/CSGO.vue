@@ -4,18 +4,11 @@
     <TabBar />
     <AddMySport />
     <div class="card-deck m-0 p-0">
-<<<<<<< HEAD
-
-    <Listcsgo />
-    <CalendarCsgo />
-    <LastResultsCsgo />
-    <Live sport="CS-GO" apiName="cs-go" :delButton="false" />
-=======
       <DisplayListTeam sport="CS-GO" apiName="csgo" />
       <DisplayCalendar sport="CS-GO" apiName="csgo"/>
       <DisplayLastResults sport="CS-GO" apiName="csgo" />
       <DisplayLive sport="CS-GO" apiName="cs-go" :delButton="false" />
->>>>>>> a70541fdd32015e90af606b5ce8415de9cedc607
+      <DisplayRanking sport="CS-GO" apiName="csgo" />
     </div>
   </div>
 </template>
@@ -30,6 +23,7 @@ import DisplayListTeam from "@/components/DisplayListTeam.vue";
 import DisplayCalendar from "@/components/DisplayCalendar.vue";
 import DisplayLive from "@/components/DisplayLive.vue"
 import DisplayLastResults from "@/components/DisplayLastResults.vue";
+import DisplayRanking from "@/components/DisplayRanking.vue";
 
 
 export default {
@@ -41,7 +35,8 @@ export default {
     DisplayCalendar,
     DisplayLive,
     DisplayListTeam,
-    DisplayLastResults
+    DisplayLastResults,
+    DisplayRanking
   },
   data() {
     return {};
