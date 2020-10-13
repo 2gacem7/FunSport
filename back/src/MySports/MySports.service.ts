@@ -8,33 +8,34 @@ import { CreateMySportDto } from '../dto/create-mySport.dto';
 @Injectable()
 export class MySportsService {
     constructor( @InjectModel(MySport.name) private mySportModel: Model<MySport>){}
-
+    /**
+     * Service used to get all sports for a specific user
+     * @param {string} userId
+     * @return {Model<MySport>[]}
+     */
     async getMySports(userId){
-        // get all sports for a specific userId.
-        // Populate the data with the API TODO
-        // :userId
-        // return Model<MySport>
         const datas = await this.mySportModel.find({userId:userId}).exec();
-        // for(let i =0; i<datas.length;i++){
-            // TODO
-        // }
         return datas;
     }
 
+    /**
+     * Service used to add a sport in the user's favorite
+     * @param {string} userId
+     * @param {string} sportId
+     * @return {Model<MySport>}
+     */
     async addMySport(userId, sportId){
-        // add a sport in your mySports array.
-        // :userId
-        // :sportId = id extract to the API
-        // return Model<MySport>
         const newMySport = await this.mySportModel.create({userId:userId, sportId:sportId, data:[]});
         newMySport.save()
         return newMySport
     }
 
+    /**
+     * Service used to delete a sport in the user's favorite
+     * @param {string} sportId
+     * @return {}
+     */
     async delMySport(sportId){
-        // del a sport in your mySports array.
-        // :sportId = id extract to the API
-        // return JSON
         await this.mySportModel.findByIdAndDelete(sportId);
         return {
             message: "Deleted ok"
