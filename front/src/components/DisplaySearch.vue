@@ -1,7 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
     <div class="card-header text-dark justify-content-between">
-      <div>Search a match or competition</div>
+      <h3>Search a match or competition</h3>
     </div>
     <div class="">
       <select class="w-100" v-model="type" required name="formSelect" id="formSelect" @change="resetData">
@@ -18,7 +18,7 @@
       <div v-if="type=='matches' && results.length != 0">
         <div class="card m-2" v-for="match in results" :key=match.id>
 
-          <div class="card-header">Scheduled at:{{ match.scheduled_at}}
+          <div class="card-header">Scheduled at: {{ match.scheduled_at}}
           </div>
           <div class="card-body">
             <div v-for="(opponent, index) in match.opponents" :key="index">
