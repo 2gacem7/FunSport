@@ -40,8 +40,6 @@ export default {
   mounted() {
     this.matchId = this.$route.params.matchId
     this.apiName = this.$route.params.apiname
-    console.log(this.matchId)
-    console.log(this.apiName)
     this.getDatas()
     this.getPronostics()
   },
@@ -73,7 +71,7 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches`, options);
+      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches?sort=-begin_at`, options);
       const json = await datas.json();
       if (datas.ok) {
         json.forEach((match)=>{
