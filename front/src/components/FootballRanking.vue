@@ -18,9 +18,6 @@
                 + favori
             </button>
 
-           <div v-if=" favorite.data[0].type == 'tournament' && favorite.data[0].sport == 'football'" :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
-              v-on:delfavorite="delToMyFavorites"> BONJOUR </div> 
-
             <button v-if="delButton" class="btn btn-danger font-weight-bold mb-2" @click="delToMyFavorites">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
