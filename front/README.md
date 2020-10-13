@@ -1,4 +1,4 @@
-# FunSport - Back end
+# FunSport - Front end
 
 ## Description
 This application is the front of this projet. It's in Vuejs.
