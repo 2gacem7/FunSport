@@ -16,7 +16,7 @@
     </div>
     <div class="card-body text-dark overflow-auto p-1">
       <div v-if="type=='matches' && results.length != 0">
-        <div class="card m-2" v-for="match in results" :key=match.id>
+        <div  v-if="match.scheduled_at!= null" class="card m-2" v-for="match in results" :key=match.id>
 
           <div class="card-header">Scheduled at: {{ match.scheduled_at| moment("MMMM Do YYYY, h:mm:ss") }}
           </div>
@@ -49,7 +49,7 @@
           </div>
           <div class="card-body">
             Begin at:{{ competition.begin_at| moment("MMMM Do YYYY, h:mm:ss") }}<br>
-            End at : {{ competition.end_at| moment("MMMM Do YYYY, h:mm:ss") }}
+            End at : <span v-if="competition.end_at == null">Unknown</span><span v-else>{{ competition.end_at| moment("MMMM Do YYYY, h:mm:ss") }}</span>
           </div>
           <div class="card-footer">
             <button class="btn btn-success" @click="goViewMatch(competition.id)"> View</button>
@@ -80,11 +80,16 @@ export default {
 
   methods: {
     goViewMatch(matchId){
-      console.log(matchId, this.type)
+      let data
+      for (let key in this.results){
+        if (this.results[key].id === matchId){
+          data = this.results[key]
+        }
+      }
       if (this.type=='matches'){
-        this.$router.push({name:'match', params:{matchId:matchId, apiname:this.apiName}})
+        this.$router.push({name:'match', params:{matchId:matchId, apiname:this.apiName, datas:data}})
       } else if (this.type == 'competitions'){
-        this.$router.push({name:'competition', params:{competitionId:matchId, apiname: this.apiName}})
+        this.$router.push({name:'competition', params:{competitionId:matchId, apiname: this.apiName, datas:data}})
       }
     },
     resetData(){
@@ -109,7 +114,7 @@ export default {
         headers: myHeaders,
         redirect: "follow",
       };
-      this.results = await fetch(`https://api.pandascore.co/${this.apiName}/matches?search\[name\]=${this.searchValue}&sort=-begin_at`, requestOptions)
+      this.results = await fetch(`https://api.pandascore.co/${this.apiName}/matches?search\[name\]=${this.searchValue}&sort=-scheduled_at`, requestOptions)
         .then((response) => response.json())
         .catch((error) => console.log("error", error));
 

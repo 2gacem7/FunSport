@@ -5,9 +5,7 @@
     <AddMySport />
     <button class="btn btn-primary" @click="go">Back</button>
 
-    <div v-if="isLoading">Loading</div>
-    <div v-else class="card m-2 p-2">
-      {{ datas}}
+    <div class="card m-2 p-2">
       League: {{ datas.league.name}}
       <img
         :src="datas.league.image_url"
@@ -48,7 +46,7 @@
         {{ pronostics}}
       </div>
     </div>
-    <div v-if="datas.status=='not_start'" class="card m-2">
+    <div v-if="datas.status=='not_started'" class="card m-2">
       <h3>Do you want to pronostic this match?</h3>
       <select v-model="selectInput" >
         <option v-for="opponent in datas.opponents" :key="opponent.id">
@@ -94,7 +92,7 @@ export default {
   mounted() {
     this.matchId = this.$route.params.matchId
     this.apiName = this.$route.params.apiname
-    this.getDatas()
+    this.datas=this.$route.params.datas
     this.getPronostics()
   },
 
@@ -121,31 +119,6 @@ export default {
       console.log(datas)
       if (datas.ok) {
         this.pronostics = json;
-      } else {
-        console.log("Down");
-      }
-    },
-    async getDatas() {
-      const header = new Headers();
-      header.append("Authorization", ENV.API_PANDA_SPORT);
-      let options = {
-        method: "GET",
-        headers: header,
-        mode: "cors",
-        cache: "default",
-      };
-      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches`, options);
-      const json = await datas.json();
-      if (datas.ok) {
-
-        json.forEach((match)=>{
-          if (match.id == this.matchId){
-            console.log(match)
-            this.datas = match;
-            this.isLoading = false;
-          }
-
-        })
       } else {
         console.log("Down");
       }

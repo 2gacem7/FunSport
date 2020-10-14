@@ -1,5 +1,5 @@
 <template>
-  <div id="matchEsport">
+  <div id="competitionEsport">
     <Navbar />
     <TabBar />
     <AddMySport />
@@ -7,7 +7,6 @@
     <div class="card-deck m-0 p-0">
       {{ datas}}
     </div>
-    {{ pronostics}}
   </div>
 </template>
 
@@ -38,33 +37,10 @@ export default {
   mounted() {
     this.matchId = this.$route.params.matchId
     this.apiName = this.$route.params.apiname
-    this.getDatas()
+    this.datas = this.$route.params.datas
   },
 
   methods: {
-    async getDatas() {
-      const header = new Headers();
-      header.append("Authorization", ENV.API_PANDA_SPORT);
-      let options = {
-        method: "GET",
-        headers: header,
-        mode: "cors",
-        cache: "default",
-      };
-      const datas = await fetch(`https://api.pandascore.co/${this.apiName}/tournaments?sort=begin_at`, options);
-    
-      const json = await datas.json();
-      if (datas.ok) {
-        json.forEach(function(match){
-          if (match.id === this.matchId){
-            this.datas = match;
-          }
-        })
-        this.isLoading = false;
-      } else {
-        console.log("Down");
-      }
-    },
 
   }
 }
