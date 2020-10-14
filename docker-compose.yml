@@ -2,61 +2,43 @@ version: '3.1'
 
 services:
     www:
-        container_name: nginx
+        restart: always
         image: nginx:alpine
-        build:
-           context: .
-           dockerfile: Dockerfile
+        volumes:
+          - ./etc/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
         ports:
-          - "80:80"
+          - "8080:8080"
         depends_on:
           - back
           - front
 
     mongo:
-        container_name: mongo
-        image: mongo
         restart: always
+        image: mongo
         volumes:
-            - ./bdd/:/data/db
+          - /home/yobar/FunSport-bdd/:/data/db:rw
         ports:
         - 27017:27017
 
     mongo-express:
+        restart: always
         container_name: mongo-express
         image: mongo-express
-        restart: always
         ports:
         - 8090:8081
-        depends_on: 
+        depends_on:
           - mongo
 
     back:
-        container_name: back
-        build:
-          args:
-            user: daegon
-            uid: 1000
-          context: ./back
-          dockerfile: Dockerfile
         restart: always
-        volumes:
-        - './back/:/usr/src/app'  
+        build:
+          context: ./back
         ports:
         - 3000:3000
-        depends_on: 
+        depends_on:
           - mongo
 
     front:
-        container_name: front
-        build:
-            args:
-                user: daegon
-                uid: 1000
-            context: ./front
-            dockerfile: Dockerfile
         restart: always
-        volumes:
-        - './front/:/usr/src/app'
-        depends_on: 
-            - back
+        build:
+            context: ./front

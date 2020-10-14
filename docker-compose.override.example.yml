@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+    back:
+        user: 1000:1000
+        volumes:
+          - ./back:/usr/src/back:rw
+
+    front:
+        image: node
+        user: 1000:1000
+        working_dir: /app
+        volumes:
+            - ./front:/app
+        environment:
+            NODE_ENV: development
+        command: "npm run serve"
