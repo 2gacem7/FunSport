@@ -84,7 +84,7 @@
                     id: this.$store.state.tabSelected.id,
                     data: {
                         sport: "football",
-                        type: "tournament",
+                        type: "calendar",
                         id_tournament: this.id_tournament,
                     },
                 });
@@ -105,7 +105,7 @@
                     .then(response => response.json())
                     .then(result => this.info = result)
                     .catch(error => console.log('error', error));
-                console.log(this.info)
+             
             },
 
             return_Link_Home(item) {
