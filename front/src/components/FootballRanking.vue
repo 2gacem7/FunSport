@@ -18,7 +18,7 @@
                 + favori
             </button>
 
-            <button v-if="delButton" class="btn btn-danger font-weight-bold mb-2" @click="delToMyFavorites">
+             <button v-if="delButton" class="btn btn-danger font-weight-bold mb-2" @click="delToMyFavorites">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -44,8 +44,8 @@
                             {{item.overall_league_position}}
                         </td>
                         <td class="text-center">
-                            {{item.team_name}}
-                            <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" />
+                            <p>{{item.team_name}}</p>
+                            <p><img :src="return_Link(item)" style="max-width: 5rem"/></p>
                         </td>
                         <td class="text-center">
                             {{item.overall_league_PTS}}
