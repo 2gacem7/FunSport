@@ -17,8 +17,6 @@ services:
         image: mongo
         volumes:
           - /home/yobar/FunSport-bdd/:/data/db:rw
-        ports:
-        - 27017:27017
 
     mongo-express:
         restart: always
@@ -32,8 +30,6 @@ services:
         restart: always
         build:
           context: ./back
-        ports:
-        - 3000:3000
         depends_on:
           - mongo
 
