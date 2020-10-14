@@ -35,9 +35,12 @@ export class PronosticsController {
   @Post()
   async create(@Request() req, @Body() createPronosticDto: CreatePronosticDto) {
     const user = req.user.id
+    console.log(createPronosticDto)
     if (createPronosticDto.matchId && createPronosticDto.winnerId && createPronosticDto.type) {
-      const matchesUserIdMatchId = await this.pronosticModel.find({ userId: user, matchId: createPronosticDto.matchId });
-      if (matchesUserIdMatchId.length != 0) {
+      const matchesUserIdMatchId = await this.pronosticModel.find({ userId: user, matchId: createPronosticDto.matchId, type:createPronosticDto.type });
+      console.log(matchesUserIdMatchId)
+      if (matchesUserIdMatchId.length !=0) {
+        console.log('ici')
         return await this.pronosticsService.updateOne(user, createPronosticDto);
       } else {
         return await this.pronosticsService.create(user, createPronosticDto);
@@ -45,7 +48,7 @@ export class PronosticsController {
     } else {
       throw new HttpException({
         error: 404,
-        message: "userId, matchId, winnerId and type are mandatory. Only commentary is optional"
+        message: "matchId, winnerId and type are mandatory. Only commentary is optional"
       }, HttpStatus.BAD_REQUEST)
     }
   }
