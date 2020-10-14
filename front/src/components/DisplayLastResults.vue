@@ -28,8 +28,8 @@
         <tbody v-for="item in info" :key="item.id">
           <tr>
             <td class="text-center">
-              <p :src="return_Date(item)">{{ item.begin_at }}</p>
-              <p>{{ item.end_at }}</p>
+              <p>Start:</p> <span v-if="item.begin_at== null">Unknown</span><span v-else> {{ item.begin_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span>
+              <p>End:</p> <span v-if="item.end_at== null">Unknown</span><span v-else> {{ item.end_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span> </p>
             </td>
             <td class="text-center">
               {{ item.league.name }}

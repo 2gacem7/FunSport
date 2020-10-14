@@ -109,9 +109,8 @@ export default {
         headers: myHeaders,
         redirect: "follow",
       };
-      await fetch(`https://api.pandascore.co/${this.apiName}/matches?search\[name\]=${this.searchValue}&sort=-begin_at`, requestOptions)
+      this.results = await fetch(`https://api.pandascore.co/${this.apiName}/matches?search\[name\]=${this.searchValue}&sort=-begin_at`, requestOptions)
         .then((response) => response.json())
-        .then((response) => (this.results = response))
         .catch((error) => console.log("error", error));
 
     },
@@ -127,9 +126,8 @@ export default {
         headers: myHeaders,
         redirect: "follow",
       };
-      await fetch(`https://api.pandascore.co/${this.apiName}/tournaments?search[slug]=${this.searchValue}&sort=-begin_at`, requestOptions)
+      this.results= await fetch(`https://api.pandascore.co/${this.apiName}/tournaments?search[slug]=${this.searchValue}&sort=-begin_at`, requestOptions)
         .then((response) => response.json())
-        .then((response) => (this.results = response))
         .catch((error) => console.log("error", error));
 
     }

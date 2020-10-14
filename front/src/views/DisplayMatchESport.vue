@@ -4,8 +4,41 @@
     <TabBar />
     <AddMySport />
     <button class="btn btn-primary" @click="go">Back</button>
-    <div class="card m-2">
+
+    <div v-if="isLoading">Loading</div>
+    <div v-else class="card m-2 p-2">
       {{ datas}}
+      League: {{ datas.league.name}}
+      <img
+        :src="datas.league.image_url"
+        alt="No image league"
+        height="50"
+        width="100"
+      />
+      Begin at: <br>
+      Status: {{ datas.status}}<br>
+      <div v-if="datas.status=='canceled'">Forfeit: {{datas.forfeit}}</div>
+      <div class="text-center">
+        <span class="" v-for="(opponent,index) in datas.opponents" :key="opponent.id">
+          {{ opponent.opponent.name}}
+          <img
+            :src="opponent.opponent.image_url"
+            alt="No image Team"
+            height="50"
+            width="100"
+          />
+          <span v-if="index%2==0"> VS </span>
+
+        </span>
+      </div>
+      Number of game: {{ datas.number_of_games}}<br>
+      <div class="card m-2 p-2" v-for="(game,index) in datas.games" :key=index>
+        Game n° {{index+1}}<br>
+        Begin at: {{game.begin_at}}<br>
+        Status: {{ game.status}}
+        Winner: {{ game.winner}}
+
+      </div>
     </div>
     <div class="card m-2">
       <div v-if="pronostics.length == 0">
@@ -15,16 +48,11 @@
         {{ pronostics}}
       </div>
     </div>
-    <div class="card m-2">
+    <div v-if="datas.status=='not_start'" class="card m-2">
       <h3>Do you want to pronostic this match?</h3>
       <select v-model="selectInput" >
         <option v-for="opponent in datas.opponents" :key="opponent.id">
           {{opponent.opponent.name}}
-          <img
-            :src="opponent.opponent.image_url"
-            alt="No image Team"
-            height="50"
-          />
         </option>
       </select>
       <h3> your commentary (optional)</h3>
@@ -110,13 +138,14 @@ export default {
       const json = await datas.json();
       if (datas.ok) {
 
-        await json.forEach((match)=>{
+        json.forEach((match)=>{
           if (match.id == this.matchId){
+            console.log(match)
             this.datas = match;
+            this.isLoading = false;
           }
 
         })
-        this.isLoading = false;
       } else {
         console.log("Down");
       }
