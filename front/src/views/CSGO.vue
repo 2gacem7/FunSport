@@ -87,43 +87,45 @@
     background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
   }
 
-  #csgo .card-header button{
+  #csgo .card-header button {
 
-  background: #2CF956;
-   background-image: -webkit-linear-gradient(top, #2CF956, #06D530);
-   background-image: -moz-linear-gradient(top, #2CF956, #06D530);
-   background-image: -ms-linear-gradient(top, #2CF956, #06D530);
-   background-image: -o-linear-gradient(top, #2CF956, #06D530);
-   background-image: -webkit-gradient(to bottom, #2CF956, #06D530);
-   -webkit-border-radius: 20px;
-   -moz-border-radius: 20px;
-   border-radius: 20px;
-   color: #FFFFFF;
-   font-family: Verdana;
-   font-size: 11px;
-   padding: 11px;
-   -webkit-box-shadow: 1px 1px 20px 0 #24C691;
-   -moz-box-shadow: 1px 1px 20px 0 #24C691;
-   box-shadow: 1px 1px 20px 0 #24C691;
-   text-shadow: 1px 1px 20px #FFFFFF;
-   border: solid #FFFFFF 1px;
-   text-decoration: none;
-   display: inline-block;
-   cursor: pointer;
-   text-align: center;
+    background: #2CF956;
+    background-image: -webkit-linear-gradient(top, #2CF956, #06D530);
+    background-image: -moz-linear-gradient(top, #2CF956, #06D530);
+    background-image: -ms-linear-gradient(top, #2CF956, #06D530);
+    background-image: -o-linear-gradient(top, #2CF956, #06D530);
+    background-image: -webkit-gradient(to bottom, #2CF956, #06D530);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color: #000000;
+    font-family: Verdana;
+    font-size: 11px;
+    padding: 11px;
+    -webkit-box-shadow: 1px 1px 20px 0 #24C691;
+    -moz-box-shadow: 1px 1px 20px 0 #24C691;
+    box-shadow: 1px 1px 20px 0 #24C691;
+    text-shadow: 1px 1px 20px #FFFFFF;
+    border: solid #FFFFFF 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
   }
-  #csgo .card-header button:hover{
-  border: solid #FFFFFF 1px;
-   background: #06D530;
-   background-image: -webkit-linear-gradient(top, #06D530, #2CF956);
-   background-image: -moz-linear-gradient(top, #06D530, #2CF956);
-   background-image: -ms-linear-gradient(top, #06D530, #2CF956);
-   background-image: -o-linear-gradient(top, #06D530, #2CF956);
-   background-image: -webkit-gradient(to bottom, #06D530, #2CF956);
-   -webkit-border-radius: 20px;
-   -moz-border-radius: 20px;
-   border-radius: 20px;
-   text-decoration: none;
+
+  #csgo .card-header button:hover {
+    border: solid #FFFFFF 1px;
+    background: #06D530;
+    color: #ffffff;
+    background-image: -webkit-linear-gradient(top, #06D530, #2CF956);
+    background-image: -moz-linear-gradient(top, #06D530, #2CF956);
+    background-image: -ms-linear-gradient(top, #06D530, #2CF956);
+    background-image: -o-linear-gradient(top, #06D530, #2CF956);
+    background-image: -webkit-gradient(to bottom, #06D530, #2CF956);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-decoration: none;
   }
 
   #csgo .card-body {
