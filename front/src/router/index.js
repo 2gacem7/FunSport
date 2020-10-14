@@ -49,7 +49,7 @@ const routes = [
   },
   {
     path: "/csgo",
-    name: "CS-GO",
+    name: "CSGO",
     component: CSGO
   },
   {
@@ -59,7 +59,7 @@ const routes = [
   },
   {
     path: "/dota2",
-    name: "DOTA-2",
+    name: "DOTA2",
     component: DOTA2
   },
   {
@@ -68,12 +68,12 @@ const routes = [
     component: Football
   },
   {
-    path: "/match/:apiname/:matchId",
+    path: "/:apiname/match/:matchId",
     name: "match",
     component: DisplayMatchESport
   },
   {
-    path: "/competition/:apiname/:competitionId",
+    path: "/:apiname/competition/:competitionId",
     name: "competition",
     component: DisplayCompetitionESport
   }

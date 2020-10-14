@@ -3,7 +3,7 @@
     <Navbar />
     <TabBar />
     <AddMySport />
-    <button class="btn btn-primary" @click="$router.go(-1)">Back</button>
+    <button class="btn btn-primary" @click="go">Back</button>
     <div class="card-deck m-0 p-0">
       {{ datas}}
     </div>
@@ -45,6 +45,9 @@ export default {
   },
 
   methods: {
+    go() {
+      this.$router.push({name:this.$store.state.tabSelected.name});
+    },
     async getPronostics() {
       const header = new Headers();
       header.append("Authorization", this.$store.state.access_token);
