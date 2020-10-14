@@ -110,4 +110,8 @@ a:link {
 .navbar {
   background-color: whitesmoke !important;
 }
+
+.nav-tabs{
+  border-bottom: 1px solid black !important;
+}
 </style>

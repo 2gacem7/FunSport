@@ -5,7 +5,7 @@
     <AddMySport />
     <div class="card-deck m-0 p-0">
       <FootballRanking />
-      <FootballCalendar />>
+      <FootballCalendar />
       
     </div>
   </div>

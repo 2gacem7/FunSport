@@ -130,11 +130,9 @@ export default {
 <style>
 .CalendarTable {
   background-color: white;
-  color: black;
 }
 
 thead {
-  font-family: counter-strike;
   font-size: 25px;
 }
 </style>

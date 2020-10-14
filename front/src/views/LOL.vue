@@ -65,13 +65,13 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .content {
   padding-top: 70px;
   padding-left: 220px;
 }
 
-body {
+body  {
   background-color: rgb(29, 28, 28);
   color: white;
 }

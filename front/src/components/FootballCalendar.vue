@@ -1,12 +1,12 @@
 <template>
     <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
         <div class="card-header d-flex justify-content-between">
-            
-            <h3 class="text-dark text-center">{{ sport }} Ranking </h3>
-            
+
+            <h3 class="text-dark text-center">{{ sport }} Calendar </h3>
+
         </div>
 
-        <div> 
+        <div>
             <select v-model="id_tournament" v-on:click="getInfos">
                 <option value="148">Premier League</option>
                 <option value="468">Liga</option>
@@ -28,33 +28,27 @@
                 </svg>
             </button>
         </div>
+        <h3 class="card-header text-center text-dark">Match</h3>
+        <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
+            
+            <div v-for="item in info" :key="item.id">
+                <p class="text-center font-weight-bold">{{item.match_round}}</p>
+                <div class="row d-flex justify-content-center">
+                    <div>
+                        <p class="font-weight-bold text-center">{{item.match_hometeam_name}}</p>
+                        <p  :src="return_Score(item)" class="font-weight-bold text-center"><img :src="return_Link_Home(item)" style="max-width: 4rem" />
+                            {{item.match_hometeam_score}}</p>
+                    </div>
 
-        <div class="card-body m-0 p-0 w-100 overflow-auto">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="h5 font-weight-bold text-center">Rank</th>
-                        <th class="h5 font-weight-bold text-center">Teams</th>
-                        <th class="h5 font-weight-bold text-center">Points</th>
-                    </tr>
-                </thead>
-                <tbody v-for="item in info" :key="item.id">
-                    <tr>
-                        <td class="text-center">
-                            {{item.overall_league_position}}
-                        </td>
-                        <td class="text-center">
-                            {{item.team_name}}
-                            <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" />
-                        </td>
-                        <td class="text-center">
-                            {{item.overall_league_PTS}}
+                    <div class="ml-5">
+                        <p class="font-weight-bold text-center">{{item.match_awayteam_name}}</p>
+                        <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img :src="return_Link_Away(item)" style="max-width: 4rem" />
+                        </p>
+                    </div>
 
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
+                </div>
+                <p class="text-center mt-3 mb-5">{{item.match_date}} at {{item.match_time}}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -104,17 +98,34 @@
                     method: 'GET',
                     redirect: 'follow'
                 };
-
-                await fetch("https://apiv2.apifootball.com/?action=get_standings&league_id="+this.id_tournament+"&APIkey=" + ENV.API_FOOTBALL,
+                await fetch(
+                        "https://apiv2.apifootball.com/?action=get_events&from=2020-08-01&to=2021-06-30&league_id=" +
+                        this.id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
                         requestOptions)
                     .then(response => response.json())
-                    .then(result => this.info=result)
-                    .catch(error => console.log('error', error));     
+                    .then(result => this.info = result)
+                    .catch(error => console.log('error', error));
+                console.log(this.info)
             },
 
-            return_Link(item) {
-                return item.team_badge;
+            return_Link_Home(item) {
+                return item.team_home_badge;
             },
+
+            return_Link_Away(item) {
+                return item.team_away_badge;
+            },
+
+              return_Score(item) {
+      if (item.match_hometeam_score == "") {
+        item.match_hometeam_score = "-";
+      }
+
+      if (item.match_awayteam_score == "") {
+        item.match_awayteam_score = "-";
+      }
+    },
+
         },
     };
 </script>
