@@ -14,7 +14,7 @@
           width="100"
         />
       </span>
-      Begin at: <br>
+      Begin at: {{ datas.begin_at| moment("MMMM Do YYYY, h:mm:ss") }} <br>
       Status: {{ datas.status}}<br>
       <div v-if="datas.status=='canceled'">Forfeit: {{datas.forfeit}}</div>
       <div class="text-center">
@@ -33,12 +33,11 @@
       Number of game: {{ datas.number_of_games}}<br>
       <div class="card m-2 p-2" v-for="(game,index) in datas.games" :key=index>
         Game n° {{index+1}}<br>
-        Begin at: {{game.begin_at}}<br>
+        Begin at:<span v-if="game.begin_at ==null"> Unknown </span> <span v-else>{{game.begin_at| moment("MMMM Do YYYY, h:mm:ss") }}</span><br>
         Status: {{ game.status}}
         <div v-for="op in datas.opponents" :key="op.id">
           <div v-if="op.opponent.id != null && datas.winner != null && op.opponent.id == datas.winner.id">
             Winner: {{ op.opponent.name}}
-
           </div>
         </div>
       </div>

@@ -114,7 +114,7 @@ export default {
         headers: myHeaders,
         redirect: "follow",
       };
-      this.results = await fetch(`https://api.pandascore.co/${this.apiName}/matches?search\[name\]=${this.searchValue}&sort=-scheduled_at`, requestOptions)
+      this.results = await fetch(`https://api.pandascore.co/${this.apiName}/matches?search[name]=${this.searchValue}&sort=-scheduled_at`, requestOptions)
         .then((response) => response.json())
         .catch((error) => console.log("error", error));
 
