@@ -16,7 +16,7 @@
     </div>
     <div class="card-body text-dark overflow-auto p-1">
       <div v-if="type=='matches' && results.length != 0">
-        <div  v-if="match.scheduled_at!= null" class="card m-2" v-for="match in results" :key=match.id>
+        <div  v-if="match.scheduled_at!= null && match.opponents[1]" class="card m-2" v-for="match in results" :key=match.id>
 
           <div class="card-header">Scheduled at: {{ match.scheduled_at| moment("MMMM Do YYYY, h:mm:ss") }}
           </div>
