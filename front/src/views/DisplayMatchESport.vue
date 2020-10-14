@@ -6,13 +6,14 @@
     <button class="btn btn-primary" @click="go">Back</button>
 
     <div class="card m-2 p-2">
-      League: {{ datas.league.name}}
+      <span v-if="datas.league"> League: {{ datas.league.name}}
       <img
         :src="datas.league.image_url"
         alt="No image league"
         height="50"
         width="100"
       />
+    </span>
       Begin at: <br>
       Status: {{ datas.status}}<br>
       <div v-if="datas.status=='canceled'">Forfeit: {{datas.forfeit}}</div>
@@ -38,17 +39,37 @@
 
       </div>
     </div>
+    <div class="card m-2 text-center">
+      <h3>Actual pronostic</h3>
+      <span class="" v-for="(opponent,index) in datas.opponents" :key="opponent.id">
+        {{ opponent.opponent.name}}
+        <img
+          :src="opponent.opponent.image_url"
+          alt="No image Team"
+          height="50"
+          width="100"
+        />
+        <span v-if="resultPronostic[index] && resultPronostic[index].count"> {{ Math.round(resultPronostic[index].count/totalPronostic * 100)}} %</span>
+        <span v-else> No pronostic again</span><br>
+        <span v-if="index%2==0"> VS </span>
+
+      </span>
+    </div>
+
     <div class="card m-2">
+      <h3>Commentaries</h3>
       <div v-if="pronostics.length == 0">
         No pronostic available for this match
       </div>
       <div v-else>
-        {{ pronostics}}
+        <div v-for="(pronostic,index) in pronostics" :key="pronostic.id">
+          Commentary n°{{index+1}} / {{ pronostic.commentary}}
+        </div>
       </div>
     </div>
     <div v-if="datas.status=='not_started'" class="card m-2">
       <h3>Do you want to pronostic this match?</h3>
-      <select v-model="selectInput" >
+      <select v-model="winnerInput" >
         <option v-for="opponent in datas.opponents" :key="opponent.id">
           {{opponent.opponent.name}}
         </option>
@@ -86,7 +107,9 @@ export default {
       pronostics:[],
       isLoading: true,
       commentaryInput:"",
-      selectInput:"",
+      winnerInput:"",
+      resultPronostic:[],
+      totalPronostic:0,
     }
   },
   mounted() {
@@ -100,8 +123,41 @@ export default {
     go() {
       this.$router.push({name:this.$store.state.tabSelected.name});
     },
-    sendPronostic(){
-      console.log('Send pronostic')
+    getResumePronostic(){
+      this.resultPronostic.push({team:this.datas.opponents[0].opponent, count:0})
+      this.resultPronostic.push({team:this.datas.opponents[1].opponent, count:0})
+      const result = this.resultPronostic
+      let totalPronostic = 0
+      this.pronostics.forEach(function(prono){
+        for(let i=0; i < result.length; i++){
+          if (result[i].team.name == prono.winnerId ){
+            result[i].count =result[i].count+1
+            totalPronostic ++
+          }
+        }
+      })
+      this.totalPronostic = totalPronostic
+
+    },
+    async sendPronostic(){
+      this.$store.commit('setAccessToken')
+
+      const header = new Headers();
+      header.append("Authorization", 'Bearer '+this.$store.state.access_token);
+      header.append("Content-type", 'application/json');
+
+      const body = new FormData()
+      let options = {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify({
+          matchId:this.matchId,
+          commentary: this.commentaryInput,
+          'winnerId': this.winnerInput,
+          'type': this.apiName})
+      }
+      await fetch(`http://localhost:3000/pronostics`, options)
+        .then(this.getPronostics())
     },
     async getPronostics() {
       this.$store.commit('setAccessToken')
@@ -116,9 +172,9 @@ export default {
       };
       const datas = await fetch(`http://localhost:3000/pronostics/${this.matchId}`, options);
       const json = await datas.json();
-      console.log(datas)
       if (datas.ok) {
         this.pronostics = json;
+        this.getResumePronostic()
       } else {
         console.log("Down");
       }
