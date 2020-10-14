@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "styleguide": "vue-cli-service styleguidist",
+    "styleguide:build": "vue-cli-service styleguidist:build"
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.16",
@@ -25,6 +27,7 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "vue-cli-plugin-styleguidist": "~4.33.0",
     "vue-styleguidist": "^4.33.0",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^5.1.0"
