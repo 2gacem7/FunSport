@@ -4,11 +4,14 @@
       <button v-if="!delButton" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
         + favori
       </button>
-      <h3 class="text-dark text-center">{{ sport }} Team</h3>
+      <h3 class="text-center">{{ sport }} Team</h3>
       <button v-if="delButton" class="btn btn-danger font-weight-bold mb-2" @click="delToMyFavorites">
-        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+          <path fill-rule="evenodd"
+            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
         </svg>
       </button>
     </div>
@@ -22,31 +25,42 @@
         </thead>
       </table>
       <table class="table">
-        <tbody class="card m-0 p-0 overflow-auto" style="max-height: 20rem">
+        <tbody class="card m-0 p-0 overflow-auto cardInside" style="max-height: 20rem">
           <tr v-for="item in info" :key="item.id" class="w-100">
             <td>
-              <button class="btn btn-success btn-sm rounded-circle mb-2"
-                      @click="addTeamToMyFavorite(item)">Add</button>
+              <button v-if="item.button" class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
+                @click="addTeamToMyFavorite(item)">ADD</button>
+              <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>ADD</button>
             </td>
             <td style="width: 100%">
               {{item.name}}
             </td>
             <td>{{item.location}}</td>
           </tr>
+          <tr v-if="info.length==0"> No more teams </tr>
         </tbody>
+        <tfoot>
+          <p>
+            <button v-if="page>1" @click="prev()">prev</button>
+            <button v-if="info.length>0" @click="next()">next</button>
+          </p>
+        </tfoot>
       </table>
     </div>
   </div>
+
 </template>
 
 <script>
   import ENV from "../../env.config";
+
   export default {
     name: "DisplayListTeam",
 
     data() {
       return {
-        info: {},
+        info: [],
+        page: 1,
       };
     },
     props: {
@@ -58,7 +72,11 @@
     beforeMount() {
       this.getInfos();
     },
-
+    computed: {
+      myFavorites: function () {
+        return this.$store.state.MyFavorites;
+      },
+    },
     methods: {
       addTeamToMyFavorite(item) {
         const teamSlug = item.slug;
@@ -70,8 +88,19 @@
             name: teamSlug
           },
         });
-
+        this.getInfos();
       },
+      async next() {
+        this.page++;
+        this.getInfos();
+      },
+      async prev() {
+        if (this.page > 1) {
+          this.page--;
+          this.getInfos();
+        }
+      },
+
       delToMyFavorites() {
         this.$emit("delfavorite", this.id);
       },
@@ -87,17 +116,33 @@
         });
       },
       async getInfos() {
+        let response = [];
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
-
         var requestOptions = {
           method: 'GET',
           headers: myHeaders,
           redirect: 'follow'
         };
-        await fetch(`https://api.pandascore.co/${this.apiName}/teams?sort=name&per_page=100`, requestOptions)
+        await this.$store.dispatch('getMyFavorites')
+        await fetch(`https://api.pandascore.co/${this.apiName}/teams?sort=name&per_page=10&page[number]=${this.page}`,
+            requestOptions)
           .then(response => response.json())
-          .then(result => this.info = result)
+          .then(result => response = result)
+          .then(update => {
+            for (let i = 0; i < response.length; i++) {
+              let check = false;
+              for (let j = 0; j < this.myFavorites.length; j++) {
+                if (response[i].slug === this.$store.state.MyFavorites[j].data[0].name) {
+                  check = true;
+                }
+              }
+              if (check) {
+                response[i].button = false;
+              } else response[i].button = true;
+            }
+            this.info = response
+          })
           .catch(error => console.log('error', error));
       },
     }
@@ -105,23 +150,55 @@
 </script>
 
 <style scoped>
-tbody {
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
-}
+  tbody {
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
   thead {
-    font-family: counter-strike;
     font-size: 25px;
   }
 
-  th {
-    font-family: counter-strike;
-    color: black;
+  .cardInside {
+    box-shadow: none !important;
   }
 
-  h3 {
-    font-family: counter-strike;
-    color: black;
+  .btnADD {
+    background: #2CF956;
+    background-image: -webkit-linear-gradient(top, #2CF956, #06D530);
+    background-image: -moz-linear-gradient(top, #2CF956, #06D530);
+    background-image: -ms-linear-gradient(top, #2CF956, #06D530);
+    background-image: -o-linear-gradient(top, #2CF956, #06D530);
+    background-image: -webkit-gradient(to bottom, #2CF956, #06D530);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color: #000000;
+    font-family: Verdana;
+    font-size: 11px;
+    padding: 11px;
+    -webkit-box-shadow: 1px 1px 20px 0 #24C691;
+    -moz-box-shadow: 1px 1px 20px 0 #24C691;
+    box-shadow: 1px 1px 20px 0 #24C691;
+    text-shadow: 1px 1px 20px #FFFFFF;
+    border: solid #FFFFFF 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .btnADD:hover {
+    border: solid #FFFFFF 1px;
+    background: #06D530;
+    color: #ffffff;
+    background-image: -webkit-linear-gradient(top, #06D530, #2CF956);
+    background-image: -moz-linear-gradient(top, #06D530, #2CF956);
+    background-image: -ms-linear-gradient(top, #06D530, #2CF956);
+    background-image: -o-linear-gradient(top, #06D530, #2CF956);
+    background-image: -webkit-gradient(to bottom, #06D530, #2CF956);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-decoration: none;
   }
 </style>
