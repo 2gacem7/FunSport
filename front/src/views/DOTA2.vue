@@ -7,6 +7,8 @@
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
       <DisplayLive sport="DOTA-2" apiName="dota2" :delButton="false" />
+      <DisplaySearch apiName="dota2" />
+      <DisplayRanking sport="DOTA-2" apiName="dota2" />
       <DisplayListTeam sport="DOTA-2" apiName="dota2" />
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
@@ -27,7 +29,9 @@
   import DisplayCalendar from "@/components/DisplayCalendar.vue";
   import DisplayLive from "@/components/DisplayLive.vue"
   import DisplayLastResults from "@/components/DisplayLastResults.vue";
+  import DisplayRanking from "@/components/DisplayRanking.vue";
 
+  import DisplaySearch from "@/components/DisplaySearch.vue";
 
   export default {
     name: "DOTA2",
@@ -38,7 +42,9 @@
       DisplayCalendar,
       DisplayLive,
       DisplayListTeam,
-      DisplayLastResults
+      DisplayLastResults,
+      DisplayRanking,
+      DisplaySearch
     },
     data() {
       return {};
