@@ -1,13 +1,37 @@
 <template>
-  <div id="matchEsport">
+  <div id="matchEsport" class="text-dark">
     <Navbar />
     <TabBar />
     <AddMySport />
     <button class="btn btn-primary" @click="go">Back</button>
-    <div class="card-deck m-0 p-0">
+    <div class="card m-2">
       {{ datas}}
     </div>
-    {{ pronostics}}
+    <div class="card m-2">
+      <div v-if="pronostics.length == 0">
+        No pronostic available for this match
+      </div>
+      <div v-else>
+        {{ pronostics}}
+      </div>
+    </div>
+    <div class="card m-2">
+      <h3>Do you want to pronostic this match?</h3>
+      <select v-model="selectInput" >
+        <option v-for="opponent in datas.opponents" :key="opponent.id">
+          {{opponent.opponent.name}}
+          <img
+            :src="opponent.opponent.image_url"
+            alt="No image Team"
+            height="50"
+          />
+        </option>
+      </select>
+      <h3> your commentary (optional)</h3>
+      <input v-model="commentaryInput"/>
+      <button class="btn btn-primary m-2 card-footer " @click="sendPronostic" >Send pronostic </button>
+    </div>
+
   </div>
 </template>
 
@@ -35,6 +59,8 @@ export default {
       datas: [],
       pronostics:[],
       isLoading: true,
+      commentaryInput:"",
+      selectInput:"",
     }
   },
   mounted() {
@@ -48,17 +74,23 @@ export default {
     go() {
       this.$router.push({name:this.$store.state.tabSelected.name});
     },
+    sendPronostic(){
+      console.log('Send pronostic')
+    },
     async getPronostics() {
+      this.$store.commit('setAccessToken')
+
       const header = new Headers();
-      header.append("Authorization", this.$store.state.access_token);
+      header.append("Authorization", 'Bearer '+this.$store.state.access_token);
       let options = {
         method: "GET",
         headers: header,
-        mode: "cors",
-        cache: "default",
+        /* mode: "cors", */
+        /* cache: "default", */
       };
       const datas = await fetch(`http://localhost:3000/pronostics/${this.matchId}`, options);
       const json = await datas.json();
+      console.log(datas)
       if (datas.ok) {
         this.pronostics = json;
       } else {
@@ -77,7 +109,7 @@ export default {
       const datas = await fetch(`https://api.pandascore.co/${this.apiName}/matches`, options);
       const json = await datas.json();
       if (datas.ok) {
-        
+
         await json.forEach((match)=>{
           if (match.id == this.matchId){
             this.datas = match;
@@ -93,7 +125,7 @@ export default {
   }
 }
 </script>
-<style>
+<style d>
 .content {
   padding-top: 70px;
   padding-left: 220px;
@@ -101,7 +133,7 @@ export default {
 
 body {
   background-color: rgb(29, 28, 28);
-  color: white;
+  color: black;
 }
 
 .update {
@@ -110,7 +142,7 @@ body {
 
 h4 {
   font-family: "counter-strike";
-  color: white;
+  color: black;
 }
 .card-deck{
   font-family: "counter-strike";
