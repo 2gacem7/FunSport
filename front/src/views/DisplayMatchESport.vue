@@ -190,21 +190,5 @@ export default {
   padding-left: 220px;
 }
 
-body {
-  background-color: rgb(29, 28, 28);
-  color: black;
-}
-
-.update {
-  font-size: 0.75rem !important;
-}
-
-h4 {
-  font-family: "counter-strike";
-  color: black;
-}
-.card-deck{
-  font-family: "counter-strike";
-}
 </style>
 

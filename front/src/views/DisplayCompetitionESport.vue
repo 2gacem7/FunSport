@@ -50,22 +50,5 @@ export default {
   padding-top: 70px;
   padding-left: 220px;
 }
-
-body {
-  background-color: rgb(29, 28, 28);
-  color: white;
-}
-
-.update {
-  font-size: 0.75rem !important;
-}
-
-h4 {
-  font-family: "counter-strike";
-  color: white;
-}
-.card-deck{
-  font-family: "counter-strike";
-}
 </style>
 
