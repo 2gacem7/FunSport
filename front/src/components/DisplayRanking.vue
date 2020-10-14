@@ -112,17 +112,7 @@
                 return item.league.image_url;
             },
 
-            return_Date(item) {
-                if (item.begin_at == null) {
-                    item.begin_at = "unknown";
-                }
-
-                if (item.end_at == null) {
-                    item.end_at = "unknown";
-                }
-            },
-
-
+            
             async getInfosRanking() {
                 if (this.id_tournament !== "") {
 
