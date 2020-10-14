@@ -12,7 +12,7 @@ import { MyFavoritesController } from './MyFavorites/MyFavorites.controller';
 import { MyFavoritesModule } from './MyFavorites/MyFavorites.module';
 import { SportsModule } from './sports/sports.module';
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/funsport'), UsersModule, AuthModule,MySportsModule, MyFavoritesModule, SportsModule, PronosticsModule],
+  imports: [MongooseModule.forRoot('mongodb://mongo/funsport'), UsersModule, AuthModule,MySportsModule, MyFavoritesModule, SportsModule, PronosticsModule],
   controllers: [AppController,MySportsController,MyFavoritesController],
   providers: [AppService],
 })
