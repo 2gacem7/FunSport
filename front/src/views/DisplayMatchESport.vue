@@ -70,13 +70,14 @@
     <div v-if="datas.status=='not_started'" class="card m-2">
       <h3>Do you want to pronostic this match?</h3>
       <select v-model="winnerInput" >
+        <option disabled selected="selected">Select the winner </option>
         <option v-for="opponent in datas.opponents" :key="opponent.id">
           {{opponent.opponent.name}}
         </option>
       </select>
       <h3> your commentary (optional)</h3>
       <input v-model="commentaryInput"/>
-      <button class="btn btn-primary m-2 card-footer " @click="sendPronostic" >Send pronostic </button>
+      <button class="btn btn-primary m-2" @click="sendPronostic" >Send pronostic </button>
     </div>
 
   </div>
@@ -107,7 +108,7 @@ export default {
       pronostics:[],
       isLoading: true,
       commentaryInput:"",
-      winnerInput:"",
+      winnerInput:"Select the winner",
       resultPronostic:[],
       totalPronostic:0,
     }
