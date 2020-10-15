@@ -5,6 +5,8 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
+import { UsersService } from '../users/users.service';
+
 import { Pronostic } from '../schemas/pronostic.schema';
 import { HttpException, HttpStatus, HttpCode } from '@nestjs/common'
 
@@ -16,31 +18,30 @@ export class PronosticsController {
   /**
    * Constructor for Pronostics controller
    * @param pronosticsService
+   * @param usersService
    * @param {Model<Pronostic>} pronosticModel
    */
   constructor(private readonly pronosticsService: PronosticsService,
+    private readonly usersService: UsersService,
     @InjectModel(Pronostic.name) private pronosticModel: Model<Pronostic>) { }
 
 
-   /**
-  * Controller check if the matchId userId doesn't matchs in the pronostics:
-  * - if match : update the matchId userId
-  * - if not : create a new pronostic
-  * You need to be connected to access to this route
-  * @param {Request}
-  * @param {Body} createPronosticDto
-  * @return {Pronostic}
-  */
+  /**
+ * Controller check if the matchId userId doesn't matchs in the pronostics:
+ * - if match : update the matchId userId
+ * - if not : create a new pronostic
+ * You need to be connected to access to this route
+ * @param {Request}
+ * @param {Body} createPronosticDto
+ * @return {Pronostic}
+ */
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Request() req, @Body() createPronosticDto: CreatePronosticDto) {
     const user = req.user.id
-    console.log(createPronosticDto)
     if (createPronosticDto.matchId && createPronosticDto.winnerId && createPronosticDto.type) {
-      const matchesUserIdMatchId = await this.pronosticModel.find({ userId: user, matchId: createPronosticDto.matchId, type:createPronosticDto.type });
-      console.log(matchesUserIdMatchId)
-      if (matchesUserIdMatchId.length !=0) {
-        console.log('ici')
+      const matchesUserIdMatchId = await this.pronosticModel.find({ userId: user, matchId: createPronosticDto.matchId, type: createPronosticDto.type });
+      if (matchesUserIdMatchId.length != 0) {
         return await this.pronosticsService.updateOne(user, createPronosticDto);
       } else {
         return await this.pronosticsService.create(user, createPronosticDto);
@@ -60,8 +61,16 @@ export class PronosticsController {
    */
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise<Pronostic[]> {
-    return this.pronosticsService.findAll();
+  async findAll(@Request() req): Promise<Pronostic[]> {
+    const isAdmin = await this.usersService.isAdmin(req.user.id);
+    if (!isAdmin) {
+      throw new HttpException({
+        message: 'Unauthorized Access',
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else {
+      return this.pronosticsService.findAll();
+    }
   }
 
   /**
@@ -93,5 +102,24 @@ export class PronosticsController {
       error: 404,
       message: "id is mandatory"
     }, HttpStatus.BAD_REQUEST)
+  }
+
+  /**
+ * Controller used to reset the field commentary for a specific pronostic
+ * You need to be connected to access to this route and to be isAdmin
+ * @return {Pronotic}
+ */
+  @UseGuards(JwtAuthGuard)
+  @Get(':pronosticId/reset')
+  async resetCommentary(@Request() req, @Param('pronosticId') pronosticId: string): Promise<Pronostic> {
+    const isAdmin = await this.usersService.isAdmin(req.user.id);
+    if (!isAdmin) {
+      throw new HttpException({
+        message: 'Unauthorized Access',
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else {
+      return this.pronosticsService.resetCommentary(pronosticId);
+    }
   }
 }
