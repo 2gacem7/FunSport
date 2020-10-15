@@ -14,32 +14,35 @@
                 <option value="176">Ligue 1</option>
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
-                <option value="9692">WK</option>
-
             </select>
         </div>
         <h3 class="card-header text-center text-dark">Match on live</h3>
         <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
-
-            <div v-for="item in info" :key="item.id">
+            <div v-for="item in info" :key="item.id" class="border-bottom mb-5">
                 <p class="text-center font-weight-bold">{{item.match_round}} {{item.match_time}}</p>
                 <p class="text-center mt-3">{{item.match_status}}</p>
-                <div class="row d-flex justify-content-center">
+                <div class="row d-flex justify-content-center mb-5">
                     <div>
                         <p class="font-weight-bold text-center">{{item.match_hometeam_name}}</p>
-                        <p :src="return_Score(item)" class="font-weight-bold text-center"><img
-                                :src="return_Link_Home(item)" style="max-width: 4rem" />
-                            {{item.match_hometeam_score}}</p>
+                        <p class="font-weight-bold text-center">
+                            <img :src="return_Link_Home(item)" style="max-width: 4rem" />{{item.match_hometeam_score}}
+                        </p>
+                        <div v-for=" goal in item.goalscorer" :key="goal.id">
+                            <div v-if="goal.home_scorer=goal.home_scorer"> {{goal.time}}' {{goal.home_scorer}} <img
+                                    src="../assets/ballon.png" style="width: 1.5rem; height:1.5rem" class="mr-1" />
+                            </div>
+                        </div>
                     </div>
                     <div class="ml-5">
                         <p class="font-weight-bold text-center ">{{item.match_awayteam_name}}</p>
-                        <p class="font-weight-bold text-center "> {{item.match_awayteam_score}} <img
-                                :src="return_Link_Away(item)" style="max-width: 4rem" /> </p>
-
+                        <p class="font-weight-bold text-center "> {{item.match_awayteam_score}}
+                            <img :src="return_Link_Away(item)" style="max-width: 4rem" /> </p>
+                        <div v-for=" goal in item.goalscorer" :key="goal.id">
+                            <div v-if="goal.away_scorer=goal.away_scorer">
+                                <img src="../assets/ballon.png" style="width: 1.5rem; height:1.5rem" class="mr-1" />
+                                {{goal.away_scorer}} {{goal.time}}' </div>
+                        </div>
                     </div>
-                </div>
-                <div v-for=" goal in item.goalscorer" :key="goal.id">
-                    <p class="font-weight-bold text-center ">{{goal.away_scorer}} {{goal.time}} </p>
                 </div>
             </div>
         </div>
@@ -60,7 +63,8 @@
                 infoLive: {},
                 league_id: "",
                 timer: 60000,
-                setTimer: ""
+                setTimer: "",
+                Home: ""
             };
         },
         props: {
@@ -140,15 +144,7 @@
                 return item.team_away_badge;
             },
 
-            return_Score(item) {
-                if (item.match_hometeam_score == "") {
-                    item.match_hometeam_score = "-";
-                }
 
-                if (item.match_awayteam_score == "") {
-                    item.match_awayteam_score = "-";
-                }
-            },
 
         },
     };
