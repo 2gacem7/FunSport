@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import MyProfile from "../views/MyProfile.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ManageUsers from "../views/ManageUsers.vue";
+import ManageCommentary from "../views/ManageCommentary.vue";
 
 import LOL from "../views/LOL.vue";
 import CSGO from "../views/CSGO.vue";
@@ -40,6 +41,11 @@ const routes = [
     path: "/manageusers",
     name: "ManageUsers",
     component: ManageUsers
+  },
+  {
+    path: "/managecommentary",
+    name: "ManageCommentary",
+    component: ManageCommentary
   },
   {
     path: "/",
