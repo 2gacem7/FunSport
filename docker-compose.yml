@@ -16,7 +16,7 @@ services:
         restart: always
         image: mongo
         volumes:
-          - /home/yobar/FunSport-bdd/:/data/db:rw
+          - /bdd/:/data/db:rw
 
 
     mongo-express:
