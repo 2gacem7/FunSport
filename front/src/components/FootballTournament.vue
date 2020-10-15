@@ -19,7 +19,7 @@
                         </td>
                         <td class="text-center">
                             <p>{{item.team_name}}</p>
-                            <p><img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" /></p>
+                            <p><img :src="return_Link(item)" alt="Team badge home" style="max-width: 7rem" class="mb-5" /></p>
                           
                         </td>
                         <td class="text-center">

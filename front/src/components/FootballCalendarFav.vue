@@ -9,13 +9,13 @@
                 <div class="row d-flex justify-content-center">
                     <div>
                         <p class="font-weight-bold text-center">{{item.match_hometeam_name}}</p>
-                        <p  :src="return_Score(item)" class="font-weight-bold text-center"><img :src="return_Link_Home(item)" style="max-width: 4rem" />
+                        <p  :src="return_Score(item)" class="font-weight-bold text-center"><img :src="return_Link_Home(item)" alt="Team badge home" style="max-width: 4rem" />
                             {{item.match_hometeam_score}}</p>
                     </div>
 
                     <div class="ml-5">
                         <p class="font-weight-bold text-center">{{item.match_awayteam_name}}</p>
-                        <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img :src="return_Link_Away(item)" style="max-width: 4rem" />
+                        <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img :src="return_Link_Away(item)" alt="Team badge away" style="max-width: 4rem" />
                         </p>
                     </div>
 
@@ -51,7 +51,6 @@
                     .then(response => response.json())
                     .then(result => this.infos=result)
                     .catch(error => console.log('error', error)); 
-                    console.log(this.infos)
         },
 
         methods: {

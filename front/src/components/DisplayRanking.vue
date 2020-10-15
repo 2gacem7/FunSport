@@ -1,5 +1,5 @@
 <template>
-    <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
+    <div class="m-3 card" style="min-width: 30rem; max-height: 30rem; max-width: 50rem">
         <div class="card-header  d-flex justify-content-between">
             <button v-if="!delButton" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
                 + favori

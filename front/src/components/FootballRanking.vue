@@ -1,12 +1,12 @@
 <template>
     <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
         <div class="card-header d-flex justify-content-between">
-            
+
             <h3 class="text-dark text-center">{{ sport }} Ranking </h3>
-            
+
         </div>
 
-        <div> 
+        <div>
             <select v-model="id_tournament" v-on:click="getInfos">
                 <option value="148">Premier League</option>
                 <option value="468">Liga</option>
@@ -33,6 +33,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th class="h5 font-weight-bold text-center"></th>
                         <th class="h5 font-weight-bold text-center">Rank</th>
                         <th class="h5 font-weight-bold text-center">Teams</th>
                         <th class="h5 font-weight-bold text-center">Points</th>
@@ -40,12 +41,17 @@
                 </thead>
                 <tbody v-for="item in info" :key="item.id">
                     <tr>
+                        <td>
+                            <button v-if="id_tournament !== ''"
+                                class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
+                                @click="addTeamToMyFavorite(item)">ADD</button>
+                        </td>
                         <td class="text-center">
                             {{item.overall_league_position}}
                         </td>
                         <td class="text-center">
                             <p>{{item.team_name}}</p>
-                            <p><img :src="return_Link(item)" style="max-width: 5rem"/></p>
+                            <p><img :src="return_Link(item)" alt="Team badge" style="max-width: 5rem" /></p>
                         </td>
                         <td class="text-center">
                             {{item.overall_league_PTS}}
@@ -71,6 +77,7 @@
                 info: {},
                 infoRanking: {},
                 id_tournament: "",
+                teamverif: ""
             };
         },
         props: {
@@ -79,12 +86,22 @@
             apiName: String, // String used to search info for 1 sport in getInfos
             delButton: Boolean,
         },
-        beforeMount() {
-            this.getInfos();
-            //this.getInfosRanking()
-        },
 
         methods: {
+            addTeamToMyFavorite(item) {
+                const teamId = item.team_id;
+                this.$store.dispatch("addToMyFavorites", {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: "football",
+                        type: "team",
+                        id_tournament: this.id_tournament,
+                        team_id: teamId
+                    },
+                });
+                this.getInfos();
+            },
+
             addToMyFavorites() {
                 this.$store.dispatch("addToMyFavorites", {
                     id: this.$store.state.tabSelected.id,
@@ -100,16 +117,18 @@
             },
 
             async getInfos() {
-                var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow'
-                };
-
-                await fetch("https://apiv2.apifootball.com/?action=get_standings&league_id="+this.id_tournament+"&APIkey=" + ENV.API_FOOTBALL,
-                        requestOptions)
-                    .then(response => response.json())
-                    .then(result => this.info=result)
-                    .catch(error => console.log('error', error));     
+                if (this.id_tournament !== '') {
+                    var requestOptions = {
+                        method: 'GET',
+                        redirect: 'follow'
+                    };
+                    await fetch("https://apiv2.apifootball.com/?action=get_standings&league_id=" + this
+                            .id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
+                            requestOptions)
+                        .then(response => response.json())
+                        .then(result => this.info = result)
+                        .catch(error => console.log('error', error));
+                }
             },
 
             return_Link(item) {
