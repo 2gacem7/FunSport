@@ -33,6 +33,10 @@
 
   import DisplaySearch from "@/components/DisplaySearch.vue";
 
+/**
+ * View where you can find all components for the CSGO game
+ * @displayName CSGO
+ */
   export default {
     name: "CSGO",
     components: {
@@ -46,14 +50,6 @@
       DisplayRanking,
       DisplaySearch
     },
-    data() {
-      return {};
-    },
-    mounted() {},
-
-    methods: {
-
-    }
   }
 </script>
 <style>
