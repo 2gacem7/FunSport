@@ -81,7 +81,7 @@
         </div>
       </div>
     </div>
-    <div v-if="datas.status=='not_started'" class="card m-2">
+    <div v-if="$store.state.UserData.id !='' && datas.status=='not_started'" class="card m-2">
       <h3>Do you want to pronostic this match?</h3>
       <select v-model="winnerInput" >
         <option disabled selected="selected">Select the winner </option>
@@ -188,13 +188,10 @@ export default {
     async getPronostics() {
       this.$store.commit('setAccessToken')
 
-      const header = new Headers();
-      header.append("Authorization", 'Bearer '+this.$store.state.access_token);
+
       let options = {
         method: "GET",
-        headers: header,
-        /* mode: "cors", */
-        /* cache: "default", */
+
       };
       const datas = await fetch(`http://localhost:3000/pronostics/${this.matchId}`, options);
       const json = await datas.json();
