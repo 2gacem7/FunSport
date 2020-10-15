@@ -72,9 +72,9 @@
         </tbody>
       </table>
     </div>
-    <div class="card-footer d-flex justify-content-between">
-        <button class="btn btn-primary " v-if="page > 1" @click="prev()">prev</button>
-        <button class="btn btn-primary " v-if="info.length > 0" @click="next()">next</button>
+    <div class="card-footer d-flex ">
+        <button class="btn btn-primary ml-2 mr-auto " v-if="page > 1" @click="prev()">prev</button>
+        <button class="btn btn-primary mr-2 ml-auto" v-if="info.length > 0" @click="next()">next</button>
     </div>
   </div>
 </template>

@@ -51,9 +51,9 @@
         </div>
       </div>
     </div>
-    <div class="card-footer text-dark">
+    <div class="card-footer d-flex text-dark">
       Last update {{ lastUpdate | moment("MMMM Do YYYY, h:mm:ss") }}
-      <button class="btn btn-danger" @click="getInfos">Refresh</button>
+      <button class="btn btn-danger ml-auto mr-1" @click="getInfos">Refresh</button>
     </div>
   </div>
 </template>

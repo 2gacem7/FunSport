@@ -16,8 +16,9 @@
             </button>
         </div>
 
-        <div>
-            <select v-model="id_tournament" v-on:click="getInfosRanking">
+        <div class="text-center m-2">
+            <select class="" v-model="id_tournament" v-on:click="getInfosRanking">
+                <option disabled selected>Select a league</option>
                 <option v-for="item in info" :key="item.id" v-bind:value="item.matches[0].tournament_id">
                     {{item.league.name}}
                 </option>
@@ -33,6 +34,8 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-if="infoRanking.length == 0" class="text-center"> No league selected</tr>
+                    <tr v-else>
                     <tr v-for="item in infoRanking" :key="item.id" class="w-100">
                         <td scope="col" class="text-center" style="width: 20%">
                             {{ item.rank }}
@@ -41,7 +44,7 @@
                             {{ item.team.name }}
                             <img :src="return_Link_Teams(item)" style="max-width: 7rem" />
                         </td>
-
+</tr>
                     </tr>
                 </tbody>
             </table>
@@ -61,8 +64,8 @@
         data() {
             return {
                 info: {},
-                infoRanking: {},
-                id_tournament: "",
+                infoRanking: [],
+                id_tournament: "Select a league",
             };
         },
         props: {
