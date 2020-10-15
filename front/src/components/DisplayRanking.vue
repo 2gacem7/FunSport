@@ -1,7 +1,7 @@
 <template>
     <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
         <div class="card-header  d-flex justify-content-between">
-            <button v-if="!delButton" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
+            <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
                 + favori
             </button>
             <h3 class="text-center">{{ sport }} RANKING </h3>

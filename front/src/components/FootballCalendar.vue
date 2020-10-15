@@ -14,7 +14,7 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="id_tournament !== '' && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
     <div class="card-header  d-flex justify-content-between">
-      <button v-if="!delButton" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
+      <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
         + favori
       </button>
       <h3 class="text-center">{{ sport }} En live</h3>
