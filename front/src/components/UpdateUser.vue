@@ -88,6 +88,10 @@
 </template>
 
 <script>
+    /**
+     * Pop Up window for update user profile
+     * @displayName updateUser
+     */
     export default {
         name: 'updateUser',
         data() {
@@ -147,6 +151,11 @@
             this.validator['password'] = false;
         },
         methods: {
+            /**
+             * Check if email is valid with regex
+             * @param {string} value
+             * @public
+             */
             validateEmail(value) {
                 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
                     this.msg['email'] = '';
@@ -156,6 +165,11 @@
                     this.validator['email'] = false;
                 }
             },
+            /**
+             * Check if firstname is valid with regex
+             * @param {string} value
+             * @public
+             */
             validateFirstName(value) {
                 if (/^[a-zA-Z0-9_]{1,16}$/.test(value)) {
                     this.msg['firstName'] = '';
@@ -165,6 +179,11 @@
                     this.validator['firstName'] = false;
                 }
             },
+            /**
+             * Check if lastname is valid with regex
+             * @param {string} value
+             * @public
+             */
             validateLastName(value) {
                 if (/^[a-zA-Z0-9_]{1,16}$/.test(value)) {
                     this.msg['lastName'] = '';
@@ -174,6 +193,11 @@
                     this.validator['lastName'] = false;
                 }
             },
+            /**
+             * Check if phone is valid with regex
+             * @param {string} value
+             * @public
+             */
             validatePhone(value) {
                 if (/^(\d\d\s){4}(\d\d)$/.test(value)) {
                     this.msg['phone'] = '';
@@ -183,6 +207,11 @@
                     this.validator['phone'] = false;
                 }
             },
+            /**
+             * Check if password is valid with regex
+             * @param {string} value
+             * @public
+             */
             validatePassword(value) {
                 if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/.test(value)) {
                     this.msg['password'] = '';
@@ -191,6 +220,11 @@
                         'Your password must have a minimum of 8 characters (1 uppercase, 1 lowercase, 1 number, 1 special character minimum)';
                 }
             },
+            /**
+             * Check if password comfirmation is equal to password
+             * @param {string} value
+             * @public
+             */
             validatePasswordComfirme(value) {
                 if (this.password === this.passwordComfirme) {
                     this.msg['passwordComfirme'] = '';
@@ -200,6 +234,11 @@
                     this.validator['password'] = false;
                 }
             },
+            /**
+             * After all control in form update selected user
+             *
+             * @public
+             */
             async update() {
                 let body = {
                     id: this.$parent.userData._id
@@ -224,35 +263,40 @@
                 }
                 let requestStatus;
                 await fetch("http://localhost:3000/users/admin/updateUser", {
-                            "method": "PATCH",
+                        "method": "PATCH",
+                        "headers": {
+                            "content-type": "application/json",
+                            "authorization": "Bearer " + this.$store.state.access_token
+                        },
+                        "body": JSON.stringify(body)
+                    })
+                    .then(res => {
+                        requestStatus = res.status
+                    })
+                if (requestStatus === 400) {
+                    this.info = true;
+                    this.msg['general'] = "Account existing for " + this.email;
+                } else {
+                    let list = [];
+                    await fetch("http://localhost:3000/users", {
+                            "method": "GET",
                             "headers": {
-                                "content-type": "application/json",
                                 "authorization": "Bearer " + this.$store.state.access_token
-                            },
-                            "body": JSON.stringify(body)
+                            }
                         })
-                        .then(res => {
-                            requestStatus = res.status
-                        })
-                    if (requestStatus === 400) {
-                        this.info = true;
-                        this.msg['general'] = "Account existing for " + this.email;
-                    } else {
-                        let list = [];
-                        await fetch("http://localhost:3000/users", {
-                                "method": "GET",
-                                "headers": {
-                                    "authorization": "Bearer " + this.$store.state.access_token
-                                }
-                            })
-                            .then(res => res.clone().json())
-                            .then(json => list = json);
-                        this.$parent.listUser = list;
-                        this.$parent.updateButton = false;
-                    }
-                
+                        .then(res => res.clone().json())
+                        .then(json => list = json);
+                    this.$parent.listUser = list;
+                    this.$parent.updateButton = false;
+                }
+
 
             },
+            /**
+             * Close this Pop Up
+             *
+             * @public
+             */
             cancel() {
                 this.$parent.updateButton = false;
             }
