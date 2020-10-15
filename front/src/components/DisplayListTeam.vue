@@ -27,14 +27,13 @@
           </tr>
           <tr v-if="info.length==0"> No more teams </tr>
         </tbody>
-        <tfoot>
-          <p>
-            <button v-if="page>1" @click="prev()">prev</button>
-            <button v-if="info.length>0" @click="next()">next</button>
-          </p>
-        </tfoot>
+
       </table>
     </div>
+    <div class="card-footer  d-flex justify-content-between">
+      <button class="btn btn-primary " v-if="page>1" @click="prev()">prev</button>
+            <button class="btn btn-primary " v-if="info.length>0" @click="next()">next</button>
+            </div>
   </div>
 
 </template>
