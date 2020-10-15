@@ -75,11 +75,9 @@ export class PronosticsController {
 
   /**
   * Controller give all pronostics for one match id
-  * You need to be connected to access to this route
   * @param {string} matchId
   * @return {Pronostic[]}
   */
-  @UseGuards(JwtAuthGuard)
   @Get(':matchId')
   async findOne(@Param('matchId') matchId: string): Promise<any> {
     return this.pronosticsService.findPronosticForOneMatchId(matchId);
