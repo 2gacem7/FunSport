@@ -1,13 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header  d-flex justify-content-between">
-<<<<<<< HEAD
-
       <h3 class="text-center">{{ sport }} Team</h3>
-
-=======
-      <h3 class="text-center">{{ sport }} Team</h3>
->>>>>>> bf684cb919268944f36c303eea12265e968120cc
     </div>
     <div class="card-body m-0 p-0 w-100">
       <table class="table m-0">
