@@ -20,14 +20,15 @@ services:
         ports:
         - 27017:27017
 
+
     mongo-express:
         restart: always
-        container_name: mongo-express
         image: mongo-express
         ports:
         - 8090:8081
         depends_on:
           - mongo
+
 
     back:
         restart: always

@@ -7,6 +7,5 @@ COPY package-lock.json /usr/src/front/
 WORKDIR /usr/src/front/
 RUN npm install
 COPY . /usr/src/front/
-COPY ./env.config.example.js /usr/src/front/env.config.js
 
 CMD npm run serve
