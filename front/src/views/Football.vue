@@ -6,6 +6,7 @@
     <div class="card-deck m-0 p-0">
       <FootballRanking />
       <FootballCalendar />
+      <FootballLive />
       
     </div>
   </div>
@@ -19,6 +20,7 @@ import AddMySport from "@/components/AddMySport.vue";
 
 import FootballRanking from "@/components/FootballRanking.vue";
 import FootballCalendar from "@/components/FootballCalendar.vue";
+import FootballLive from "@/components/FootballLive.vue";
 
 
 export default {
@@ -28,7 +30,8 @@ export default {
     TabBar,
     AddMySport,
     FootballRanking,
-    FootballCalendar
+    FootballCalendar,
+    FootballLive,
   },
   data() {
     return {};
