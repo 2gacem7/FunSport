@@ -36,9 +36,9 @@
                         <th class="h5 font-weight-bold text-center">Teams</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr v-if="id_tournament == ''" class="text-center"> No league selected</tr>
-                    <tr v-else>
+                <tbody v-if="id_tournament == ''" class="text-center"> No league selected</tbody>
+                <tbody v-else>
+
                     <tr v-for="item in infoRanking" :key="item.id" class="w-100">
                         <td scope="col" class="text-center" style="width: 20%">
                             {{ item.rank }}
@@ -48,7 +48,7 @@
                             <img :src="return_Link_Teams(item)" style="max-width: 7rem" />
                         </td>
 </tr>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -161,7 +161,7 @@ export default {
      * @public
      */
     async getInfosRanking() {
-      if (this.id_tournament !== "Select a league") {
+      if (!this.isLoading && this.id_tournament !== "") {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
 

@@ -16,15 +16,15 @@
         <option value="competitions">Competitions</option>
       </select>
       <input
-        class="mr-2 mr-auto ml-1  p-0"
+        class="mr-2 mr-auto ml-1 p-0"
         placeholder="Search value"
         v-model="searchValue"
       />
       <button class="btn btn-primary mr-2" @click="launchSearch">Search</button>
-      </div>
-      <div class="h5 bg-light text-dark font-weight-bold text-center">
-        Results
-      </div>
+    </div>
+    <div class="h5 bg-light text-dark font-weight-bold text-center">
+      Results
+    </div>
 
     <div class="card-body text-dark overflow-auto p-1">
       <div v-if="type == 'matches' && results.length != 0">
@@ -76,7 +76,9 @@
             End at : <span v-if="competition.end_at == null">Unknown</span
             ><span v-else>{{
               competition.end_at | moment("MMMM Do YYYY, h:mm:ss")
-            }}</span>
+            }}</span><br/>
+            <span>Number of team: {{ competition.teams.length }}</span><br/>
+            <span> Number of matches: {{ competition.matches.length }}</span>
           </div>
           <div class="card-footer">
             <button
