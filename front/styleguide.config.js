@@ -4,14 +4,15 @@ module.exports = {
 	sections: [
 		  {
 			name: 'Environment Config',
-		    components: 'src/env.config.exemple.js'
+		    content: 'docs/environement.md',
+          	description: 'The desciption of env.config.js'
 		  },
 		  {
 			name: 'Views',
 		    components: 'src/views/*.vue'
 		  },
 		  {
-		    name: 'Components',
+			name: 'Components',
 		    components: 'src/components/*.vue'
 		  }
 		],

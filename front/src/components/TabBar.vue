@@ -28,7 +28,7 @@
 <script>
   /**
    * Tabar on header of all views in this app for navigate in views
-   * @displayName DisplaySearch
+   * @displayName TabBar
    */
   export default {
     name: "TabBar",
