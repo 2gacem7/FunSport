@@ -1,11 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import MyProfile from "../views/MyProfile.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ManageUsers from "../views/ManageUsers.vue";
+import ManageCommentary from "../views/ManageCommentary.vue";
 
 import LOL from "../views/LOL.vue";
 import CSGO from "../views/CSGO.vue";
@@ -41,6 +41,11 @@ const routes = [
     path: "/manageusers",
     name: "ManageUsers",
     component: ManageUsers
+  },
+  {
+    path: "/managecommentary",
+    name: "ManageCommentary",
+    component: ManageCommentary
   },
   {
     path: "/",

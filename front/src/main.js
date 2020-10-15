@@ -16,11 +16,8 @@ new Vue({
   store,
   async beforeCreate(){
     await this.$store.dispatch('getSports');
-
     await this.$store.dispatch('getUserData');
     await this.$store.dispatch('getMySports');
-
-
   },
   created: function (){
     document.title = 'FunSport !';

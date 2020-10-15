@@ -14,7 +14,7 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="id_tournament !== '' && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 
@@ -84,7 +84,7 @@
                     id: this.$store.state.tabSelected.id,
                     data: {
                         sport: "football",
-                        type: "tournament",
+                        type: "calendar",
                         id_tournament: this.id_tournament,
                     },
                 });
@@ -105,7 +105,7 @@
                     .then(response => response.json())
                     .then(result => this.info = result)
                     .catch(error => console.log('error', error));
-                console.log(this.info)
+             
             },
 
             return_Link_Home(item) {

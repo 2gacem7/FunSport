@@ -33,6 +33,11 @@
 
   import DisplaySearch from "@/components/DisplaySearch.vue";
 
+
+/**
+ * View where you can find all components for the LOL game
+ * @displayName LOL
+ */
   export default {
     name: "Lol",
     components: {
@@ -45,28 +50,6 @@
       DisplayListTeam,
       DisplayRanking,
       DisplaySearch
-    },
-    data() {
-      return {};
-    },
-    mounted() {},
-    methods: {
-      getCookie() {
-        let access_token = "";
-        if (document.cookie.length > 0) {
-          let cookieArray = document.cookie.split(";");
-          for (let i = 0; i < cookieArray.length; i++) {
-            if (cookieArray[i].indexOf("My_FunSport_Token") != -1) {
-              const cookiename = "My_FunSport_Token=";
-              access_token = cookieArray[i].substring(
-                cookiename.length,
-                cookieArray[i].length
-              );
-            }
-          }
-        }
-        return access_token;
-      },
     },
   };
 </script>

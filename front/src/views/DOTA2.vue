@@ -33,6 +33,11 @@
 
   import DisplaySearch from "@/components/DisplaySearch.vue";
 
+
+/**
+ * View where you can find all components for the DOTA2 game
+ * @displayName DOTA2
+ */
   export default {
     name: "DOTA2",
     components: {
@@ -46,14 +51,6 @@
       DisplayRanking,
       DisplaySearch
     },
-    data() {
-      return {};
-    },
-    mounted() {},
-
-    methods: {
-
-    }
   }
 </script>
 <style>

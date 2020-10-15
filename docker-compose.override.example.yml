@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+    back:
+        user: 1000:1000
+        working_dir: /usr/src/back
+        volumes:
+          - ./back:/usr/src/back:rw
+        command: "npm run start:dev"
+
+    front:
+        image: node
+        user: 1000:1000
+        working_dir: /usr/src/front
+        volumes:
+            - ./front:/usr/src/front
+        environment:
+            NODE_ENV: development

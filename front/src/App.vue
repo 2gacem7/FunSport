@@ -15,4 +15,8 @@
   src: local("dota2"),
    url(./fonts/TrajanPro-Bold.woff) format("woff");
 }
+
+body{
+  background-color: black;
+}
 </style>
