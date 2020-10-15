@@ -53,7 +53,10 @@
 
 <script>
   import ENV from "../../env.config";
-
+  /**
+   * Component card for display all teams
+   * @displayName DisplayListTeam
+   */
   export default {
     name: "DisplayListTeam",
 
@@ -64,9 +67,21 @@
       };
     },
     props: {
+      /**
+       * The id of this card
+       */
       id: "",
+      /**
+       * The type of sport of this card
+       */
       sport: String, // String display in the header
+      /**
+       * The api name (ex: football, cs-go, etc...)
+       */
       apiName: String, // String used to search info for 1 sport in getInfos
+      /**
+       * The button for del this card in favorite
+       */
       delButton: Boolean,
     },
     beforeMount() {
@@ -78,6 +93,11 @@
       },
     },
     methods: {
+      /**
+       * Add this team to my favorites
+       *
+       * @public
+       */
       addTeamToMyFavorite(item) {
         const teamSlug = item.slug;
         this.$store.dispatch("addToMyFavorites", {
@@ -90,31 +110,39 @@
         });
         this.getInfos();
       },
+      /**
+       * display next page of results
+       *
+       * @public
+       */
       async next() {
         this.page++;
         this.getInfos();
       },
+      /**
+       * display previous page of results
+       *
+       * @public
+       */
       async prev() {
         if (this.page > 1) {
           this.page--;
           this.getInfos();
         }
       },
-
+      /**
+       * Delete this components in my favorites
+       *
+       * @public
+       */
       delToMyFavorites() {
         this.$emit("delfavorite", this.id);
       },
-      addToMyFavorites() {
-        this.$store.dispatch("addToMyFavorites", {
-          id: this.$store.state.tabSelected.id,
-          data: {
-            sport: this.sport,
-            type: "component",
-            name: "list",
-            apiName: this.apiName,
-          },
-        });
-      },
+      /**
+       * Get datas from api for display on the card
+       *
+       * @public
+       */
       async getInfos() {
         let response = [];
         var myHeaders = new Headers();

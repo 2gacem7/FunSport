@@ -1,24 +1,29 @@
 module.exports = {
-	components: "src/components/appButton.vue",
-	webpackConfig: {
-	  module: {
-		rules: [
+	// set your styleguidist configuration here
+	title: 'Funsport Frontend Documentation',
+	sections: [
 		  {
-			test: /\.vue$/,
-			exclude: /node_modules/,
-			loader: "vue-loader"
-		  },
-		  // For js or css files:
-		  {
-			test: /\.js?$/,
-			exclude: /node_modules/,
-			loader: "babel-loader"
+			name: 'Environment Config',
+		    components: 'src/env.config.exemple.js'
 		  },
 		  {
-			test: /\.css$/,
-			loader: "style-loader!css-loader"
+			name: 'Views',
+		    components: 'src/views/*.vue'
+		  },
+		  {
+		    name: 'Components',
+		    components: 'src/components/*.vue'
 		  }
-		]
-	  }
-	}
-  };
+		],
+	// components: 'src/components/**/[A-Z]*.vue',
+	// defaultExample: true,
+	// sections: [
+	//   {
+	//     name: 'First Section',
+	//     components: 'src/components/**/[A-Z]*.vue'
+	//   }
+	// ],
+	// webpackConfig: {
+	//   // custom config goes here
+	// },
+}

@@ -88,6 +88,10 @@
 </template>
 
 <script>
+    /**
+     * Pop Up window for create user
+     * @displayName createUser
+     */
     export default {
         name: 'createUser',
         data() {
@@ -138,6 +142,11 @@
             this.validator['password'] = false;
         },
         methods: {
+            /**
+             * Check if email is valid with regex
+             * @param {string} value
+             * @public
+             */
             validateEmail(value) {
                 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
                     this.msg['email'] = '';
@@ -147,6 +156,11 @@
                     this.validator['email'] = false;
                 }
             },
+            /**
+             * Check if firstname is valid with regex
+             * @param {string} value
+             * @public
+             */
             validateFirstName(value) {
                 if (/^[a-zA-Z0-9_]{1,16}$/.test(value)) {
                     this.msg['firstName'] = '';
@@ -156,6 +170,11 @@
                     this.validator['firstName'] = false;
                 }
             },
+            /**
+             * Check if lastname is valid with regex
+             * @param {string} value
+             * @public
+             */
             validateLastName(value) {
                 if (/^[a-zA-Z0-9_]{1,16}$/.test(value)) {
                     this.msg['lastName'] = '';
@@ -165,6 +184,11 @@
                     this.validator['lastName'] = false;
                 }
             },
+            /**
+             * Check if phone is valid with regex
+             * @param {string} value
+             * @public
+             */
             validatePhone(value) {
                 if (/^(\d\d\s){4}(\d\d)$/.test(value)) {
                     this.msg['phone'] = '';
@@ -174,6 +198,11 @@
                     this.validator['phone'] = false;
                 }
             },
+            /**
+             * Check if password is valid with regex
+             * @param {string} value
+             * @public
+             */
             validatePassword(value) {
                 if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/.test(value)) {
                     this.msg['password'] = '';
@@ -182,6 +211,11 @@
                         'Your password must have a minimum of 8 characters (1 uppercase, 1 lowercase, 1 number, 1 special character minimum)';
                 }
             },
+            /**
+             * Check if password comfirmation is equal to password
+             * @param {string} value
+             * @public
+             */
             validatePasswordComfirme(value) {
                 if (this.password === this.passwordComfirme) {
                     this.msg['passwordComfirme'] = '';
@@ -191,6 +225,11 @@
                     this.validator['password'] = false;
                 }
             },
+            /**
+             * After all control in form create new user
+             *
+             * @public
+             */
             async submit() {
                 if (this.validator.firstName === true && this.validator.lastName === true && this.validator
                     .email === true && this.validator.phone && this.validator.password ===
@@ -236,6 +275,11 @@
                     this.msg['general'] = "Information missing in the form";
                 }
             },
+            /**
+             * Close this Pop Up
+             *
+             * @public
+             */
             cancel() {
                 this.$parent.createButton = false;
             }

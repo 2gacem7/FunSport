@@ -116,6 +116,16 @@
               :id_tournament="favorite.data[0].id_tournament"
               v-on:delfavorite="delToMyFavorites"
             />
+            <FootballCalendarFav
+              v-if="
+              favorite.data[0].type == 'calendar' &&
+              favorite.data[0].sport == 'football'
+              "
+              :id="favorite._id"
+              :id_tournament="favorite.data[0].id_tournament"
+              v-on:delfavorite="delToMyFavorites"
+            />
+            
           </div>
         </div>
       </div>
@@ -133,6 +143,7 @@ import DisplayCalendar from "@/components/DisplayCalendar.vue";
 import DisplayListTeam from "@/components/DisplayListTeam.vue";
 import DisplayRanking from "@/components/DisplayRanking.vue";
 import FootballTournament from "@/components/FootballTournament.vue";
+import FootballCalendarFav from "@/components/FootballCalendarFav.vue";
 
 import TeamCSGO from "@/components/TeamCSGO.vue";
 
@@ -147,7 +158,9 @@ export default {
     DisplayListTeam,
     DisplayRanking,
     TeamCSGO,
-    FootballTournament
+    FootballTournament,
+    FootballCalendarFav
+    
 
   },
   data() {
