@@ -1,7 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
     <div class="card-header d-flex justify-content-between">
-      <button v-if="!delButton" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+      <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
         + favori
       </button>
       <h3 class="text-center">{{ sport }} Last results</h3>
@@ -28,15 +28,17 @@
         <tbody v-for="item in info" :key="item.id">
           <tr>
             <td class="text-center">
-              <p>Start:</p> <span v-if="item.begin_at== null">Unknown</span><span v-else> {{ item.begin_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span>
-              <p>End:</p> <span v-if="item.end_at== null">Unknown</span><span v-else> {{ item.end_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span> </p>
+              <p>Start:</p> <span v-if="item.begin_at== null">Unknown</span><span v-else>
+                {{ item.begin_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span>
+              <p>End:</p> <span v-if="item.end_at== null">Unknown</span><span v-else>
+                {{ item.end_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span>
             </td>
             <td class="text-center">
               {{ item.league.name }}
               <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" />
             </td>
             <td class="text-center">{{ item.name }}</td>
-            <td class="text-center">{{ item.winner.name }}</td>
+            <td v-if="item.winner != null" class="text-center">{{ item.winner.name }}</td>
           </tr>
         </tbody>
         <tfoot>
@@ -52,7 +54,10 @@
 
 <script>
   import ENV from "../../env.config";
-
+  /**
+   * Component card for display last matches results
+   * @displayName DisplayLastResults
+   */
   export default {
     name: "DisplayLastResults",
     data() {
@@ -61,18 +66,33 @@
         page: 1,
       };
     },
-
     beforeMount() {
       this.getPastInfos();
     },
     props: {
+      /**
+       * The id of this card
+       */
       id: "",
+      /**
+       * The type of sport of this card
+       */
       sport: String, // String display in the header
+      /**
+       * The api name (ex: football, cs-go, etc...)
+       */
       apiName: String, // String used to search info for 1 sport in getInfos
+      /**
+       * The button for del this card in favorite
+       */
       delButton: Boolean,
     },
-
     methods: {
+      /**
+       * Add this components to my favorites
+       *
+       * @public
+       */
       addToMyFavorites() {
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
@@ -84,19 +104,39 @@
           },
         });
       },
+      /**
+       * display next page of results
+       *
+       * @public
+       */
       async next() {
         this.page++;
         this.getPastInfos();
       },
+      /**
+       * display previous page of results
+       *
+       * @public
+       */
       async prev() {
         if (this.page > 1) {
           this.page--;
           this.getPastInfos();
         }
       },
+      /**
+       * Delete this components in my favorites
+       *
+       * @public
+       */
       delToMyFavorites() {
         this.$emit("delfavorite", this.id);
       },
+      /**
+       * Get datas from api for display on the card
+       *
+       * @public
+       */
       async getPastInfos() {
         var myHeaders = new Headers();
         myHeaders.append(
@@ -109,16 +149,25 @@
           headers: myHeaders,
           redirect: "follow",
         };
-        await fetch(`https://api.pandascore.co/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}`, requestOptions)
+        await fetch(`https://api.pandascore.co/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}`,
+            requestOptions)
           .then((response) => response.json())
           .then((result) => (this.info = result))
           .catch((error) => console.log("error", error));
       },
-
+      /**
+       * Return link to img for display in card
+       *
+       * @public
+       */
       return_Link(item) {
         return item.league.image_url;
       },
-
+      /**
+       * Format date for better UX
+       *
+       * @public
+       */
       return_Date(item) {
         if (item.begin_at == null) {
           item.begin_at = "unknown";

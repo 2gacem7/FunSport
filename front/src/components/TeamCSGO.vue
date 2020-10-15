@@ -16,6 +16,10 @@
 
 <script>
     import ENV from "../../env.config";
+    /**
+     * Component card for display one team on dashboard
+     * @displayName TeamCSGO
+     */
     export default {
         name: "TeamCSGO",
         data() {
@@ -24,18 +28,24 @@
             };
         },
         props: {
+            /**
+             * The slug name of team
+             */
             name: String,
-            id : ""
+            /**
+             * The id of this card
+             */
+            id: ""
         },
         async mounted() {
             let infos = [];
             await fetch("https://api.pandascore.co/csgo/teams?sort=name&per_page=100&search%5Bslug%5D=" + this
-                .name, {
-                    "method": "GET",
-                    "headers": {
-                        "authorization": "Bearer " + ENV.API_PANDA_SPORT
-                    }
-                })
+                    .name, {
+                        "method": "GET",
+                        "headers": {
+                            "authorization": "Bearer " + ENV.API_PANDA_SPORT
+                        }
+                    })
                 .then(response => response.json())
                 .then(result => infos = result)
                 .catch(err => {
@@ -44,6 +54,11 @@
             this.infos = infos;
         },
         methods: {
+            /**
+             * remove this team from my favorite
+             *
+             * @public
+             */
             delToMyFavorites() {
                 this.$emit("delfavorite", this.id);
             },

@@ -1,7 +1,7 @@
 <template>
     <div class="m-3 card" style="min-width: 30rem; max-height: 30rem; max-width: 50rem">
         <div class="card-header  d-flex justify-content-between">
-            <button v-if="!delButton" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
+            <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
                 + favori
             </button>
             <h3 class="text-center">{{ sport }} RANKING </h3>
@@ -16,7 +16,7 @@
             </button>
         </div>
 
-        <div> 
+        <div>
             <select v-model="id_tournament" v-on:click="getInfosRanking">
                 <option v-for="item in info" :key="item.id" v-bind:value="item.matches[0].tournament_id">
                     {{item.league.name}}
@@ -52,10 +52,12 @@
 
 <script>
     import ENV from "../../env.config";
-
+    /**
+     * Component card for display calendar for upcomming sport matchs
+     * @displayName DisplayCalendar
+     */
     export default {
         name: "DisplayCalendar",
-
         data() {
             return {
                 info: {},
@@ -64,9 +66,21 @@
             };
         },
         props: {
+            /**
+             * The id of this card
+             */
             id: "",
+            /**
+             * The type of sport of this card
+             */
             sport: String, // String display in the header
+            /**
+             * The api name (ex: football, cs-go, etc...)
+             */
             apiName: String, // String used to search info for 1 sport in getInfos
+            /**
+             * The button for del this card in favorite
+             */
             delButton: Boolean,
         },
         beforeMount() {
@@ -75,6 +89,11 @@
         },
 
         methods: {
+            /**
+             * Add this sport calendar to my favorite
+             *
+             * @public
+             */
             addToMyFavorites() {
                 this.$store.dispatch("addToMyFavorites", {
                     id: this.$store.state.tabSelected.id,
@@ -86,9 +105,19 @@
                     },
                 });
             },
+            /**
+             * Delete this components in my favorites
+             *
+             * @public
+             */
             delToMyFavorites() {
                 this.$emit("delfavorite", this.id);
             },
+            /**
+             * Get datas from api for display on the card
+             *
+             * @public
+             */
             async getInfos() {
                 var myHeaders = new Headers();
                 myHeaders.append(
@@ -107,12 +136,20 @@
                     .then((result) => (this.info = result))
                     .catch((error) => console.log("error", error));
             },
-
+            /**
+             * Return link to img for display in card
+             *
+             * @public
+             */
             return_Link(item) {
                 return item.league.image_url;
             },
 
-            
+            /**
+             * Get datas ranking from api for display on the card
+             *
+             * @public
+             */
             async getInfosRanking() {
                 if (this.id_tournament !== "") {
 
@@ -136,7 +173,11 @@
                 }
 
             },
-
+            /**
+             * Return link to img for display in card
+             *
+             * @public
+             */
             return_Link_Teams(item) {
                 return item.team.image_url;
             },

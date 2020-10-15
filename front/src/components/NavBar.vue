@@ -32,30 +32,36 @@
 </template>
 
 <script>
+  /**
+   * Navbar on header of all views in this app
+   * @displayName Navbar
+   */
   export default {
     name: "Navbar",
-    components: {},
-    data() {
-      return {
-        value: "",
-      };
-    },
     methods: {
+      /**
+       * Remove Vuex state and remove cookie with api token
+       *
+       * @public
+       */
       logout() {
         document.cookie = "My_FunSport_Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=LAX;";
         this.$store.state.tabSelected = this.$store.state.sports[0].name
-        this.$router.push({name:this.$store.state.sports[0].name})
+        this.$router.push({
+          name: this.$store.state.sports[0].name
+        })
         document.location.reload(true);
-
-
-
-
       }
     }
   };
 </script>
 <style>
-@font-face {font-family: "LEQUIPE Regular"; src: url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.eot"); src: url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.woff") format("woff"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.svg#LEQUIPE Regular") format("svg"); }
+  @font-face {
+    font-family: "LEQUIPE Regular";
+    src: url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.eot");
+    src: url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.woff") format("woff"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/99ec515cf2e0c3afd21659c007955a32.svg#LEQUIPE Regular") format("svg");
+  }
+
   a {
     text-decoration: none;
     color: black;
@@ -64,11 +70,13 @@
   a:link {
     text-decoration: none;
   }
-.brand{
-  font-family: LEQUIPE Regular,sans-serif;
-  font-size: 30px;
-  color: #d61e00
-}
+
+  .brand {
+    font-family: LEQUIPE Regular, sans-serif;
+    font-size: 30px;
+    color: #d61e00
+  }
+
   .navbar {
     background-color: whitesmoke !important;
   }

@@ -29,6 +29,7 @@ export class PronosticsService {
                const createdPronostic = await new this.pronosticModel({
                  userId: userId,
                  matchId: createPronosticDto.matchId,
+                 type: createPronosticDto.type,
                  winnerId: createPronosticDto.winnerId,
                  commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : "")
                })
@@ -80,7 +81,7 @@ export class PronosticsService {
               * @return  {Pronostic}
               */
              async updateOne(userId, createPronosticDto): Promise<any> {
-               const newPronostic = await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId });
+               const newPronostic = await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId, type:createPronosticDto.type });
                newPronostic.winnerId = createPronosticDto.winnerId
                newPronostic.commentary = (createPronosticDto.commentary ? createPronosticDto.commentary : "")
                return newPronostic.save();
