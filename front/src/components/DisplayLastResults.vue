@@ -1,7 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
     <div class="card-header d-flex justify-content-between">
-      <button v-if="!delButton" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+      <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
         + favori
       </button>
       <h3 class="text-center">{{ sport }} Last results</h3>
@@ -38,7 +38,7 @@
               <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" />
             </td>
             <td class="text-center">{{ item.name }}</td>
-            <td class="text-center">{{ item.winner.name }}</td>
+            <td v-if="item.winner != null" class="text-center">{{ item.winner.name }}</td>
           </tr>
         </tbody>
         <tfoot>

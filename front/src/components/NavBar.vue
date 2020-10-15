@@ -34,7 +34,7 @@
 <script>
   /**
    * Navbar on header of all views in this app
-   * @displayName DisplaySearch
+   * @displayName Navbar
    */
   export default {
     name: "Navbar",

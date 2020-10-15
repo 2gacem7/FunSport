@@ -1,9 +1,13 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header  d-flex justify-content-between">
+<<<<<<< HEAD
 
       <h3 class="text-center">{{ sport }} Team</h3>
 
+=======
+      <h3 class="text-center">{{ sport }} Team</h3>
+>>>>>>> bf684cb919268944f36c303eea12265e968120cc
     </div>
     <div class="card-body m-0 p-0 w-100">
       <table class="table m-0">
@@ -18,7 +22,7 @@
         <tbody class="card m-0 p-0 overflow-auto cardInside" style="max-height: 20rem">
           <tr v-for="item in info" :key="item.id" class="w-100">
             <td>
-              <button v-if="item.button" class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
+              <button v-if="item.button && $store.state.UserData.id !=''" class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
                 @click="addTeamToMyFavorite(item)">ADD</button>
               <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>ADD</button>
             </td>
