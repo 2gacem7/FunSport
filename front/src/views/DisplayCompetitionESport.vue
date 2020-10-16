@@ -2,7 +2,6 @@
   <div id="competitionEsport">
     <Navbar />
     <TabBar />
-    <AddMySport />
     <button class="btn btn-primary" @click="go">Back</button>
     <div class="card-deck m-2">
       <div class="card" style="width: 30rem">
@@ -37,7 +36,7 @@
       </div>
     </div>
     <div class="card m-4">
-      <div class="card-header h3">{{ datas.teams.length }} teams</div>
+      <div class="card-header h3"><span v-if="datas.teams">No team</span><span v-else >{{ datas.teams.length }} teams</span></div>
       <div class="card-body card-deck">
         <div
           class="card bg-light no-border text-center"
@@ -121,7 +120,7 @@ export default {
    * This hook is used to set datas using the router params
    * @public
    */
-  mounted() {
+  beforeMount() {
     this.matchId = this.$route.params.matchId;
     this.apiName = this.$route.params.apiname;
     this.datas = this.$route.params.datas;
