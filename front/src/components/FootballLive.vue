@@ -16,7 +16,7 @@
     </div>
     <h3 class="card-header text-center text-dark">Match on live</h3>
     <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
-        
+    
     <div class="text-dark text-center font-weight-bold" v-if="info.error == 404">
         No live available
     </div>
@@ -84,7 +84,7 @@ export default {
       info: {},
       infoLive: {},
       league_id: "",
-      timer: 600000,
+      timer: 60000,
       setTimer: "",
       Home: "",
     };
