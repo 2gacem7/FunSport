@@ -110,13 +110,13 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
-            <TeamCSGO
+            <EsportTeam
               v-if="
-                favorite.data[0].type == 'team' &&
-                favorite.data[0].sport == 'CS-GO'
+                favorite.data[0].type == 'team'
               "
               :id="favorite._id"
               :name="favorite.data[0].name"
+              :apiName="favorite.data[0].sport"
               v-on:delfavorite="delToMyFavorites"
             />
             <FootballTournament
@@ -156,7 +156,7 @@ import DisplayRanking from "@/components/DisplayRanking.vue";
 import FootballTournament from "@/components/FootballTournament.vue";
 import FootballCalendarFav from "@/components/FootballCalendarFav.vue";
 
-import TeamCSGO from "@/components/TeamCSGO.vue";
+import EsportTeam from "@/components/EsportTeam.vue";
 
 /**
  * View where you can find all tyour favorite's components and your favorite's sports
@@ -172,7 +172,7 @@ export default {
     DisplayCalendar,
     DisplayListTeam,
     DisplayRanking,
-    TeamCSGO,
+    EsportTeam,
     FootballTournament,
     FootballCalendarFav,
   },
