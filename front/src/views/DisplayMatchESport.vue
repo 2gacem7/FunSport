@@ -100,10 +100,11 @@
         No commentary available for this match
       </div>
       <div v-else>
-        <div v-for="(commentary, index) in commentaries" :key="commentary.id">
+        <div v-for="commentary in commentaries" :key="commentary.id">
           <div v-if="commentary.commentary != ''">
             Commentary: Winner {{ commentary.winnerId }} /
             {{ commentary.commentary }}
+            <button class="btn btn-primary" @click="reportCommentary(commentary._id)">Report this commentary</button>
           </div>
         </div>
       </div>
@@ -198,6 +199,23 @@ export default {
   },
 
   methods: {
+    async reportCommentary(commentaryId){
+      this.$store.commit("setAccessToken");
+      const header = new Headers();
+        header.append(
+          "Authorization",
+          "Bearer " + this.$store.state.access_token
+        );
+
+        const body = new FormData();
+        let options = {
+          method: "GET",
+          headers: header,
+        };
+      await fetch(`http://localhost:3000/pronostics/${commentaryId}/report`, options).then(()=>{
+          this.getPronostics()
+        });
+    },
     /**
      * This method is used to go back in terms of variable in $store.state.tabSelected
      * @public
@@ -234,6 +252,7 @@ export default {
           commentaries.push(prono);
         }
       });
+
       this.commentaries = commentaries;
       this.totalPronostic = totalPronostic;
     },
