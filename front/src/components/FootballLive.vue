@@ -84,7 +84,7 @@ export default {
       info: {},
       infoLive: {},
       league_id: "",
-      timer: 60000,
+      timer: 600000,
       setTimer: "",
       Home: "",
     };

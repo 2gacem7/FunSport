@@ -69,7 +69,10 @@
               " :id="favorite._id" :sport="favorite.data[0].sport" :apiName="favorite.data[0].apiName"
               :delButton="true" v-on:delfavorite="delToMyFavorites" />
             <EsportTeam v-if="
-                favorite.data[0].type == 'team'
+                favorite.data[0].type == 'team'&&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :name="favorite.data[0].name" :apiName="favorite.data[0].sport"
               v-on:delfavorite="delToMyFavorites" />
             <FootballTournament v-if="
@@ -91,7 +94,9 @@
             <FavoriteRanking v-if="
               favorite.data[0].type == 'component' &&
               favorite.data[0].name == 'favoriteRanking' &&
-              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
               :leagueName="favorite.data[0].leagueName" v-on:delfavorite="delToMyFavorites" />
           </div>

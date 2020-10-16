@@ -1,10 +1,10 @@
 <template>
     <div class="card m-3 bg-light" style="max-height: 50rem; max-width: 40rem">
         <div class="card-header d-flex justify-content-between">
-            <img :src="return_Link(infos[0].team_badge)" alt="no team badge" style="max-width: 7rem" />
-            <h3 class="text-dark text-center">{{infos[0].team_name}}'s informations </h3>
+            <img v-if="infos[0]" :src="return_Link(infos[0].team_badge)" alt="no team badge" style="max-width: 7rem" />
+            <h3 v-if="infos[0]" class="text-dark text-center">{{infos[0].team_name}}'s informations </h3>
         </div>
-        <div class="card-body m-0 p-0 overflow-auto text-dark">
+        <div class="card-body m-0 p-0 overflow-auto text-dark" v-if="infos[0]">
             <h5 class="font-weight-bold text-center">Coach</h5>
             <div v-for="coach in infos[0].coaches" :key="coach.coach_name">
                 <p class="text-center font-weight-bold">{{coach.coach_name}}</p>
