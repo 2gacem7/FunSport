@@ -2,7 +2,6 @@
   <div id="matchEsport" class="text-dark">
     <Navbar />
     <TabBar />
-    <AddMySport />
     <button class="btn btn-primary" @click="go">Back</button>
 
     <div class="card m-2 p-2">

@@ -2,7 +2,6 @@
   <div id="competitionEsport">
     <Navbar />
     <TabBar />
-    <AddMySport />
     <button class="btn btn-primary" @click="go">Back</button>
     <div class="card-deck m-2">
       <div class="card" style="width: 30rem">
