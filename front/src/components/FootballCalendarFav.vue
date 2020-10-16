@@ -9,13 +9,15 @@
                 <div class="row d-flex justify-content-center">
                     <div>
                         <p class="font-weight-bold text-center">{{item.match_hometeam_name}}</p>
-                        <p  :src="return_Score(item)" class="font-weight-bold text-center"><img :src="return_Link_Home(item)" style="max-width: 4rem" />
+                        <p :src="return_Score(item)" class="font-weight-bold text-center"><img
+                                :src="return_Link_Home(item)" alt="no team badge home" style="max-width: 4rem" />
                             {{item.match_hometeam_score}}</p>
                     </div>
 
                     <div class="ml-5">
                         <p class="font-weight-bold text-center">{{item.match_awayteam_name}}</p>
-                        <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img :src="return_Link_Away(item)" style="max-width: 4rem" />
+                        <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img
+                                :src="return_Link_Away(item)" alt="no team badge home" style="max-width: 4rem" />
                         </p>
                     </div>
 
@@ -30,6 +32,10 @@
 
 <script>
     import ENV from "../../env.config";
+    /**
+     * Component card for display one league's calendar on dashboard
+     * @displayName FootballCalendarFav
+     */
     export default {
         name: "FootballCalendarFav",
         data() {
@@ -38,45 +44,71 @@
             };
         },
         props: {
+            /**
+             * The id tournament of one league
+             */
             id_tournament: String,
-            id : ""
+            /**
+             * The id of this card
+             */
+            id: ""
         },
+        
         async mounted() {
             var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow'
-                };
-                await fetch("https://apiv2.apifootball.com/?action=get_events&from=2020-08-01&to=2021-06-30&league_id="+this.id_tournament+"&APIkey=" + ENV.API_FOOTBALL,
-                        requestOptions)
-                    .then(response => response.json())
-                    .then(result => this.infos=result)
-                    .catch(error => console.log('error', error)); 
-                    console.log(this.infos)
+                method: 'GET',
+                redirect: 'follow'
+            };
+            await fetch(
+                    "https://apiv2.apifootball.com/?action=get_events&from=2020-08-01&to=2021-06-30&league_id=" +
+                    this.id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
+                    requestOptions)
+                .then(response => response.json())
+                .then(result => this.infos = result)
+                .catch(error => console.log('error', error));
         },
 
         methods: {
+            /**
+             * remove this team from my favorite
+             *
+             * @public
+             */
             delToMyFavorites() {
                 this.$emit("delfavorite", this.id);
             },
+            /**
+             * Return link to img for display badge home team in card
+             *
+             * @public
+             */
             return_Link_Home(item) {
                 return item.team_home_badge;
             },
-
+            /**
+             * Return link to img for display badge away team in card
+             *
+             * @public
+             */
             return_Link_Away(item) {
                 return item.team_away_badge;
             },
-
+            /**
+             * Format score for better UX
+             *
+             * @public
+             */
             return_Score(item) {
-      if (item.match_hometeam_score == "") {
-        item.match_hometeam_score = "-";
-      }
+                if (item.match_hometeam_score == "") {
+                    item.match_hometeam_score = "-";
+                }
 
-      if (item.match_awayteam_score == "") {
-        item.match_awayteam_score = "-";
-      }
-    },
+                if (item.match_awayteam_score == "") {
+                    item.match_awayteam_score = "-";
+                }
+            },
         },
 
-            
+
     };
 </script>
