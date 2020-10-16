@@ -28,9 +28,9 @@
         <tbody>
           <tr v-for="item in info" :key="item.id" class="w-100">
             <td scope="col" class="text-center" style="width: 20%">
-              <p>Start:</p> <span v-if="item.begin_at== null">Unknown</span><span v-else>
+              <p class="m-0 font-weight-bold">Start:</p> <span v-if="item.begin_at== null">Unknown</span><span v-else>
                 {{ item.begin_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span>
-              <p>End:</p> <span v-if="item.end_at== null">Unknown</span><span v-else>
+              <p class="m-0 mt-2 font-weight-bold">End:</p> <span v-if="item.end_at== null">Unknown</span><span v-else>
                 {{ item.end_at| moment("MMMM Do YYYY, h:mm:ss")  }}</span>
             </td>
             <td scope="col" class="text-center">

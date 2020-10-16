@@ -18,9 +18,9 @@
         </div>
 
         <div class="text-center m-2">
-            <select v-if="isLoading" >
+            <select v-if="isLoading">
                 <option disabled selected="true">Loading list</option>
-                </select>
+            </select>
             <select v-else class="" v-model="id_tournament" v-on:click="getInfosRanking">
                 <option disabled selected="true">Select a league</option>
                 <option v-for="item in info" :key="item.id" v-bind:value="item.matches[0].tournament_id">
@@ -58,7 +58,168 @@
 
 
 <script>
+    import ENV from "../../env.config";
+    /**
+     * Component card for display calendar for upcomming sport matchs
+     * @displayName DisplayCalendar
+     */
 
+    /**
+     * Component card for display calendar for upcomming sport matchs
+     * @displayName DisplayRanking
+     */
+    export default {
+        name: "DisplayRanking",
+        data() {
+            return {
+                info: [],
+                infoRanking: [],
+                id_tournament: "",
+                isLoading: true
+            };
+        },
+        props: {
+            /**
+             * The id of this card
+             */
+            id: "",
+            /**
+             * The type of sport of this card
+             */
+            sport: String, // String display in the header
+            /**
+             * The api name (ex: football, cs-go, etc...)
+             */
+            apiName: String, // String used to search info for 1 sport in getInfos
+            /**
+             * The button for del this card in favorite
+             */
+            delButton: Boolean,
+        },
+        beforeMount() {
+            this.getInfos();
+            //this.getInfosRanking()
+        },
+        methods: {
+            /**
+             * Add this team to my favorites
+             *
+             * @public
+             */
+            addTournamentToMyFavorite() {
+                let leagueName = "";
+                for(let i = 0 ; i < this.info.length ; i++){
+                    if(this.info[i].matches[0].tournament_id === this.id_tournament){
+                        leagueName = this.info[i].league.name;
+                    }
+                }
+                this.$store.dispatch("addToMyFavorites", {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: this.sport,
+                        type: "component",
+                        id_tournament: this.id_tournament,
+                        apiName: this.apiName,
+                        leagueName: leagueName,
+                        name: "favoriteRanking",
+                    },
+                });
+                this.getInfos();
+            },
+            /**
+             * Add this sport calendar to my favorite
+             *
+             * @public
+             */
+            addToMyFavorites() {
+                this.$store.dispatch("addToMyFavorites", {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: this.sport,
+                        type: "component",
+                        name: "ranking",
+                        apiName: this.apiName,
+                    },
+                });
+            },
+            /**
+             * Delete this components in my favorites
+             *
+             * @public
+             */
+            delToMyFavorites() {
+                this.$emit("delfavorite", this.id);
+            },
+            /**
+             * Get datas from api for display on the card
+             *
+             * @public
+             */
+            async getInfos() {
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
+                var requestOptions = {
+                    method: "GET",
+                    headers: myHeaders,
+                    redirect: "follow",
+                };
+                await fetch(
+                        `https://api.pandascore.co/${this.apiName}/tournaments/past`,
+                        requestOptions
+                    )
+                    .then((response) => response.json())
+                    .then((result) => {
+                        this.info = result
+                    })
+                    .catch((error) => console.log("error", error));
+                this.isLoading = false;
+            },
+            /**
+             * Return link to img for display in card
+             *
+             * @public
+             */
+            return_Link(item) {
+                return item.league.image_url;
+            },
+
+            /**
+             * Get datas ranking from api for display on the card
+             *
+             * @public
+             */
+            async getInfosRanking() {
+                if (this.id_tournament !== "") {
+
+                    var myHeaders = new Headers();
+                    myHeaders.append(
+                        "Authorization",
+                        "Bearer " + ENV.API_PANDA_SPORT
+                    );
+
+                    var requestOptions = {
+                        method: "GET",
+                        headers: myHeaders,
+                        redirect: "follow",
+                    };
+
+                    await fetch(`https://api.pandascore.co/tournaments/` + this.id_tournament + `/standings`,
+                            requestOptions)
+                        .then((response) => response.json())
+                        .then((result) => (this.infoRanking = result))
+                        .catch((error) => console.log("error", error));
+                }
+            },
+            /**
+             * Return link to img for display in card
+             *
+             * @public
+             */
+            return_Link_Teams(item) {
+                return item.team.image_url;
+            },
+        },
+    };
 </script>
 
 
