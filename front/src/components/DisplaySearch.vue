@@ -71,6 +71,7 @@
             />
           </div>
           <div class="card-body">
+            {{ competition.name }}<br/>
             Begin at:{{ competition.begin_at | moment("MMMM Do YYYY, h:mm:ss")
             }}<br />
             End at : <span v-if="competition.end_at == null">Unknown</span
