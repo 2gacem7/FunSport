@@ -1,7 +1,7 @@
 <template>
     <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 30rem">
         <div class="card-header d-flex justify-content-between">
-            <h3 class="text-dark text-center m-3"> NOM TOURNOI </h3>
+            <h3 class="text-dark text-center m-3"> {{ leagueName }} </h3>
         </div>
         <div class="card-body m-0 p-0 overflow-auto">
             <table class="table">
@@ -51,9 +51,14 @@
             /**
              * The id of this card
              */
-            id: ""
+            id: "",
+            /**
+             * The name of league
+             */
+            leagueName: String,
         },
         async mounted() {
+            console.log(this.leagueName)
             var myHeaders = new Headers();
             myHeaders.append(
                 "Authorization",

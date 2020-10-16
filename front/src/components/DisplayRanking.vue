@@ -18,9 +18,9 @@
         </div>
 
         <div class="text-center m-2">
-            <select v-if="isLoading" >
+            <select v-if="isLoading">
                 <option disabled selected="true">Loading list</option>
-                </select>
+            </select>
             <select v-else class="" v-model="id_tournament" v-on:click="getInfosRanking">
                 <option disabled selected="true">Select a league</option>
                 <option v-for="item in info" :key="item.id" v-bind:value="item.matches[0].tournament_id">
@@ -58,11 +58,11 @@
 
 
 <script>
-import ENV from "../../env.config";
-/**
- * Component card for display calendar for upcomming sport matchs
- * @displayName DisplayCalendar
- */
+    import ENV from "../../env.config";
+    /**
+     * Component card for display calendar for upcomming sport matchs
+     * @displayName DisplayCalendar
+     */
 
     /**
      * Component card for display calendar for upcomming sport matchs
@@ -72,10 +72,10 @@ import ENV from "../../env.config";
         name: "DisplayRanking",
         data() {
             return {
-                info: {},
-                infoRanking: {},
+                info: [],
+                infoRanking: [],
                 id_tournament: "",
-                isLoading:true
+                isLoading: true
             };
         },
         props: {
@@ -100,49 +100,6 @@ import ENV from "../../env.config";
             this.getInfos();
             //this.getInfosRanking()
         },
-    /**
-     * Delete this components in my favorites
-     *
-     * @public
-     */
-    delToMyFavorites() {
-      this.$emit("delfavorite", this.id);
-    },
-    /**
-     * Get datas from api for display on the card
-     *
-     * @public
-     */
-    async getInfos() {
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
-
-      var requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow",
-      };
-      if (this.id_tournament != "Loading") {
-        await fetch(
-          `https://api.pandascore.co/${this.apiName}/tournaments/past`,
-          requestOptions
-        )
-          .then((response) => response.json())
-          .then((result) => {
-              this.info = result
-              this.isLoading=false})
-          .catch((error) => console.log("error", error));
-      }
-    },
-    /**
-     * Return link to img for display in card
-     *
-     * @public
-     */
-    return_Link(item) {
-      return item.league.image_url;
-    },
-
         methods: {
             /**
              * Add this team to my favorites
@@ -150,6 +107,12 @@ import ENV from "../../env.config";
              * @public
              */
             addTournamentToMyFavorite() {
+                let leagueName = "";
+                for(let i = 0 ; i < this.info.length ; i++){
+                    if(this.info[i].matches[0].tournament_id === this.id_tournament){
+                        leagueName = this.info[i].league.name;
+                    }
+                }
                 this.$store.dispatch("addToMyFavorites", {
                     id: this.$store.state.tabSelected.id,
                     data: {
@@ -157,12 +120,12 @@ import ENV from "../../env.config";
                         type: "component",
                         id_tournament: this.id_tournament,
                         apiName: this.apiName,
+                        leagueName: leagueName,
                         name: "favoriteRanking",
                     },
                 });
                 this.getInfos();
             },
-
             /**
              * Add this sport calendar to my favorite
              *
@@ -194,22 +157,22 @@ import ENV from "../../env.config";
              */
             async getInfos() {
                 var myHeaders = new Headers();
-                myHeaders.append(
-                    "Authorization",
-                    "Bearer " + ENV.API_PANDA_SPORT
-                );
-
+                myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
                 var requestOptions = {
                     method: "GET",
                     headers: myHeaders,
                     redirect: "follow",
                 };
-
-                await fetch(`https://api.pandascore.co/${this.apiName}/tournaments/past`, requestOptions)
+                await fetch(
+                        `https://api.pandascore.co/${this.apiName}/tournaments/past`,
+                        requestOptions
+                    )
                     .then((response) => response.json())
-                    .then((result) => (this.info = result))
+                    .then((result) => {
+                        this.info = result
+                    })
                     .catch((error) => console.log("error", error));
-                    console.log(this.info)
+                this.isLoading = false;
             },
             /**
              * Return link to img for display in card
