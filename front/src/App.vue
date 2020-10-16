@@ -15,6 +15,11 @@
   src: local("dota2"),
    url(./fonts/TrajanPro-Bold.woff) format("woff");
 }
+@font-face {
+  font-family: "football";
+  src: local("football"),
+   url(./fonts/SoccerLeague.ttf) format("truetype");
+}
 
 body{
   background-color: black;
