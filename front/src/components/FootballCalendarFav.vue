@@ -1,7 +1,7 @@
 <template>
     <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 30rem">
         <div class="card-header d-flex justify-content-between">
-            <h3 class="text-dark text-center m-3">{{infos[0].league_name}}'s Calendar </h3>
+            <h3 v-if="infos[0]" class="text-dark text-center m-3">{{infos[0].league_name}}'s Calendar </h3>
         </div>
         <div class="card-body m-0 p-0 overflow-auto text-dark">
             <div v-for="item in infos" :key="item.id">

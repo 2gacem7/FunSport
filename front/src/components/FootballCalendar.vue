@@ -38,14 +38,14 @@
                     <div>
                         <p class="font-weight-bold text-center">{{item.match_hometeam_name}}</p>
                         <p :src="return_Score(item)" class="font-weight-bold text-center"><img
-                                :src="return_Link_Home(item)" alt="no tTeam badge home" style="max-width: 4rem" />
+                                :src="return_Link_Home(item)" alt="no Team badge" style="max-width: 4rem" />
                             {{item.match_hometeam_score}}</p>
                     </div>
 
                     <div class="ml-5">
                         <p class="font-weight-bold text-center">{{item.match_awayteam_name}}</p>
                         <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img
-                                :src="return_Link_Away(item)" alt="no tTeam badge away" style="max-width: 4rem" />
+                                :src="return_Link_Away(item)" alt="no Team badge" style="max-width: 4rem" />
                         </p>
                     </div>
 

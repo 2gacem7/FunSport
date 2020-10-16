@@ -78,8 +78,8 @@
 
         data() {
             return {
-                info: {},
-                infoRanking: {},
+                info: [],
+                infoRanking: [],
                 id_tournament: "",
             };
         },
