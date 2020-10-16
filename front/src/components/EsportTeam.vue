@@ -63,7 +63,7 @@
                 let sportName;
                 if (this.apiName == "CS-GO") {
                     sportName = 'csgo'
-                } else if (this.apiName == "DOTA-2") {
+                } else if (this.apiName == "DOTA2") {
                     sportName = 'dota2'
                 } else if (this.apiName == "LOL") {
                     sportName = 'lol'

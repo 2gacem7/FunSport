@@ -262,9 +262,9 @@ export default {
             type: this.apiName,
           }),
         };
-        await fetch(`http://localhost:3000/pronostics`, options).then(
+        await fetch(`http://localhost:3000/pronostics`, options).then(()=>{
           this.getPronostics()
-        );
+        });
       } else {
         alert("You have to select the winner before");
       }
