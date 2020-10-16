@@ -17,8 +17,12 @@
             </button>
         </div>
 
-        <div>
-            <select v-model="id_tournament" v-on:click="getInfosRanking">
+        <div class="text-center m-2">
+            <select v-if="isLoading" >
+                <option disabled selected="true">Loading list</option>
+                </select>
+            <select v-else class="" v-model="id_tournament" v-on:click="getInfosRanking">
+                <option disabled selected="true">Select a league</option>
                 <option v-for="item in info" :key="item.id" v-bind:value="item.matches[0].tournament_id">
                     {{item.league.name}}
                 </option>
@@ -34,7 +38,9 @@
                         <th class="h5 font-weight-bold text-center">Teams</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="id_tournament == ''" class="text-center"> No league selected</tbody>
+                <tbody v-else>
+
                     <tr v-for="item in infoRanking" :key="item.id" class="w-100">
                         <td scope="col" class="text-center font-weight-bold" style="width: 20%">
                             {{ item.rank }}
@@ -52,7 +58,12 @@
 
 
 <script>
-    import ENV from "../../env.config";
+import ENV from "../../env.config";
+/**
+ * Component card for display calendar for upcomming sport matchs
+ * @displayName DisplayCalendar
+ */
+
     /**
      * Component card for display calendar for upcomming sport matchs
      * @displayName DisplayRanking
@@ -64,7 +75,7 @@
                 info: {},
                 infoRanking: {},
                 id_tournament: "",
-                Test1:"yo"
+                isLoading:true
             };
         },
         props: {
@@ -89,6 +100,48 @@
             this.getInfos();
             //this.getInfosRanking()
         },
+    /**
+     * Delete this components in my favorites
+     *
+     * @public
+     */
+    delToMyFavorites() {
+      this.$emit("delfavorite", this.id);
+    },
+    /**
+     * Get datas from api for display on the card
+     *
+     * @public
+     */
+    async getInfos() {
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
+
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+      if (this.id_tournament != "Loading") {
+        await fetch(
+          `https://api.pandascore.co/${this.apiName}/tournaments/past`,
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => {
+              this.info = result
+              this.isLoading=false})
+          .catch((error) => console.log("error", error));
+      }
+    },
+    /**
+     * Return link to img for display in card
+     *
+     * @public
+     */
+    return_Link(item) {
+      return item.league.image_url;
+    },
 
         methods: {
             /**

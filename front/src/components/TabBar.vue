@@ -21,6 +21,12 @@
           Users</a>
         <a v-else class="nav-link" href="#" @click="goManageUsers">Manage Users</a>
       </li>
+      <li v-show="$store.state.UserData.isAdmin === true" class="nav-item">
+        <a v-if="$store.state.tabSelected.name == 'ManageCommentary'" class="nav-link active"
+          @click="goManageCommentary">Manage
+          Commentary</a>
+        <a v-else class="nav-link" href="#" @click="goManageCommentary">Manage Commentary</a>
+      </li>
     </ul>
   </div>
 </template>
@@ -46,31 +52,48 @@
         }
       },
       goMyProfile() {
-        this.$store.commit("setTabSelected", {
-          id: 99,
-          name: "MyProfile"
-        });
-        this.$router.push({
-          name: "MyProfile"
-        });
+        if (this.$store.state.tabSelected.name != "MyProfile") {
+          this.$store.commit("setTabSelected", {
+            id: 99,
+            name: "MyProfile"
+          });
+          this.$router.push({
+            name: "MyProfile"
+          });
+        }
       },
       goMyDashboard() {
-        this.$store.commit("setTabSelected", {
-          id: 100,
-          name: "Dashboard"
-        });
-        this.$router.push({
-          name: "Dashboard"
-        });
+        if (this.$store.state.tabSelected.name != "Dashboard") {
+          this.$store.commit("setTabSelected", {
+            id: 100,
+            name: "Dashboard"
+          });
+          this.$router.push({
+            name: "Dashboard"
+          });
+        }
       },
       goManageUsers() {
-        this.$store.commit("setTabSelected", {
-          id: 101,
-          name: "ManageUsers"
-        });
-        this.$router.push({
-          name: "ManageUsers"
-        });
+        if (this.$store.state.tabSelected.name != "ManageUsers") {
+          this.$store.commit("setTabSelected", {
+            id: 101,
+            name: "ManageUsers"
+          });
+          this.$router.push({
+            name: "ManageUsers"
+          });
+        }
+      },
+      goManageCommentary() {
+        if (this.$store.state.tabSelected.name != "ManageCommentary") {
+          this.$store.commit("setTabSelected", {
+            id: 102,
+            name: "ManageCommentary"
+          });
+          this.$router.push({
+            name: "ManageCommentary"
+          });
+        }
       }
     },
   };

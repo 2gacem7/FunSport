@@ -19,7 +19,9 @@
             v-bind:key="sport.name"
             class="row mt-2 p-3 justify-content-center"
           >
-            <a class="btn btn-default" @click="goTo(sport.name)">Go to {{ sport.name }}</a>
+            <a class="btn btn-default" @click="goTo(sport.name)"
+              >Go to {{ sport.name }}</a
+            >
             <button
               class="btn btn-danger btn-sm rounded-circle ml-5 mb-2"
               @click="deleteSport(sport._id)"
@@ -34,15 +36,17 @@
       <div class="card-header">
         <h1 class="text text-center">My Favorites</h1>
       </div>
-      <div class="card-body  m-0">
+      <div class="card-body m-0">
         <div v-if="myFavorites.length == 0">You don't have favorite</div>
         <div v-else class="card-deck m-0">
           <div v-for="favorite in myFavorites" :key="favorite.id">
             <DisplayLive
               v-if="
-              favorite.data[0].type == 'component' &&
-              favorite.data[0].name == 'live' &&
-              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'live' &&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -52,9 +56,11 @@
             />
             <DisplayLastResults
               v-if="
-              favorite.data[0].type == 'component' &&
-              favorite.data[0].name == 'lastResult' &&
-              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'lastResult' &&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -64,9 +70,11 @@
             />
             <DisplayCalendar
               v-if="
-              favorite.data[0].type == 'component' &&
-              favorite.data[0].name == 'calendar' &&
-              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'calendar' &&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -76,9 +84,11 @@
             />
             <DisplayListTeam
               v-if="
-              favorite.data[0].type == 'component' &&
-              favorite.data[0].name == 'list' &&
-              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'list' &&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -88,9 +98,11 @@
             />
             <DisplayRanking
               v-if="
-              favorite.data[0].type == 'component' &&
-              favorite.data[0].name == 'ranking' &&
-              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+                favorite.data[0].type == 'component' &&
+                favorite.data[0].name == 'ranking' &&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
               "
               :id="favorite._id"
               :sport="favorite.data[0].sport"
@@ -98,19 +110,19 @@
               :delButton="true"
               v-on:delfavorite="delToMyFavorites"
             />
-            <TeamCSGO
+            <EsportTeam
               v-if="
-              favorite.data[0].type == 'team' &&
-              favorite.data[0].sport == 'CS-GO'
+                favorite.data[0].type == 'team'
               "
               :id="favorite._id"
               :name="favorite.data[0].name"
+              :apiName="favorite.data[0].sport"
               v-on:delfavorite="delToMyFavorites"
             />
             <FootballTournament
               v-if="
-              favorite.data[0].type == 'tournament' &&
-              favorite.data[0].sport == 'football'
+                favorite.data[0].type == 'tournament' &&
+                favorite.data[0].sport == 'football'
               "
               :id="favorite._id"
               :id_tournament="favorite.data[0].id_tournament"
@@ -118,8 +130,8 @@
             />
             <FootballCalendarFav
               v-if="
-              favorite.data[0].type == 'calendar' &&
-              favorite.data[0].sport == 'football'
+                favorite.data[0].type == 'calendar' &&
+                favorite.data[0].sport == 'football'
               "
               :id="favorite._id"
               :id_tournament="favorite.data[0].id_tournament"
@@ -169,9 +181,14 @@ import DisplayRanking from "@/components/DisplayRanking.vue";
 import FootballTournament from "@/components/FootballTournament.vue";
 import FootballCalendarFav from "@/components/FootballCalendarFav.vue";
 import FootballTeamFavorite from "@/components/FootballTeamFavorite.vue";
-import TeamCSGO from "@/components/TeamCSGO.vue";
 import FavoriteRanking from "@/components/FavoriteRanking.vue";
 
+import EsportTeam from "@/components/EsportTeam.vue";
+
+/**
+ * View where you can find all tyour favorite's components and your favorite's sports
+ * @displayName Dashboard
+ */
 export default {
   name: "Dashboard",
   components: {
@@ -182,7 +199,7 @@ export default {
     DisplayCalendar,
     DisplayListTeam,
     DisplayRanking,
-    TeamCSGO,
+    EsportTeam,
     FootballTournament,
     FootballCalendarFav,
     FootballTeamFavorite,
@@ -193,6 +210,11 @@ export default {
       access_token: "",
     };
   },
+  /**
+   * This hook is used to redirect user not connected and dispatch 'getMySports' and 'getMyFavorites'
+   * A user is considere as not connected if $store.state.UserData.id !=''
+   * @public
+   */
   async mounted() {
     if (this.$store.state.UserData.id == "") {
       this.$router.push({
@@ -211,17 +233,27 @@ export default {
     },
   },
   methods: {
+    /**
+   * This method is used to redirect the user in the view desired. It's save in $store.state.tabSelected the id and name of the next view
+   * @param {string} nameTab This param is a the name present in the collection <sport>
+   * @public
+   */
     goTo(nameTab) {
-      let idTab = ""
-      this.$store.state.sports.forEach((sport)=>{
-        if (sport.name == nameTab)
-        {
-          idTab = sport._id
+      let idTab = "";
+      this.$store.state.sports.forEach((sport) => {
+        if (sport.name == nameTab) {
+          idTab = sport._id;
         }
-      })
+      });
       this.$store.commit("setTabSelected", { id: idTab, name: nameTab });
       this.$router.push({ name: nameTab });
     },
+
+    /**
+   * This method is used to delete a sport in your favorite's sports
+   * @param {number} id This param means _id present in the collection <MySport>
+   * @public
+   */
     async deleteSport(id) {
       const body = {
         id: id,
@@ -239,6 +271,11 @@ export default {
         .then((json) => (mySports = json));
       this.$store.dispatch("getMySports");
     },
+    /**
+   * This method is used to delete a favorite's component in the favorite's user
+   * @param {number} id  This param means _id present in the collection <MyFavorite>
+   * @public
+   */
     async delToMyFavorites(id) {
       this.$store.commit("setAccessToken");
       if (this.$store.state.access_token != "") {
