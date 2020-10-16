@@ -1,11 +1,8 @@
 <template>
     <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
         <div class="card-header d-flex justify-content-between">
-
-            <h3 class="text-dark text-center">Ranking </h3>
-
+            <h3 class="text-center">Ranking </h3>
         </div>
-
         <div>
             <select v-model="id_tournament" v-on:click="getInfos">
                 <option value="148">Premier League</option>
