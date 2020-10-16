@@ -16,7 +16,8 @@
         <tbody class="card m-0 p-0 overflow-auto cardInside" style="max-height: 20rem">
           <tr v-for="item in info" :key="item.id" class="w-100">
             <td>
-              <button v-if="item.button && $store.state.UserData.id !=''" class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
+              <button v-if="item.button && $store.state.UserData.id !=''"
+                class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
                 @click="addTeamToMyFavorite(item)">ADD</button>
               <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>ADD</button>
             </td>

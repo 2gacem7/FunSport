@@ -30,13 +30,13 @@
         </div>
         <div class="card-body">
           <div>ChampionShip : {{ oneMatch.match.league.slug }}</div>
-          <img :src="oneMatch.match.league.image_url" alt="Image League" width="100" />
+          <img :src="oneMatch.match.league.image_url" alt="no image League" width="100" />
           <div>Status : {{ oneMatch.match.status }}</div>
           <div>Match :</div>
           <div class="row">
             <span class="col-6 text-center" v-for="team in oneMatch.match.opponents" :key="team.id">
               {{ team.opponent.name }}
-              <img :src="team.opponent.image_url" alt="Image Team" height="100" />
+              <img :src="team.opponent.image_url" alt="no image Team" height="100" />
             </span>
           </div>
           <div class="row">

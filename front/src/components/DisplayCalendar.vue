@@ -35,7 +35,7 @@
             </td>
             <td scope="col" class="text-center">
               {{ item.league.name }}
-              <img :src="return_Link(item)" style="max-width: 7rem" />
+              <img :src="return_Link(item)" style="max-width: 7rem" alt="no league badge" />
             </td>
             <td scope="col" class="text-center">{{ item.name }}</td>
             <td v-if="item.live_url" scope="col" class="text-center" style="width: 20%">

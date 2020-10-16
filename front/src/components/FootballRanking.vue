@@ -14,7 +14,8 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== '' && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="id_tournament !== ''"
+                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 
@@ -51,7 +52,7 @@
                         </td>
                         <td class="text-center">
                             <p>{{item.team_name}}</p>
-                            <p><img :src="return_Link(item)" alt="Team badge" style="max-width: 5rem" /></p>
+                            <p><img :src="return_Link(item)" alt="no team badge" style="max-width: 5rem" /></p>
                         </td>
                         <td class="text-center">
                             {{item.overall_league_PTS}}
@@ -68,7 +69,10 @@
 
 <script>
     import ENV from "../../env.config";
-
+    /**
+     * Component card for display all teams
+     * @displayName FootballRanking
+     */
     export default {
         name: "FootballRanking",
 
@@ -77,17 +81,25 @@
                 info: {},
                 infoRanking: {},
                 id_tournament: "",
-                teamverif: ""
             };
         },
         props: {
+            /**
+             * The id of this card
+             */
             id: "",
-            sport: String, // String display in the header
-            apiName: String, // String used to search info for 1 sport in getInfos
+            /**
+             * The button for del this card in favorite
+             */
             delButton: Boolean,
         },
 
         methods: {
+            /**
+             * Add this team to my favorites
+             *
+             * @public
+             */
             addTeamToMyFavorite(item) {
                 const teamId = item.team_id;
                 this.$store.dispatch("addToMyFavorites", {
@@ -101,7 +113,11 @@
                 });
                 this.getInfos();
             },
-
+            /**
+             * Add one league to my favorites
+             *
+             * @public
+             */
             addToMyFavorites() {
                 this.$store.dispatch("addToMyFavorites", {
                     id: this.$store.state.tabSelected.id,
@@ -112,10 +128,19 @@
                     },
                 });
             },
+            /**
+             * Delete this ranking in my favorites
+             *
+             * @public
+             */
             delToMyFavorites() {
                 this.$emit("delfavorite", this.id);
             },
-
+            /**
+             * Get datas from api for display on the card
+             *
+             * @public
+             */
             async getInfos() {
                 if (this.id_tournament !== '') {
                     var requestOptions = {
@@ -130,7 +155,11 @@
                         .catch(error => console.log('error', error));
                 }
             },
-
+            /**
+             * Return link to img for display team badge in card
+             *
+             * @public
+             */
             return_Link(item) {
                 return item.team_badge;
             },

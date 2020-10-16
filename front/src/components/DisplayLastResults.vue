@@ -35,7 +35,7 @@
             </td>
             <td class="text-center">
               {{ item.league.name }}
-              <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" />
+              <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" alt="no league image" />
             </td>
             <td class="text-center">{{ item.name }}</td>
             <td v-if="item.winner != null" class="text-center">{{ item.winner.name }}</td>

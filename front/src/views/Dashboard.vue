@@ -136,6 +136,19 @@
               :team_id="favorite.data[0].team_id"
               v-on:delfavorite="delToMyFavorites"
             />
+
+             <FavoriteRanking
+              v-if="
+              favorite.data[0].type == 'component' &&
+              favorite.data[0].name == 'favoriteRanking' &&
+              ( favorite.data[0].sport == 'CS-GO' || favorite.data[0].sport == 'LOL')
+              "
+              :id="favorite._id"
+              :id_tournament="favorite.data[0].id_tournament"
+              v-on:delfavorite="delToMyFavorites"
+            />
+
+          
             
           </div>
         </div>
@@ -156,8 +169,8 @@ import DisplayRanking from "@/components/DisplayRanking.vue";
 import FootballTournament from "@/components/FootballTournament.vue";
 import FootballCalendarFav from "@/components/FootballCalendarFav.vue";
 import FootballTeamFavorite from "@/components/FootballTeamFavorite.vue";
-
 import TeamCSGO from "@/components/TeamCSGO.vue";
+import FavoriteRanking from "@/components/FavoriteRanking.vue";
 
 export default {
   name: "Dashboard",
@@ -172,9 +185,8 @@ export default {
     TeamCSGO,
     FootballTournament,
     FootballCalendarFav,
-    FootballTeamFavorite
-    
-
+    FootballTeamFavorite,
+    FavoriteRanking  
   },
   data() {
     return {

@@ -1,7 +1,8 @@
 <template>
     <div class="m-3 card" style="min-width: 30rem; max-height: 30rem; max-width: 50rem">
         <div class="card-header  d-flex justify-content-between">
-            <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
+            <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold mb-2"
+                @click="addToMyFavorites">
                 + favori
             </button>
             <h3 class="text-center">{{ sport }} RANKING </h3>
@@ -22,8 +23,9 @@
                     {{item.league.name}}
                 </option>
             </select>
+            <button v-if="id_tournament !== ''" @click="addTournamentToMyFavorite()"
+                class="btn btn-success font-weight-bold mb-2 ml-3 btnADD">+ favori</button>
         </div>
-
         <div class="card-body m-0 p-0 w-100 overflow-auto">
             <table class="table">
                 <thead>
@@ -34,14 +36,13 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in infoRanking" :key="item.id" class="w-100">
-                        <td scope="col" class="text-center" style="width: 20%">
+                        <td scope="col" class="text-center font-weight-bold" style="width: 20%">
                             {{ item.rank }}
                         </td>
                         <td scope="col" class="text-center">
-                            {{ item.team.name }}
-                            <img :src="return_Link_Teams(item)" style="max-width: 7rem" />
+                            <p class="font-weight-bold">{{ item.team.name }}</p>
+                            <p><img :src="return_Link_Teams(item)" alt="no team badge" style="max-width: 7rem" /></p>
                         </td>
-
                     </tr>
                 </tbody>
             </table>
@@ -54,15 +55,16 @@
     import ENV from "../../env.config";
     /**
      * Component card for display calendar for upcomming sport matchs
-     * @displayName DisplayCalendar
+     * @displayName DisplayRanking
      */
     export default {
-        name: "DisplayCalendar",
+        name: "DisplayRanking",
         data() {
             return {
                 info: {},
                 infoRanking: {},
                 id_tournament: "",
+                Test1:"yo"
             };
         },
         props: {
@@ -89,6 +91,25 @@
         },
 
         methods: {
+            /**
+             * Add this team to my favorites
+             *
+             * @public
+             */
+            addTournamentToMyFavorite() {
+                this.$store.dispatch("addToMyFavorites", {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: this.sport,
+                        type: "component",
+                        id_tournament: this.id_tournament,
+                        apiName: this.apiName,
+                        name: "favoriteRanking",
+                    },
+                });
+                this.getInfos();
+            },
+
             /**
              * Add this sport calendar to my favorite
              *
@@ -135,6 +156,7 @@
                     .then((response) => response.json())
                     .then((result) => (this.info = result))
                     .catch((error) => console.log("error", error));
+                    console.log(this.info)
             },
             /**
              * Return link to img for display in card
@@ -171,7 +193,6 @@
                         .then((result) => (this.infoRanking = result))
                         .catch((error) => console.log("error", error));
                 }
-
             },
             /**
              * Return link to img for display in card
@@ -187,11 +208,43 @@
 
 
 <style>
-    .CalendarTable {
-        background-color: white;
+    .btnADD {
+        background: #2CF956;
+        background-image: -webkit-linear-gradient(top, #2CF956, #06D530);
+        background-image: -moz-linear-gradient(top, #2CF956, #06D530);
+        background-image: -ms-linear-gradient(top, #2CF956, #06D530);
+        background-image: -o-linear-gradient(top, #2CF956, #06D530);
+        background-image: -webkit-gradient(to bottom, #2CF956, #06D530);
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        color: #000000;
+        font-family: Verdana;
+        font-size: 11px;
+        padding: 11px;
+        -webkit-box-shadow: 1px 1px 20px 0 #24C691;
+        -moz-box-shadow: 1px 1px 20px 0 #24C691;
+        box-shadow: 1px 1px 20px 0 #24C691;
+        text-shadow: 1px 1px 20px #FFFFFF;
+        border: solid #FFFFFF 1px;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
     }
 
-    thead {
-        font-size: 25px;
+    .btnADD:hover {
+        border: solid #FFFFFF 1px;
+        background: #06D530;
+        color: #ffffff;
+        background-image: -webkit-linear-gradient(top, #06D530, #2CF956);
+        background-image: -moz-linear-gradient(top, #06D530, #2CF956);
+        background-image: -ms-linear-gradient(top, #06D530, #2CF956);
+        background-image: -o-linear-gradient(top, #06D530, #2CF956);
+        background-image: -webkit-gradient(to bottom, #06D530, #2CF956);
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        text-decoration: none;
     }
 </style>

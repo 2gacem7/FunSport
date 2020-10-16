@@ -14,7 +14,8 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== '' && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="id_tournament !== ''"
+                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 
@@ -30,19 +31,21 @@
         </div>
         <h3 class="card-header text-center text-dark">Match</h3>
         <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
-            
+
             <div v-for="item in info" :key="item.id">
                 <p class="text-center font-weight-bold">{{item.match_round}}</p>
                 <div class="row d-flex justify-content-center">
                     <div>
                         <p class="font-weight-bold text-center">{{item.match_hometeam_name}}</p>
-                        <p  :src="return_Score(item)" class="font-weight-bold text-center" ><img :src="return_Link_Home(item)" alt="Team badge home" style="max-width: 4rem" />
+                        <p :src="return_Score(item)" class="font-weight-bold text-center"><img
+                                :src="return_Link_Home(item)" alt="no tTeam badge home" style="max-width: 4rem" />
                             {{item.match_hometeam_score}}</p>
                     </div>
 
                     <div class="ml-5">
                         <p class="font-weight-bold text-center">{{item.match_awayteam_name}}</p>
-                        <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img :src="return_Link_Away(item)" alt="Team badge away" style="max-width: 4rem" />
+                        <p class="font-weight-bold text-center"> {{item.match_awayteam_score}} <img
+                                :src="return_Link_Away(item)" alt="no tTeam badge away" style="max-width: 4rem" />
                         </p>
                     </div>
 
@@ -56,9 +59,13 @@
 
 <script>
     import ENV from "../../env.config";
+    /**
+     * Component card for display football calendar
+     * @displayName FootballCalendar
+     */
 
     export default {
-        name: "FootballRanking",
+        name: "FootballCalendar",
 
         data() {
             return {
@@ -68,9 +75,18 @@
             };
         },
         props: {
+            /**
+             * The id of this card
+             */
             id: "",
+            /**
+             * The type of sport of this card
+             */
             sport: String, // String display in the header
-            apiName: String, // String used to search info for 1 sport in getInfos
+
+            /**
+             * The button for del this card in favorite
+             */
             delButton: Boolean,
         },
         beforeMount() {
@@ -79,6 +95,11 @@
         },
 
         methods: {
+            /**
+             * Add this components to my favorites
+             *
+             * @public
+             */
             addToMyFavorites() {
                 this.$store.dispatch("addToMyFavorites", {
                     id: this.$store.state.tabSelected.id,
@@ -89,10 +110,20 @@
                     },
                 });
             },
+
+            /**
+             * Delete this components in my favorites
+             *
+             * @public
+             */
             delToMyFavorites() {
                 this.$emit("delfavorite", this.id);
             },
-
+            /**
+             * Get datas from api for display on the card
+             *
+             * @public
+             */
             async getInfos() {
                 var requestOptions = {
                     method: 'GET',
@@ -106,24 +137,38 @@
                     .then(result => this.info = result)
                     .catch(error => console.log('error', error));
             },
-
+            /**
+             * Return link to img for display badge home team in card
+             *
+             * @public
+             */
             return_Link_Home(item) {
                 return item.team_home_badge;
             },
 
+            /**
+             * Return link to img for display badge away team in card
+             *
+             * @public
+             */
             return_Link_Away(item) {
                 return item.team_away_badge;
             },
 
-              return_Score(item) {
-      if (item.match_hometeam_score == "") {
-        item.match_hometeam_score = "-";
-      }
+            /**
+             * Format score for better UX
+             *
+             * @public
+             */
+            return_Score(item) {
+                if (item.match_hometeam_score == "") {
+                    item.match_hometeam_score = "-";
+                }
 
-      if (item.match_awayteam_score == "") {
-        item.match_awayteam_score = "-";
-      }
-    },
+                if (item.match_awayteam_score == "") {
+                    item.match_awayteam_score = "-";
+                }
+            },
 
         },
     };
