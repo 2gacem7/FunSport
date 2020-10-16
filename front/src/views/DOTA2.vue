@@ -6,15 +6,15 @@
       <AddMySport />
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
-      <DisplayLive sport="DOTA-2" apiName="dota2" :delButton="false" />
+      <DisplayLive sport="DOTA2" apiName="dota2" :delButton="false" />
       <DisplaySearch apiName="dota2" />
-      <DisplayRanking sport="DOTA-2" apiName="dota2" />
-      <DisplayListTeam sport="DOTA-2" apiName="dota2" />
+      <DisplayRanking sport="DOTA2" apiName="dota2" />
+      <DisplayListTeam sport="DOTA2" apiName="dota2" />
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
-      <DisplayCalendar sport="DOTA-2" apiName="dota2" />
+      <DisplayCalendar sport="DOTA2" apiName="dota2" />
       <img class="m-5 p-5" style="margin-top: -35px" src="../assets/dota2_logo.png">
-      <DisplayLastResults sport="DOTA-2" apiName="dota2" />
+      <DisplayLastResults sport="DOTA2" apiName="dota2" />
     </div>
   </div>
 </template>
