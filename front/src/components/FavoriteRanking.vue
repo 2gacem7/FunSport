@@ -58,7 +58,6 @@
             leagueName: String,
         },
         async mounted() {
-            console.log(this.leagueName)
             var myHeaders = new Headers();
             myHeaders.append(
                 "Authorization",
