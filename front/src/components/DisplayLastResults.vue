@@ -45,12 +45,12 @@
         <tbody v-for="item in info" :key="item.id">
           <tr>
             <td class="text-center">
-              <p class="m-0">Start:</p>
+              <p class="m-0 font-weight-bold">Start:</p>
               <span v-if="item.begin_at == null">Unknown</span
               ><span v-else>
                 {{ item.begin_at | moment("MMMM Do YYYY") }}</span
               >
-              <p  class="m-0 mt-2">End:</p>
+              <p  class="m-0 mt-2 font-weight-bold">End:</p>
               <span v-if="item.end_at == null">Unknown</span
               ><span v-else>
                 {{ item.end_at | moment("MMMM Do YYYY") }}</span
