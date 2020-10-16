@@ -16,7 +16,12 @@
     </div>
     <h3 class="card-header text-center text-dark">Match on live</h3>
     <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
-      <div v-for="item in info" :key="item.id" class="border-bottom mb-5">
+        
+    <div class="text-dark text-center font-weight-bold" v-if="info.error == 404">
+        No live available
+    </div>
+
+      <div v-else class="border-bottom mb-5" v-for="item in info" :key="item.id" >
         <p class="text-center font-weight-bold">
           {{ item.match_round }} {{ item.match_time }}
         </p>
