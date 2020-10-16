@@ -45,15 +45,15 @@
         <tbody v-for="item in info" :key="item.id">
           <tr>
             <td class="text-center">
-              <p>Start:</p>
+              <p class="m-0 font-weight-bold">Start:</p>
               <span v-if="item.begin_at == null">Unknown</span
               ><span v-else>
-                {{ item.begin_at | moment("MMMM Do YYYY, h:mm:ss") }}</span
+                {{ item.begin_at | moment("MMMM Do YYYY") }}</span
               >
-              <p>End:</p>
+              <p  class="m-0 mt-2 font-weight-bold">End:</p>
               <span v-if="item.end_at == null">Unknown</span
               ><span v-else>
-                {{ item.end_at | moment("MMMM Do YYYY, h:mm:ss") }}</span
+                {{ item.end_at | moment("MMMM Do YYYY") }}</span
               >
             </td>
             <td class="text-center">
@@ -83,7 +83,7 @@
 <script>
 import ENV from "../../env.config";
 /**
- * Component card for display last matches results
+ * Generic component card for display last matches results
  * @displayName DisplayLastResults
  */
 export default {
