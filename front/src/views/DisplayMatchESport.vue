@@ -87,6 +87,8 @@
           }}
           %</span
         >
+        <span v-else>
+          0 %</span>
         <br /><span v-if="index % 2 == 0"> VS </span>
       </span>
       <span v-if="totalPronostic == 0"> No pronostic for this match</span><br />
