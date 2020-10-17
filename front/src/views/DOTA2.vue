@@ -7,7 +7,7 @@
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
       <DisplayLive sport="DOTA2" apiName="dota2" :delButton="false" />
-      <DisplaySearch apiName="dota2" />
+      <DisplaySearch sport="DOTA2" apiName="dota2" />
       <DisplayRanking sport="DOTA2" apiName="dota2" />
       <DisplayListTeam sport="DOTA2" apiName="dota2" />
     </div>

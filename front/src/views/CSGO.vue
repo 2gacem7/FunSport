@@ -7,7 +7,7 @@
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
       <DisplayLive sport="CS-GO" apiName="cs-go" :delButton="false" />
-      <DisplaySearch apiName="csgo" />
+      <DisplaySearch sport="CS-GO"  apiName="csgo" />
       <DisplayRanking sport="CS-GO" apiName="csgo" />
       <DisplayListTeam sport="CS-GO" apiName="csgo" />
     </div>

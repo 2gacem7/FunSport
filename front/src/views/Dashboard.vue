@@ -75,6 +75,14 @@
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :name="favorite.data[0].name" :apiName="favorite.data[0].sport"
               v-on:delfavorite="delToMyFavorites" />
+
+              <DisplayFavoriteMatch v-if="
+                favorite.data[0].type == 'matches'&&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
+              " :id="favorite._id" :matchId="favorite.data[0].matchId" :apiName="favorite.data[0].apiName"
+              v-on:delfavorite="delToMyFavorites" />
             <FootballTournament v-if="
                 favorite.data[0].type == 'tournament' &&
                 favorite.data[0].sport == 'football'
@@ -121,6 +129,7 @@
   import FavoriteRanking from "@/components/FavoriteRanking.vue";
 
   import EsportTeam from "@/components/EsportTeam.vue";
+    import DisplayFavoriteMatch from "@/components/DisplayFavoriteMatch.vue";
 
   /**
    * View where you can find all tyour favorite's components and your favorite's sports
@@ -140,7 +149,8 @@
       FootballTournament,
       FootballCalendarFav,
       FootballTeamFavorite,
-      FavoriteRanking
+      FavoriteRanking,
+      DisplayFavoriteMatch
     },
     data() {
       return {

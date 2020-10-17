@@ -111,10 +111,7 @@
               <span v-if="commentary.isReported"> Commentary reported. Waiting the admin's moderation </span>
               <span v-else>  {{ commentary.commentary }} </span>
             </div>
-
           </div>
-
-
         </div>
       </div>
     </div>
