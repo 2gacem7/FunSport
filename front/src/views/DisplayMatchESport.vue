@@ -100,12 +100,21 @@
         No commentary available for this match
       </div>
       <div v-else>
-        <div v-for="commentary in commentaries" :key="commentary.id">
+        <div class="card m-2" v-for="commentary in commentaries" :key="commentary.id">
           <div v-if="commentary.commentary != ''">
-            Commentary: Winner {{ commentary.winnerId }} /
-            {{ commentary.commentary }}
-            <button class="btn btn-primary" @click="reportCommentary(commentary._id)">Report this commentary</button>
+            <div class="card-header d-flex">
+              <span>Post the {{ commentary.createdAt  | moment("MMMM Do YYYY, h:mm  ")}} by {{ commentary.authorName }}: Winner {{ commentary.winnerId }}</span>
+                          <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto" @click="reportCommentary(commentary._id)">Report this commentary</button>
+
+            </div>
+            <div class="card-body">
+              <span v-if="commentary.isReported"> Commentary reported. Waiting the admin's moderation </span>
+              <span v-else>  {{ commentary.commentary }} </span>
+            </div>
+
           </div>
+
+
         </div>
       </div>
     </div>
@@ -281,6 +290,8 @@ export default {
             commentary: this.commentaryInput,
             winnerId: this.winnerInput,
             type: this.apiName,
+            authorName: this.$store.state.UserData.firstName,
+            createdAt: new Date()
           }),
         };
         await fetch(`http://localhost:3000/pronostics`, options).then(()=>{

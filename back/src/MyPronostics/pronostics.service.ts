@@ -33,6 +33,8 @@ export class PronosticsService {
       winnerId: createPronosticDto.winnerId,
       commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : ""),
       isReported: false,
+      authorName: createPronosticDto.authorName,
+      createdAt:createPronosticDto.createdAt
     })
     return createdPronostic.save();
   }
@@ -53,7 +55,7 @@ export class PronosticsService {
    * @returns {Pronostic[]}
    */
   async findPronosticForOneMatchId(matchId: string): Promise<any> {
-    const pronostic = await this.pronosticModel.find({ 'matchId': matchId, isReported:false });
+    const pronostic = await this.pronosticModel.find({ 'matchId': matchId});
     return pronostic;
   }
 

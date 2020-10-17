@@ -42,6 +42,18 @@ export class Pronostic extends Document {
   @Prop()
   isReported: boolean;
 
+  /**
+   * name of the author
+   */
+  @Prop()
+  authorName: string;
+
+  /**
+   * date of creation of the commentary
+   */
+  @Prop()
+  createdAt: string;
+
 }
 
 /**

@@ -30,4 +30,16 @@ export class CreatePronosticDto {
   @IsOptional()
   commentary: string;
 
+  /**
+   * User name
+   */
+  @IsOptional()
+  authorName: string;
+
+  /**
+   * date of the creation of the commentary
+   */
+  @IsOptional()
+  createdAt: string;
+
 }
