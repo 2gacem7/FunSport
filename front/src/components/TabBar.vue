@@ -1,6 +1,12 @@
 <template>
   <div>
     <ul class="nav nav-tabs align-items-center bg-light">
+      <li class="nav-item">
+        <a v-if="$store.state.tabSelected.name == 'News'" class="nav-link active" @click="goToNews">My
+          News</a>
+          <a v-else class="nav-link " @click="goToNews">My
+          News</a>
+      </li>
       <li v-for="sport in $store.state.sports" :key="sport.id" class="nav-item">
         <a v-if="sport.name == $store.state.tabSelected.name" class="nav-link active"
           @click="go(sport._id, sport.name)">{{ sport.name }}</a>
@@ -59,6 +65,17 @@
           });
           this.$router.push({
             name: "MyProfile"
+          });
+        }
+      },
+      goToNews() {
+        if (this.$store.state.tabSelected.name != "News") {
+          this.$store.commit("setTabSelected", {
+            id: 1,
+            name: "News"
+          });
+          this.$router.push({
+            name: "News"
           });
         }
       },
