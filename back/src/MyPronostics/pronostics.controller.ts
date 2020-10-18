@@ -73,15 +73,7 @@ export class PronosticsController {
     }
   }
 
-  /**
-  * Controller give all pronostics for one match id
-  * @param {string} matchId
-  * @return {Pronostic[]}
-  */
-  @Get(':apiName/:matchId')
-  async findOne(@Param('matchId') matchId: string, @Param('apiName') apiName: string): Promise<any> {
-    return this.pronosticsService.findPronosticForOneMatchId(apiName,matchId);
-  }
+
 
   /**
    * Controller delete a specific pronostic
@@ -151,4 +143,15 @@ async reportCommentary( @Param('pronosticId') pronosticId: string): Promise<Pron
   return this.pronosticsService.reportCommentary(pronosticId);
 
 }
+
+
+/**
+  * Controller give all pronostics for one match id
+  * @param {string} matchId
+  * @return {Pronostic[]}
+  */
+ @Get(':apiName/:matchId')
+ async findOne(@Param('matchId') matchId: string, @Param('apiName') apiName: string): Promise<any> {
+   return this.pronosticsService.findPronosticForOneMatchId(apiName,matchId);
+ }
 }
