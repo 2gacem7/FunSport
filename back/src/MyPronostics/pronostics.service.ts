@@ -58,14 +58,10 @@ export class PronosticsService {
    */
   async findPronosticForOneMatchId(matchId: string): Promise<any> {
     let pronostics = await this.pronosticModel.find({ 'matchId': matchId});
-    /**
-     * Add name authorName
-     */
     for (let i = 0; i < pronostics.length; i++){
       let name = await this.userModel.findById(pronostics[i].userId).select('firstName');
       pronostics[i].authorName = name
     }
-    console.log(pronostics)
     return pronostics;
   }
 
