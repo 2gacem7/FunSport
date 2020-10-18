@@ -1,10 +1,10 @@
 <template>
   <div>
     <ul class="nav nav-tabs align-items-center bg-light">
-      <li class="nav-item">
-        <a v-if="$store.state.tabSelected.name == 'News'" class="nav-link active" @click="goToNews">My
+      <li class="nav-item bg-danger">
+        <a v-if="$store.state.tabSelected.name == 'News'" class="nav-link active bg-danger" @click="goToNews">
           News</a>
-          <a v-else class="nav-link " @click="goToNews">My
+          <a v-else class="nav-link " @click="goToNews">
           News</a>
       </li>
       <li v-for="sport in $store.state.sports" :key="sport.id" class="nav-item">
