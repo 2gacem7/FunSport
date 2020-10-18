@@ -56,8 +56,8 @@ export class PronosticsService {
    * @param {string} matchId
    * @returns {Pronostic[]}
    */
-  async findPronosticForOneMatchId(matchId: string): Promise<any> {
-    let pronostics = await this.pronosticModel.find({ 'matchId': matchId});
+  async findPronosticForOneMatchId(apiName:string, matchId: string): Promise<any> {
+    let pronostics = await this.pronosticModel.find({ 'matchId': matchId, 'type':apiName});
     for (let i = 0; i < pronostics.length; i++){
       let name = await this.userModel.findById(pronostics[i].userId).select('firstName');
       pronostics[i].authorName = name

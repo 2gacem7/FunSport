@@ -78,9 +78,9 @@ export class PronosticsController {
   * @param {string} matchId
   * @return {Pronostic[]}
   */
-  @Get(':matchId')
-  async findOne(@Param('matchId') matchId: string): Promise<any> {
-    return this.pronosticsService.findPronosticForOneMatchId(matchId);
+  @Get(':apiName/:matchId')
+  async findOne(@Param('matchId') matchId: string, @Param('apiName') apiName: string): Promise<any> {
+    return this.pronosticsService.findPronosticForOneMatchId(apiName,matchId);
   }
 
   /**

@@ -287,7 +287,6 @@ export default {
             commentary: this.commentaryInput,
             winnerId: this.winnerInput,
             type: this.apiName,
-            authorName: this.$store.state.UserData.firstName,
             createdAt: new Date()
           }),
         };
@@ -310,7 +309,7 @@ export default {
         method: "GET",
       };
       const datas = await fetch(
-        `http://localhost:3000/pronostics/${this.matchId}`,
+        `http://localhost:3000/pronostics/${this.apiName}/${this.matchId}`,
         options
       );
       const json = await datas.json();
