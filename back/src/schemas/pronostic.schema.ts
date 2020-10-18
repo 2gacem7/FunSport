@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { User } from '../schemas/user.schema';
+
 
 /**
  * This collection collects all pronotics and the commentary associated
@@ -46,7 +48,7 @@ export class Pronostic extends Document {
    * name of the author
    */
   @Prop()
-  authorName: string;
+  authorName: User;
 
   /**
    * date of creation of the commentary

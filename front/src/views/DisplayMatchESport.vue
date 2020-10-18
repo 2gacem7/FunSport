@@ -103,7 +103,7 @@
         <div class="card m-2" v-for="commentary in commentaries" :key="commentary.id">
           <div v-if="commentary.commentary != ''">
             <div class="card-header d-flex">
-              <span>Post the {{ commentary.createdAt  | moment("MMMM Do YYYY, h:mm  ")}} by {{ commentary.authorName }}: Winner {{ commentary.winnerId }}</span>
+              <span>Post the {{ commentary.createdAt  | moment("MMMM Do YYYY, h:mm  ")}} by {{ commentary.authorName.firstName }}: Winner {{ commentary.winnerId }}</span>
                           <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto" @click="reportCommentary(commentary._id)">Report this commentary</button>
 
             </div>

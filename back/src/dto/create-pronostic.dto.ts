@@ -1,4 +1,6 @@
 import { IsEmail, Matches , MinLength, IsOptional} from 'class-validator';
+import { User } from '../schemas/user.schema';
+
 
 /**
  * This Dto is used to create a new pronostic.
@@ -34,7 +36,7 @@ export class CreatePronosticDto {
    * User name
    */
   @IsOptional()
-  authorName: string;
+  authorName: User;
 
   /**
    * date of the creation of the commentary

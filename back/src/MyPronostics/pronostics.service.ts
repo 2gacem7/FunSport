@@ -5,6 +5,8 @@ import { Pronostic } from '../schemas/pronostic.schema';
 import { HttpException, HttpStatus } from '@nestjs/common'
 
 import { CreatePronosticDto } from '../dto/create-pronostic.dto';
+import { User } from '../schemas/user.schema';
+
 
 /**
  * Service used to manage all action available in PronosticsService
@@ -14,7 +16,8 @@ export class PronosticsService {
   /**
    * Constructor for PronosticsService
    */
-  constructor(@InjectModel(Pronostic.name) private pronosticModel: Model<Pronostic>
+  constructor(@InjectModel(Pronostic.name) private pronosticModel: Model<Pronostic>,
+  @InjectModel(User.name) private userModel: Model<User>,
   ) {
   }
 
@@ -33,7 +36,6 @@ export class PronosticsService {
       winnerId: createPronosticDto.winnerId,
       commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : ""),
       isReported: false,
-      authorName: createPronosticDto.authorName,
       createdAt:createPronosticDto.createdAt
     })
     return createdPronostic.save();
@@ -55,8 +57,16 @@ export class PronosticsService {
    * @returns {Pronostic[]}
    */
   async findPronosticForOneMatchId(matchId: string): Promise<any> {
-    const pronostic = await this.pronosticModel.find({ 'matchId': matchId});
-    return pronostic;
+    let pronostics = await this.pronosticModel.find({ 'matchId': matchId});
+    /**
+     * Add name authorName
+     */
+    for (let i = 0; i < pronostics.length; i++){
+      let name = await this.userModel.findById(pronostics[i].userId).select('firstName');
+      pronostics[i].authorName = name
+    }
+    console.log(pronostics)
+    return pronostics;
   }
 
   /**
