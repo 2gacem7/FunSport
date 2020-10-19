@@ -1,32 +1,48 @@
 <template>
-  <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
-    <div class="card-header text-dark justify-content-between">
-      <!-- <tbody v-for="item in infos" :key="item.id">
-        <tr>
-          <td class="text-center">
-            <p class="m-0 font-weight-bold">Start:</p>
-            <span v-if="item.begin_at == null">Unknown</span><span v-else>
-              {{ item.begin_at | moment("MMMM Do YYYY") }}</span>
-            <p class="m-0 mt-2 font-weight-bold">End:</p>
-            <span v-if="item.end_at == null">Unknown</span><span v-else>
-              {{ item.end_at | moment("MMMM Do YYYY") }}</span>
-          </td>
-          <td class="text-center">
-            {{ item.league}}
-            <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" alt="no league image" />
-          </td>
-          <td class="text-center">{{ item }}</td>
-          <td v-if="item.winner != null" class="text-center">
-            {{ item.winner}}
-          </td>
-        </tr>
-      </tbody> -->
-      {{ infos }}
+  <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
 
+        <div class="card-header text-center">
+         <h3> {{ sport }}  </h3>  {{infos.name}}  
+          </div>
+        <div class="card-body m-0 p-0 w-100 overflow-auto">
+
+         <table class="table">
+        <thead>
+          <tr>
+            <th class="h5 font-weight-bold text-center">Dates</th>
+            <th class="h5 font-weight-bold text-center">Leagues</th>
+            <th class="h5 font-weight-bold text-center">Winner</th>
+          </tr>
+        </thead>
+       <tbody>
+         <tr>
+           <td class="text-center">
+             <p class="m-0 font-weight-bold">Start:</p>
+              <span v-if="infos.begin_at == null">Unknown</span><span v-else>
+                {{ infos.begin_at | moment("MMMM Do YYYY") }}</span>
+              <p class="m-0 mt-2 font-weight-bold">End:</p>
+              <span v-if="infos.end_at == null">Unknown</span><span v-else>
+                {{ infos.end_at | moment("MMMM Do YYYY") }}</span>
+           </td>
+           <td class="text-center">
+             {{infos.league.name}}
+            <img :src="return_Link(infos)" style="max-width: 7rem" class="mb-5" alt="no league image" />
+
+           </td>
+           <td class="text-center">
+             {{infos.winner.name}}
+           </td>
+         </tr>
+       </tbody>
+         </table>
+
+        <div class="card-footer d-flex text-dark">
+       <button class="btn btn-danger p-1" style="width:100%" @click="delToMyFavorites()">Unfav</button>
     </div>
-    <button class="btn btn-danger p-1" style="width:100%" @click="delToMyFavorites()">Unfav</button>
-
+        </div>
   </div>
+      
+  
 </template>
 
 <script>
@@ -50,6 +66,8 @@
        * The api name (ex: football, cs-go, etc...)
        */
       apiName: String, // String used to search info for 1 sport in getInfos
+
+      sport:String
     },
     data() {
       return {
@@ -57,6 +75,7 @@
         type: "matches",
         searchValue: "",
         results: [],
+
       };
     },
     async mounted() {
@@ -101,7 +120,15 @@
             });
         this.infos = infos;
         console.log(infos)
-      }
+      },
+      /**
+       * Return link to img for display in card
+       *
+       * @public
+       */
+      return_Link(infos) {
+        return infos.league.image_url;
+      },     
     },
   };
 </script>

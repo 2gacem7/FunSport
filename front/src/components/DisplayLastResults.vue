@@ -107,6 +107,7 @@
        * The button for del this card in favorite
        */
       delButton: Boolean,
+      
     },
     computed: {
       myFavorites: function () {

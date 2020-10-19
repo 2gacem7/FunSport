@@ -83,6 +83,7 @@
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id"
                 :matchId="favorite.data[0].match_id"
+                :sport="favorite.data[0].sport"
                 :apiName="favorite.data[0].apiName"
               v-on:delfavorite="delToMyFavorites" />
               <DisplayFavoriteNews v-if="
