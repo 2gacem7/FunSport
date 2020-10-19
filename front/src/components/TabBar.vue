@@ -28,6 +28,11 @@
         <a v-else class="nav-link" href="#" @click="goManageUsers">Manage Users</a>
       </li>
       <li v-show="$store.state.UserData.isAdmin === true" class="nav-item">
+        <a v-if="$store.state.tabSelected.name == 'ManageNews'" class="nav-link active" @click="goManageNews">Manage
+          News</a>
+        <a v-else class="nav-link" href="#" @click="goManageNews">Manage News</a>
+      </li>
+      <li v-show="$store.state.UserData.isAdmin === true" class="nav-item">
         <a v-if="$store.state.tabSelected.name == 'ManageCommentary'" class="nav-link active"
           @click="goManageCommentary">Manage
           Commentary</a>
@@ -98,6 +103,17 @@
           });
           this.$router.push({
             name: "ManageUsers"
+          });
+        }
+      },
+      goManageNews() {
+        if (this.$store.state.tabSelected.name != "ManageNews") {
+          this.$store.commit("setTabSelected", {
+            id: 101,
+            name: "ManageNews"
+          });
+          this.$router.push({
+            name: "ManageNews"
           });
         }
       },
