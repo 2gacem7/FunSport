@@ -95,7 +95,7 @@ export default {
    * Methods used to return a extract of the content
    * @public
    */
-    getResume(content="") {
+    getResume(content) {
       return content.substr(0, 50);
     },
     /**
