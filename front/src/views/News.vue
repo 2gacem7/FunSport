@@ -11,7 +11,8 @@
         </option>
       </select>
     </div>
-
+<div class="card m-2" v-if="listNews.length == 0">No result for you</div>
+  <div v-else>
     <div v-for="news in listNews" :key="news.id" class="card m-2">
       <h2>Title : {{ news.title }}</h2>
       <span
@@ -34,6 +35,8 @@
         </button>
       </div>
     </div>
+    </div>
+
   </div>
 </template>
 
