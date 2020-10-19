@@ -10,7 +10,9 @@
       >
       <span>Sport: {{ news.sport }}</span>
       <span>Author: {{ news.author }}</span>
-      <span>Resume : {{ news.content }}</span>
+
+      <v-md-preview :text="getResume(news.content)"></v-md-preview>
+
       <div class="d-flex justify-content-between">
         <button class="btn btn-primary w-25" @click="goToNews(news)">
           View
@@ -66,6 +68,9 @@ export default {
     this.getNews();
   },
   methods: {
+    getResume(content) {
+      return content.substr(0, 50);
+    },
     /**
      * Methods used to get all news to display them
      * @public
@@ -83,16 +88,16 @@ export default {
       this.listNews = list;
     },
     addToMyFavorites(newsId) {
-      console.log("Todo",newsId);
+      console.log("Todo", newsId);
     },
     goToNews(news) {
       this.$router.push({
-          name: "detailNews",
-          params: {
-            newsId: news._id,
-            datas: news,
-          },
-        });
+        name: "detailNews",
+        params: {
+          newsId: news._id,
+          datas: news,
+        },
+      });
     },
   },
 };
