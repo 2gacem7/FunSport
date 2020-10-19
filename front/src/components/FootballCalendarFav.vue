@@ -22,7 +22,7 @@
                     </div>
 
                 </div>
-                <p class="text-center mt-3 mb-5">{{item.match_date}} at {{item.match_time}}</p>
+                <p class="text-center mt-3 mb-5">{{ item.match_date | moment("MMMM Do YYYY") }}at {{ item.match_time| moment("h:mm:ss")}}</p>
             </div>
         </div>
         <button class="btn btn-danger p-1" style="width:100%" @click="delToMyFavorites()">Unfav</button>

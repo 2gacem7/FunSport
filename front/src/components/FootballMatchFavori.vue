@@ -9,7 +9,7 @@
             <div v-for="item in info" :key="item.id">
                 <p class="text-center font-weight-bold">{{item.match_round}}</p>
                 <p class="text-center mt-3 mb-5">
-                    {{item.match_date}} at {{item.match_time}}
+                    {{ item.match_date | moment("MMMM Do YYYY") }}at {{ item.match_time| moment("h:mm:ss")}}
                 </p>
                 <div class="row d-flex justify-content-center ml-2">
                     <div>
@@ -98,7 +98,6 @@
                 .then(result => this.info = result)
                 .catch(error => console.log('error', error));
         },
-
         methods: {
             /**
              * Remove this team from my favorites
@@ -116,7 +115,6 @@
             return_Link_Home(item) {
                 return item.team_home_badge;
             },
-
             /**
              * Return link to img for display badge away team in card
              *
@@ -140,7 +138,6 @@
                 }
             },
         },
-
     };
 </script>
 

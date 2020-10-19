@@ -57,7 +57,7 @@
 
                 </div>
                 <p class="text-center mt-3 mb-5">
-                    {{item.match_date}} at {{item.match_time}}<br />
+                    {{ item.match_date | moment("MMMM Do YYYY") }} at {{ item.match_time| moment("h:mm:ss")}}<br />
                     <button class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
                         @click="addMatchToMyFavorite(item)">ADD</button></p>
             </div>
