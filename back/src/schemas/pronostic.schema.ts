@@ -1,12 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { User } from '../schemas/user.schema';
+
 
 /**
  * This collection collects all pronotics and the commentary associated
  */
 @Schema()
 export class Pronostic extends Document {
-  /** 
+  /**
    * id user given in Model<User>
    */
   @Prop()
@@ -19,7 +21,7 @@ export class Pronostic extends Document {
   matchId: string;
 
   /**
-   * name of the sport 
+   * name of the sport
    */
   @Prop()
   type: string;
@@ -35,6 +37,25 @@ export class Pronostic extends Document {
    */
   @Prop()
   commentary: string;
+
+  /**
+   * boolean true if the commentary is signaled
+   */
+  @Prop()
+  isReported: boolean;
+
+  /**
+   * name of the author
+   */
+  @Prop()
+  authorName: User;
+
+  /**
+   * date of creation of the commentary
+   */
+  @Prop()
+  createdAt: string;
+
 }
 
 /**

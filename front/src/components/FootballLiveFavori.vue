@@ -1,11 +1,14 @@
 <template>
     <div class="m-3 card" style="max-height: 30rem; max-width: 50rem; min-width: 30rem">
         <div class="card-header d-flex justify-content-between">
-            <h3 v-if="info[0]" class="text-dark text-center">{{ info[0].league_name }} Live</h3>
+            <h3 class="text-dark text-center">Live</h3>
         </div>
         <h3 class="card-header text-center text-dark">Match on live</h3>
         <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
-            <div class="border-bottom mb-5" v-for="item in info" :key="item.id">
+            <div class="text-dark text-center font-weight-bold" v-if="info.error == 404">
+                No live available
+            </div>
+            <div v-else class="border-bottom mb-5" v-for="item in info" :key="item.id">
                 <p class="text-center font-weight-bold">
                     {{ item.match_round }} {{ item.match_time }}
                 </p>
@@ -41,7 +44,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -49,10 +51,12 @@
     </div>
 </template>
 
-
 <script>
     import ENV from "../../env.config";
-
+    /**
+     * Component card for display all teams
+     * @displayName FootballLiveFavori
+     */
     export default {
         name: "FootballLiveFavori",
 
@@ -64,9 +68,18 @@
             };
         },
         props: {
+            /**
+             * The id of this card
+             */
             id: "",
             sport: String, // String display in the header
+            /**
+             * The button for del this card in favorite
+             */
             delButton: Boolean,
+            /**
+             * The league id of the league
+             */
             league_id: String
         },
         async mounted() {
@@ -99,7 +112,6 @@
                 .then((response) => response.json())
                 .then((result) => {
                     this.info = result;
-                    console.log(this.info)
                     if (this.setTimer == "") {
                         this.setTimer = setInterval(() => {
                             this.getInfos();
@@ -110,14 +122,27 @@
         },
 
         methods: {
+            /**
+             * Remove this team from my favorites
+             *
+             * @public
+             */
             delToMyFavorites() {
                 this.$emit("delfavorite", this.id);
             },
-
+            /**
+             * Return link to img for display team (home) badge in card
+             *
+             * @public
+             */
             return_Link_Home(item) {
                 return item.team_home_badge;
             },
-
+            /**
+             * Return link to img for display team (away) badge in card
+             *
+             * @public
+             */
             return_Link_Away(item) {
                 return item.team_away_badge;
             },

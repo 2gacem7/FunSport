@@ -34,6 +34,10 @@
             class="card m-3"
           >
             <div class="card-header">
+              <button v-if="$store.state.UserData.id != ''"
+                class="btn btn-success btn-sm rounded-circle mb-2 btnADD" @click="addMatchToMyFavorite(match.id)">
+                ADD
+              </button>
               Scheduled at:
               {{ match.scheduled_at | moment("MMMM Do YYYY, h:mm:ss") }}
             </div>
@@ -109,6 +113,10 @@ export default {
      * The api name (ex: football, cs-go, etc...)
      */
     apiName: String, // String used to search info for 1 sport in getInfos
+     /**
+       * The type of sport of this card
+       */
+      sport: String, // String display in the header
   },
   data() {
     return {
@@ -118,6 +126,19 @@ export default {
     };
   },
   methods: {
+    addMatchToMyFavorite(matchId){
+        this.$store.dispatch("addToMyFavorites", {
+          id: this.$store.state.tabSelected.id,
+          data: {
+            sport: this.sport,
+            type: "matches",
+            matchId: matchId,
+            apiName:this.apiName
+
+          },
+        });
+
+    },
     goViewMatch(matchId) {
       let data;
       for (let key in this.results) {

@@ -73,15 +73,7 @@ export class PronosticsController {
     }
   }
 
-  /**
-  * Controller give all pronostics for one match id
-  * @param {string} matchId
-  * @return {Pronostic[]}
-  */
-  @Get(':matchId')
-  async findOne(@Param('matchId') matchId: string): Promise<any> {
-    return this.pronosticsService.findPronosticForOneMatchId(matchId);
-  }
+
 
   /**
    * Controller delete a specific pronostic
@@ -120,4 +112,46 @@ export class PronosticsController {
       return this.pronosticsService.resetCommentary(pronosticId);
     }
   }
+
+   /**
+ * Controller used to validate a commentary
+ * You need to be connected to access to this route and to be isAdmin
+ * @return {Pronotic}
+ */
+@UseGuards(JwtAuthGuard)
+@Get(':pronosticId/validate')
+async validateCommentary(@Request() req, @Param('pronosticId') pronosticId: string): Promise<Pronostic> {
+  const isAdmin = await this.usersService.isAdmin(req.user.id);
+  if (!isAdmin) {
+    throw new HttpException({
+      message: 'Unauthorized Access',
+    }, HttpStatus.UNAUTHORIZED);
+  }
+  else {
+    return this.pronosticsService.validateCommentary(pronosticId);
+  }
+}
+
+   /**
+ * Controller used to report a specific commentary
+ * You need to be connected to access to this route
+ * @return {Pronotic}
+ */
+@UseGuards(JwtAuthGuard)
+@Get(':pronosticId/report')
+async reportCommentary( @Param('pronosticId') pronosticId: string): Promise<Pronostic> {
+  return this.pronosticsService.reportCommentary(pronosticId);
+
+}
+
+
+/**
+  * Controller give all pronostics for one match id
+  * @param {string} matchId
+  * @return {Pronostic[]}
+  */
+ @Get(':apiName/:matchId')
+ async findOne(@Param('matchId') matchId: string, @Param('apiName') apiName: string): Promise<any> {
+   return this.pronosticsService.findPronosticForOneMatchId(apiName,matchId);
+ }
 }

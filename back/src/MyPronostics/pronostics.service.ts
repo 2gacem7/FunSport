@@ -5,6 +5,8 @@ import { Pronostic } from '../schemas/pronostic.schema';
 import { HttpException, HttpStatus } from '@nestjs/common'
 
 import { CreatePronosticDto } from '../dto/create-pronostic.dto';
+import { User } from '../schemas/user.schema';
+
 
 /**
  * Service used to manage all action available in PronosticsService
@@ -14,7 +16,8 @@ export class PronosticsService {
   /**
    * Constructor for PronosticsService
    */
-  constructor(@InjectModel(Pronostic.name) private pronosticModel: Model<Pronostic>
+  constructor(@InjectModel(Pronostic.name) private pronosticModel: Model<Pronostic>,
+  @InjectModel(User.name) private userModel: Model<User>,
   ) {
   }
 
@@ -31,7 +34,9 @@ export class PronosticsService {
       matchId: createPronosticDto.matchId,
       type: createPronosticDto.type,
       winnerId: createPronosticDto.winnerId,
-      commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : "")
+      commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : ""),
+      isReported: false,
+      createdAt:createPronosticDto.createdAt
     })
     return createdPronostic.save();
   }
@@ -42,7 +47,7 @@ export class PronosticsService {
    * @return {Pronotic[]}
    */
   async findAll(): Promise<any> {
-    return this.pronosticModel.find({});
+    return this.pronosticModel.find({isReported:true});
   }
 
   /**
@@ -51,9 +56,13 @@ export class PronosticsService {
    * @param {string} matchId
    * @returns {Pronostic[]}
    */
-  async findPronosticForOneMatchId(matchId: string): Promise<any> {
-    const pronostic = await this.pronosticModel.find({ 'matchId': matchId }).exec();
-    return pronostic;
+  async findPronosticForOneMatchId(apiName:string, matchId: string): Promise<any> {
+    let pronostics = await this.pronosticModel.find({ 'matchId': matchId, 'type':apiName});
+    for (let i = 0; i < pronostics.length; i++){
+      let name = await this.userModel.findById(pronostics[i].userId).select('firstName');
+      pronostics[i].authorName = name
+    }
+    return pronostics;
   }
 
   /**
@@ -84,6 +93,7 @@ export class PronosticsService {
     const newPronostic = await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId, type: createPronosticDto.type });
     newPronostic.winnerId = createPronosticDto.winnerId
     newPronostic.commentary = (createPronosticDto.commentary ? createPronosticDto.commentary : "")
+    newPronostic.isReported = false
     return newPronostic.save();
   }
 
@@ -96,6 +106,35 @@ export class PronosticsService {
   async resetCommentary(pronosticId) {
     const newPronostic = await this.pronosticModel.findById(pronosticId);
     newPronostic.commentary = ""
+    newPronostic.isReported = false
+    return newPronostic.save();
+
+  }
+
+
+  /**
+  * Service used to validate a commentary
+  * You need to be connected to access to this route and to be isAdmin
+  * @param {String} pronosticId id of the pronostic
+  * @return  {Pronostic}
+  */
+  async validateCommentary(pronosticId) {
+    const newPronostic = await this.pronosticModel.findById(pronosticId);
+    newPronostic.isReported = false
+    return newPronostic.save();
+
+  }
+
+
+  /**
+  * Service used to report a commentary
+  * You need to be connected to access to this route and to be isAdmin
+  * @param {String} pronosticId id of the pronostic
+  * @return  {Pronostic}
+  */
+  async reportCommentary(pronosticId) {
+    const newPronostic = await this.pronosticModel.findById(pronosticId);
+    newPronostic.isReported = true
     return newPronostic.save();
 
   }
