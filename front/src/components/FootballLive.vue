@@ -11,16 +11,18 @@
         <option value="468">Liga</option>
         <option value="176">Ligue 1</option>
         <option value="262">Serie A</option>
-        <option value="195">Bundesliga</option>
+        <option value="435">Bundesliga</option>
       </select>
+      <button v-if="league_id !== ''"
+                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+                + favori
+            </button>
     </div>
     <h3 class="card-header text-center text-dark">Match on live</h3>
-    <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
-        
+    <div class="card-body m-0 p-0 w-100 overflow-auto text-dark"> 
     <div class="text-dark text-center font-weight-bold" v-if="info.error == 404">
         No live available
     </div>
-
       <div v-else class="border-bottom mb-5" v-for="item in info" :key="item.id" >
         <p class="text-center font-weight-bold">
           {{ item.match_round }} {{ item.match_time }}
@@ -83,10 +85,10 @@ export default {
     return {
       info: {},
       infoLive: {},
-      league_id: "",
       timer: 600000,
       setTimer: "",
       Home: "",
+      league_id:""
     };
   },
   props: {
@@ -94,6 +96,7 @@ export default {
     sport: String, // String display in the header
     apiName: String, // String used to search info for 1 sport in getInfos
     delButton: Boolean,
+    
   },
   beforeMount() {
     this.getInfos();

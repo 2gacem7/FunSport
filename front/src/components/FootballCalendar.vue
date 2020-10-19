@@ -50,7 +50,9 @@
                     </div>
 
                 </div>
-                <p class="text-center mt-3 mb-5">{{item.match_date}} at {{item.match_time}}</p>
+                <p class="text-center mt-3 mb-5">
+                    {{item.match_date}} at {{item.match_time}}<br/>
+                    <button class="btn btn-success btn-sm rounded-circle mb-2 btnADD" @click="addMatchToMyFavorite(item)">ADD</button></p>
             </div>
         </div>
     </div>
@@ -69,8 +71,8 @@
 
         data() {
             return {
-                info: {},
-                infoRanking: {},
+                info: [],
+                infoRanking: [],
                 id_tournament: "",
             };
         },
@@ -95,6 +97,23 @@
         },
 
         methods: {
+            /**
+             * Add this match to my favorites
+             *
+             * @public
+             */
+            addMatchToMyFavorite(item) {
+                const matchId = item.match_id;
+                this.$store.dispatch("addToMyFavorites", {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: "football",
+                        type: "matchFavori",
+                        match_id: matchId
+                    },
+                });
+                this.getInfos();
+            },
             /**
              * Add this components to my favorites
              *
@@ -130,7 +149,7 @@
                     redirect: 'follow'
                 };
                 await fetch(
-                        "https://apiv2.apifootball.com/?action=get_events&from=2020-08-01&to=2021-06-30&league_id=" +
+                        "https://apiv2.apifootball.com/?action=get_events&from=2020-08-03&to=2021-06-30&league_id=" +
                         this.id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
                         requestOptions)
                     .then(response => response.json())
