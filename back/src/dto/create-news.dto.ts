@@ -25,7 +25,7 @@ export class CreateNewsDto {
    * User name
    */
   @IsOptional()
-  author: User;
+  author: string;
 
   /**
    * date of the creation of the news

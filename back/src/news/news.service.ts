@@ -35,7 +35,7 @@ export class NewsService {
       title: createNewsDto.title,
       content: createNewsDto.content,
       sport: createNewsDto.sport,
-      author: user.firstName + " " + user.lastName,
+      author: user.id,
       createdAt: Date.now(),
     })
     return createdPronostic.save();
@@ -46,7 +46,13 @@ export class NewsService {
    * @return {News[]}
    */
   async findAll(): Promise<any> {
-    return this.newsModel.find();
+    let news = await this.newsModel.find();
+    for (let i = 0; i < news.length; i++){
+        let firstName = await this.userModel.findById(news[i].author).select('firstName');
+        let lastName = await this.userModel.findById(news[i].author).select('lastName');
+        news[i].author = firstName.firstName + " " + lastName.lastName;
+      }
+    return news;
   }
 
   /**

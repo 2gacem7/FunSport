@@ -29,7 +29,7 @@ export class News extends Document {
    * User name
    */
   @Prop()
-  author: User;
+  author: string;
 
   /**
    * date of the creation of the news
