@@ -6,6 +6,8 @@ import MyProfile from "../views/MyProfile.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ManageUsers from "../views/ManageUsers.vue";
 import ManageCommentary from "../views/ManageCommentary.vue";
+import ManageNews from "../views/ManageNews.vue";
+
 import News from "../views/News.vue";
 
 
@@ -43,6 +45,11 @@ const routes = [
     path: "/manageusers",
     name: "ManageUsers",
     component: ManageUsers
+  },
+  {
+    path: "/managenews",
+    name: "ManageNews",
+    component: ManageNews
   },
   {
     path: "/news",
