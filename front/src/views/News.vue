@@ -28,7 +28,7 @@
           View
         </button>
         <button
-        v-if="$store.state.UserData.id != ''"
+        v-if="$store.state.UserData.id != '' && !isInMyFavorite(news._id)"
           class="btn btn-primary w-25"
           @click="addToMyFavorites(news)"
         >
@@ -91,7 +91,25 @@ export default {
   mounted() {
     this.getNews();
   },
+  computed:{
+
+
+  },
   methods: {
+    /**
+     * Check if this sport live is in favorite user
+     *
+     * @public
+     */
+    isInMyFavorite(newsId) {
+      for (let i=0; i< this.$store.state.MyFavorites.length; i++){
+        if (this.$store.state.MyFavorites[i].data[0].type == "news" && this.$store.state.MyFavorites[i].data[0].name == newsId) {
+          return true;
+        }
+      }
+      return false;
+    },
+
     /**
    * Methods used to return a extract of the content
    * @public
