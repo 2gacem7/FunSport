@@ -18,6 +18,7 @@
           No commentary available for this match
         </div>
         <div v-else>
+
           <div
             class="card m-2"
             v-for="commentary in commentaries"
@@ -27,9 +28,8 @@
               <div class="card-header d-flex">
                 <span
                   >Post the
-                  {{ commentary.createdAt | moment("MMMM Do YYYY, h:mm  ") }} by
-                  {{ commentary.author }}: Winner
-                  {{ commentary.winnerId }}</span
+                  {{ commentary.createdAt | moment("MMMM Do YYYY, h:mm") }} by
+                  {{ commentary.userId }}</span
                 >
                 <button
                   v-if="!commentary.isReported && $store.state.UserData.id!=''"
@@ -125,10 +125,10 @@ export default {
         headers: header,
       };
       await fetch(
-        `http://localhost:3000/news/${commentaryId}/report`,
+        `http://localhost:3000/commentaries/${commentaryId}/report`,
         options
       ).then(() => {
-        this.getPronostics();
+        this.getCommentaries();
       });
     },
     /**
@@ -166,8 +166,10 @@ export default {
             commentary: this.commentaryInput,
           }),
         };
-        await fetch(`http://localhost:3000/news`, options).then(() => {
+        await fetch(`http://localhost:3000/commentaries`, options).then(() => {
           this.getCommentaries();
+                this.commentaryInput= ""
+
         });
       } else {
         alert("Type your commentary before");
@@ -185,7 +187,7 @@ export default {
         method: "GET",
       };
       const datas = await fetch(
-        `http://localhost:3000/news/${this.newsId}`,
+        `http://localhost:3000/commentaries/${this.newsId}`,
         options
       );
       const json = await datas.json();
