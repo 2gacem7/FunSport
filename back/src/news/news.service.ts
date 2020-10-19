@@ -59,6 +59,15 @@ export class NewsService {
     return this.newsModel.find({ 'sport': sport});
   }
 
+  /**
+   * Service used to give one news
+   * @return {News}
+   */
+  async findById(id): Promise<any> {
+    return this.newsModel.findById(id);
+  }
+
+
    /**
    * Service used to delete a specific pronostic
    * You need to be connected to access to this route

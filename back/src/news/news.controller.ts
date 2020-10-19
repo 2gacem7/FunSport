@@ -68,9 +68,18 @@ export class NewsController {
    * Controller give all news in the database
    * @return {News[]}
    */
-  @Get(":sport")
+  @Get("/filter/:sport")
   async findBySport(@Param('sport') sport: string): Promise<News[]> {
       return this.newsService.findBySport(sport);
+  }
+
+  /**
+   * Controller give one news in the database
+   * @return {News}
+   */
+  @Get(":id")
+  async findById(@Param('id') id: string): Promise<News> {
+      return this.newsService.findById(id);
   }
 
   /**
