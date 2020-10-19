@@ -28,10 +28,10 @@ export default new Vuex.Store({
     setSports(state, payload) {
       state.sports = payload;
       state.tabSelected = {
-        id: state.sports[0]._id,
-        name: state.sports[0].name
+        id: 1,
+        name: "News"
       };
-      state.backRouteName = "news";
+      state.backRouteName = "News";
     },
     setTabSelected(state, payload) {
       state.tabSelected = payload;

@@ -83,6 +83,10 @@
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :matchId="favorite.data[0].matchId" :apiName="favorite.data[0].apiName"
               v-on:delfavorite="delToMyFavorites" />
+              <DisplayFavoriteNews v-if="
+                favorite.data[0].type == 'news'"
+               :id="favorite._id" :newsId="favorite.data[0].name"
+              v-on:delfavorite="delToMyFavorites" />
             <FootballTournament v-if="
                 favorite.data[0].type == 'tournament' &&
                 favorite.data[0].sport == 'football'
@@ -107,6 +111,14 @@
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
               :leagueName="favorite.data[0].leagueName" v-on:delfavorite="delToMyFavorites" />
+            <FootballLiveFavori v-if="
+                favorite.data[0].type == 'live' &&
+                favorite.data[0].sport == 'football'
+              " :id="favorite._id" :league_id="favorite.data[0].league_id" v-on:delfavorite="delToMyFavorites" />
+            <FootballMatchFavori v-if="
+                favorite.data[0].type == 'matchFavori' &&
+                favorite.data[0].sport == 'football'
+              " :id="favorite._id" :match_id="favorite.data[0].match_id" v-on:delfavorite="delToMyFavorites" />
           </div>
         </div>
       </div>
@@ -127,9 +139,11 @@
   import FootballCalendarFav from "@/components/FootballCalendarFav.vue";
   import FootballTeamFavorite from "@/components/FootballTeamFavorite.vue";
   import FavoriteRanking from "@/components/FavoriteRanking.vue";
-
+  import FootballLiveFavori from "@/components/FootballLiveFavori.vue";
+  import FootballMatchFavori from "@/components/FootballMatchFavori.vue";
   import EsportTeam from "@/components/EsportTeam.vue";
-    import DisplayFavoriteMatch from "@/components/DisplayFavoriteMatch.vue";
+  import DisplayFavoriteMatch from "@/components/DisplayFavoriteMatch.vue";
+  import DisplayFavoriteNews from "@/components/DisplayFavoriteNews.vue";
 
   /**
    * View where you can find all tyour favorite's components and your favorite's sports
@@ -150,7 +164,11 @@
       FootballCalendarFav,
       FootballTeamFavorite,
       FavoriteRanking,
-      DisplayFavoriteMatch
+      DisplayFavoriteMatch,
+      DisplayFavoriteNews,
+      FootballLiveFavori,
+      FootballMatchFavori,
+
     },
     data() {
       return {

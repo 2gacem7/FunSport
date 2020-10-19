@@ -19,23 +19,41 @@
               style="width: 100%; border-bottom: 1px solid silver"
             >
               <div class="row" style="width: 100%">
-                <p class="m-2">Sport: {{ commentary.type }}</p>
+                <p v-if="!commentary.newsId" class="m-2">Sport: {{ commentary.type }}</p>
+                <p v-else class="m-2">News</p>
               </div>
               <div class="row" style="width: 100%">
                 <p class="m-2">Commentary: {{ commentary.commentary }}</p>
               </div>
-              <button
-                class="btn btn-warning mr-2"
-                @click="validateCommentary(commentary._id)"
-              >
-                Validate Commentary
-              </button>
-              <button
-                class="btn btn-danger mr-2"
-                @click="moderateCommentary(commentary._id)"
-              >
-                Moderate Commentary
-              </button>
+              <div v-if="!commentary.newsId">
+                <button
+                  class="btn btn-warning mr-2"
+                  @click="validateCommentary(commentary._id)"
+                >
+                  Validate Commentary
+                </button>
+                <button
+                  class="btn btn-danger mr-2"
+                  @click="moderateCommentary(commentary._id)"
+                >
+                  Moderate Commentary
+                </button>
+              </div>
+              <div v-else>
+                <button
+                  class="btn btn-warning mr-2"
+                  @click="validateNewsCommentary(commentary._id)"
+                >
+                  Validate Commentary
+                </button>
+
+                <button
+                  class="btn btn-danger mr-2"
+                  @click="moderateNewsCommentary(commentary._id)"
+                >
+                  Moderate Commentary
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -73,8 +91,18 @@ export default {
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
         },
-      }).then((res) => console.log(res));
-      this.getCommentary();
+      }).then(() => {this.getCommentary()});
+    },
+    async moderateNewsCommentary(commentaryID) {
+      this.$store.commit("setAccessToken");
+
+      await fetch(`http://localhost:3000/commentaries/${commentaryID}/delete`, {
+        method: "DELETE",
+        headers: {
+          authorization: "Bearer " + this.$store.state.access_token,
+        },
+      }).then(() => {this.getCommentary()});
+      ;
     },
     async validateCommentary(commentaryID) {
       this.$store.commit("setAccessToken");
@@ -85,10 +113,22 @@ export default {
           authorization: "Bearer " + this.$store.state.access_token,
         },
       }).then(() => {this.getCommentary()});
-      ;
+    },
+    async validateNewsCommentary(commentaryID) {
+      this.$store.commit("setAccessToken");
+
+      await fetch(
+        `http://localhost:3000/commentaries/${commentaryID}/validate`,
+        {
+          method: "GET",
+          headers: {
+            authorization: "Bearer " + this.$store.state.access_token,
+          },
+        }
+      ).then(() => {this.getCommentary()});
     },
     async getCommentary() {
-      let list = [];
+      let listPronostics = [];
       await fetch("http://localhost:3000/pronostics", {
         method: "GET",
         headers: {
@@ -96,8 +136,18 @@ export default {
         },
       })
         .then((res) => res.clone().json())
-        .then((json) => (list = json));
-      this.listCommentary = list;
+        .then((json) => (listPronostics = json));
+
+      let listCommentaries = [];
+      await fetch("http://localhost:3000/commentaries", {
+        method: "GET",
+        headers: {
+          authorization: "Bearer " + this.$store.state.access_token,
+        },
+      })
+        .then((res) => res.clone().json())
+        .then((json) => (listCommentaries = json));
+      this.listCommentary = listPronostics.concat(listCommentaries);
     },
   },
 };

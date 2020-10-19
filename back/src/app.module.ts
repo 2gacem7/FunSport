@@ -11,8 +11,12 @@ import { MySportsModule } from './MySports/MySports.module';
 import { MyFavoritesController } from './MyFavorites/MyFavorites.controller';
 import { MyFavoritesModule } from './MyFavorites/MyFavorites.module';
 import { SportsModule } from './sports/sports.module';
+import { NewsModule } from './news/news.module';
+import { NewsController } from './news/news.controller';
+import { CommentariesModule } from './commentaries/commentaries.module';
+
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/funsport'), UsersModule, AuthModule,MySportsModule, MyFavoritesModule, SportsModule, PronosticsModule],
+  imports: [MongooseModule.forRoot('mongodb://localhost/funsport'), UsersModule, AuthModule,MySportsModule, MyFavoritesModule, SportsModule, PronosticsModule, NewsModule, CommentariesModule],
   controllers: [AppController,MySportsController,MyFavoritesController],
   providers: [AppService],
 })
