@@ -32,7 +32,7 @@
                   {{ commentary.winnerId }}</span
                 >
                 <button
-                  v-if="!commentary.isReported"
+                  v-if="!commentary.isReported && $store.state.UserData.id!=''"
                   class="btn btn-primary mr-2 ml-auto"
                   @click="reportCommentary(commentary._id)"
                 >

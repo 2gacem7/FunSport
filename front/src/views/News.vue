@@ -28,6 +28,7 @@
           View
         </button>
         <button
+        v-if="$store.state.UserData.id != ''"
           class="btn btn-primary w-25"
           @click="addToMyFavorites(news._id)"
         >
