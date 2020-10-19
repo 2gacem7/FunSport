@@ -18,7 +18,6 @@
                             style="max-width: 4rem" />
                         {{infoMatch[0].match_hometeam_score}}</p>
                 </div>
-
                 <div v-if="infoMatch[0]" class="ml-5">
                     <p class="font-weight-bold text-center">{{infoMatch[0].match_awayteam_name}}</p>
                     <p class="font-weight-bold text-center"> {{infoMatch[0].match_awayteam_score}} <img
@@ -27,7 +26,7 @@
                     </p>
                 </div>
                 <p class="row justify-content-center font-weight-bold">Actual pronostics</p>
-                <div class="row justify-content-center" v-if="infoMatch[0].match_status !== 'Finished'">
+                <div class="row justify-content-center" v-if="resultPronostic[0] && resultPronostic[0].count || resultPronostic[1] && resultPronostic[1].count">
                     <p>Winner:{{Math.round((resultPronostic[0].count/ totalPronostic) * 100)}}%</p>
                     <p class="ml-5" v-if="resultPronostic[1]">
                         Winner:{{Math.round((resultPronostic[1].count/ totalPronostic) * 100)}}%</p>
@@ -35,10 +34,8 @@
                 <div v-else>
                     No pronostic for this match
                 </div>
-
             </div>
         </div>
-
         <div class="card m-2">
             <h3>Commentaries</h3>
             <div v-if="commentaries.length == 0">
@@ -52,7 +49,6 @@
                                 {{ commentary.authorName.firstName }}: Winner {{ commentary.winnerId }}</span>
                             <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto"
                                 @click="reportCommentary(commentary._id)">Report this commentary</button>
-
                         </div>
                         <div class="card-body">
                             <span v-if="commentary.isReported"> Commentary reported. Waiting the admin's moderation
@@ -63,8 +59,6 @@
                 </div>
             </div>
         </div>
-
-
         <div v-if="infoMatch[0].match_status !== 'Finished'" class="card m-2">
             <h3>Do you want to pronostic this match?</h3>
             <select v-model="winnerInput">
@@ -82,12 +76,7 @@
                 Send pronostic
             </button>
         </div>
-
-
-
     </div>
-
-
 </template>
 
 <script>
