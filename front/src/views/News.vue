@@ -28,6 +28,7 @@
           View
         </button>
         <button
+        v-if="$store.state.UserData.id != ''"
           class="btn btn-primary w-25"
           @click="addToMyFavorites(news._id)"
         >
@@ -55,8 +56,8 @@ import DisplayRanking from "@/components/DisplayRanking.vue";
 import DisplaySearch from "@/components/DisplaySearch.vue";
 
 /**
- * View where you can find all components for the DOTA2 game
- * @displayName DOTA2
+ * View where you can find all news
+ * @displayName News
  */
 export default {
   name: "News",
@@ -73,14 +74,28 @@ export default {
   },
   data() {
     return {
+      /**
+       * array containing  all news available
+       */
       listNews: [],
+      /**
+       * id for the element selected in select HTML
+       */
       sportSelected: "ALL",
     };
   },
+  /**
+   * This hook is used to get news
+   * @public
+   */
   mounted() {
     this.getNews();
   },
   methods: {
+    /**
+   * Methods used to return a extract of the content
+   * @public
+   */
     getResume(content) {
       return content.substr(0, 50);
     },
@@ -106,9 +121,17 @@ export default {
         .then((json) => (list = json));
       this.listNews = list;
     },
+    /**
+     * This method is used to add a news in your favorite
+     * @public
+     */
     addToMyFavorites(newsId) {
       console.log("Todo", newsId);
     },
+    /**
+     * This method is used to go in detailNews
+     * @public
+     */
     goToNews(news) {
       this.$router.push({
         name: "detailNews",

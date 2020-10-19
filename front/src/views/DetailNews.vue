@@ -5,48 +5,58 @@
     <button class="btn btn-primary" @click="go">Back</button>
 
     <div class="card m-2 p-2">
-
-      <span>Create at: {{ datas.createdAt | moment("MMMM Do YYYY, h:mm:ss") }} by: {{ datas.authorName}} </span><br />
-
-      <span>Sport : {{ datas.sport}} </span>
-
+      <span
+        >Create at: {{ datas.createdAt | moment("MMMM Do YYYY, h:mm:ss") }} by:
+        {{ datas.author }} </span
+      ><br />
+      <span>Sport : {{ datas.sport }} </span>
       <label>Content: </label><br />
-
       <v-md-preview :text="datas.content"></v-md-preview>
-
-
-    <div class="card m-2">
-      <h3>Commentaries</h3>
-      <div v-if="commentaries.length == 0">
-        No commentary available for this match
-      </div>
-      <div v-else>
-        <div class="card m-2" v-for="commentary in commentaries" :key="commentary.id">
-          <div v-if="commentary.commentary != ''">
-            <div class="card-header d-flex">
-              <span>Post the {{ commentary.createdAt  | moment("MMMM Do YYYY, h:mm  ")}} by {{ commentary.authorName.firstName }}: Winner {{ commentary.winnerId }}</span>
-                          <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto" @click="reportCommentary(commentary._id)">Report this commentary</button>
-            </div>
-            <div class="card-body">
-              <span v-if="commentary.isReported"> Commentary reported. Waiting the admin's moderation </span>
-              <span v-else>  {{ commentary.commentary }} </span>
+      <div class="card m-2">
+        <h3>Commentaries</h3>
+        <div v-if="commentaries.length == 0">
+          No commentary available for this match
+        </div>
+        <div v-else>
+          <div
+            class="card m-2"
+            v-for="commentary in commentaries"
+            :key="commentary.id"
+          >
+            <div v-if="commentary.commentary != ''">
+              <div class="card-header d-flex">
+                <span
+                  >Post the
+                  {{ commentary.createdAt | moment("MMMM Do YYYY, h:mm  ") }} by
+                  {{ commentary.author }}: Winner
+                  {{ commentary.winnerId }}</span
+                >
+                <button
+                  v-if="!commentary.isReported && $store.state.UserData.id!=''"
+                  class="btn btn-primary mr-2 ml-auto"
+                  @click="reportCommentary(commentary._id)"
+                >
+                  Report this commentary
+                </button>
+              </div>
+              <div class="card-body">
+                <span v-if="commentary.isReported">
+                  Commentary reported. Waiting the admin's moderation
+                </span>
+                <span v-else> {{ commentary.commentary }} </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div v-if="$store.state.UserData.id != ''">
+        <h3>Your commentary</h3>
+        <input v-model="commentaryInput" />
+        <button class="btn btn-primary m-2" @click="sendCommentary">
+          Send commentary
+        </button>
+      </div>
     </div>
-    <div
-      v-if="$store.state.UserData.id != '' "
-
-    >
-
-      <h3>Your commentary</h3>
-      <input v-model="commentaryInput" />
-      <button class="btn btn-primary m-2" @click="sendCommentary">
-        Send commentary
-      </button>
-    </div>
-  </div>
   </div>
 </template>
 
@@ -68,7 +78,9 @@ export default {
   },
   data() {
     return {
-
+      /**
+       * id for a specific news
+       */
       newsId: "",
 
       /**
@@ -96,6 +108,10 @@ export default {
   },
 
   methods: {
+    /**
+     * This method is used to report a specific commentary
+     * @public
+     */
     async reportCommentary(commentaryId) {
       this.$store.commit("setAccessToken");
       const header = new Headers();
@@ -103,7 +119,6 @@ export default {
         "Authorization",
         "Bearer " + this.$store.state.access_token
       );
-
       const body = new FormData();
       let options = {
         method: "GET",
@@ -120,7 +135,10 @@ export default {
      * This method is used to go back in terms of variable in $store.state.tabSelected
      * @public
      */
-    go() {
+    go() {/**
+     * This method is used to go in detailNews
+     * @public
+     */
       this.$router.push({ name: this.$store.state.tabSelected.name });
     },
 
