@@ -1,7 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
     <div class="card-header text-dark justify-content-between">
-      <tbody v-for="item in info" :key="item.id">
+      <!-- <tbody v-for="item in infos" :key="item.id">
         <tr>
           <td class="text-center">
             <p class="m-0 font-weight-bold">Start:</p>
@@ -12,15 +12,16 @@
               {{ item.end_at | moment("MMMM Do YYYY") }}</span>
           </td>
           <td class="text-center">
-            {{ item.league.name }}
+            {{ item.league}}
             <img :src="return_Link(item)" style="max-width: 7rem" class="mb-5" alt="no league image" />
           </td>
-          <td class="text-center">{{ item.name }}</td>
+          <td class="text-center">{{ item }}</td>
           <td v-if="item.winner != null" class="text-center">
-            {{ item.winner.name }}
+            {{ item.winner}}
           </td>
         </tr>
-      </tbody>
+      </tbody> -->
+      {{ infos }}
 
     </div>
     <button class="btn btn-danger p-1" style="width:100%" @click="delToMyFavorites()">Unfav</button>
@@ -40,7 +41,7 @@
       /**
        * The slug name of team
        */
-      name: String,
+      matchId: Number,
       /**
        * The id of this card
        */
@@ -52,6 +53,7 @@
     },
     data() {
       return {
+        infos:[],
         type: "matches",
         searchValue: "",
         results: [],
@@ -85,9 +87,8 @@
             sportName = 'lol'
         }
         let infos = [];
-        await fetch("https://api.pandascore.co/" + sportName +
-                "/teams?sort=name&per_page=100&search%5Bslug%5D=" + this
-                .name, {
+        await fetch("https://api.pandascore.co/matches/" + this
+                .matchId, {
                     "method": "GET",
                     "headers": {
                         "authorization": "Bearer " + ENV.API_PANDA_SPORT
@@ -99,6 +100,7 @@
                 console.error(err);
             });
         this.infos = infos;
+        console.log(infos)
       }
     },
   };

@@ -81,7 +81,9 @@
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
-              " :id="favorite._id" :matchId="favorite.data[0].matchId" :apiName="favorite.data[0].apiName"
+              " :id="favorite._id"
+                :matchId="favorite.data[0].match_id"
+                :apiName="favorite.data[0].apiName"
               v-on:delfavorite="delToMyFavorites" />
               <DisplayFavoriteNews v-if="
                 favorite.data[0].type == 'news'"

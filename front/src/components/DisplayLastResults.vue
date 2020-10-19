@@ -108,9 +108,11 @@
        */
       delButton: Boolean,
     },
-    myFavorites: function () {
+    computed: {
+      myFavorites: function () {
         return this.$store.state.MyFavorites;
       },
+    },
     methods: {
       /**
        * Add this components to my favorites
@@ -129,19 +131,17 @@
         });
       },
       addMatchToMyFavorite(item) {
-        const matchId = item.match_id;
+        const matchId = item.id;
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
           data: {
             sport: this.sport,
-            type: "component",
-            name:"matches",
-            id_tournament: this.id_tournament,
+            type: "matches",
             match_id: matchId,
             apiName: this.apiName,
           },
         });
-        this.getInfos();
+        this.getPastInfos();
       },
       /**
        * display next page of results
@@ -186,6 +186,7 @@
           headers: myHeaders,
           redirect: "follow",
         };
+        await this.$store.dispatch("getMyFavorites");
         await fetch(
             `https://api.pandascore.co/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}`,
             requestOptions
@@ -193,15 +194,10 @@
           .then((response) => response.json())
           .then((result) => (response = result))
           .then((update) => {
-            console.log(response.length)
-            let l = response.length;
-            for (let i = 0; i < l; i++) {
+            for (let i = 0; i < response.length; i++) {
               let check = false;
               for (let j = 0; j < this.myFavorites.length; j++) {
-                if (
-                  response[i].slug ===
-                  this.$store.state.MyFavorites[j].data[0].name
-                ) {
+                if (response[i].id === this.$store.state.MyFavorites[j].data[0].match_id) {
                   check = true;
                 }
               }
@@ -210,7 +206,6 @@
               } else response[i].button = true;
             }
             this.info = response;
-                      console.log(this.info)
 
           })
           .catch((error) => console.log("error", error));
@@ -281,5 +276,4 @@
     border-radius: 20px;
     text-decoration: none;
   }
-
 </style>
