@@ -13,27 +13,17 @@
         <option value="262">Serie A</option>
         <option value="435">Bundesliga</option>
       </select>
-      <button v-if="league_id !== ''"
-                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
-                + favori
-            </button>
+      <button v-if="league_id !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+        + favori
+      </button>
     </div>
     <h3 class="card-header text-center text-dark">Match on live</h3>
-<<<<<<< HEAD
-    <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
 
+    <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
       <div class="text-dark text-center font-weight-bold" v-if="info.error == 404">
         No live available
       </div>
-
       <div v-else class="border-bottom mb-5" v-for="item in info" :key="item.id">
-=======
-    <div class="card-body m-0 p-0 w-100 overflow-auto text-dark"> 
-    <div class="text-dark text-center font-weight-bold" v-if="info.error == 404">
-        No live available
-    </div>
-      <div v-else class="border-bottom mb-5" v-for="item in info" :key="item.id" >
->>>>>>> 583b50675e7508a822f412379d5fe83c06996862
         <p class="text-center font-weight-bold">
           {{ item.match_round }} {{ item.match_time }}
         </p>
@@ -86,7 +76,6 @@
   export default {
     name: "FootballLive",
 
-<<<<<<< HEAD
     data() {
       return {
         info: {},
@@ -96,61 +85,14 @@
         setTimer: "", // save the timer interval
         Home: "",
       };
-=======
-export default {
-  name: "FootballLive",
 
-  data() {
-    return {
-      info: {},
-      infoLive: {},
-      timer: 600000,
-      setTimer: "",
-      Home: "",
-      league_id:""
-    };
-  },
-  props: {
-    id: "",
-    sport: String, // String display in the header
-    apiName: String, // String used to search info for 1 sport in getInfos
-    delButton: Boolean,
-    
-  },
-  beforeMount() {
-    this.getInfos();
-    //this.getInfosRanking()
-  },
-
-  methods: {
-    addToMyFavorites() {
-      this.$store.dispatch("addToMyFavorites", {
-        id: this.$store.state.tabSelected.id,
-        data: {
-          sport: "football",
-          type: "live",
-          league_id: this.league_id,
-        },
-      });
->>>>>>> 583b50675e7508a822f412379d5fe83c06996862
     },
     props: {
-      /**
-       * The id of this card
-       */
       id: "",
-      /**
-       * The type of sport of this card
-       */
       sport: String, // String display in the header
-      /**
-       * The api name (ex: football, cs-go, etc...)
-       */
       apiName: String, // String used to search info for 1 sport in getInfos
-      /**
-       * The button for del this card in favorite
-       */
       delButton: Boolean,
+
     },
     beforeMount() {
       this.getInfos();
@@ -158,11 +100,6 @@ export default {
     },
 
     methods: {
-      /**
-       * Add this team to my favorites
-       *
-       * @public
-       */
       addToMyFavorites() {
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
@@ -171,70 +108,110 @@ export default {
             type: "live",
             league_id: this.league_id,
           },
-        });
+        });       
       },
-      /**
-       * Delete this ranking in my favorites
-       *
-       * @public
-       */
-      delToMyFavorites() {
-        this.$emit("delfavorite", this.id);
+      props: {
+        /**
+         * The id of this card
+         */
+        id: "",
+        /**
+         * The type of sport of this card
+         */
+        sport: String, // String display in the header
+        /**
+         * The api name (ex: football, cs-go, etc...)
+         */
+        apiName: String, // String used to search info for 1 sport in getInfos
+        /**
+         * The button for del this card in favorite
+         */
+        delButton: Boolean,
       },
-      /**
-       * Get datas from api for display on the card
-       *
-       * @public
-       */
-      async getInfos() {
-        var requestOptions = {
-          method: "GET",
-          redirect: "follow",
-        };
-        var today = new Date();
+      beforeMount() {
+        this.getInfos();
+        //this.getInfosRanking()
+      },
 
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
+      methods: {
+        /**
+         * Add this team to my favorites
+         *
+         * @public
+         */
+        addToMyFavorites() {
+          this.$store.dispatch("addToMyFavorites", {
+            id: this.$store.state.tabSelected.id,
+            data: {
+              sport: "football",
+              type: "live",
+              league_id: this.league_id,
+            },
+          });
+        },
+        /**
+         * Delete this ranking in my favorites
+         *
+         * @public
+         */
+        delToMyFavorites() {
+          this.$emit("delfavorite", this.id);
+        },
+        /**
+         * Get datas from api for display on the card
+         *
+         * @public
+         */
+        async getInfos() {
+          var requestOptions = {
+            method: "GET",
+            redirect: "follow",
+          };
+          var today = new Date();
 
-        if (dd < 10) {
-          dd = "0" + dd;
-        }
+          var dd = today.getDate();
+          var mm = today.getMonth() + 1;
+          var yyyy = today.getFullYear();
 
-        if (mm < 10) {
-          mm = "0" + mm;
-        }
-        today = yyyy + "-" + mm + "-" + dd;
+          if (dd < 10) {
+            dd = "0" + dd;
+          }
 
-        await fetch(
-            `https://apiv2.apifootball.com/?action=get_events&match_live=1&to=${today}&from=${today}&league_id=` +
-            this.league_id +
-            "&APIkey=" +
-            ENV.API_FOOTBALL,
-            requestOptions
-          )
-          .then((response) => response.json())
-          .then((result) => {
-            this.info = result;
-            if (this.setTimer == "") {
-              this.setTimer = setInterval(() => {
-                this.getInfos();
-              }, this.timer);
-            }
-          })
-          .catch((error) => console.log("error", error));
+          if (mm < 10) {
+            mm = "0" + mm;
+          }
+          today = yyyy + "-" + mm + "-" + dd;
+
+          await fetch(
+              `https://apiv2.apifootball.com/?action=get_events&match_live=1&to=${today}&from=${today}&league_id=` +
+              this.league_id +
+              "&APIkey=" +
+              ENV.API_FOOTBALL,
+              requestOptions
+            )
+            .then((response) => response.json())
+            .then((result) => {
+              this.info = result;
+              if (this.setTimer == "") {
+                this.setTimer = setInterval(() => {
+                  this.getInfos();
+                }, this.timer);
+              }
+            })
+            .catch((error) => console.log("error", error));
+        },
+        /**
+         * Return link to img for display team badge in card
+         *
+         * @public
+         */
+        return_Link_Home(item) {
+          return item.team_home_badge;
+        },
+        return_Link_Away(item) {
+          return item.team_away_badge;
+        },
       },
-      /**
-       * Return link to img for display team badge in card
-       *
-       * @public
-       */
-      return_Link_Home(item) {
-        return item.team_home_badge;
-      },
-      return_Link_Away(item) {
-        return item.team_away_badge;
-      },
-    },
-  };
+    }
+  }
 </script>
