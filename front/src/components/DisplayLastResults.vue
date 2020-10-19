@@ -29,6 +29,13 @@
         <tbody v-for="item in info" :key="item.id">
           <tr>
             <td class="text-center">
+              <button v-if="item.button && $store.state.UserData.id != ''"
+                class="btn btn-success btn-sm rounded-circle mb-2 btnADD" @click="addMatchToMyFavorite(item)">
+                ADD
+              </button>
+              <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>
+                ADD
+              </button>
               <p class="m-0 font-weight-bold">Start:</p>
               <span v-if="item.begin_at == null">Unknown</span><span v-else>
                 {{ item.begin_at | moment("MMMM Do YYYY") }}</span>
@@ -101,6 +108,11 @@
        */
       delButton: Boolean,
     },
+    computed: {
+      myFavorites: function () {
+        return this.$store.state.MyFavorites;
+      },
+    },
     methods: {
       /**
        * Add this components to my favorites
@@ -117,6 +129,19 @@
             apiName: this.apiName,
           },
         });
+      },
+      addMatchToMyFavorite(item) {
+        const matchId = item.id;
+        this.$store.dispatch("addToMyFavorites", {
+          id: this.$store.state.tabSelected.id,
+          data: {
+            sport: this.sport,
+            type: "matches",
+            match_id: matchId,
+            apiName: this.apiName,
+          },
+        });
+        this.getPastInfos();
       },
       /**
        * display next page of results
@@ -152,6 +177,7 @@
        * @public
        */
       async getPastInfos() {
+        let response = [];
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
 
@@ -160,12 +186,28 @@
           headers: myHeaders,
           redirect: "follow",
         };
+        await this.$store.dispatch("getMyFavorites");
         await fetch(
             `https://api.pandascore.co/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}`,
             requestOptions
           )
           .then((response) => response.json())
-          .then((result) => (this.info = result))
+          .then((result) => (response = result))
+          .then((update) => {
+            for (let i = 0; i < response.length; i++) {
+              let check = false;
+              for (let j = 0; j < this.myFavorites.length; j++) {
+                if (response[i].id === this.$store.state.MyFavorites[j].data[0].match_id) {
+                  check = true;
+                }
+              }
+              if (check) {
+                response[i].button = false;
+              } else response[i].button = true;
+            }
+            this.info = response;
+
+          })
           .catch((error) => console.log("error", error));
       },
       /**
@@ -194,5 +236,44 @@
   };
 </script>
 
-<style>
+<style scoped>
+  .btnADD {
+    background: #2cf956;
+    background-image: -webkit-linear-gradient(top, #2cf956, #06d530);
+    background-image: -moz-linear-gradient(top, #2cf956, #06d530);
+    background-image: -ms-linear-gradient(top, #2cf956, #06d530);
+    background-image: -o-linear-gradient(top, #2cf956, #06d530);
+    background-image: -webkit-gradient(to bottom, #2cf956, #06d530);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color: #000000;
+    font-family: Verdana;
+    font-size: 11px;
+    padding: 11px;
+    -webkit-box-shadow: 1px 1px 20px 0 #24c691;
+    -moz-box-shadow: 1px 1px 20px 0 #24c691;
+    box-shadow: 1px 1px 20px 0 #24c691;
+    text-shadow: 1px 1px 20px #ffffff;
+    border: solid #ffffff 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .btnADD:hover {
+    border: solid #ffffff 1px;
+    background: #06d530;
+    color: #ffffff;
+    background-image: -webkit-linear-gradient(top, #06d530, #2cf956);
+    background-image: -moz-linear-gradient(top, #06d530, #2cf956);
+    background-image: -ms-linear-gradient(top, #06d530, #2cf956);
+    background-image: -o-linear-gradient(top, #06d530, #2cf956);
+    background-image: -webkit-gradient(to bottom, #06d530, #2cf956);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+  }
 </style>
