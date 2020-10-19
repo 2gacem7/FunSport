@@ -9,6 +9,7 @@ import ManageCommentary from "../views/ManageCommentary.vue";
 import ManageNews from "../views/ManageNews.vue";
 
 import News from "../views/News.vue";
+import DetailNews from "../views/DetailNews.vue";
 
 
 import LOL from "../views/LOL.vue";
@@ -85,6 +86,11 @@ const routes = [
     path: "/football",
     name: "FOOTBALL",
     component: Football
+  },
+  {
+    path: "/news/:newsId",
+    name: "detailNews",
+    component: DetailNews
   },
   {
     path: "/:apiname/match/:matchId",
