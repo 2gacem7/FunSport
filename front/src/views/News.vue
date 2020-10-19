@@ -3,6 +3,15 @@
     <Navbar />
     <TabBar />
 
+    <div class="row mt-2 justify-content-center">
+      <select v-model="sportSelected" id="selectionSport" @change="getNews">
+        <option>ALL</option>
+        <option v-for="sport in $store.state.sports" :key="sport.id">
+          {{ sport.name }}
+        </option>
+      </select>
+    </div>
+
     <div v-for="news in listNews" :key="news.id" class="card m-2">
       <h2>Title : {{ news.title }}</h2>
       <span
@@ -62,6 +71,7 @@ export default {
   data() {
     return {
       listNews: [],
+      sportSelected: "ALL",
     };
   },
   mounted() {
@@ -77,7 +87,13 @@ export default {
      */
     async getNews() {
       let list = [];
-      await fetch("http://localhost:3000/news", {
+      let urlFiltered;
+      if (this.sportSelected == "ALL") {
+        urlFiltered = `http://localhost:3000/news`;
+      } else {
+        urlFiltered = `http://localhost:3000/news/${this.sportSelected}`;
+      }
+      await fetch(urlFiltered, {
         method: "GET",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
