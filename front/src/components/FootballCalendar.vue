@@ -14,8 +14,7 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== ''"
-                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="id_tournament !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 
@@ -33,12 +32,19 @@
         <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
 
             <div v-for="item in info" :key="item.id">
-                <p class="text-center font-weight-bold">{{item.match_round}}</p>
+                <p class="text-center font-weight-bold">{{item.match_round}} 
+                    <router-link v-bind:to="'/football/' + item.match_id">
+                    <button
+                        class="btn btn-success justify-content-center">
+                        View
+                    </button>
+                    </router-link>
+                </p>
                 <div class="row d-flex justify-content-center">
                     <div>
                         <p class="font-weight-bold text-center">{{item.match_hometeam_name}}</p>
-                        <p :src="return_Score(item)" class="font-weight-bold text-center"><img
-                                :src="return_Link_Home(item)" alt="no Team badge" style="max-width: 4rem" />
+                        <p :src="return_Score(item)" class="font-weight-bold text-center">
+                            <img :src="return_Link_Home(item)" alt="no Team badge" style="max-width: 4rem" />
                             {{item.match_hometeam_score}}</p>
                     </div>
 
@@ -51,8 +57,9 @@
 
                 </div>
                 <p class="text-center mt-3 mb-5">
-                    {{item.match_date}} at {{item.match_time}}<br/>
-                    <button class="btn btn-success btn-sm rounded-circle mb-2 btnADD" @click="addMatchToMyFavorite(item)">ADD</button></p>
+                    {{item.match_date}} at {{item.match_time}}<br />
+                    <button class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
+                        @click="addMatchToMyFavorite(item)">ADD</button></p>
             </div>
         </div>
     </div>
@@ -188,7 +195,6 @@
                     item.match_awayteam_score = "-";
                 }
             },
-
         },
     };
 </script>

@@ -19,6 +19,8 @@ import Football from "../views/Football.vue";
 import DisplayMatchESport from "../views/DisplayMatchESport.vue";
 import DisplayCompetitionESport from "../views/DisplayCompetitionESport.vue";
 
+import DisplayMatchFootball from "../views/DisplayMatchFootball.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -101,7 +103,12 @@ const routes = [
     path: "/:apiname/competition/:competitionId",
     name: "competition",
     component: DisplayCompetitionESport
-  }
+  },
+  {
+    path: "/football/:matchId",
+    name: "match",
+    component: DisplayMatchFootball
+  },
 ];
 
 const router = new VueRouter({
