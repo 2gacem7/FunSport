@@ -26,16 +26,16 @@ export class NewsService {
   /**
    * Service used to create a news
    * You need to be connected in admin to access to this route
-   * @param {string} userId
+   * @param {User} userId
    * @param {CreateNewsDto} createNewsDto
    * @return {News}
    */
-  async create(userId: string, createNewsDto: CreateNewsDto): Promise<News> {
+  async create(user: User, createNewsDto: CreateNewsDto): Promise<News> {
     const createdPronostic = await new this.newsModel({
       title: createNewsDto.title,
       content: createNewsDto.content,
       sport: createNewsDto.sport,
-      author: userId,
+      author: user.firstName + " " + user.lastName,
       createdAt: Date.now(),
     })
     return createdPronostic.save();
@@ -99,6 +99,7 @@ export class NewsService {
       updated = true;
     } 
     if(updated){
+      newsUpdated = await this.newsModel.findByIdAndUpdate( id,{"modifiedAt": Date.now()},{new:true,useFindAndModify:false}); 
       return newsUpdated;
     }
     else{

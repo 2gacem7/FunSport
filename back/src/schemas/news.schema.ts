@@ -35,13 +35,13 @@ export class News extends Document {
    * date of the creation of the news
    */
   @Prop()
-  createdAt: string;
+  createdAt: number;
 
   /**
    * date of the update of the news
    */
   @Prop()
-  modifiedAt: string;
+  modifiedAt: number;
 
 }
 

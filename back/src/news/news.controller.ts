@@ -45,7 +45,7 @@ export class NewsController {
     }
     else {
         if (createNewsDto.title && createNewsDto.content && createNewsDto.sport) {
-            const user = req.user.id;
+            const user = req.user;
             return await this.newsService.create(user, createNewsDto);
           } else {
             throw new HttpException({
