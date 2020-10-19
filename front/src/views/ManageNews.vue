@@ -6,9 +6,10 @@
       class="card mt-3 mb-3 align-item-center d-flex mx-auto"
       style="width: 90%; background-color: #f4f4f4e3"
     >
-      <div class="card-header d-flex justify-content-center">
-        <h4>Manage News</h4>
-      </div>
+      <div class="card-header d-flex justify-content-between">
+                <h4>Manage News</h4>
+                <button class="btn btn-warning" @click="createNews">Create new news</button>
+            </div>
       <div class="card-body overflow-auto mx-auto" style="width: 100%">
         <div v-if="listNews.length == 0">Nothing to display</div>
         <div v-else>
@@ -27,7 +28,7 @@
 
               <button
                 class="btn btn-warning mr-2"
-                @click="editNews(news._id)"
+                @click="editNews(news)"
               >
                 Edit news
               </button>
@@ -41,6 +42,9 @@
           </div>
         </div>
       </div>
+      <div v-if="modalVisible == true">
+            <CreateNews :data ="selectedNewsData" />
+        </div>
     </div>
   </div>
 </template>
@@ -48,16 +52,21 @@
 <script>
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
+import CreateNews from "@/components/CreateNews.vue";
+
 
 export default {
   name: "ManageNews",
   components: {
     Navbar,
     TabBar,
+    CreateNews
   },
   data() {
     return {
       listNews: [],
+      modalVisible:false,
+      selectedNewsData:{}
     };
   },
 
@@ -66,8 +75,13 @@ export default {
     this.getNews();
   },
   methods: {
-    async editNews(newsId) {
-      console.log('Edit news')
+    createNews(){
+      this.modalVisible = true
+
+    },
+    async editNews(news) {
+      this.selectedNewsData= {title:'test'}
+      this.modalVisible = true
 
     },
     async deleteNews(commentaryID) {
