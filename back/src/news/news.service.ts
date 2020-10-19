@@ -3,12 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { News} from '../schemas/news.schema';
 import { HttpException, HttpStatus } from '@nestjs/common'
-
 import { CreateNewsDto } from '../dto/create-news.dto';
 import { User } from '../schemas/user.schema';
-import { title } from 'process';
-
-
 
 /**
  * Service used to manage all action available in NewsService
@@ -31,14 +27,14 @@ export class NewsService {
    * @return {News}
    */
   async create(user: User, createNewsDto: CreateNewsDto): Promise<News> {
-    const createdPronostic = await new this.newsModel({
+    const createdNews = await new this.newsModel({
       title: createNewsDto.title,
       content: createNewsDto.content,
       sport: createNewsDto.sport,
       author: user.id,
       createdAt: Date.now(),
     })
-    return createdPronostic.save();
+    return createdNews.save();
   }
 
   /**
@@ -62,6 +58,15 @@ export class NewsService {
   async findBySport(sport): Promise<any> {
     return this.newsModel.find({ 'sport': sport});
   }
+
+  /**
+   * Service used to give one news
+   * @return {News}
+   */
+  async findById(id): Promise<any> {
+    return this.newsModel.findById(id);
+  }
+
 
    /**
    * Service used to delete a specific pronostic

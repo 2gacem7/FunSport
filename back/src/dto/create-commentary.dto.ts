@@ -1,40 +1,38 @@
-// import { IsEmail, Matches , MinLength, IsOptional} from 'class-validator';
-// import { User } from '../schemas/user.schema';
+import { IsEmail, Matches , MinLength, IsOptional} from 'class-validator';
+import { User } from '../schemas/user.schema';
 
 
-// /**
-//  * This Dto is used to create a new commentary.
-//  */
-// export class CreateCommentaryDto {
+/**
+ * This Dto is used to create a new commentary.
+ */
+export class CreateCommentaryDto {
 
+ /**
+  * User commentary for this pronostic
+  */
+  commentary: string;
 
-//   commentary: string;
+  /**
+  * User commentary for this pronostic
+  */
+  newsId: string;
 
-//   /**
-//    * Id given in the Model<User>
-//    */
-//   userId: string;
+  /**
+   * Id given in the Model<User>
+   */
+  @IsOptional()
+  userId: string;
 
-//   /**
-//    * Id given by the API
-//    */
-//   matchId: string;
+  /**
+   * date of the creation of the commentary
+   */
+  @IsOptional()
+  createdAt: string;
 
-//   /**
-//    * User commentary for this pronostic
-//    */
-//   @IsOptional()
-//   commentary: string;
+  /**
+  * boolean true if the commentary is signaled
+  */
+  @IsOptional()
+  isReported: boolean;
 
-//   /**
-//    * User name
-//    */
-//   authorName: User;
-
-//   /**
-//    * date of the creation of the commentary
-//    */
-//   @IsOptional()
-//   createdAt: string;
-
-// }
+}
