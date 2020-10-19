@@ -158,10 +158,7 @@
             for (let i = 0; i < response.length; i++) {
               let check = false;
               for (let j = 0; j < this.myFavorites.length; j++) {
-                if (
-                  response[i].slug ===
-                  this.$store.state.MyFavorites[j].data[0].name
-                ) {
+                if (response[i].slug === this.$store.state.MyFavorites[j].data[0].name) {
                   check = true;
                 }
               }

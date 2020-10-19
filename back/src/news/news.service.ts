@@ -3,12 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { News} from '../schemas/news.schema';
 import { HttpException, HttpStatus } from '@nestjs/common'
-
 import { CreateNewsDto } from '../dto/create-news.dto';
 import { User } from '../schemas/user.schema';
-import { title } from 'process';
-
-
 
 /**
  * Service used to manage all action available in NewsService
@@ -26,19 +22,19 @@ export class NewsService {
   /**
    * Service used to create a news
    * You need to be connected in admin to access to this route
-   * @param {string} userId
+   * @param {User} userId
    * @param {CreateNewsDto} createNewsDto
    * @return {News}
    */
-  async create(userId: string, createNewsDto: CreateNewsDto): Promise<News> {
-    const createdPronostic = await new this.newsModel({
+  async create(user: User, createNewsDto: CreateNewsDto): Promise<News> {
+    const createdNews = await new this.newsModel({
       title: createNewsDto.title,
       content: createNewsDto.content,
       sport: createNewsDto.sport,
-      author: userId,
+      author: user.id,
       createdAt: Date.now(),
     })
-    return createdPronostic.save();
+    return createdNews.save();
   }
 
   /**
@@ -46,7 +42,13 @@ export class NewsService {
    * @return {News[]}
    */
   async findAll(): Promise<any> {
-    return this.newsModel.find();
+    let news = await this.newsModel.find();
+    for (let i = 0; i < news.length; i++){
+        let firstName = await this.userModel.findById(news[i].author).select('firstName');
+        let lastName = await this.userModel.findById(news[i].author).select('lastName');
+        news[i].author = firstName.firstName + " " + lastName.lastName;
+      }
+    return news;
   }
 
   /**
@@ -56,6 +58,15 @@ export class NewsService {
   async findBySport(sport): Promise<any> {
     return this.newsModel.find({ 'sport': sport});
   }
+
+  /**
+   * Service used to give one news
+   * @return {News}
+   */
+  async findById(id): Promise<any> {
+    return this.newsModel.findById(id);
+  }
+
 
    /**
    * Service used to delete a specific pronostic
@@ -99,6 +110,7 @@ export class NewsService {
       updated = true;
     } 
     if(updated){
+      newsUpdated = await this.newsModel.findByIdAndUpdate( id,{"modifiedAt": Date.now()},{new:true,useFindAndModify:false}); 
       return newsUpdated;
     }
     else{

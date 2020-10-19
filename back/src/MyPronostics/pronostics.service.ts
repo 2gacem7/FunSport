@@ -128,7 +128,7 @@ export class PronosticsService {
 
   /**
   * Service used to report a commentary
-  * You need to be connected to access to this route and to be isAdmin
+  * You need to be connected to access to this route
   * @param {String} pronosticId id of the pronostic
   * @return  {Pronostic}
   */
@@ -136,6 +136,5 @@ export class PronosticsService {
     const newPronostic = await this.pronosticModel.findById(pronosticId);
     newPronostic.isReported = true
     return newPronostic.save();
-
   }
 }

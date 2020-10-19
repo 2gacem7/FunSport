@@ -29,19 +29,19 @@ export class News extends Document {
    * User name
    */
   @Prop()
-  author: User;
+  author: string;
 
   /**
    * date of the creation of the news
    */
   @Prop()
-  createdAt: string;
+  createdAt: number;
 
   /**
    * date of the update of the news
    */
   @Prop()
-  modifiedAt: string;
+  modifiedAt: number;
 
 }
 
