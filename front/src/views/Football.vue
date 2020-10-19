@@ -59,7 +59,7 @@
     letter-spacing: 3px;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
     color: #ffffff !important;
-    border-bottom: 1px solid rgba(194, 6, 6, 1);
+    border-bottom: 1px solid rgb(24, 154, 0);
     background: rgb(24, 154, 0);
     background: linear-gradient(90deg, rgba(24, 154, 0, 1) 0%, rgba(239, 252, 69, 1) 100%);
   }
