@@ -30,7 +30,7 @@
         <button
         v-if="$store.state.UserData.id != ''"
           class="btn btn-primary w-25"
-          @click="addToMyFavorites(news._id)"
+          @click="addToMyFavorites(news)"
         >
           Add
         </button>
@@ -109,7 +109,7 @@ export default {
       if (this.sportSelected == "ALL") {
         urlFiltered = `http://localhost:3000/news`;
       } else {
-        urlFiltered = `http://localhost:3000/news/${this.sportSelected}`;
+        urlFiltered = `http://localhost:3000/news/filter/${this.sportSelected}`;
       }
       await fetch(urlFiltered, {
         method: "GET",
@@ -125,9 +125,17 @@ export default {
      * This method is used to add a news in your favorite
      * @public
      */
-    addToMyFavorites(newsId) {
-      console.log("Todo", newsId);
+    addToMyFavorites(news) {
+      this.$store.dispatch("addToMyFavorites", {
+          id: this.$store.state.tabSelected.id,
+          data: {
+            sport: news.sport,
+            type: "news",
+            name: news._id,
+          },
+        });
     },
+
     /**
      * This method is used to go in detailNews
      * @public

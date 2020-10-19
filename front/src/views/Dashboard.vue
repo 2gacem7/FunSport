@@ -83,6 +83,10 @@
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :matchId="favorite.data[0].matchId" :apiName="favorite.data[0].apiName"
               v-on:delfavorite="delToMyFavorites" />
+              <DisplayFavoriteNews v-if="
+                favorite.data[0].type == 'news'"
+               :id="favorite._id" :newsId="favorite.data[0].name"
+              v-on:delfavorite="delToMyFavorites" />
             <FootballTournament v-if="
                 favorite.data[0].type == 'tournament' &&
                 favorite.data[0].sport == 'football'
@@ -139,6 +143,7 @@
   import FootballMatchFavori from "@/components/FootballMatchFavori.vue";
   import EsportTeam from "@/components/EsportTeam.vue";
   import DisplayFavoriteMatch from "@/components/DisplayFavoriteMatch.vue";
+  import DisplayFavoriteNews from "@/components/DisplayFavoriteNews.vue";
 
   /**
    * View where you can find all tyour favorite's components and your favorite's sports
@@ -160,8 +165,10 @@
       FootballTeamFavorite,
       FavoriteRanking,
       DisplayFavoriteMatch,
+      DisplayFavoriteNews,
       FootballLiveFavori,
-      FootballMatchFavori
+      FootballMatchFavori,
+
     },
     data() {
       return {
