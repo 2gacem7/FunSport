@@ -23,12 +23,8 @@
               <label>Select the sport</label>
             </div>
             <div class="row mt-2 justify-content-center">
-              <select id="selectionSport">
-                <option
-                  v-for="sport in $store.state.sports"
-                  :key="sport.id"
-                  :value="sport.id"
-                >
+              <select v-model="sportSelected" id="selectionSport">
+                <option v-for="sport in $store.state.sports" :key="sport.id">
                   {{ sport.name }}
                 </option>
               </select>
@@ -59,18 +55,19 @@
             </div>
           </div>
           <button
-            v-if="data == {}"
+            v-if="Object.keys(this.data).length == 0"
             class="btn btn-success p-4"
             style="width: 100%"
             @click="submit()"
           >
             Create
           </button>
+
           <button
             v-else
             class="btn btn-success p-4"
             style="width: 100%"
-            @click="submit()"
+            @click="update()"
           >
             Update
           </button>
@@ -82,8 +79,8 @@
 
 <script>
 /**
- * Pop Up window for create user
- * @displayName createUser
+ * Pop Up window for create or update a news
+ * @displayName createNews
  */
 export default {
   name: "createNews",
@@ -92,6 +89,7 @@ export default {
       title: "",
       content: "",
       sport: "",
+      sportSelected: this.$store.state.sports[0].name,
       msg: [],
       validator: [],
       info: false,
@@ -105,21 +103,23 @@ export default {
     if (Object.keys(this.data).length > 0) {
       this.title = this.data.title;
       this.content = this.data.content;
-      this.sport = this.data.sport;
+      this.sportSelected = this.data.sport;
+    } else {
+      this.sportSelected = this.$store.state.sports[0].name;
     }
   },
   methods: {
     /**
-     * After all control in form create new user
+     * Methods used to create a new news
      *
      * @public
      */
     async submit() {
-      if (this.validator.title === true) {
+      if (this.title != "") {
         let body = {
           title: this.title,
           content: this.content,
-          email: this.sport,
+          sport: this.sportSelected,
         };
         let requestStatus;
         await fetch("http://localhost:3000/news", {
@@ -133,10 +133,36 @@ export default {
           requestStatus = res.status;
         });
         this.$parent.modalVisible = false;
+        this.$parent.getNews();
       } else {
         this.info = true;
         this.msg["general"] = "Information missing in the form";
       }
+    },
+    /**
+     * Methods used to update a news
+     *
+     * @public
+     */
+    async update() {
+      let body = {
+        title: this.title,
+        content: this.content,
+        sport: this.sportSelected,
+      };
+      let requestStatus;
+      await fetch(`http://localhost:3000/news/${this.data._id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: "Bearer " + this.$store.state.access_token,
+        },
+        body: JSON.stringify(body),
+      }).then((res) => {
+        requestStatus = res.status;
+      });
+      this.$parent.modalVisible = false;
+      this.$parent.getNews();
     },
     /**
      * Close this Pop Up
