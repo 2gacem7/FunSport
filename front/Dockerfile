@@ -1,5 +1,5 @@
 # base image
-FROM node
+FROM node:alpine
 
 
 ARG user
