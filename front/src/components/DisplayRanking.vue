@@ -88,6 +88,18 @@
             //this.getInfosRanking()
         },
         methods: {
+            addToMyFavorites() {
+                this.$store.dispatch("addToMyFavorites", {
+                    id: this.$store.state.tabSelected.id,
+                    data: {
+                        sport: this.sport,
+                        type: "component",
+                        name: "live",
+                        apiName: this.apiName,
+                    },
+                });
+                this.isFavorite = false;
+            },
             /**
              * Add this team to my favorites
              *
@@ -95,8 +107,8 @@
              */
             addTournamentToMyFavorite() {
                 let leagueName = "";
-                for(let i = 0 ; i < this.info.length ; i++){
-                    if(this.info[i].matches[0].tournament_id === this.id_tournament){
+                for (let i = 0; i < this.info.length; i++) {
+                    if (this.info[i].matches[0].tournament_id === this.id_tournament) {
                         leagueName = this.info[i].league.name;
                     }
                 }
