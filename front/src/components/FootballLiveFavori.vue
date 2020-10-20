@@ -118,7 +118,6 @@
                         }, this.timer);
                     }
                 })
-                .catch((error) => console.log("error", error));
         },
 
         methods: {

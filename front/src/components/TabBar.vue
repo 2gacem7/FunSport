@@ -49,6 +49,9 @@
    */
   export default {
     name: "TabBar",
+    mounted(){
+
+    },
     methods: {
       go(idTab, nameTab) {
         if (this.$store.state.tabSelected.name != nameTab) {

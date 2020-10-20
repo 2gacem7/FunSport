@@ -65,7 +65,6 @@
                         requestOptions)
                     .then(response => response.json())
                     .then(result => this.infos=result)
-                    .catch(error => console.log('error', error)); 
         },
 
         methods: {
@@ -87,6 +86,6 @@
             },
         },
 
-            
+
     };
 </script>

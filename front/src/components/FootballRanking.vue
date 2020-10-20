@@ -149,7 +149,6 @@
                             requestOptions)
                         .then(response => response.json())
                         .then(result => this.info = result)
-                        .catch(error => console.log('error', error));
                 }
             },
             /**

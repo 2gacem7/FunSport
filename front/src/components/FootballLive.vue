@@ -174,7 +174,7 @@
               }, this.timer);
             }
           })
-          .catch((error) => console.log("error", error));
+
       },
       /**
        * Return link to img for display team badge in card
