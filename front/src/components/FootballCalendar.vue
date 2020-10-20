@@ -1,5 +1,5 @@
 <template>
-    <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
+    <div class="m-3 card" style="min-height: 30rem;max-height: 30rem; max-width: 50rem">
         <div class="card-header d-flex justify-content-between">
 
             <h3 class="text-center">{{ sport }} Calendar </h3>

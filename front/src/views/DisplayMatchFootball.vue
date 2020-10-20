@@ -26,7 +26,8 @@
                     </p>
                 </div>
                 <p class="row justify-content-center font-weight-bold">Actual pronostics</p>
-                <div class="row justify-content-center" v-if="resultPronostic[0] && resultPronostic[0].count || resultPronostic[1] && resultPronostic[1].count">
+                <div class="row justify-content-center"
+                    v-if="resultPronostic[0] && resultPronostic[0].count || resultPronostic[1] && resultPronostic[1].count">
                     <p>Winner:{{Math.round((resultPronostic[0].count/ totalPronostic) * 100)}}%</p>
                     <p class="ml-5" v-if="resultPronostic[1]">
                         Winner:{{Math.round((resultPronostic[1].count/ totalPronostic) * 100)}}%</p>
@@ -59,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="infoMatch[0].match_status !== 'Finished'" class="card m-2">
+        <div v-if="infoMatch[0] && infoMatch[0].match_status !== 'Finished'" class="card m-2">
             <h3>Do you want to pronostic this match?</h3>
             <select v-model="winnerInput">
                 <option disabled selected="selected">Select the winner</option>
@@ -127,7 +128,6 @@
                 .then(response => response.json())
                 .then(result => this.infoMatch = result)
                 .catch(error => console.log('error', error));
-            console.log(this.infoMatch[0].league_name);
             this.getPronostics();
         },
 
@@ -188,7 +188,6 @@
              */
             async getPronostics() {
                 this.$store.commit("setAccessToken");
-
                 let options = {
                     method: "GET",
                 };
@@ -276,7 +275,6 @@
                         commentaries.push(prono);
                     }
                 });
-                console.log(this.resultPronostic)
                 this.commentaries = commentaries;
                 this.totalPronostic = totalPronostic;
             },
