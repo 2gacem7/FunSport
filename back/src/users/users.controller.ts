@@ -16,6 +16,7 @@ import { HttpException, HttpStatus, HttpCode } from '@nestjs/common'
 export class UsersController {
   /**
      * Constructor for UsersController
+     * @param {UsersService} usersService
      */
   constructor(private readonly usersService: UsersService) { }
 
