@@ -78,6 +78,9 @@ export default {
   },
   data() {
     return {
+       /**
+       * The list of the commentaries reported
+       */
       listCommentary: [],
     };
   },
