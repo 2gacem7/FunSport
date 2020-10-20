@@ -38,6 +38,10 @@
 
 <script>
   import Navbar from "@/components/NavBar.vue";
+  /**
+ * Views used tologin a user
+ * @displayName Login
+ */
   export default {
     name: "Login",
     components: {
@@ -45,12 +49,28 @@
     },
     data() {
       return {
+         /**
+       * Variable saves the user's input in email field
+       */
         email: "",
+         /**
+       * Variable saves the user's input in password field
+       */
         password: "",
+         /**
+       * Variable saves the error messages
+       */
         msg: [],
+         /**
+       * State if error in validation
+       */
         info : false,
       };
     },
+    /**
+   * This hook is used to set datas using the router params
+   * @public
+   */
     async mounted() {
       if (document.cookie.length > 0) {
         let cookieArray = document.cookie.split(";");
@@ -70,6 +90,11 @@
       }
     },
     methods: {
+      /**
+     * Methods used to validate the format of the Email
+     * @param value Email to check
+     * @public
+     */
       validateEmail(value) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
           this.msg["email"] = "";
@@ -77,6 +102,10 @@
           this.msg["email"] = "Adresse Email incorecte";
         }
       },
+      /**
+     * Methods used to check if credentials matchs with the database
+     * @public
+     */
       async login() {
         let response = {};
         let profile = {};
