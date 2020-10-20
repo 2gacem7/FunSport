@@ -143,6 +143,7 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
 import Navbar from "@/components/NavBar.vue";
 /**
  * View where the new user can register
@@ -342,7 +343,7 @@ export default {
           password: this.password,
         };
         let requestStatus;
-        await fetch("http://localhost:3000/users", {
+        await fetch(`http://${ENV.API_BACKEND}/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -356,7 +357,7 @@ export default {
           this.msg["general"] = "Account existing for " + this.email;
         } else {
           let userData = {};
-          await fetch("http://localhost:3000/auth/login/", {
+          await fetch(`http://${ENV.API_BACKEND}/auth/login/`, {
             method: "Post",
             headers: {
               "content-type": "application/json",

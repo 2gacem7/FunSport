@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import CreateNews from "@/components/CreateNews.vue";
@@ -107,7 +108,7 @@ export default {
     async deleteNews(newsId) {
       this.$store.commit("setAccessToken");
 
-      await fetch(`http://localhost:3000/news/${newsId}`, {
+      await fetch(`http://${ENV.API_BACKEND}/news/${newsId}`, {
         method: "DELETE",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
@@ -122,7 +123,7 @@ export default {
      */
     async getNews() {
       let list = [];
-      await fetch("http://localhost:3000/news", {
+      await fetch(`http://${ENV.API_BACKEND}/news`, {
         method: "GET",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,

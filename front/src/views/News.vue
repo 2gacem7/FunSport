@@ -123,9 +123,9 @@ export default {
       let list = [];
       let urlFiltered;
       if (this.sportSelected == "ALL") {
-        urlFiltered = `http://localhost:3000/news`;
+        urlFiltered = `http://${ENV.API_BACKEND}/news`;
       } else {
-        urlFiltered = `http://localhost:3000/news/filter/${this.sportSelected}`;
+        urlFiltered = `http://${ENV.API_BACKEND}/news/filter/${this.sportSelected}`;
       }
       await fetch(urlFiltered, {
         method: "GET",

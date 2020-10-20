@@ -125,7 +125,7 @@ export default {
         headers: header,
       };
       await fetch(
-        `http://localhost:3000/commentaries/${commentaryId}/report`,
+        `http://${ENV.API_BACKEND}/commentaries/${commentaryId}/report`,
         options
       ).then(() => {
         this.getCommentaries();
@@ -166,7 +166,7 @@ export default {
             commentary: this.commentaryInput,
           }),
         };
-        await fetch(`http://localhost:3000/commentaries`, options).then(() => {
+        await fetch(`http://${ENV.API_BACKEND}/commentaries`, options).then(() => {
           this.getCommentaries();
                 this.commentaryInput= ""
 
@@ -187,7 +187,7 @@ export default {
         method: "GET",
       };
       const datas = await fetch(
-        `http://localhost:3000/commentaries/${this.newsId}`,
+        `http://${ENV.API_BACKEND}/commentaries/${this.newsId}`,
         options
       );
       const json = await datas.json();

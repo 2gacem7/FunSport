@@ -130,6 +130,7 @@
 </template>
 
 <script>
+  import ENV, { API_BACKEND } from "../../env.config";
   import Navbar from "@/components/NavBar.vue";
   import TabBar from "@/components/TabBar.vue";
 
@@ -232,7 +233,7 @@
           id: id,
         };
         let mySports = [];
-        await fetch("http://localhost:3000/mysports", {
+        await fetch(`http://${ENV.API_BACKEND}/mysports`, {
             method: "DELETE",
             headers: {
               "content-type": "application/json",
@@ -252,7 +253,7 @@
       async delToMyFavorites(id) {
         this.$store.commit("setAccessToken");
         if (this.$store.state.access_token != "") {
-          await fetch("http://localhost:3000/myfavorites", {
+          await fetch(`http://${ENV.API_BACKEND}/myfavorites`, {
             method: "DELETE",
             headers: {
               "content-type": "application/json",

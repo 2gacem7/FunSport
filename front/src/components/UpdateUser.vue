@@ -88,6 +88,7 @@
 </template>
 
 <script>
+    import ENV from "../../env.config";
     /**
      * Pop Up window for update user profile
      * @displayName updateUser
@@ -262,7 +263,7 @@
                     body.isAdmin = this.isAdmin;
                 }
                 let requestStatus;
-                await fetch("http://localhost:3000/users/admin/updateUser", {
+                await fetch(`http://${ENV.API_BACKEND}/users/admin/updateUser`, {
                         "method": "PATCH",
                         "headers": {
                             "content-type": "application/json",
@@ -278,7 +279,7 @@
                     this.msg['general'] = "Account existing for " + this.email;
                 } else {
                     let list = [];
-                    await fetch("http://localhost:3000/users", {
+                    await fetch(`http://${ENV.API_BACKEND}/users`, {
                             "method": "GET",
                             "headers": {
                                 "authorization": "Bearer " + this.$store.state.access_token

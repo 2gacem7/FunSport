@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
 /**
  * Pop Up window for create or update a news
  * @displayName createNews
@@ -130,7 +131,7 @@ export default {
           sport: this.sportSelected,
         };
         let requestStatus;
-        await fetch("http://localhost:3000/news", {
+        await fetch(`http://${ENV.API_BACKEND}/news`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -159,7 +160,7 @@ export default {
         sport: this.sportSelected,
       };
       let requestStatus;
-      await fetch(`http://localhost:3000/news/${this.data._id}`, {
+      await fetch(`http://${ENV.API_BACKEND}/news/${this.data._id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

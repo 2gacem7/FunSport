@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 
@@ -97,7 +98,7 @@ export default {
      */
     async moderateCommentary(commentaryID) {
       this.$store.commit("setAccessToken");
-      await fetch(`http://localhost:3000/pronostics/${commentaryID}/reset`, {
+      await fetch(`http://${ENV.API_BACKEND}/pronostics/${commentaryID}/reset`, {
         method: "GET",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
@@ -111,7 +112,7 @@ export default {
      */
     async moderateNewsCommentary(newsId) {
       this.$store.commit("setAccessToken");
-      await fetch(`http://localhost:3000/commentaries/${newsId}/delete`, {
+      await fetch(`http://${ENV.API_BACKEND}/commentaries/${newsId}/delete`, {
         method: "DELETE",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
@@ -126,7 +127,7 @@ export default {
      */
     async validateCommentary(commentaryID) {
       this.$store.commit("setAccessToken");
-      await fetch(`http://localhost:3000/pronostics/${commentaryID}/validate`, {
+      await fetch(`http://${ENV.API_BACKEND}/pronostics/${commentaryID}/validate`, {
         method: "GET",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
@@ -141,7 +142,7 @@ export default {
     async validateNewsCommentary(newsId) {
       this.$store.commit("setAccessToken");
       await fetch(
-        `http://localhost:3000/commentaries/${newsId}/validate`,
+        `http://${ENV.API_BACKEND}/commentaries/${newsId}/validate`,
         {
           method: "GET",
           headers: {
@@ -156,7 +157,7 @@ export default {
      */
     async getCommentary() {
       let listPronostics = [];
-      await fetch("http://localhost:3000/pronostics", {
+      await fetch(`http://${ENV.API_BACKEND}/pronostics`, {
         method: "GET",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
@@ -166,7 +167,7 @@ export default {
         .then((json) => (listPronostics = json));
 
       let listCommentaries = [];
-      await fetch("http://localhost:3000/commentaries", {
+      await fetch(`http://${ENV.API_BACKEND}/commentaries`, {
         method: "GET",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,

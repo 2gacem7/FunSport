@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 import CreateUser from "@/components/CreateUser.vue";
@@ -86,7 +87,7 @@ export default {
     this.$store.dispatch("getUserData");
     this.$store.dispatch("getMySports");
     let list = [];
-    await fetch("http://localhost:3000/users", {
+    await fetch(`http://${ENV.API_BACKEND}/users`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + this.$store.state.access_token,
@@ -112,7 +113,7 @@ export default {
      * @public
      */
     async deleteUser(id) {
-      await fetch("http://localhost:3000/users/" + id, {
+      await fetch(`http://${ENV.API_BACKEND}/users/` + id, {
         method: "DELETE",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
@@ -120,7 +121,7 @@ export default {
       });
 
       let list = [];
-      await fetch("http://localhost:3000/users", {
+      await fetch(`http://${ENV.API_BACKEND}/users`, {
         method: "GET",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,

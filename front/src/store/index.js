@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import ENV from "../../env.config";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -58,14 +59,14 @@ export default new Vuex.Store({
   },
   actions: {
     async getSports(context) {
-      await fetch("http://localhost:3000/sports")
+      await fetch(`http://${ENV.API_BACKEND}/sports`)
         .then(res => res.json())
         .then(res => context.commit("setSports", res));
     },
     async getMyFavorites(context) {
       context.commit("setAccessToken");
       if (context.state.access_token != "") {
-        await fetch("http://localhost:3000/myfavorites", {
+        await fetch(`http://${ENV.API_BACKEND}/myfavorites`, {
           method: "GET",
           headers: {
             authorization: "Bearer " + context.state.access_token
@@ -79,7 +80,7 @@ export default new Vuex.Store({
     async addToMyFavorites(context, value) {
       context.commit("setAccessToken");
       if (context.state.access_token != "") {
-        await fetch("http://localhost:3000/myfavorites", {
+        await fetch(`http://${ENV.API_BACKEND}/myfavorites`, {
           method: "Post",
           headers: {
             "content-type": "application/json",
@@ -103,7 +104,7 @@ export default new Vuex.Store({
               cookieArray[i].length
             );
             this.state.access_token = access_token;
-            await fetch("http://localhost:3000/profile", {
+            await fetch(`http://${ENV.API_BACKEND}/profile`, {
               method: "GET",
               headers: {
                 authorization: "Bearer " + access_token
@@ -132,7 +133,7 @@ export default new Vuex.Store({
               cookieArray[i].length
             );
             let mySports = [];
-            await fetch("http://localhost:3000/mysports", {
+            await fetch(`http://${ENV.API_BACKEND}/mysports`, {
               method: "GET",
               headers: {
                 authorization: "Bearer " + access_token
@@ -143,7 +144,7 @@ export default new Vuex.Store({
             for (let i = 0; i < mySports.length; i++) {
               let tmp = null;
               await fetch(
-                "http://localhost:3000/sports/" + mySports[i].sportId,
+                `http://${ENV.API_BACKEND}/sports/` + mySports[i].sportId,
                 {
                   method: "GET",
                   headers: {

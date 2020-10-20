@@ -81,9 +81,9 @@
 </template>
 
 <script>
+    import ENV from "../../env.config";
     import Navbar from "@/components/NavBar.vue";
     import TabBar from "@/components/TabBar.vue";
-    import ENV from "../../env.config";
     /**
      * Component card for display all teams
      * @displayName DisplayMatchFootball
@@ -123,7 +123,7 @@
                 redirect: 'follow'
             };
             await fetch("https://apiv2.apifootball.com/?action=get_events&match_id=" + this.matchId +
-                    "&APIkey=ae0f32bd587cf3d83b7ab64f1062b4e78a1744330a375e195cd2d08065672225",
+                    "&APIkey=" + API_BACKEND,
                     requestOptions)
                 .then(response => response.json())
                 .then(result => this.infoMatch = result)

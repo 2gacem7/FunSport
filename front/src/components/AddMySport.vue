@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
   /**
    * Button for add a sport to your favorite.
    * @displayName addMySport
@@ -39,7 +40,7 @@
          * @event click
          * @type {Event}
          */
-        await fetch("http://localhost:3000/mysports", {
+        await fetch(`http://${ENV.API_BACKEND}/mysports`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

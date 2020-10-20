@@ -223,7 +223,7 @@ export default {
           method: "GET",
           headers: header,
         };
-      await fetch(`http://localhost:3000/pronostics/${commentaryId}/report`, options).then(()=>{
+      await fetch(`http://${ENV.API_BACKEND}/pronostics/${commentaryId}/report`, options).then(()=>{
           this.getPronostics()
         });
     },
@@ -295,7 +295,7 @@ export default {
             createdAt: new Date()
           }),
         };
-        await fetch(`http://localhost:3000/pronostics`, options).then(()=>{
+        await fetch(`http://${ENV.API_BACKEND}/pronostics`, options).then(()=>{
           this.getPronostics()
         });
       } else {
@@ -314,7 +314,7 @@ export default {
         method: "GET",
       };
       const datas = await fetch(
-        `http://localhost:3000/pronostics/${this.apiName}/${this.matchId}`,
+        `http://${ENV.API_BACKEND}/pronostics/${this.apiName}/${this.matchId}`,
         options
       );
       const json = await datas.json();

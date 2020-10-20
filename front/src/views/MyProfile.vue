@@ -146,6 +146,7 @@
 </template>
 
 <script>
+import ENV from "../../env.config";
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 
@@ -373,7 +374,7 @@ export default {
               cookieArray[i].length
             );
             let requestStatus;
-            await fetch("http://localhost:3000/users", {
+            await fetch(`http://${ENV.API_BACKEND}/users`, {
               method: "PATCH",
               headers: {
                 authorization: "Bearer " + access_token,

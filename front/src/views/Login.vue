@@ -37,6 +37,7 @@
 </template>
 
 <script>
+  import ENV, { API_BACKEND } from "../../env.config";
   import Navbar from "@/components/NavBar.vue";
   /**
  * Views used tologin a user
@@ -114,7 +115,7 @@
           password: this.password,
         };
         let requestStatus;
-        await fetch("http://localhost:3000/auth/login/", {
+        await fetch(`http://${ENV.API_BACKEND}/auth/login/`, {
             method: "Post",
             headers: {
               "content-type": "application/json",
@@ -138,7 +139,7 @@
             date +
             "; path=/;SameSite=LAX;";
 
-          await fetch("http://localhost:3000/profile", {
+          await fetch(`http://${ENV.API_BACKEND}/profile`, {
               method: "GET",
               headers: {
                 authorization: "Bearer " + response.access_token,

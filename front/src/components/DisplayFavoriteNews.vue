@@ -97,7 +97,7 @@ export default {
       };
 
       const datas = await fetch(
-        `http://localhost:3000/news/${this.newsId}`,
+        `http://${ENV.API_BACKEND}/news/${this.newsId}`,
         options
       );
       const json = await datas.json();
