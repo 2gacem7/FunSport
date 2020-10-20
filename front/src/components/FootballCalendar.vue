@@ -32,7 +32,7 @@
         <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
 
             <div v-for="item in info" :key="item.id">
-                <p class="text-center font-weight-bold">{{item.match_round}} 
+                <p class="text-center font-weight-bold">{{item.match_round}}
                     <router-link v-bind:to="'/football/' + item.match_id">
                     <button
                         class="btn btn-success justify-content-center">
@@ -56,8 +56,8 @@
                     </div>
 
                 </div>
-                <p class="text-center mt-3 mb-5">
-                    {{ item.match_date | moment("MMMM Do YYYY") }} at {{ item.match_time| moment("h:mm:ss")}}<br />
+                <p v-if="item.match_date && item.match_time" class="text-center mt-3 mb-5">
+                    {{ item.match_date  }} at {{ item.match_time}}<br />
                     <button class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
                         @click="addMatchToMyFavorite(item)">ADD</button></p>
             </div>
@@ -98,7 +98,7 @@
              */
             delButton: Boolean,
         },
-      
+
         methods: {
             /**
              * Add this match to my favorites
@@ -157,7 +157,6 @@
                         requestOptions)
                     .then(response => response.json())
                     .then(result => this.info = result)
-                    .catch(error => console.log('error', error));
             },
             /**
              * Return link to img for display badge home team in card
