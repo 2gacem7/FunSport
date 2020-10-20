@@ -98,11 +98,7 @@
              */
             delButton: Boolean,
         },
-        beforeMount() {
-            this.getInfos();
-            //this.getInfosRanking()
-        },
-
+      
         methods: {
             /**
              * Add this match to my favorites
