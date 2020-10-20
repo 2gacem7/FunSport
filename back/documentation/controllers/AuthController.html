@@ -65,6 +65,13 @@
                 <code>auth</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller used for the route &#39;auth&#39;</p>
+
+            </p>
 
 
 
@@ -134,14 +141,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="11"
-                            class="link-to-prism">src/auth/auth.controller.ts:11</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/auth/auth.controller.ts:23</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller when a user wants to login</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -182,14 +191,26 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Request, Post, UseGuards,Get} from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Request, Post, UseGuards, Get } from &#x27;@nestjs/common&#x27;;
 import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
 
+/**
+ * Controller used for the route &#x27;auth&#x27;
+ */
 @Controller(&#x27;auth&#x27;)
 export class AuthController {
-constructor(private authService: AuthService) {}
+  /**
+    * Constructor for AuthController
+    */
+  constructor(private authService: AuthService) { }
 
+
+  /**
+       * Controller when a user wants to login
+       * @param {} req
+       * @return {}
+       */
   @UseGuards(AuthGuard(&#x27;local&#x27;))
   @Post(&#x27;login&#x27;)
   async login(@Request() req) {

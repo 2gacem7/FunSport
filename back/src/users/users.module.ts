@@ -7,6 +7,9 @@ import { MySport, MySportSchema } from '../schemas/mySport.schema';
 import { MyFavorite, MyFavoriteSchema } from '../schemas/myFavorite.schema';
 
 
+/**
+ * Module for Model<User>
+ */
 @Module({
     imports: [
       MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),

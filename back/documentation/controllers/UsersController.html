@@ -65,6 +65,14 @@
                 <code>users</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller used for the route &#39;users&#39;
+This routes are manage the users</p>
+
+            </p>
 
 
 
@@ -158,14 +166,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/users/users.controller.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/users/users.controller.ts:115</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to add a user in the database from admin user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -248,14 +258,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="94"
-                            class="link-to-prism">src/users/users.controller.ts:94</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="140"
+                            class="link-to-prism">src/users/users.controller.ts:140</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to update a specific user in the Model<User> from admin user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -332,14 +344,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/users/users.controller.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/users/users.controller.ts:29</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to add a user in the database</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -411,14 +425,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/users/users.controller.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/users/users.controller.ts:82</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to delete a specific user in the Model<User></p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -501,14 +517,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/users/users.controller.ts:26</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/users/users.controller.ts:44</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to have all users in the database</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -576,14 +594,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/users/users.controller.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/users/users.controller.ts:63</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to have all details for a specific user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -593,6 +613,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -606,6 +627,8 @@
                                     </td>
 
 
+                                    <td>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>id</td>
@@ -618,6 +641,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>The id given in the database</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -666,14 +693,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="68"
-                            class="link-to-prism">src/users/users.controller.ts:68</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="102"
+                            class="link-to-prism">src/users/users.controller.ts:102</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to patch a specific user in the Model<User></p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -723,22 +752,36 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Put, Post, Param, Delete, Patch, UseGuards, Request} from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Put, Post, Param, Delete, Patch, UseGuards, Request } from &#x27;@nestjs/common&#x27;;
 import { UsersService } from &#x27;./users.service&#x27;;
 import { CreateUserDto } from &#x27;../dto/create-user.dto&#x27;;
 import { UpdateUserDto } from &#x27;../dto/update-user.dto&#x27;;
 import { JwtAuthGuard } from &#x27;../auth/jwt-auth.guard&#x27;;
 
 import { User } from &#x27;../schemas/user.schema&#x27;;
-import { HttpException, HttpStatus , HttpCode} from &#x27;@nestjs/common&#x27;
+import { HttpException, HttpStatus, HttpCode } from &#x27;@nestjs/common&#x27;
 
+
+/**
+ * Controller used for the route &#x27;users&#x27;
+ * This routes are manage the users
+ */
 @Controller(&#x27;users&#x27;)
 export class UsersController {
-constructor(private readonly usersService: UsersService) {}
+  /**
+     * Constructor for UsersController
+     * @param {UsersService} usersService
+     */
+  constructor(private readonly usersService: UsersService) { }
 
+  /**
+      * Controller used to add a user in the database
+      * @param {CreateUserDto} createUserDto
+      * @return {Model&lt;User&gt;}
+      */
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    if(await this.usersService.userExists(createUserDto)){
+    if (await this.usersService.userExists(createUserDto)) {
       throw new HttpException({
         message: &#x27;User already Exist&#x27;,
       }, HttpStatus.BAD_REQUEST);
@@ -746,48 +789,68 @@ constructor(private readonly usersService: UsersService) {}
     return await this.usersService.create(createUserDto);
   }
 
+  /**
+     * Controller used to have all users in the database
+     * @return {Model&lt;User[]&gt;}
+     */
   @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Request() req): Promise&lt;User[]&gt; {
     const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
-    if(!isAdmin){
+    if (!isAdmin) {
       throw new HttpException({
         message: &#x27;Unauthorized Access&#x27;,
       }, HttpStatus.UNAUTHORIZED);
     }
-    else{
+    else {
       return this.usersService.findAll();
     }
   }
 
+  /**
+     * Controller used to have all details for a specific user
+     * @param {string} id The id given in the database
+     * @return {Model&lt;User&gt;}
+     */
   @UseGuards(JwtAuthGuard)
   @Get(&#x27;:id&#x27;)
   async findOne(@Request() req, @Param(&#x27;id&#x27;) id: string): Promise&lt;any&gt; {
     const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
-    if(!isAdmin){
+    if (!isAdmin) {
       throw new HttpException({
         message: &#x27;Unauthorized Access&#x27;,
       }, HttpStatus.UNAUTHORIZED);
     }
-    else{
+    else {
       return this.usersService.findUserById(id);
     }
   }
 
+  /**
+     * Controller used to delete a specific user in the Model&lt;User&gt;
+     * @param {Request} req
+     * @return {}
+     */
   @UseGuards(JwtAuthGuard)
   @Delete(&#x27;:id&#x27;)
   async delete(@Request() req, @Param(&#x27;id&#x27;) id: string): Promise&lt;any&gt; {
     const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
-    if(!isAdmin){
+    if (!isAdmin) {
       throw new HttpException({
         message: &#x27;Unauthorized Access&#x27;,
       }, HttpStatus.UNAUTHORIZED);
     }
-    else{
+    else {
       return this.usersService.deleteUser(id);
     }
   }
 
+  /**
+     * Controller used to patch a specific user in the Model&lt;User&gt;
+     * @param {Request} req
+     * @param {} body
+     * @return {Model&lt;User&gt;}
+     */
   @UseGuards(JwtAuthGuard)
   @Patch()
   async update(@Request() req, @Body() body) {
@@ -795,17 +858,23 @@ constructor(private readonly usersService: UsersService) {}
     return this.usersService.update(id, body);
   }
 
+  /**
+     * Controller used to add a user in the database from admin user
+     * @param {CreateUserDto} createUserDto
+     * @param {Request} req
+     * @return {Model&lt;User&gt;}
+     */
   @UseGuards(JwtAuthGuard)
   @Post(&#x27;admin/createUser&#x27;)
-  async adminCreate(@Request() req,@Body() createUserDto: CreateUserDto) {
+  async adminCreate(@Request() req, @Body() createUserDto: CreateUserDto) {
     const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
-    if(!isAdmin){
+    if (!isAdmin) {
       throw new HttpException({
         message: &#x27;Unauthorized Access&#x27;,
       }, HttpStatus.UNAUTHORIZED);
     }
-    else{
-      if(await this.usersService.userExists(createUserDto)){
+    else {
+      if (await this.usersService.userExists(createUserDto)) {
         throw new HttpException({
           message: &#x27;User already Exist&#x27;,
         }, HttpStatus.BAD_REQUEST);
@@ -814,17 +883,23 @@ constructor(private readonly usersService: UsersService) {}
     }
   }
 
+  /**
+    * Controller used to update a specific user in the Model&lt;User&gt; from admin user
+    * @param {Request} req
+    * @param {} body
+    * @return {Model&lt;User&gt;}
+    */
   @UseGuards(JwtAuthGuard)
   @Patch(&#x27;admin/updateUser&#x27;)
   async adminUpdate(@Request() req, @Body() body) {
     const id &#x3D; req.user.id
     const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
-    if(!isAdmin){
+    if (!isAdmin) {
       throw new HttpException({
         message: &#x27;Unauthorized Access&#x27;,
       }, HttpStatus.UNAUTHORIZED);
     }
-    else{
+    else {
       return this.usersService.adminUpdate(body.id, body);
     }
   }
