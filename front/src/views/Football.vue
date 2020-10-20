@@ -34,14 +34,6 @@
       FootballCalendar,
       FootballLive,
     },
-    data() {
-      return {};
-    },
-    mounted() {},
-
-    methods: {
-
-    }
   }
 </script>
 
