@@ -13,7 +13,8 @@
         <option value="262">Serie A</option>
         <option value="435">Bundesliga</option>
       </select>
-      <button v-if="league_id !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+      <button v-if="isFavorite && !delButton && $store.state.UserData.id != '' && league_id!==''"
+        class="btn btn-success font-weight-bold" @click="addToMyFavorites">
         + favori
       </button>
     </div>
@@ -84,6 +85,7 @@
         timer: 60000, // timer to refresh the live data 10s
         setTimer: "", // save the timer interval
         Home: "",
+        isFavorite: false
       };
     },
     props: {
@@ -109,6 +111,12 @@
       //this.getInfosRanking()
     },
 
+    computed: {
+      myFavorites: function () {
+        return this.$store.state.MyFavorites;
+      },
+    },
+
     methods: {
       /**
        * Add this team to my favorites
@@ -126,6 +134,21 @@
         });
       },
       /**
+       * verify if the league's live is in user favorites
+       *
+       * @public
+       */
+      async isInMyFavorite() {
+        let x = await this.$store.state.MyFavorites.length;
+        for (let i = 0; i < x; i++) {
+          if (this.$store.state.MyFavorites[i].data[0].sport == "football" && this.$store.state
+            .MyFavorites[i].data[0].type == "live" && this.$store.state.MyFavorites[i].data[0]
+            .league_id == this.league_id) {
+            this.isFavorite = false
+          }
+        }
+      },
+      /**
        * Delete this ranking in my favorites
        *
        * @public
@@ -139,6 +162,8 @@
        * @public
        */
       async getInfos() {
+        this.isFavorite = true;
+        this.isInMyFavorite();
         var requestOptions = {
           method: "GET",
           redirect: "follow",

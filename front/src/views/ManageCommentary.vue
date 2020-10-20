@@ -66,6 +66,10 @@
 import Navbar from "@/components/NavBar.vue";
 import TabBar from "@/components/TabBar.vue";
 
+/**
+ * View where you can manage the reported commentaries
+ * @displayName ManageCommentary
+ */
 export default {
   name: "ManageCommentary",
   components: {
@@ -74,6 +78,9 @@ export default {
   },
   data() {
     return {
+       /**
+       * The list of the commentaries reported
+       */
       listCommentary: [],
     };
   },
@@ -83,9 +90,13 @@ export default {
     this.getCommentary();
   },
   methods: {
+    /**
+     * Methods used to moderate a specific commentary (clean the field commentary in pronostic)
+     * @param commentaryID Id of the commentary to moderate
+     * @public
+     */
     async moderateCommentary(commentaryID) {
       this.$store.commit("setAccessToken");
-
       await fetch(`http://localhost:3000/pronostics/${commentaryID}/reset`, {
         method: "GET",
         headers: {
@@ -93,10 +104,14 @@ export default {
         },
       }).then(() => {this.getCommentary()});
     },
-    async moderateNewsCommentary(commentaryID) {
+    /**
+     * Methods used to delete  a specific news for moderation
+     * @param newsId Id of the news to moderate
+     * @public
+     */
+    async moderateNewsCommentary(newsId) {
       this.$store.commit("setAccessToken");
-
-      await fetch(`http://localhost:3000/commentaries/${commentaryID}/delete`, {
+      await fetch(`http://localhost:3000/commentaries/${newsId}/delete`, {
         method: "DELETE",
         headers: {
           authorization: "Bearer " + this.$store.state.access_token,
@@ -104,9 +119,13 @@ export default {
       }).then(() => {this.getCommentary()});
       ;
     },
+    /**
+     * Methods used to validate a specific commentary
+     * @param commentaryID Id of the commentary to validate
+     * @public
+     */
     async validateCommentary(commentaryID) {
       this.$store.commit("setAccessToken");
-
       await fetch(`http://localhost:3000/pronostics/${commentaryID}/validate`, {
         method: "GET",
         headers: {
@@ -114,11 +133,15 @@ export default {
         },
       }).then(() => {this.getCommentary()});
     },
-    async validateNewsCommentary(commentaryID) {
+     /**
+     * Methods used to validate a specific news
+     * @param newsId Id of the news
+     * @public
+     */
+    async validateNewsCommentary(newsId) {
       this.$store.commit("setAccessToken");
-
       await fetch(
-        `http://localhost:3000/commentaries/${commentaryID}/validate`,
+        `http://localhost:3000/commentaries/${newsId}/validate`,
         {
           method: "GET",
           headers: {
@@ -127,6 +150,10 @@ export default {
         }
       ).then(() => {this.getCommentary()});
     },
+    /**
+     * Methods used to get all news and pronostics reported
+     * @public
+     */
     async getCommentary() {
       let listPronostics = [];
       await fetch("http://localhost:3000/pronostics", {

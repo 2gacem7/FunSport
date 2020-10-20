@@ -162,20 +162,56 @@ export default {
   data() {
     return {
       /**
-     * Variable saves the user's input in firstName field
-     */
+       * Variable saves the user's input in firstName field
+       */
       firstName: "",
+      /**
+       * Variable saves the user's input in newFirstName field
+       */
       newFirstName: "",
+      /**
+       * Variable saves the user's input in lastName field
+       */
       lastName: "",
+      /**
+       * Variable saves the user's input in newLastName field
+       */
       newLastName: "",
+      /**
+       * Variable saves the user's input in phone field
+       */
       phone: "",
+      /**
+       * Variable saves the user's input in new phone field
+       */
       newPhone: "",
+      /**
+       * Variable saves the user's input in email field
+       */
       email: "",
+      /**
+       * Variable saves the user's input in new email field
+       */
       newEmail: "",
+      /**
+       * Variable saves the user's input in password field
+       */
       password: "",
+      /**
+       * Variable saves the user's input in confirmation password field
+       */
       passwordComfirme: "",
+      /**
+       * Variable saves the error messages
+       */
       msg: [],
+      /**
+       * Variable saves the state of each validator
+       */
       validator: [],
+      /**
+       * State if error in validation
+       */
       info: false,
     };
   },
@@ -217,6 +253,11 @@ export default {
     this.validator["password"] = false;
   },
   methods: {
+    /**
+     * Methods used to validate the format of the Email
+     * @param value Email to check
+     * @public
+     */
     validateEmail(value) {
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
         this.msg["email"] = "";
@@ -226,6 +267,11 @@ export default {
         this.validator["email"] = false;
       }
     },
+    /**
+     * Methods used to validate the format of the FirstName
+     * @param value firstName to check
+     * @public
+     */
     validateFirstName(value) {
       if (/^[a-zA-Z0-9_]{1,16}$/.test(value)) {
         this.msg["firstName"] = "";
@@ -236,6 +282,11 @@ export default {
         this.validator["firstName"] = false;
       }
     },
+    /**
+     * Methods used to validate the format of the lasttName
+     * @param value lastName to check
+     * @public
+     */
     validateLastName(value) {
       if (/^[a-zA-Z0-9_]{1,16}$/.test(value)) {
         this.msg["lastName"] = "";
@@ -246,6 +297,11 @@ export default {
         this.validator["lastName"] = false;
       }
     },
+    /**
+     * Methods used to validate the format of the phone
+     * @param value phone to check
+     * @public
+     */
     validatePhone(value) {
       if (/^(\d\d\s){4}(\d\d)$/.test(value)) {
         this.msg["phone"] = "";
@@ -255,6 +311,11 @@ export default {
         this.validator["phone"] = false;
       }
     },
+    /**
+     * Methods used to validate the format of the password
+     * @param value password to check
+     * @public
+     */
     validatePassword(value) {
       if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/.test(value)) {
         this.msg["password"] = "";
@@ -263,6 +324,11 @@ export default {
           "Your password must have a minimum of 8 characters (1 uppercase, 1 lowercase, 1 number, 1 special character minimum)";
       }
     },
+    /**
+     * Methods used to validate the format of the confirmation password
+     * @param value confirmation password to check if equal password
+     * @public
+     */
     validatePasswordComfirme(value) {
       if (this.password === this.passwordComfirme) {
         this.msg["passwordComfirme"] = "";
@@ -272,6 +338,10 @@ export default {
         this.validator["password"] = false;
       }
     },
+    /**
+     * Methods used to update the user's information
+     * @public
+     */
     async update() {
       let body = {};
       if (this.validator.phone === true) {

@@ -34,7 +34,7 @@
             class="card m-3"
           >
             <div class="card-header">
-              <button v-if="$store.state.UserData.id != ''"
+              <button v-if="match.button && $store.state.UserData.id != ''"
                 class="btn btn-success btn-sm rounded-circle mb-2 btnADD" @click="addMatchToMyFavorite(match.id)">
                 ADD
               </button>
@@ -125,7 +125,17 @@ export default {
       results: [],
     };
   },
+  computed: {
+    myFavorites: function () {
+      return this.$store.state.MyFavorites;
+    },
+  },
   methods: {
+    /**
+     * Methods used to add a match in my favorite
+     * @param matchId matchId given by the api pandascore
+     * @public
+     */
     addMatchToMyFavorite(matchId){
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
@@ -136,8 +146,18 @@ export default {
             apiName: this.apiName,
           },
         });
+        for(let i = 0 ; i< this.results.length; i++){
+          if(this.results[i].id === matchId){
+            this.results[i].button = false;
+          }
+        }
 
     },
+     /**
+     * Methods used to go in a view for a specific match or competition
+     * @param matchId matchId given by the api pandascore
+     * @public
+     */
     goViewMatch(matchId) {
       let data;
       for (let key in this.results) {
@@ -165,9 +185,17 @@ export default {
         });
       }
     },
+    /**
+     * Methods used to reset this.results
+     * @public
+     */
     resetData() {
       this.results = [];
     },
+    /**
+     * Methods used to launch the search
+     * @public
+     */
     launchSearch() {
       if (this.type == "competitions") {
         this.getCompetitions();
@@ -175,22 +203,47 @@ export default {
         this.getMatches();
       }
     },
+    /**
+     * Methods used to get matches datas
+    * api uses: pandascore
+     * @public
+     */
     async getMatches() {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
-
+      let response = [];
       var requestOptions = {
         method: "GET",
         headers: myHeaders,
         redirect: "follow",
       };
-      this.results = await fetch(
+      await fetch(
         `https://api.pandascore.co/${this.apiName}/matches?search[name]=${this.searchValue}&sort=-scheduled_at`,
         requestOptions
       )
         .then((response) => response.json())
-        .catch((error) => console.log("error", error));
+        .then((result) => (response = result))
+          .then((update) => {
+            for (let i = 0; i < response.length; i++) {
+              let check = false;
+              for (let j = 0; j < this.myFavorites.length; j++) {
+                if (response[i].id === this.$store.state.MyFavorites[j].data[0].match_id) {
+                  check = true;
+                }
+              }
+              if (check) {
+                response[i].button = false;
+              } else response[i].button = true;
+            }
+            this.results = response;
+          })
+        
     },
+    /**
+     * Methods used to get competitions datas
+     * api uses: pandascore
+     * @public
+     */
     async getCompetitions() {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
@@ -205,7 +258,6 @@ export default {
         requestOptions
       )
         .then((response) => response.json())
-        .catch((error) => console.log("error", error));
     },
   },
 };

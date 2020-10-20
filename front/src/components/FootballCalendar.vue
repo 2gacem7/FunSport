@@ -14,7 +14,8 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="isFavorite && !delButton && $store.state.UserData.id != '' && id_tournament!==''"
+                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 
@@ -72,9 +73,6 @@
 
 
 <script>
-    import {
-        match
-    } from 'assert';
     import ENV from "../../env.config";
     /**
      * Component card for display football calendar
@@ -89,6 +87,7 @@
                 info: [],
                 infoRanking: [],
                 id_tournament: "",
+                isFavorite: false
             };
         },
         props: {
@@ -112,7 +111,6 @@
                 return this.$store.state.MyFavorites;
             },
         },
-
         methods: {
             /**
              * Add this match to my favorites
@@ -145,6 +143,22 @@
                         id_tournament: this.id_tournament,
                     },
                 });
+                this.isFavorite = false;
+            },
+            /**
+             * verify if this league's calendar is in favorite
+             *
+             * @public
+             */
+            async isInMyFavorite() {
+                let x = await this.$store.state.MyFavorites.length;
+                for (let i = 0; i < x; i++) {
+                    if (this.$store.state.MyFavorites[i].data[0].sport == "football" && this.$store.state
+                        .MyFavorites[i].data[0].type == "calendar" && this.$store.state.MyFavorites[i].data[0]
+                        .id_tournament == this.id_tournament) {
+                        this.isFavorite = false
+                    }
+                }
             },
 
             /**
@@ -161,6 +175,8 @@
              * @public
              */
             async getInfos() {
+                this.isFavorite = true;
+                this.isInMyFavorite();
                 let response = [];
                 var requestOptions = {
                     method: 'GET',
@@ -170,13 +186,14 @@
                         "https://apiv2.apifootball.com/?action=get_events&from=2020-08-03&to=2021-06-30&league_id=" +
                         this.id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
                         requestOptions)
-                    .then((response) => response.json())
+                    .then(response => response.json())
                     .then((result) => (response = result))
                     .then((update) => {
                         for (let i = 0; i < response.length; i++) {
                             let check = false;
                             for (let j = 0; j < this.myFavorites.length; j++) {
-                                if (response[i].match_id === this.$store.state.MyFavorites[j].data[0].match_id) {
+                                if (response[i].match_id === this.$store.state.MyFavorites[j].data[0]
+                                    .match_id) {
                                     check = true;
                                 }
                             }
@@ -186,7 +203,6 @@
                         }
                         this.info = response;
                     })
-                    .catch((error) => console.log("error", error));
             },
             /**
              * Return link to img for display badge home team in card
@@ -223,3 +239,45 @@
         },
     };
 </script>
+
+<style scoped>
+    .btnADD {
+        background: #2cf956;
+        background-image: -webkit-linear-gradient(top, #2cf956, #06d530);
+        background-image: -moz-linear-gradient(top, #2cf956, #06d530);
+        background-image: -ms-linear-gradient(top, #2cf956, #06d530);
+        background-image: -o-linear-gradient(top, #2cf956, #06d530);
+        background-image: -webkit-gradient(to bottom, #2cf956, #06d530);
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        color: #000000;
+        font-family: Verdana;
+        font-size: 11px;
+        padding: 11px;
+        -webkit-box-shadow: 1px 1px 20px 0 #24c691;
+        -moz-box-shadow: 1px 1px 20px 0 #24c691;
+        box-shadow: 1px 1px 20px 0 #24c691;
+        text-shadow: 1px 1px 20px #ffffff;
+        border: solid #ffffff 1px;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btnADD:hover {
+        border: solid #ffffff 1px;
+        background: #06d530;
+        color: #ffffff;
+        background-image: -webkit-linear-gradient(top, #06d530, #2cf956);
+        background-image: -moz-linear-gradient(top, #06d530, #2cf956);
+        background-image: -ms-linear-gradient(top, #06d530, #2cf956);
+        background-image: -o-linear-gradient(top, #06d530, #2cf956);
+        background-image: -webkit-gradient(to bottom, #06d530, #2cf956);
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        text-decoration: none;
+    }
+</style>
