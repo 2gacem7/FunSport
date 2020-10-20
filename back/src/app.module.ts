@@ -15,6 +15,9 @@ import { NewsModule } from './news/news.module';
 import { NewsController } from './news/news.controller';
 import { CommentariesModule } from './commentaries/commentaries.module';
 
+/**
+ * Module for the application. Define the database used
+ */
 @Module({
   imports: [MongooseModule.forRoot('mongodb://localhost/funsport'), UsersModule, AuthModule,MySportsModule, MyFavoritesModule, SportsModule, PronosticsModule, NewsModule, CommentariesModule],
   controllers: [AppController,MySportsController,MyFavoritesController],
