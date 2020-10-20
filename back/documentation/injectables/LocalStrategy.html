@@ -60,6 +60,13 @@
             <code>src/auth/local.strategy.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Strategy used to define the passport Strategy</p>
+
+            </p>
 
 
 
@@ -103,12 +110,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/auth/local.strategy.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/auth/local.strategy.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for the localStrategy</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -170,14 +179,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/auth/local.strategy.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/auth/local.strategy.ts:25</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Method used to check if a user is validated to access to other elements</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -241,12 +252,25 @@ import { PassportStrategy } from &#x27;@nestjs/passport&#x27;;
 import { Injectable, UnauthorizedException } from &#x27;@nestjs/common&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
 
+/**
+ *Strategy used to define the passport Strategy
+ */
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
+  /**
+ * Constructor for the localStrategy
+ * @param {AuthService} authService
+ */
   constructor(private authService: AuthService) {
     super({ usernameField: &#x27;email&#x27; });
   }
 
+  /**
+ * Method used to check if a user is validated to access to other elements
+ * @param {string} email
+ * @param {string} password
+ * @return {}
+ */
   async validate(email: string, password: string): Promise&lt;any&gt; {
     const user &#x3D; await this.authService.validateUser(email, password);
     if (!user) {
@@ -254,8 +278,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     }
     return user;
   }
-
-
 }</code></pre>
     </div>
 
