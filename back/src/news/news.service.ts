@@ -56,7 +56,13 @@ export class NewsService {
    * @return {News[]}
    */
   async findBySport(sport): Promise<any> {
-    return this.newsModel.find({ 'sport': sport});
+    let news = await this.newsModel.find({ 'sport': sport});
+    for (let i = 0; i < news.length; i++){
+      let firstName = await this.userModel.findById(news[i].author).select('firstName');
+      let lastName = await this.userModel.findById(news[i].author).select('lastName');
+      news[i].author = firstName.firstName + " " + lastName.lastName;
+    }
+   return news;
   }
 
   /**
