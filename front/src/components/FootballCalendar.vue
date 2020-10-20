@@ -14,7 +14,8 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="isFavorite && !delButton && $store.state.UserData.id != '' && id_tournament!==''"
+                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 
@@ -55,56 +56,57 @@
                     </div>
 
                 </div>
-                <p class="text-center mt-3 mb-5">
-                    {{ item.match_date | moment("MMMM Do YYYY") }} at {{ item.match_time| moment("h:mm:ss")}}<br />
+                <p v-if="item" class="text-center mt-3 mb-5">
+                    {{ item.match_date }} at {{ item.match_time }}<br />
                     <button v-if="item.button && $store.state.UserData.id != ''"
-                        class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
-                        @click="addMatchToMyFavorite(item)">ADD</button>
+                        class="btn btn-success btn-sm rounded-circle mb-2 btnADD" @click="addMatchToMyFavorite(item)">
+                        ADD
+                    </button>
                     <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>
                         ADD
                     </button>
                 </p>
-
             </div>
         </div>
-      </div>
+    </div>
 </template>
 
 
 <script>
-import ENV from "../../env.config";
-/**
- * Component card for display football calendar
- * @displayName FootballCalendar
- */
-
-export default {
-  name: "FootballCalendar",
-
-  data() {
-    return {
-      info: [],
-      infoRanking: [],
-      id_tournament: "",
-    };
-  },
-  props: {
+    import ENV from "../../env.config";
     /**
-     * The id of this card
+     * Component card for display football calendar
+     * @displayName FootballCalendar
      */
-    id: "",
-    /**
-     * The type of sport of this card
-     */
-    sport: String, // String display in the header
 
-    /**
-     * The button for del this card in favorite
-     */
-    delButton: Boolean,
-  },
-          
-          computed: {
+    export default {
+        name: "FootballCalendar",
+
+        data() {
+            return {
+                info: [],
+                infoRanking: [],
+                id_tournament: "",
+                isFavorite: false
+            };
+        },
+        props: {
+            /**
+             * The id of this card
+             */
+            id: "",
+            /**
+             * The type of sport of this card
+             */
+            sport: String, // String display in the header
+
+            /**
+             * The button for del this card in favorite
+             */
+            delButton: Boolean,
+        },
+
+        computed: {
             myFavorites: function () {
                 return this.$store.state.MyFavorites;
             },
@@ -141,6 +143,22 @@ export default {
                         id_tournament: this.id_tournament,
                     },
                 });
+                this.isFavorite = false;
+            },
+            /**
+             * verify if this league's calendar is in favorite
+             *
+             * @public
+             */
+            async isInMyFavorite() {
+                let x = await this.$store.state.MyFavorites.length;
+                for (let i = 0; i < x; i++) {
+                    if (this.$store.state.MyFavorites[i].data[0].sport == "football" && this.$store.state
+                        .MyFavorites[i].data[0].type == "calendar" && this.$store.state.MyFavorites[i].data[0]
+                        .id_tournament == this.id_tournament) {
+                        this.isFavorite = false
+                    }
+                }
             },
 
             /**
@@ -157,6 +175,8 @@ export default {
              * @public
              */
             async getInfos() {
+                this.isFavorite = true;
+                this.isInMyFavorite();
                 let response = [];
                 var requestOptions = {
                     method: 'GET',
@@ -182,7 +202,7 @@ export default {
                             } else response[i].button = true;
                         }
                         this.info = response;
-                    })                  
+                    })
             },
             /**
              * Return link to img for display badge home team in card
@@ -193,31 +213,31 @@ export default {
                 return item.team_home_badge;
             },
 
-    /**
-     * Return link to img for display badge away team in card
-     *
-     * @public
-     */
-    return_Link_Away(item) {
-      return item.team_away_badge;
-    },
+            /**
+             * Return link to img for display badge away team in card
+             *
+             * @public
+             */
+            return_Link_Away(item) {
+                return item.team_away_badge;
+            },
 
-    /**
-     * Format score for better UX
-     *
-     * @public
-     */
-    return_Score(item) {
-      if (item.match_hometeam_score == "") {
-        item.match_hometeam_score = "-";
-      }
+            /**
+             * Format score for better UX
+             *
+             * @public
+             */
+            return_Score(item) {
+                if (item.match_hometeam_score == "") {
+                    item.match_hometeam_score = "-";
+                }
 
-      if (item.match_awayteam_score == "") {
-        item.match_awayteam_score = "-";
-      }
-    },
-  },
-};
+                if (item.match_awayteam_score == "") {
+                    item.match_awayteam_score = "-";
+                }
+            },
+        },
+    };
 </script>
 
 <style scoped>

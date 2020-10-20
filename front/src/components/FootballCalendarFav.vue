@@ -38,8 +38,8 @@
           </div>
         </div>
         <p class="text-center mt-3 mb-5">
-          {{ item.match_date | moment("MMMM Do YYYY") }}at
-          {{ item.match_time | moment("h:mm:ss") }}
+          {{ item.match_date}}at
+          {{ item.match_time }}
         </p>
       </div>
     </div>
