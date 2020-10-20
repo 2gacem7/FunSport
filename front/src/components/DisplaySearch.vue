@@ -126,6 +126,11 @@ export default {
     };
   },
   methods: {
+    /**
+     * Methods used to add a match in my favorite
+     * @param matchId matchId given by the api pandascore
+     * @public
+     */
     addMatchToMyFavorite(matchId){
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
@@ -138,6 +143,11 @@ export default {
         });
 
     },
+     /**
+     * Methods used to go in a view for a specific match or competition
+     * @param matchId matchId given by the api pandascore
+     * @public
+     */
     goViewMatch(matchId) {
       let data;
       for (let key in this.results) {
@@ -165,9 +175,17 @@ export default {
         });
       }
     },
+    /**
+     * Methods used to reset this.results
+     * @public
+     */
     resetData() {
       this.results = [];
     },
+    /**
+     * Methods used to launch the search
+     * @public
+     */
     launchSearch() {
       if (this.type == "competitions") {
         this.getCompetitions();
@@ -175,6 +193,11 @@ export default {
         this.getMatches();
       }
     },
+    /**
+     * Methods used to get matches datas
+    * api uses: pandascore
+     * @public
+     */
     async getMatches() {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
@@ -189,8 +212,12 @@ export default {
         requestOptions
       )
         .then((response) => response.json())
-        .catch((error) => console.log("error", error));
     },
+    /**
+     * Methods used to get competitions datas
+     * api uses: pandascore
+     * @public
+     */
     async getCompetitions() {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + ENV.API_PANDA_SPORT);
@@ -205,7 +232,6 @@ export default {
         requestOptions
       )
         .then((response) => response.json())
-        .catch((error) => console.log("error", error));
     },
   },
 };
