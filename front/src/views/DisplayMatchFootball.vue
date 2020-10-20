@@ -9,7 +9,7 @@
                 <img :src="return_Link(infoMatch[0].league_logo)" alt="No image league" height="100" width="100" />
             </span>
             <p v-if="infoMatch[0]" class="mt-2">Begin at: {{ infoMatch[0].match_date | moment("MMMM Do YYYY") }},
-                {{ infoMatch[0].match_time | moment("h:mm:ss") }}</p>
+                {{ infoMatch[0].match_time | moment("h:mm:ss")}}</p>
             <div class="row justify-content-center">
                 <div v-if="infoMatch[0]">
                     <p class="font-weight-bold text-center">{{infoMatch[0].match_hometeam_name}}</p>
