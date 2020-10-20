@@ -1,48 +1,45 @@
 version: '3.1'
 
 services:
-    www:
-        container_name: nginx
-        image: nginx:alpine
-        build:
-           context: .
-           dockerfile: Dockerfile
-        ports:
-          - "80:80"
-        depends_on:
-          - back
-          - front
+    # www:
+    #     restart: always
+    #     image: nginx:alpine
+    #     volumes:
+    #       - ./etc/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+    #     ports:
+    #       - "80:8080"
+    #     depends_on:
+    #       - back
+    #       - front
 
     mongo:
-        container_name: mongo
+        restart: always
         image: mongo
-        restart: always
         volumes:
-            - ./bdd/:/data/db
+          - /bdd/:/data/db:rw
         ports:
-        - 27017:27017
+          - 27017:27017
 
-    back:
-        container_name: back
-        build:
-          args:
-            user: daegon
-            uid: 1000
-          context: ./back
-          dockerfile: Dockerfile
+
+    mongo-express:
         restart: always
+        image: mongo-express
         ports:
-        - 3000:3000
-        depends_on: 
+        - 8090:8081
+        depends_on:
           - mongo
 
-    front:
-        container_name: front
+
+    back:
+        restart: always
         build:
-            args:
-                user: daegon
-                uid: 1000
-            context: ./front
-            dockerfile: Dockerfile
-        depends_on: 
-            - back
+          context: ./back
+        depends_on:
+          - mongo
+        ports:
+          - 3000:3000
+
+    # front:
+    #     restart: always
+    #     build:
+    #         context: ./front

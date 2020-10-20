@@ -1,17 +1,11 @@
-# base image
-FROM node:alpine
+FROM node:current-alpine
 
+ENV TZ Europe/Paris
 
-ARG user
-ARG uid
-
-ADD . /app
-
-WORKDIR /app
-
-RUN npm install @vue/cli@3.7.0 -g
-
+COPY package.json  /usr/src/front/
+COPY package-lock.json /usr/src/front/
+WORKDIR /usr/src/front/
+COPY . /usr/src/front/
 RUN npm install
-
 
 CMD npm run serve
