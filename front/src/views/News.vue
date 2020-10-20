@@ -11,33 +11,32 @@
         </option>
       </select>
     </div>
-<div class="card m-2" v-if="listNews.length == 0">No result for you</div>
-  <div v-else>
-    <div v-for="news in listNews" :key="news.id" class="card m-2">
-      <h2>Title : {{ news.title }}</h2>
-      <span
-        >Created at: {{ news.createdAt | moment("MMMM Do YYYY, h:mm") }}</span
-      >
-      <span>Sport: {{ news.sport }}</span>
-      <span>Author: {{ news.author }}</span>
-
-      <v-md-preview :text="getResume(news.content)"></v-md-preview>
-
-      <div class="d-flex justify-content-between">
-        <button class="btn btn-primary w-25" @click="goToNews(news)">
-          View
-        </button>
-        <button
-        v-if="$store.state.UserData.id != '' && !isInMyFavorite(news._id)"
-          class="btn btn-primary w-25"
-          @click="addToMyFavorites(news)"
+    <div class="card m-2" v-if="listNews.length == 0">No result for you</div>
+    <div v-else>
+      <div v-for="news in listNews" :key="news.id" class="card m-2">
+        <h2>Title : {{ news.title }}</h2>
+        <span
+          >Created at: {{ news.createdAt | moment("MMMM Do YYYY, h:mm") }}</span
         >
-          Add
-        </button>
+        <span>Sport: {{ news.sport }}</span>
+        <span>Author: {{ news.author }}</span>
+
+        <v-md-preview :text="getResume(news.content)"></v-md-preview>
+
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-primary w-25" @click="goToNews(news)">
+            View
+          </button>
+          <button
+            v-if="$store.state.UserData.id != '' && !isInMyFavorite(news._id)"
+            class="btn btn-primary w-25"
+            @click="addToMyFavorites(news)"
+          >
+            Add
+          </button>
+        </div>
       </div>
     </div>
-    </div>
-
   </div>
 </template>
 
@@ -91,10 +90,6 @@ export default {
   mounted() {
     this.getNews();
   },
-  computed:{
-
-
-  },
   methods: {
     /**
      * Check if this sport live is in favorite user
@@ -102,8 +97,11 @@ export default {
      * @public
      */
     isInMyFavorite(newsId) {
-      for (let i=0; i< this.$store.state.MyFavorites.length; i++){
-        if (this.$store.state.MyFavorites[i].data[0].type == "news" && this.$store.state.MyFavorites[i].data[0].name == newsId) {
+      for (let i = 0; i < this.$store.state.MyFavorites.length; i++) {
+        if (
+          this.$store.state.MyFavorites[i].data[0].type == "news" &&
+          this.$store.state.MyFavorites[i].data[0].name == newsId
+        ) {
           return true;
         }
       }
@@ -111,9 +109,9 @@ export default {
     },
 
     /**
-   * Methods used to return a extract of the content
-   * @public
-   */
+     * Methods used to return a extract of the content
+     * @public
+     */
     getResume(content) {
       return content.substr(0, 50);
     },
@@ -145,13 +143,13 @@ export default {
      */
     addToMyFavorites(news) {
       this.$store.dispatch("addToMyFavorites", {
-          id: this.$store.state.tabSelected.id,
-          data: {
-            sport: news.sport,
-            type: "news",
-            name: news._id,
-          },
-        });
+        id: this.$store.state.tabSelected.id,
+        data: {
+          sport: news.sport,
+          type: "news",
+          name: news._id,
+        },
+      });
     },
 
     /**
