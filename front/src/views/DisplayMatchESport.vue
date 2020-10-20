@@ -205,6 +205,11 @@ export default {
   },
 
   methods: {
+    /**
+     * This method is used to report a specific commentary
+     * @param commentaryId
+     * @public
+     */
     async reportCommentary(commentaryId){
       this.$store.commit("setAccessToken");
       const header = new Headers();
