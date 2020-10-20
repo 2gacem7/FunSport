@@ -1,7 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
     <div class="card-header d-flex justify-content-between">
-      <button v-if="!delButton && $store.state.UserData.id != ''" class="btn btn-success font-weight-bold"
+      <button v-if="isFavorite && !delButton && $store.state.UserData.id != ''" class="btn btn-success font-weight-bold"
         @click="addToMyFavorites">
         + favori
       </button>
@@ -85,10 +85,12 @@
       return {
         info: {},
         page: 1,
+        isFavorite: true,
       };
     },
-    beforeMount() {
+    async beforeMount() {
       this.getPastInfos();
+      this.isInMyFavorite();
     },
     props: {
       /**
@@ -120,6 +122,19 @@
        *
        * @public
        */
+      async isInMyFavorite() {
+        let x  = await this.$store.state.MyFavorites.length;
+        for(let i= 0 ; i < x ; i++){
+          if (this.$store.state.MyFavorites[i].data[0].sport == this.sport && this.$store.state.MyFavorites[i].data[0].type == "component" && this.$store.state.MyFavorites[i].data[0].name == 'calendar' ) {
+            this.isFavorite = false
+          }
+        }
+      },
+      /**
+       * Add this components to my favorites
+       *
+       * @public
+       */
       addToMyFavorites() {
         this.$store.dispatch("addToMyFavorites", {
           id: this.$store.state.tabSelected.id,
@@ -130,6 +145,7 @@
             apiName: this.apiName,
           },
         });
+        this.isFavorite = false;
       },
       addMatchToMyFavorite(item) {
         const matchId = item.id;

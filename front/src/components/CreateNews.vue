@@ -86,16 +86,24 @@ export default {
   name: "createNews",
   data() {
     return {
+      /**
+       * The v-model for the title
+       */
       title: "",
+      /**
+       * The v-model for the content
+       */
       content: "",
-      sport: "",
+      /**
+       * The v-model for the selected sport
+       */
       sportSelected: this.$store.state.sports[0].name,
-      msg: [],
-      validator: [],
-      info: false,
     };
   },
   props: {
+    /**
+       * props from ManageNews when edit news is selected
+       */
     data: Object,
   },
 

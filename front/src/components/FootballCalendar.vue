@@ -67,43 +67,44 @@
 
             </div>
         </div>
-    </div>
+      </div>
 </template>
 
 
 <script>
-    import ENV from "../../env.config";
+import ENV from "../../env.config";
+/**
+ * Component card for display football calendar
+ * @displayName FootballCalendar
+ */
+
+export default {
+  name: "FootballCalendar",
+
+  data() {
+    return {
+      info: [],
+      infoRanking: [],
+      id_tournament: "",
+    };
+  },
+  props: {
     /**
-     * Component card for display football calendar
-     * @displayName FootballCalendar
+     * The id of this card
      */
+    id: "",
+    /**
+     * The type of sport of this card
+     */
+    sport: String, // String display in the header
 
-    export default {
-        name: "FootballCalendar",
-
-        data() {
-            return {
-                info: [],
-                infoRanking: [],
-                id_tournament: "",
-            };
-        },
-        props: {
-            /**
-             * The id of this card
-             */
-            id: "",
-            /**
-             * The type of sport of this card
-             */
-            sport: String, // String display in the header
-
-            /**
-             * The button for del this card in favorite
-             */
-            delButton: Boolean,
-        },
-        computed: {
+    /**
+     * The button for del this card in favorite
+     */
+    delButton: Boolean,
+  },
+          
+          computed: {
             myFavorites: function () {
                 return this.$store.state.MyFavorites;
             },
@@ -192,32 +193,33 @@
                 return item.team_home_badge;
             },
 
-            /**
-             * Return link to img for display badge away team in card
-             *
-             * @public
-             */
-            return_Link_Away(item) {
-                return item.team_away_badge;
-            },
+    /**
+     * Return link to img for display badge away team in card
+     *
+     * @public
+     */
+    return_Link_Away(item) {
+      return item.team_away_badge;
+    },
 
-            /**
-             * Format score for better UX
-             *
-             * @public
-             */
-            return_Score(item) {
-                if (item.match_hometeam_score == "") {
-                    item.match_hometeam_score = "-";
-                }
+    /**
+     * Format score for better UX
+     *
+     * @public
+     */
+    return_Score(item) {
+      if (item.match_hometeam_score == "") {
+        item.match_hometeam_score = "-";
+      }
 
-                if (item.match_awayteam_score == "") {
-                    item.match_awayteam_score = "-";
-                }
-            },
-        },
-    };
+      if (item.match_awayteam_score == "") {
+        item.match_awayteam_score = "-";
+      }
+    },
+  },
+};
 </script>
+
 <style scoped>
     .btnADD {
         background: #2cf956;

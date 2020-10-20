@@ -1,7 +1,7 @@
 <template>
   <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
     <div class="card-header  d-flex justify-content-between">
-      <button v-if="!delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
+      <button v-if="isFavorite && !delButton && $store.state.UserData.id !=''" class="btn btn-success font-weight-bold mb-2" @click="addToMyFavorites">
         + favori
       </button>
       <h3 class="text-center">{{ sport }} Calendar matches</h3>
@@ -60,6 +60,7 @@
     data() {
       return {
         info: {},
+        isFavorite: true,
       };
     },
     props: {
@@ -82,10 +83,24 @@
     },
     beforeMount() {
       this.getInfos();
+      this.isInMyFavorite();
     },
     methods: {
       /**
        * Add this components to my favorites
+       *
+       * @public
+       */
+      async isInMyFavorite() {
+        let x  = await this.$store.state.MyFavorites.length;
+        for(let i= 0 ; i < x ; i++){
+          if (this.$store.state.MyFavorites[i].data[0].sport == this.sport && this.$store.state.MyFavorites[i].data[0].type == "component" && this.$store.state.MyFavorites[i].data[0].name == 'calendar' ) {
+            this.isFavorite = false
+          }
+        }
+      },
+      /**
+       * Add this sport live to my favorite
        *
        * @public
        */
@@ -99,6 +114,7 @@
             apiName: this.apiName,
           },
         });
+        this.isFavorite = false;
       },
       /**
        * Delete this components in my favorites

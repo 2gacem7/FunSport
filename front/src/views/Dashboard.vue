@@ -27,7 +27,7 @@
       <div class="card-body m-0">
         <div v-if="myFavorites.length == 0">You don't have favorite</div>
         <div v-else class="card-deck m-0">
-          <div v-for="favorite in myFavorites" :key="favorite.id">
+          <div v-for="favorite in myFavorites" :key="favorite._id">
             <DisplayLive v-if="
                 favorite.data[0].type == 'component' &&
                 favorite.data[0].name == 'live' &&
@@ -175,7 +175,7 @@
     },
     data() {
       return {
-        access_token: "",
+        isLoading: true
       };
     },
     /**
@@ -262,7 +262,8 @@
             body: JSON.stringify({
               sportFavoriteId: id
             }),
-          }).then(this.$store.dispatch("getMyFavorites"));
+          }).then(()=>{this.$store.dispatch("getMyFavorites")});
+
         }
       },
     },
