@@ -132,9 +132,8 @@ export default {
           data: {
             sport: this.sport,
             type: "matches",
-            matchId: matchId,
-            apiName:this.apiName
-
+            match_id: matchId,
+            apiName: this.apiName,
           },
         });
 
