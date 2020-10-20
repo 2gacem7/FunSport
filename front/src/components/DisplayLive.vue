@@ -71,7 +71,7 @@
       return {
         infos: [],
         isLoading: true,
-        lastUpdate: "",
+        lastUpdate: new Date(),
         timer: 10000, // timer to refresh the live data 10s
         setTimer: "", // save the timer interval
       };
