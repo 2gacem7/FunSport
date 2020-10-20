@@ -4,7 +4,7 @@
     <TabBar />
     <button class="btn btn-primary" @click="go">Back</button>
 
-    <div class="card m-2 p-2">
+    <div class="card m-2 p-2" v-if="datas.createdAt">
       <span
         >Create at: {{ datas.createdAt | moment("MMMM Do YYYY, h:mm:ss") }} by:
         {{ datas.author }} </span
@@ -28,7 +28,7 @@
               <div class="card-header d-flex">
                 <span
                   >Post the
-                  {{ commentary.createdAt | moment("MMMM Do YYYY, h:mm") }} by
+                  {{ parseFloat(commentary.createdAt) | moment("MMMM Do YYYY, h:mm") }} by
                   {{ commentary.userId }}</span
                 >
                 <button
@@ -101,7 +101,7 @@ export default {
    * This hook is used to set datas using the router params
    * @public
    */
-  mounted() {
+  async mounted() {
     this.newsId = this.$route.params.newsId;
     this.datas = this.$route.params.datas;
     this.getCommentaries();

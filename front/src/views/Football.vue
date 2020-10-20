@@ -1,5 +1,5 @@
 <template>
-  <div id="football" style="background-color:#06D530;height:140vh">
+  <div id="football" style="background-color:#06D530;height:100%">
     <Navbar />
     <TabBar />
     <div id="bannerFootball">
@@ -9,7 +9,6 @@
       <FootballRanking />
       <FootballCalendar />
       <FootballLive />
-
     </div>
   </div>
 </template>
