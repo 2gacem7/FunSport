@@ -32,12 +32,11 @@
         <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
 
             <div v-for="item in info" :key="item.id">
-                <p class="text-center font-weight-bold">{{item.match_round}} 
+                <p class="text-center font-weight-bold">{{item.match_round}}
                     <router-link v-bind:to="'/football/' + item.match_id">
-                    <button
-                        class="btn btn-success justify-content-center">
-                        View
-                    </button>
+                        <button class="btn btn-success justify-content-center">
+                            View
+                        </button>
                     </router-link>
                 </p>
                 <div class="row d-flex justify-content-center">
@@ -56,10 +55,16 @@
                     </div>
 
                 </div>
-                <p class="text-center mt-3 mb-5">
-                    {{ item.match_date | moment("MMMM Do YYYY") }} at {{ item.match_time| moment("h:mm:ss")}}<br />
-                    <button class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
-                        @click="addMatchToMyFavorite(item)">ADD</button></p>
+                <p v-if="item" class="text-center mt-3 mb-5">
+                    {{ item.match_date }} at {{ item.match_time }}<br />
+                    <button v-if="item.button && $store.state.UserData.id != ''"
+                        class="btn btn-success btn-sm rounded-circle mb-2 btnADD" @click="addMatchToMyFavorite(item)">
+                        ADD
+                    </button>
+                    <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>
+                        ADD
+                    </button>
+                </p>
             </div>
         </div>
     </div>
@@ -67,6 +72,9 @@
 
 
 <script>
+    import {
+        match
+    } from 'assert';
     import ENV from "../../env.config";
     /**
      * Component card for display football calendar
@@ -98,7 +106,13 @@
              */
             delButton: Boolean,
         },
-      
+
+        computed: {
+            myFavorites: function () {
+                return this.$store.state.MyFavorites;
+            },
+        },
+
         methods: {
             /**
              * Add this match to my favorites
@@ -147,6 +161,7 @@
              * @public
              */
             async getInfos() {
+                let response = [];
                 var requestOptions = {
                     method: 'GET',
                     redirect: 'follow'
@@ -155,9 +170,23 @@
                         "https://apiv2.apifootball.com/?action=get_events&from=2020-08-03&to=2021-06-30&league_id=" +
                         this.id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
                         requestOptions)
-                    .then(response => response.json())
-                    .then(result => this.info = result)
-                    .catch(error => console.log('error', error));
+                    .then((response) => response.json())
+                    .then((result) => (response = result))
+                    .then((update) => {
+                        for (let i = 0; i < response.length; i++) {
+                            let check = false;
+                            for (let j = 0; j < this.myFavorites.length; j++) {
+                                if (response[i].match_id === this.$store.state.MyFavorites[j].data[0].match_id) {
+                                    check = true;
+                                }
+                            }
+                            if (check) {
+                                response[i].button = false;
+                            } else response[i].button = true;
+                        }
+                        this.info = response;
+                    })
+                    .catch((error) => console.log("error", error));
             },
             /**
              * Return link to img for display badge home team in card

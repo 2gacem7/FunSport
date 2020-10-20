@@ -1,7 +1,7 @@
 <template>
     <div class="m-3 card" style="max-height: 30rem; max-width: 50rem">
         <div class="card-header d-flex justify-content-between">
-            <h3 class="text-center">Ranking </h3>
+            <h3 class="text-center">Ranking</h3>
         </div>
         <div>
             <select v-model="id_tournament" v-on:click="getInfos">
@@ -11,8 +11,7 @@
                 <option value="262">Serie A</option>
                 <option value="195">Bundesliga</option>
             </select>
-            <button v-if="id_tournament !== ''"
-                class="btn btn-success font-weight-bold" @click="addToMyFavorites">
+            <button v-if="id_tournament !== ''" class="btn btn-success font-weight-bold" @click="addToMyFavorites">
                 + favori
             </button>
 
@@ -40,9 +39,17 @@
                 <tbody v-for="item in info" :key="item.id">
                     <tr>
                         <td>
-                            <button v-if="id_tournament !== ''"
-                                class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
-                                @click="addTeamToMyFavorite(item)">ADD</button>
+                            <button v-if="item.button && $store.state.UserData.id != ''"
+                            class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
+                            @click="addTeamToMyFavorite(item)">
+                                ADD
+                            </button>
+
+                            <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>
+                                ADD
+                            </button>
+
+
                         </td>
                         <td class="text-center">
                             {{item.overall_league_position}}
@@ -89,6 +96,11 @@
              * The button for del this card in favorite
              */
             delButton: Boolean,
+        },
+        computed: {
+            myFavorites: function () {
+                return this.$store.state.MyFavorites;
+            },
         },
 
         methods: {
@@ -139,6 +151,7 @@
              * @public
              */
             async getInfos() {
+                let response = [];
                 if (this.id_tournament !== '') {
                     var requestOptions = {
                         method: 'GET',
@@ -147,8 +160,22 @@
                     await fetch("https://apiv2.apifootball.com/?action=get_standings&league_id=" + this
                             .id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
                             requestOptions)
-                        .then(response => response.json())
-                        .then(result => this.info = result)
+                        .then((response) => response.json())
+                        .then((result) => (response = result))
+                        .then((update) => {
+                            for (let i = 0; i < response.length; i++) {
+                                let check = false;
+                                for (let j = 0; j < this.myFavorites.length; j++) {
+                                    if (response[i].team_id === this.$store.state.MyFavorites[j].data[0].team_id) {
+                                        check = true;
+                                    }
+                                }
+                                if (check) {
+                                    response[i].button = false;
+                                } else response[i].button = true;
+                            }
+                            this.info = response;
+                        })
                 }
             },
             /**
