@@ -103,7 +103,7 @@ export default {
       const json = await datas.json();
       if (datas.ok) {
         this.infos = json;
-        console.log(this.infos);
+
       } else {
         console.log("Down");
       }
