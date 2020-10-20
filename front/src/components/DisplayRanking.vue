@@ -14,7 +14,7 @@
                     {{item.league.name}}
                 </option>
             </select>
-            <button v-if="id_tournament !== ''" @click="addTournamentToMyFavorite()"
+            <button v-if="isFavorite && id_tournament !== ''" @click="addTournamentToMyFavorite()"
                 class="btn btn-success font-weight-bold mb-2 ml-3 btnADD">+ favori</button>
         </div>
         <div class="card-body m-0 p-0 w-100 overflow-auto">
@@ -62,7 +62,8 @@
                 info: [],
                 infoRanking: [],
                 id_tournament: "",
-                isLoading: true
+                isLoading: true,
+                isFavorite:true,
             };
         },
         props: {
@@ -89,14 +90,29 @@
         },
         methods: {
             /**
+             * Check if this sport live is in favorite user
+             *
+             * @public
+             */
+            async isInMyFavorite() {
+                let x = await this.$store.state.MyFavorites.length
+                for (let i = 0; i < x; i++) {
+                    if (this.$store.state.MyFavorites[i].data[0].sport == this.sport && this.$store.state
+                        .MyFavorites[i].data[0].type == "component" && this.$store.state.MyFavorites[i].data[0]
+                        .id_tournament == this.id_tournament) {
+                        this.isFavorite = false
+                    }
+                }
+            },
+            /**
              * Add this team to my favorites
              *
              * @public
              */
             addTournamentToMyFavorite() {
                 let leagueName = "";
-                for(let i = 0 ; i < this.info.length ; i++){
-                    if(this.info[i].matches[0].tournament_id === this.id_tournament){
+                for (let i = 0; i < this.info.length; i++) {
+                    if (this.info[i].matches[0].tournament_id === this.id_tournament) {
                         leagueName = this.info[i].league.name;
                     }
                 }
@@ -112,6 +128,7 @@
                     },
                 });
                 this.getInfos();
+                this.isFavorite = false;
             },
             /**
              * Get datas from api for display on the card
@@ -153,7 +170,8 @@
              */
             async getInfosRanking() {
                 if (this.id_tournament !== "") {
-
+                    this.isFavorite = true;
+                    this.isInMyFavorite();
                     var myHeaders = new Headers();
                     myHeaders.append(
                         "Authorization",
