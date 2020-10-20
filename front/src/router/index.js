@@ -106,7 +106,7 @@ const routes = [
   },
   {
     path: "/football/:matchId",
-    name: "match",
+    name: "matchFootball",
     component: DisplayMatchFootball
   },
 ];

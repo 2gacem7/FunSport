@@ -207,7 +207,6 @@
               } else response[i].button = true;
             }
             this.info = response;
-
           })
           .catch((error) => console.log("error", error));
       },
