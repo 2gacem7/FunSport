@@ -1,16 +1,16 @@
 version: '3.1'
 
 services:
-    # www:
-    #     restart: always
-    #     image: nginx:alpine
-    #     volumes:
-    #       - ./etc/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
-    #     ports:
-    #       - "8080:8080"
-    #     depends_on:
-    #       - back
-    #       - front
+    www:
+        restart: always
+        image: nginx:alpine
+        volumes:
+          - ./etc/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+        ports:
+          - "8080:8080"
+        depends_on:
+          - back
+          - front
 
     mongo:
         restart: always
@@ -39,7 +39,7 @@ services:
         ports:
           - 3000:3000
 
-    # front:
-    #     restart: always
-    #     build:
-    #         context: ./front
+    front:
+        restart: always
+        build:
+            context: ./front
