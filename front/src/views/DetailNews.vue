@@ -15,7 +15,7 @@
       <div class="card m-2">
         <h3>Commentaries</h3>
         <div v-if="commentaries.length == 0">
-          No commentary available for this match
+          No commentary available for this news
         </div>
         <div v-else>
 
