@@ -32,12 +32,11 @@
         <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
 
             <div v-for="item in info" :key="item.id">
-                <p class="text-center font-weight-bold">{{item.match_round}} 
+                <p class="text-center font-weight-bold">{{item.match_round}}
                     <router-link v-bind:to="'/football/' + item.match_id">
-                    <button
-                        class="btn btn-success justify-content-center">
-                        View
-                    </button>
+                        <button class="btn btn-success justify-content-center">
+                            View
+                        </button>
                     </router-link>
                 </p>
                 <div class="row d-flex justify-content-center">
@@ -58,8 +57,14 @@
                 </div>
                 <p class="text-center mt-3 mb-5">
                     {{ item.match_date | moment("MMMM Do YYYY") }} at {{ item.match_time| moment("h:mm:ss")}}<br />
-                    <button class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
-                        @click="addMatchToMyFavorite(item)">ADD</button></p>
+                    <button v-if="item.button && $store.state.UserData.id != ''"
+                        class="btn btn-success btn-sm rounded-circle mb-2 btnADD"
+                        @click="addMatchToMyFavorite(item)">ADD</button>
+                    <button v-else class="btn btn-success btn-sm rounded-circle mb-2 btnADD" disabled>
+                        ADD
+                    </button>
+                </p>
+
             </div>
         </div>
     </div>
@@ -98,7 +103,11 @@
              */
             delButton: Boolean,
         },
-      
+        computed: {
+            myFavorites: function () {
+                return this.$store.state.MyFavorites;
+            },
+        },
         methods: {
             /**
              * Add this match to my favorites
@@ -147,6 +156,7 @@
              * @public
              */
             async getInfos() {
+                let response = [];
                 var requestOptions = {
                     method: 'GET',
                     redirect: 'follow'
@@ -156,8 +166,22 @@
                         this.id_tournament + "&APIkey=" + ENV.API_FOOTBALL,
                         requestOptions)
                     .then(response => response.json())
-                    .then(result => this.info = result)
-                    .catch(error => console.log('error', error));
+                    .then((result) => (response = result))
+                    .then((update) => {
+                        for (let i = 0; i < response.length; i++) {
+                            let check = false;
+                            for (let j = 0; j < this.myFavorites.length; j++) {
+                                if (response[i].match_id === this.$store.state.MyFavorites[j].data[0]
+                                    .match_id) {
+                                    check = true;
+                                }
+                            }
+                            if (check) {
+                                response[i].button = false;
+                            } else response[i].button = true;
+                        }
+                        this.info = response;
+                    })                  
             },
             /**
              * Return link to img for display badge home team in card
@@ -194,3 +218,44 @@
         },
     };
 </script>
+<style scoped>
+    .btnADD {
+        background: #2cf956;
+        background-image: -webkit-linear-gradient(top, #2cf956, #06d530);
+        background-image: -moz-linear-gradient(top, #2cf956, #06d530);
+        background-image: -ms-linear-gradient(top, #2cf956, #06d530);
+        background-image: -o-linear-gradient(top, #2cf956, #06d530);
+        background-image: -webkit-gradient(to bottom, #2cf956, #06d530);
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        color: #000000;
+        font-family: Verdana;
+        font-size: 11px;
+        padding: 11px;
+        -webkit-box-shadow: 1px 1px 20px 0 #24c691;
+        -moz-box-shadow: 1px 1px 20px 0 #24c691;
+        box-shadow: 1px 1px 20px 0 #24c691;
+        text-shadow: 1px 1px 20px #ffffff;
+        border: solid #ffffff 1px;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btnADD:hover {
+        border: solid #ffffff 1px;
+        background: #06d530;
+        color: #ffffff;
+        background-image: -webkit-linear-gradient(top, #06d530, #2cf956);
+        background-image: -moz-linear-gradient(top, #06d530, #2cf956);
+        background-image: -ms-linear-gradient(top, #06d530, #2cf956);
+        background-image: -o-linear-gradient(top, #06d530, #2cf956);
+        background-image: -webkit-gradient(to bottom, #06d530, #2cf956);
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        text-decoration: none;
+    }
+</style>
