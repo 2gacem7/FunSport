@@ -2,7 +2,7 @@
   <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
 
         <div class="card-header text-center">
-         <h3> {{ sport }}  </h3>  {{infos.name}}  
+         <h3> {{ sport }}  </h3>  {{infos.name}}
           </div>
         <div class="card-body m-0 p-0 w-100 overflow-auto">
 
@@ -15,7 +15,7 @@
           </tr>
         </thead>
        <tbody>
-         <tr>
+         <tr v-if="infos.league">
            <td class="text-center">
              <p class="m-0 font-weight-bold">Start:</p>
               <span v-if="infos.begin_at == null">Unknown</span><span v-else>
@@ -29,8 +29,11 @@
             <img :src="return_Link(infos)" style="max-width: 7rem" class="mb-5" alt="no league image" />
 
            </td>
-           <td class="text-center">
+           <td v-if="infos.winner" class="text-center">
              {{infos.winner.name}}
+           </td>
+           <td v-else class="text-center">
+             unknown
            </td>
          </tr>
        </tbody>
@@ -41,8 +44,8 @@
     </div>
         </div>
   </div>
-      
-  
+
+
 </template>
 
 <script>
@@ -78,7 +81,7 @@
 
       };
     },
-    async mounted() {
+    async beforeMount() {
       this.getInfo();
     },
     methods: {
@@ -114,12 +117,13 @@
                     }
                 })
             .then(response => response.json())
-            .then(result => infos = result)
+            .then(response => {infos = response
+                              this.infos = response})
             .catch(err => {
                 console.error(err);
             });
-        this.infos = infos;
-        console.log(infos)
+
+
       },
       /**
        * Return link to img for display in card
@@ -128,7 +132,7 @@
        */
       return_Link(infos) {
         return infos.league.image_url;
-      },     
+      },
     },
   };
 </script>
