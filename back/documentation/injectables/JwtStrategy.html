@@ -60,6 +60,13 @@
             <code>src/auth/jwt.strategy.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Strategy used to define the JWT strategy</p>
+
+            </p>
 
 
 
@@ -103,10 +110,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/auth/jwt.strategy.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/auth/jwt.strategy.ts:10</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for the JWTStrategy</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -140,14 +153,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/auth/jwt.strategy.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/auth/jwt.strategy.ts:27</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Method used to validate the payload of the JWT</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -199,8 +214,14 @@ import { PassportStrategy } from &#x27;@nestjs/passport&#x27;;
 import { Injectable } from &#x27;@nestjs/common&#x27;;
 import { jwtConstants } from &#x27;./constants&#x27;;
 
+/**
+ *Strategy used to define the JWT strategy
+ */
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+    /**
+ * Constructor for the JWTStrategy
+ */
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -209,10 +230,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+    /**
+ * Method used to validate the payload of the JWT
+ * @param {} payload
+ * @return {}
+ */
   async validate(payload: any) {
     return { id: payload.id, email: payload.email, firstName: payload.firstName, lastName: payload.lastName, phone: payload.phone , isAdmin: payload.isAdmin};
   }
-  
+
 }</code></pre>
     </div>
 

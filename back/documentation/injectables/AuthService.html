@@ -60,6 +60,13 @@
             <code>src/auth/auth.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service used for managing the actions available for Auth controller</p>
+
+            </p>
 
 
 
@@ -107,12 +114,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/auth/auth.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/auth/auth.service.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor of SportsService</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -186,14 +195,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/auth/auth.service.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/auth/auth.service.ts:42</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to return the access_token</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -203,6 +214,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -217,6 +229,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>user object</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -258,14 +274,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/auth/auth.service.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/auth/auth.service.ts:27</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Service used to validate the credentials</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -275,6 +293,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -289,6 +308,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>email of the user</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>pass</td>
@@ -301,6 +324,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>password of the user</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -329,13 +356,27 @@ import { UsersService } from &#x27;../users/users.service&#x27;;
 import { JwtService } from &#x27;@nestjs/jwt&#x27;;
 import * as bcrypt from &#x27;bcrypt&#x27;;
 
+/**
+ * Service used for managing the actions available for Auth controller
+ */
 @Injectable()
 export class AuthService {
+  /**
+     * Constructor of SportsService
+     * @param {UsersService} usersService
+     * @param {JwtService} jwtService
+     */
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService
     ) {}
 
+    /**
+     * Service used to validate the credentials
+     * @param {string} email email of the user
+     * @param {string} pass password of the user
+     * @return {}
+     */
   async validateUser(email: string, pass: string): Promise&lt;any&gt; {
     const user &#x3D; await this.usersService.findOne(email);
     const passVerify &#x3D; await bcrypt.compare(pass, user[0].password);
@@ -346,8 +387,13 @@ export class AuthService {
     return null;
   }
 
+   /**
+     * Service used to return the access_token
+     * @param {} user user object
+     * @return {}
+     */
   async login(user: any) {
-    const payload &#x3D; { 
+    const payload &#x3D; {
                       email: user[0].email,
                       id: user[0]._id ,
                       firstName: user[0].firstName,

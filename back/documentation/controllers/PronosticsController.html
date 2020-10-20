@@ -105,6 +105,18 @@
                                     <span class="modifier">Async</span>
                                 <a href="#findOne">findOne</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#reportCommentary">reportCommentary</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#resetCommentary">resetCommentary</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateCommentary">validateCommentary</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -153,8 +165,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:40</a></div>
                 </td>
             </tr>
 
@@ -250,8 +262,8 @@ You need to be connected to access to this route</li>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:86</a></div>
                 </td>
             </tr>
 
@@ -318,7 +330,7 @@ You need to be connected to access to this route</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findAll()</code>
+                    <code>findAll(req)</code>
                 </td>
             </tr>
 
@@ -332,8 +344,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="60"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:60</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:64</a></div>
                 </td>
             </tr>
 
@@ -344,6 +356,28 @@ You need to be connected to access to this route</p>
 You need to be connected to access to this route</p>
 </div>
 
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div>
                     </div>
                     <div class="io-description">
@@ -374,7 +408,7 @@ You need to be connected to access to this route</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findOne(matchId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>findOne(matchId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, apiName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -382,22 +416,21 @@ You need to be connected to access to this route</p>
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@UseGuards(JwtAuthGuard)<br />@Get(&#x27;:matchId&#x27;)<br /></code>
+                    <code>@Get(&#x27;:apiName/:matchId&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:72</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:154</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Controller give all pronostics for one match id
-You need to be connected to access to this route</p>
+                    <div class="io-description"><p>Controller give all pronostics for one match id</p>
 </div>
 
                     <div class="io-description">
@@ -413,6 +446,18 @@ You need to be connected to access to this route</p>
                             <tbody>
                                 <tr>
                                     <td>matchId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>apiName</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -439,6 +484,274 @@ You need to be connected to access to this route</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportCommentary"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            reportCommentary
+                        </b>
+                        <a href="#reportCommentary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>reportCommentary(pronosticId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@UseGuards(JwtAuthGuard)<br />@Get(&#x27;:pronosticId/report&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="142"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:142</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to report a specific commentary
+You need to be connected to access to this route</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>pronosticId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Pronostic.html" target="_self" >Promise&lt;Pronostic&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetCommentary"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            resetCommentary
+                        </b>
+                        <a href="#resetCommentary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetCommentary(req, pronosticId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@UseGuards(JwtAuthGuard)<br />@Get(&#x27;:pronosticId/reset&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="104"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:104</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to reset the field commentary for a specific pronostic
+You need to be connected to access to this route and to be isAdmin</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>pronosticId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Pronostic.html" target="_self" >Promise&lt;Pronostic&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateCommentary"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            validateCommentary
+                        </b>
+                        <a href="#validateCommentary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateCommentary(req, pronosticId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@UseGuards(JwtAuthGuard)<br />@Get(&#x27;:pronosticId/validate&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/MyPronostics/pronostics.controller.ts:123</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to validate a commentary
+You need to be connected to access to this route and to be isAdmin</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>pronosticId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Pronostic.html" target="_self" >Promise&lt;Pronostic&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>    </div>
 
 
@@ -449,6 +762,8 @@ import { CreatePronosticDto } from &#x27;../dto/create-pronostic.dto&#x27;;
 import { JwtAuthGuard } from &#x27;../auth/jwt-auth.guard&#x27;;
 import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
 import { Model } from &#x27;mongoose&#x27;;
+
+import { UsersService } from &#x27;../users/users.service&#x27;;
 
 import { Pronostic } from &#x27;../schemas/pronostic.schema&#x27;;
 import { HttpException, HttpStatus, HttpCode } from &#x27;@nestjs/common&#x27;
@@ -461,27 +776,29 @@ export class PronosticsController {
   /**
    * Constructor for Pronostics controller
    * @param pronosticsService
+   * @param usersService
    * @param {Model&lt;Pronostic&gt;} pronosticModel
    */
   constructor(private readonly pronosticsService: PronosticsService,
+    private readonly usersService: UsersService,
     @InjectModel(Pronostic.name) private pronosticModel: Model&lt;Pronostic&gt;) { }
 
 
-   /**
-  * Controller check if the matchId userId doesn&#x27;t matchs in the pronostics:
-  * - if match : update the matchId userId
-  * - if not : create a new pronostic
-  * You need to be connected to access to this route
-  * @param {Request}
-  * @param {Body} createPronosticDto
-  * @return {Pronostic}
-  */
+  /**
+ * Controller check if the matchId userId doesn&#x27;t matchs in the pronostics:
+ * - if match : update the matchId userId
+ * - if not : create a new pronostic
+ * You need to be connected to access to this route
+ * @param {Request}
+ * @param {Body} createPronosticDto
+ * @return {Pronostic}
+ */
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Request() req, @Body() createPronosticDto: CreatePronosticDto) {
     const user &#x3D; req.user.id
     if (createPronosticDto.matchId &amp;&amp; createPronosticDto.winnerId &amp;&amp; createPronosticDto.type) {
-      const matchesUserIdMatchId &#x3D; await this.pronosticModel.find({ userId: user, matchId: createPronosticDto.matchId });
+      const matchesUserIdMatchId &#x3D; await this.pronosticModel.find({ userId: user, matchId: createPronosticDto.matchId, type: createPronosticDto.type });
       if (matchesUserIdMatchId.length !&#x3D; 0) {
         return await this.pronosticsService.updateOne(user, createPronosticDto);
       } else {
@@ -490,7 +807,7 @@ export class PronosticsController {
     } else {
       throw new HttpException({
         error: 404,
-        message: &quot;userId, matchId, winnerId and type are mandatory. Only commentary is optional&quot;
+        message: &quot;matchId, winnerId and type are mandatory. Only commentary is optional&quot;
       }, HttpStatus.BAD_REQUEST)
     }
   }
@@ -502,21 +819,19 @@ export class PronosticsController {
    */
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise&lt;Pronostic[]&gt; {
-    return this.pronosticsService.findAll();
+  async findAll(@Request() req): Promise&lt;Pronostic[]&gt; {
+    const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
+    if (!isAdmin) {
+      throw new HttpException({
+        message: &#x27;Unauthorized Access&#x27;,
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else {
+      return this.pronosticsService.findAll();
+    }
   }
 
-  /**
-  * Controller give all pronostics for one match id
-  * You need to be connected to access to this route
-  * @param {string} matchId
-  * @return {Pronostic[]}
-  */
-  @UseGuards(JwtAuthGuard)
-  @Get(&#x27;:matchId&#x27;)
-  async findOne(@Param(&#x27;matchId&#x27;) matchId: string): Promise&lt;any&gt; {
-    return this.pronosticsService.findPronosticForOneMatchId(matchId);
-  }
+
 
   /**
    * Controller delete a specific pronostic
@@ -536,6 +851,67 @@ export class PronosticsController {
       message: &quot;id is mandatory&quot;
     }, HttpStatus.BAD_REQUEST)
   }
+
+  /**
+ * Controller used to reset the field commentary for a specific pronostic
+ * You need to be connected to access to this route and to be isAdmin
+ * @return {Pronotic}
+ */
+  @UseGuards(JwtAuthGuard)
+  @Get(&#x27;:pronosticId/reset&#x27;)
+  async resetCommentary(@Request() req, @Param(&#x27;pronosticId&#x27;) pronosticId: string): Promise&lt;Pronostic&gt; {
+    const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
+    if (!isAdmin) {
+      throw new HttpException({
+        message: &#x27;Unauthorized Access&#x27;,
+      }, HttpStatus.UNAUTHORIZED);
+    }
+    else {
+      return this.pronosticsService.resetCommentary(pronosticId);
+    }
+  }
+
+   /**
+ * Controller used to validate a commentary
+ * You need to be connected to access to this route and to be isAdmin
+ * @return {Pronotic}
+ */
+@UseGuards(JwtAuthGuard)
+@Get(&#x27;:pronosticId/validate&#x27;)
+async validateCommentary(@Request() req, @Param(&#x27;pronosticId&#x27;) pronosticId: string): Promise&lt;Pronostic&gt; {
+  const isAdmin &#x3D; await this.usersService.isAdmin(req.user.id);
+  if (!isAdmin) {
+    throw new HttpException({
+      message: &#x27;Unauthorized Access&#x27;,
+    }, HttpStatus.UNAUTHORIZED);
+  }
+  else {
+    return this.pronosticsService.validateCommentary(pronosticId);
+  }
+}
+
+   /**
+ * Controller used to report a specific commentary
+ * You need to be connected to access to this route
+ * @return {Pronotic}
+ */
+@UseGuards(JwtAuthGuard)
+@Get(&#x27;:pronosticId/report&#x27;)
+async reportCommentary( @Param(&#x27;pronosticId&#x27;) pronosticId: string): Promise&lt;Pronostic&gt; {
+  return this.pronosticsService.reportCommentary(pronosticId);
+
+}
+
+
+/**
+  * Controller give all pronostics for one match id
+  * @param {string} matchId
+  * @return {Pronostic[]}
+  */
+ @Get(&#x27;:apiName/:matchId&#x27;)
+ async findOne(@Param(&#x27;matchId&#x27;) matchId: string, @Param(&#x27;apiName&#x27;) apiName: string): Promise&lt;any&gt; {
+   return this.pronosticsService.findPronosticForOneMatchId(apiName,matchId);
+ }
 }
 </code></pre>
     </div>

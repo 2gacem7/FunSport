@@ -59,6 +59,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>General controller for the application</p>
+
+            </p>
 
 
 
@@ -125,14 +132,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="11"
-                            class="link-to-prism">src/app.controller.ts:11</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/app.controller.ts:23</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Controller used to get all data for the user given a JWT</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -177,10 +186,22 @@
 import { JwtAuthGuard } from &#x27;./auth/jwt-auth.guard&#x27;;
 import { AppService } from &#x27;./app.service&#x27;;
 
+/**
+ * General controller for the application
+ */
 @Controller()
 export class AppController {
+   /**
+     * Constructor for UsersController
+     * @param {AppService} appService
+     */
   constructor(private readonly appService: AppService) {}
 
+  /**
+     * Controller used to get all data for the user given a JWT
+     * @param {} req
+     * @return {string}
+     */
   @UseGuards(JwtAuthGuard)
   @Get(&#x27;profile&#x27;)
   getProfile(@Request() req) {

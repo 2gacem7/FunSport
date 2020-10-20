@@ -101,7 +101,19 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#reportCommentary">reportCommentary</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#resetCommentary">resetCommentary</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#updateOne">updateOne</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateCommentary">validateCommentary</a>
                             </li>
                         </ul>
                     </td>
@@ -121,12 +133,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(pronosticModel: <a href="../classes/Pronostic.html">Model<Pronostic></a>)</code>
+<code>constructor(pronosticModel: <a href="../classes/Pronostic.html">Model<Pronostic></a>, userModel: <a href="../classes/User.html">Model<User></a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/MyPronostics/pronostics.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/MyPronostics/pronostics.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -150,6 +162,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../classes/Pronostic.html" target="_self" >Model&lt;Pronostic&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userModel</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/User.html" target="_self" >Model&lt;User&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -195,8 +219,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:31</a></div>
                 </td>
             </tr>
 
@@ -282,8 +306,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:74</a></div>
                 </td>
             </tr>
 
@@ -358,8 +382,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:49</a></div>
                 </td>
             </tr>
 
@@ -400,15 +424,15 @@ You need to be connected to access to this route</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findPronosticForOneMatchId(matchId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>findPronosticForOneMatchId(apiName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, matchId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:59</a></div>
                 </td>
             </tr>
 
@@ -431,6 +455,18 @@ You need to be connected to access to this route</p>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>apiName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
                                     <td>matchId</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
@@ -449,6 +485,158 @@ You need to be connected to access to this route</p>
                     </div>
                     <div class="io-description">
                         <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportCommentary"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            reportCommentary
+                        </b>
+                        <a href="#reportCommentary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>reportCommentary(pronosticId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="135"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:135</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Service used to report a commentary
+You need to be connected to access to this route</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>pronosticId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>id of the pronostic</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetCommentary"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            resetCommentary
+                        </b>
+                        <a href="#resetCommentary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetCommentary(pronosticId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:106</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Service used to reset the field commentary for a specific pronostic
+You need to be connected to access to this route and to be isAdmin</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>pronosticId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>id of the pronostic</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
 
                     </div>
                     <div class="io-description">
@@ -482,8 +670,8 @@ You need to be connected to access to this route</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:92</a></div>
                 </td>
             </tr>
 
@@ -545,6 +733,82 @@ You need to be connected to access to this route</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateCommentary"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            validateCommentary
+                        </b>
+                        <a href="#validateCommentary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateCommentary(pronosticId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="121"
+                            class="link-to-prism">src/MyPronostics/pronostics.service.ts:121</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Service used to validate a commentary
+You need to be connected to access to this route and to be isAdmin</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>pronosticId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>id of the pronostic</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -558,6 +822,8 @@ import { Pronostic } from &#x27;../schemas/pronostic.schema&#x27;;
 import { HttpException, HttpStatus } from &#x27;@nestjs/common&#x27;
 
 import { CreatePronosticDto } from &#x27;../dto/create-pronostic.dto&#x27;;
+import { User } from &#x27;../schemas/user.schema&#x27;;
+
 
 /**
  * Service used to manage all action available in PronosticsService
@@ -567,77 +833,127 @@ export class PronosticsService {
   /**
    * Constructor for PronosticsService
    */
-  constructor(@InjectModel(Pronostic.name) private pronosticModel: Model&lt;Pronostic&gt;
-             ) {
-             }
+  constructor(@InjectModel(Pronostic.name) private pronosticModel: Model&lt;Pronostic&gt;,
+  @InjectModel(User.name) private userModel: Model&lt;User&gt;,
+  ) {
+  }
 
-             /**
-              * Service used to create a pronostic
-              * You need to be connected to access to this route
-              * @param {string} userId
-              * @param {CreatePronosticDto} createPronosticDto
-              * @return {Pronostic}
-              */
-             async create(userId: string, createPronosticDto: CreatePronosticDto): Promise&lt;Pronostic&gt; {
-               const createdPronostic &#x3D; await new this.pronosticModel({
-                 userId: userId,
-                 matchId: createPronosticDto.matchId,
-                 winnerId: createPronosticDto.winnerId,
-                 commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;)
-               })
-               return createdPronostic.save();
-             }
+  /**
+   * Service used to create a pronostic
+   * You need to be connected to access to this route
+   * @param {string} userId
+   * @param {CreatePronosticDto} createPronosticDto
+   * @return {Pronostic}
+   */
+  async create(userId: string, createPronosticDto: CreatePronosticDto): Promise&lt;Pronostic&gt; {
+    const createdPronostic &#x3D; await new this.pronosticModel({
+      userId: userId,
+      matchId: createPronosticDto.matchId,
+      type: createPronosticDto.type,
+      winnerId: createPronosticDto.winnerId,
+      commentary: (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;),
+      isReported: false,
+      createdAt:createPronosticDto.createdAt
+    })
+    return createdPronostic.save();
+  }
 
-             /**
-              * Service used to give all pronostics in the database
-              * You need to be connected to access to this route
-              * @return {Pronotic[]}
-              */
-             async findAll(): Promise&lt;any&gt; {
-               return this.pronosticModel.find({});
-             }
+  /**
+   * Service used to give all pronostics in the database
+   * You need to be connected to access to this route
+   * @return {Pronotic[]}
+   */
+  async findAll(): Promise&lt;any&gt; {
+    return this.pronosticModel.find({isReported:true});
+  }
 
-             /**
-              * Service used to give all pronostics for a specific match
-              * You need to be connected to access to this route
-              * @param {string} matchId
-              * @returns {Pronostic[]}
-              */
-             async findPronosticForOneMatchId(matchId: string): Promise&lt;any&gt; {
-               const pronostic &#x3D; await this.pronosticModel.find({ &#x27;matchId&#x27;: matchId }).exec();
-               return pronostic;
-             }
+  /**
+   * Service used to give all pronostics for a specific match
+   * You need to be connected to access to this route
+   * @param {string} matchId
+   * @returns {Pronostic[]}
+   */
+  async findPronosticForOneMatchId(apiName:string, matchId: string): Promise&lt;any&gt; {
+    let pronostics &#x3D; await this.pronosticModel.find({ &#x27;matchId&#x27;: matchId, &#x27;type&#x27;:apiName});
+    for (let i &#x3D; 0; i &lt; pronostics.length; i++){
+      let name &#x3D; await this.userModel.findById(pronostics[i].userId).select(&#x27;firstName&#x27;);
+      pronostics[i].authorName &#x3D; name
+    }
+    return pronostics;
+  }
 
-             /**
-              * Service used to delete a specific pronostic
-              * You need to be connected to access to this route
-              * @param {string} id pronostic id
-              * @returns  {JSON}
-              */
-             async deleteOne(id): Promise&lt;any&gt; {
-               const result &#x3D; await this.pronosticModel.findByIdAndDelete(id);
-               if (!result) {
-                 throw new HttpException({
-                   message: &#x27;No pronostic deleted&#x27;,
-                 }, HttpStatus.BAD_REQUEST);
-               }
-               else return {
-                 message: &quot;Pronostic Deleted !&quot;,
-               }
-             }
+  /**
+   * Service used to delete a specific pronostic
+   * You need to be connected to access to this route
+   * @param {string} id pronostic id
+   * @returns  {JSON}
+   */
+  async deleteOne(id): Promise&lt;any&gt; {
+    const result &#x3D; await this.pronosticModel.findByIdAndDelete(id);
+    if (!result) {
+      throw new HttpException({
+        message: &#x27;No pronostic deleted&#x27;,
+      }, HttpStatus.BAD_REQUEST);
+    }
+    else return {
+      message: &quot;Pronostic Deleted !&quot;,
+    }
+  }
 
-             /**
-              * Service used to update a specific pronostic
-              * You need to be connected to access to this route
-              * @param {String} userId id of the user
-              * @return  {Pronostic}
-              */
-             async updateOne(userId, createPronosticDto): Promise&lt;any&gt; {
-               const newPronostic &#x3D; await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId });
-               newPronostic.winnerId &#x3D; createPronosticDto.winnerId
-               newPronostic.commentary &#x3D; (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;)
-               return newPronostic.save();
-             }
+  /**
+   * Service used to update a specific pronostic
+   * You need to be connected to access to this route
+   * @param {String} userId id of the user
+   * @return  {Pronostic}
+   */
+  async updateOne(userId, createPronosticDto): Promise&lt;any&gt; {
+    const newPronostic &#x3D; await this.pronosticModel.findOne({ userId: userId, matchId: createPronosticDto.matchId, type: createPronosticDto.type });
+    newPronostic.winnerId &#x3D; createPronosticDto.winnerId
+    newPronostic.commentary &#x3D; (createPronosticDto.commentary ? createPronosticDto.commentary : &quot;&quot;)
+    newPronostic.isReported &#x3D; false
+    return newPronostic.save();
+  }
+
+  /**
+  * Service used to reset the field commentary for a specific pronostic
+  * You need to be connected to access to this route and to be isAdmin
+  * @param {String} pronosticId id of the pronostic
+  * @return  {Pronostic}
+  */
+  async resetCommentary(pronosticId) {
+    const newPronostic &#x3D; await this.pronosticModel.findById(pronosticId);
+    newPronostic.commentary &#x3D; &quot;&quot;
+    newPronostic.isReported &#x3D; false
+    return newPronostic.save();
+
+  }
+
+
+  /**
+  * Service used to validate a commentary
+  * You need to be connected to access to this route and to be isAdmin
+  * @param {String} pronosticId id of the pronostic
+  * @return  {Pronostic}
+  */
+  async validateCommentary(pronosticId) {
+    const newPronostic &#x3D; await this.pronosticModel.findById(pronosticId);
+    newPronostic.isReported &#x3D; false
+    return newPronostic.save();
+
+  }
+
+
+  /**
+  * Service used to report a commentary
+  * You need to be connected to access to this route
+  * @param {String} pronosticId id of the pronostic
+  * @return  {Pronostic}
+  */
+  async reportCommentary(pronosticId) {
+    const newPronostic &#x3D; await this.pronosticModel.findById(pronosticId);
+    newPronostic.isReported &#x3D; true
+    return newPronostic.save();
+  }
 }
 </code></pre>
     </div>

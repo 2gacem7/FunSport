@@ -64,6 +64,13 @@
             <code>src/dto/create-user.dto.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This Dto is used to create a users.</p>
+
+            </p>
 
 
 
@@ -146,10 +153,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/dto/create-user.dto.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/dto/create-user.dto.ts:28</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Email of the user</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -182,10 +195,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/dto/create-user.dto.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/dto/create-user.dto.ts:16</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>firstname of the user</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -218,10 +237,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/dto/create-user.dto.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/dto/create-user.dto.ts:46</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Status administrator for this user (optionnal)</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -254,10 +279,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/dto/create-user.dto.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/dto/create-user.dto.ts:22</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Lastname of the user</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -290,10 +321,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/dto/create-user.dto.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/dto/create-user.dto.ts:40</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Password of the user using regex</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -326,10 +363,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/dto/create-user.dto.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/dto/create-user.dto.ts:34</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Phone of the user (min 10)</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -347,25 +390,48 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IsEmail, Matches , MinLength, IsOptional} from &#x27;class-validator&#x27;;
 
+/**
+ * Regex used to check if password is validated.
+ */
 const passwordRegex &#x3D; new RegExp(&#x27;^(((?&#x3D;.*[a-z])(?&#x3D;.*[A-Z]))|((?&#x3D;.*[a-z])(?&#x3D;.*[0-9]))|((?&#x3D;.*[A-Z])(?&#x3D;.*[0-9])))(?&#x3D;.{6,})&#x27;);
 
+/**
+ * This Dto is used to create a users.
+ */
 export class CreateUserDto {
-
+ /**
+   * firstname of the user
+   */
   @MinLength(1)
   firstName: string;
 
+  /**
+   * Lastname of the user
+   */
   @MinLength(1)
   lastName: string;
 
+  /**
+   * Email of the user
+   */
   @IsEmail()
   email: string;
 
+  /**
+   * Phone of the user (min 10)
+   */
   @MinLength(10)
   phone: string;
 
+  /**
+   * Password of the user using regex
+   */
   @Matches(passwordRegex)
   password: string;
 
+  /**
+   * Status administrator for this user (optionnal)
+   */
   @IsOptional()
   isAdmin: boolean;
 
