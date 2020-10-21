@@ -68,7 +68,7 @@
                 headers: myHeaders,
                 redirect: "follow",
             };
-            await fetch(`https://api.pandascore.co/tournaments/` + this.id_tournament + `/standings?token=${ENV.API_PANDA_SPORT}`,
+            await fetch(`https://api.pandascore.co/tournaments/` + this.id_tournament + `/standings`,
                     requestOptions)
                 .then((response) => response.json())
                 .then((result) => (this.infoRanking = result))
