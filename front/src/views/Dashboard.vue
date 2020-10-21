@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="card m-3" style="background-color: #f4f4f4e3">
-      <div class="card-header">
+      <div class="card-header root">
         <h1 class="text text-center">My Favorites</h1>
       </div>
       <div class="card-body m-0">
@@ -308,4 +308,13 @@
 
 <style scoped>
   @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+    .root.card-header {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
+    color: #ffffff !important;
+    border-bottom: 1px solid rgb(194, 6, 62);
+    background: rgb(131, 58, 180);
+    background: linear-gradient(90deg, rgba(194, 6, 62, 0.527) 0%,  rgba(6, 188, 194, 0.527) 50%, rgb(69, 252, 124) 100%);
+  }
 </style>
