@@ -109,7 +109,7 @@
        * The button for del this card in favorite
        */
       delButton: Boolean,
-      
+
     },
     computed: {
       myFavorites: function () {
@@ -205,7 +205,7 @@
         };
         await this.$store.dispatch("getMyFavorites");
         await fetch(
-            `https://api.pandascore.co/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}`,
+            `https://api.pandascore.co/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}?token=${ENV.API_PANDA_SPORT}`,
             requestOptions
           )
           .then((response) => response.json())

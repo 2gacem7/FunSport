@@ -81,7 +81,7 @@
 </template>
 
 <script>
-    import ENV from "../../env.config";
+    import ENV, { API_FOOTBALL } from "../../env.config";
     import Navbar from "@/components/NavBar.vue";
     import TabBar from "@/components/TabBar.vue";
     /**

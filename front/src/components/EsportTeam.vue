@@ -71,7 +71,7 @@
                 let infos = [];
                 await fetch("https://api.pandascore.co/" + sportName +
                         "/teams?sort=name&per_page=100&search%5Bslug%5D=" + this
-                        .name, {
+                        .name+"?token="+ENV.API_PANDA_SPORT, {
                             "method": "GET",
                             "headers": {
                                 "authorization": "Bearer " + ENV.API_PANDA_SPORT
