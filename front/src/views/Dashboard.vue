@@ -4,15 +4,17 @@
     <TabBar />
     <div class="card m-3" style="background-color: #f4f4f4e3">
       <div class="card-header root">
-        <h1 class="text text-center">My Favorite Sports</h1>
+        <h1 class="text text-center">My Favorites Sports</h1>
       </div>
-      <div class="card-body">
+      <div class="card-body favorite">
         <div v-if="mySports.length == 0" class="row mt-2 justify-content-center">
           <label class="card-text text-center">No favorite sports added</label>
         </div>
         <div v-else>
           <div v-for="sport in mySports" v-bind:key="sport.name" class="row mt-2 p-3 justify-content-center">
-            <a class="btn btn-default" @click="goTo(sport.name)">Go to {{ sport.name }}</a>
+            <a class="btn btn-default" @click="goTo(sport.name)">
+              <h4>{{ sport.name }}</h4>
+            </a>
             <button class="btn btn-danger btn-sm rounded-circle ml-5 mb-2" @click="deleteSport(sport._id)">
               Del
             </button>
@@ -22,9 +24,9 @@
     </div>
     <div class="card m-3" style="background-color: #f4f4f4e3">
       <div class="card-header root">
-        <h1 class="text text-center">My Favorites</h1>
+        <h1 class="text text-center">My Widgets</h1>
       </div>
-      <div class="card-body m-0">
+      <div class="card-body dash m-0">
         <div v-if="myFavorites.length == 0">You don't have favorite</div>
         <div v-else>
           <div class="card-deck m-0">
@@ -306,15 +308,43 @@
   };
 </script>
 
-<style scoped>
+<style>
   @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
-    .root.card-header {
+  .root.card-header {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
     color: #ffffff !important;
-    border-bottom: 1px solid rgb(194, 6, 62);
+    border-bottom: 3px solid rgb(255, 255, 255);
     background: rgb(131, 58, 180);
-    background: linear-gradient(90deg, rgba(194, 6, 62, 0.527) 0%,  rgba(6, 188, 194, 0.527) 50%, rgb(69, 252, 124) 100%);
+    background: linear-gradient(90deg, rgba(194, 6, 62, 0.527) 0%, rgba(6, 188, 194, 0.527) 50%, rgb(69, 252, 124) 100%);
+  }
+
+  .dash {
+    background: rgb(174, 238, 230);
+    background: -moz-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#aeeee6", endColorstr="#1f79ec", GradientType=1);
+  }
+
+  .favorite {
+    background: rgb(174, 238, 230);
+    background: -moz-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#aeeee6", endColorstr="#1f79ec", GradientType=1);
+  }
+
+  .dash .card {
+    -webkit-box-shadow: 4px 6px 58px -11px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 4px 6px 58px -11px rgba(255, 255, 255, 1);
+    box-shadow: 4px 6px 58px -11px rgba(255, 255, 255, 1);
+  }
+
+  .dash .card .card-header {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 0px 0px 10px rgba(141, 137, 137, 0.91);
+    color: #212529 !important;
   }
 </style>
