@@ -2,14 +2,15 @@
     <div id="matchEsport" class="text-dark">
         <Navbar />
         <TabBar />
-        <button class="btn btn-primary" @click="go">Back</button>
-        <div class="card m-2 p-2">
-            <span v-if="infoMatch[0]">
-                League: {{ infoMatch[0].league_name }}
-                <img :src="return_Link(infoMatch[0].league_logo)" alt="No image league" height="100" width="100" />
-            </span>
-            <p v-if="infoMatch[0]" class="mt-2">Begin at: {{ infoMatch[0].match_date | moment("MMMM Do YYYY") }},
-                {{ infoMatch[0].match_time | moment("h:mm:ss")}}</p>
+        <div class="card m-2">
+            <div class="card-header d-flex justify-content-between" v-if="infoMatch[0]">
+                <h2 class="m-3">{{ infoMatch[0].league_name }}</h2>
+                <img class="p-3" :src="return_Link(infoMatch[0].league_logo)" alt="No image league" height="100" width="100" style="background-color:white;border-radius: 34px;"/>
+                <button class="btn btn-primary btnCustom" @click="go">Back</button>
+            </div>
+
+            <h4 v-if="infoMatch[0]" class="m-3">Begin at: {{ infoMatch[0].match_date | moment("MMMM Do YYYY") }},
+                {{ infoMatch[0].match_time | moment("h:mm:ss")}}</h4>
             <div class="row justify-content-center">
                 <div v-if="infoMatch[0]">
                     <p class="font-weight-bold text-center">{{infoMatch[0].match_hometeam_name}}</p>
@@ -32,7 +33,7 @@
                     <p class="ml-5" v-if="resultPronostic[1]">
                         Winner:{{Math.round((resultPronostic[1].count/ totalPronostic) * 100)}}%</p>
                 </div>
-                <div v-else>
+                <div class="m-3" v-else>
                     No pronostic for this match
                 </div>
             </div>
@@ -48,7 +49,7 @@
                         <div class="card-header d-flex">
                             <span>Post the {{ commentary.createdAt  | moment("MMMM Do YYYY, h:mm  ")}} by
                                 {{ commentary.authorName.firstName }}: Winner {{ commentary.winnerId }}</span>
-                            <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto"
+                            <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto report"
                                 @click="reportCommentary(commentary._id)">Report this commentary</button>
                         </div>
                         <div class="card-body">
@@ -61,8 +62,8 @@
             </div>
         </div>
         <div v-if="infoMatch[0] && infoMatch[0].match_status !== 'Finished'" class="card m-2">
-            <h3>Do you want to pronostic this match?</h3>
-            <select v-model="winnerInput">
+            <h3 class="m-2">Do you want to pronostic this match?</h3>
+            <select class="m-2" v-model="winnerInput">
                 <option disabled selected="selected">Select the winner</option>
                 <option>
                     {{ infoMatch[0].match_hometeam_name }}
@@ -71,9 +72,9 @@
                     {{ infoMatch[0].match_awayteam_name }}
                 </option>
             </select>
-            <h3>your commentary (optional)</h3>
-            <input v-model="commentaryInput" />
-            <button class="btn btn-primary m-2" @click="sendPronostic">
+            <h3 class="m-2">Your commentary (optional)</h3>
+            <input class="m-2" v-model="commentaryInput" />
+            <button class="btn btn-primary m-2 btnCustom" @click="sendPronostic">
                 Send pronostic
             </button>
         </div>
@@ -81,7 +82,9 @@
 </template>
 
 <script>
-    import ENV, { API_FOOTBALL } from "../../env.config";
+    import ENV, {
+        API_FOOTBALL
+    } from "../../env.config";
     import Navbar from "@/components/NavBar.vue";
     import TabBar from "@/components/TabBar.vue";
     /**
@@ -281,3 +284,65 @@
         },
     };
 </script>
+
+<style>
+    .content {
+        padding-top: 70px;
+        padding-left: 220px;
+    }
+
+    #competitionEsport .card-header {
+        font-family: Arial, Helvetica, sans-serif;
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
+        color: #ffffff !important;
+        border-bottom: 1px solid #9cfdf9;
+        background: #278cff;
+        background: linear-gradient(90deg, #9cabfd 0%, #1f06ff 25%, #273dff 100%);
+    }
+
+    .btnCustom {
+        background: linear-gradient(to bottom, #67fdf6 5%, #3665ff 100%);
+        background-color: #3665ff;
+        border-radius: 34px;
+        border: 1px solid #67fdf6;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 17px;
+        padding: 10px 31px;
+        text-decoration: none;
+        text-shadow: 0px 2px 0px #041312;
+    }
+
+    .btnCustom:hover {
+        background: linear-gradient(to bottom, #3665ff 5%, #17fff3 100%);
+        background-color: #3665ff;
+        border: 1px solid #67fdf6;
+    }
+
+    .report {
+        background: linear-gradient(to bottom, #fa0e0e 5%, #f85e16 100%);
+        background-color: #f8e916;
+        border-radius: 34px;
+        border: 1px solid #fa0e0e;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 17px;
+        padding: 10px 31px;
+        text-decoration: none;
+        text-shadow: 0px 2px 0px #041312;
+    }
+
+    .report:hover {
+        background: linear-gradient(to bottom, #f8e916 5%, #fa0e0e 100%);
+        background-color: #f8e916;
+        border: 1px solid #fa0e0e;
+    }
+
+    span {
+        font-size: larger;
+    }
+</style>

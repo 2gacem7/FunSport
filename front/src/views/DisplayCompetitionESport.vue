@@ -9,7 +9,7 @@
           <button class="btn btn-primary btnCustom" @click="go">Back</button>
           </div>
         <div class="card-body">
-          Name: {{ datas.name }}<br />
+          {{ datas.name }}<br />
 
           Begin at: {{ datas.begin_at | moment("MMMM Do YYYY, h:mm:ss") }}
           <br />
@@ -25,27 +25,27 @@
       <div class="card" style="width: 30rem">
         <div class="card-header h3">League</div>
         <div class="card-body">
-          <span v-if="datas.league">
-            League: {{ datas.league.name }}
+          <h4 v-if="datas.league">
+            {{ datas.league.name }}
             <img
               :src="datas.league.image_url"
               alt="No image league"
               height="50"
               width="100"
             />
-          </span>
+          </h4>
         </div>
       </div>
     </div>
     <div class="card m-4">
-      <div class="card-header h3"><span v-if="datas.teams">No team</span><span v-else >{{ datas.teams.length }} teams</span></div>
+      <div class="card-header h3"><span v-if="!datas.teams">No team</span><span v-else >{{ datas.teams.length }} teams</span></div>
       <div class="card-body card-deck">
         <div
           class="card bg-light no-border text-center"
           v-for="team in datas.teams"
           :key="team.id"
         >
-          Name: {{ team.name }}
+          {{ team.name }}
           <div class="text-center">
             <img
               :src="team.image_url"
@@ -144,5 +144,14 @@ export default {
   padding-top: 70px;
   padding-left: 220px;
 }
+
+ #matchEsport .card-header {
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
+    color: #ffffff !important;
+    border-bottom: 1px solid #9cfdf9;
+    background: #278cff;
+    background: linear-gradient(90deg, #9cabfd 0%, #1f06ff 25%, #273dff 100%);
+  }
 </style>
 
