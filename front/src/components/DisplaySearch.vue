@@ -218,7 +218,7 @@ export default {
         redirect: "follow",
       };
       await fetch(
-        `https://api.pandascore.co/${this.apiName}/matches?search[name]=${this.searchValue}&sort=-scheduled_at`,
+        `https://api.pandascore.co/${this.apiName}/matches?search[name]=${this.searchValue}&sort=-scheduled_at?token=${ENV.API_PANDA_SPORT}`,
         requestOptions
       )
         .then((response) => response.json())
@@ -237,7 +237,7 @@ export default {
             }
             this.results = response;
           })
-        
+
     },
     /**
      * Methods used to get competitions datas
@@ -254,7 +254,7 @@ export default {
         redirect: "follow",
       };
       this.results = await fetch(
-        `https://api.pandascore.co/${this.apiName}/tournaments?search[slug]=${this.searchValue}&sort=-begin_at`,
+        `https://api.pandascore.co/${this.apiName}/tournaments?search[slug]=${this.searchValue}&sort=-begin_at?token=${ENV.API_PANDA_SPORT}`,
         requestOptions
       )
         .then((response) => response.json())

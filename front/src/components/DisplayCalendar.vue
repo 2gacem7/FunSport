@@ -142,7 +142,7 @@
           redirect: "follow",
         };
 
-        await fetch(`https://api.pandascore.co/${this.apiName}/matches`, requestOptions)
+        await fetch(`https://api.pandascore.co/${this.apiName}/matches?token=${ENV.API_PANDA_SPORT}`, requestOptions)
           .then((response) => response.json())
           .then((result) => (this.info = result))
           .catch((error) => console.log("error", error));

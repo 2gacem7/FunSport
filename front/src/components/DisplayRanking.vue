@@ -144,7 +144,7 @@
                     redirect: "follow",
                 };
                 await fetch(
-                        `https://api.pandascore.co/${this.apiName}/tournaments/past`,
+                        `https://api.pandascore.co/${this.apiName}/tournaments/past?token=${ENV.API_PANDA_SPORT}`,
                         requestOptions
                     )
                     .then((response) => response.json())
@@ -184,7 +184,7 @@
                         redirect: "follow",
                     };
 
-                    await fetch(`https://api.pandascore.co/tournaments/` + this.id_tournament + `/standings`,
+                    await fetch(`https://api.pandascore.co/tournaments/` + this.id_tournament + `/standings?token=${ENV.API_PANDA_SPORT}`,
                             requestOptions)
                         .then((response) => response.json())
                         .then((result) => (this.infoRanking = result))

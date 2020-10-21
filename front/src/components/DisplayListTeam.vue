@@ -149,7 +149,7 @@
         };
         await this.$store.dispatch("getMyFavorites");
         await fetch(
-            `https://api.pandascore.co/${this.apiName}/teams?sort=name&per_page=10&page[number]=${this.page}`,
+            `https://api.pandascore.co/${this.apiName}/teams?sort=name&per_page=10&page[number]=${this.page}?token=${ENV.API_PANDA_SPORT}`,
             requestOptions
           )
           .then((response) => response.json())
