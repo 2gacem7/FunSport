@@ -289,7 +289,7 @@
     },
   };
 </script>
-<style d>
+<style >
   .content {
     padding-top: 70px;
     padding-left: 220px;
@@ -297,7 +297,7 @@
 
 
 
-  #matchEsport .card-header {
+  #competitionEsport .card-header {
     font-family: Arial, Helvetica, sans-serif;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
     color: #ffffff !important;

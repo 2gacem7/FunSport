@@ -3,7 +3,7 @@
     <Navbar />
     <TabBar />
     <div class="card m-3" style="background-color: #f4f4f4e3">
-      <div class="card-header">
+      <div class="card-header root">
         <h1 class="text text-center">My Favorite Sports</h1>
       </div>
       <div class="card-body">
@@ -26,102 +26,133 @@
       </div>
       <div class="card-body m-0">
         <div v-if="myFavorites.length == 0">You don't have favorite</div>
-        <div v-else class="card-deck m-0">
-          <div v-for="favorite in myFavorites" :key="favorite._id">
-            <DisplayLive v-if="
+        <div v-else>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <DisplayLive v-if="
                 favorite.data[0].type == 'component' &&
                 favorite.data[0].name == 'live' &&
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :sport="favorite.data[0].sport" :apiName="favorite.data[0].apiName"
-              :delButton="true" v-on:delfavorite="delToMyFavorites" />
-            <DisplayLastResults v-if="
+                :delButton="true" v-on:delfavorite="delToMyFavorites" />
+              <FootballLiveFavori v-if="
+                favorite.data[0].type == 'live' &&
+                favorite.data[0].sport == 'football'
+              " :id="favorite._id" :league_id="favorite.data[0].league_id" v-on:delfavorite="delToMyFavorites" />
+              <DisplayLastResults v-if="
                 favorite.data[0].type == 'component' &&
                 favorite.data[0].name == 'lastResult' &&
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :sport="favorite.data[0].sport" :apiName="favorite.data[0].apiName"
-              :delButton="true" v-on:delfavorite="delToMyFavorites" />
-            <DisplayCalendar v-if="
+                :delButton="true" v-on:delfavorite="delToMyFavorites" />
+              <DisplayCalendar v-if="
                 favorite.data[0].type == 'component' &&
                 favorite.data[0].name == 'calendar' &&
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :sport="favorite.data[0].sport" :apiName="favorite.data[0].apiName"
-              :delButton="true" v-on:delfavorite="delToMyFavorites" />
-            <DisplayListTeam v-if="
+                :delButton="true" v-on:delfavorite="delToMyFavorites" />
+              <DisplayListTeam v-if="
                 favorite.data[0].type == 'component' &&
                 favorite.data[0].name == 'list' &&
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :sport="favorite.data[0].sport" :apiName="favorite.data[0].apiName"
-              :delButton="true" v-on:delfavorite="delToMyFavorites" />
-            <DisplayRanking v-if="
+                :delButton="true" v-on:delfavorite="delToMyFavorites" />
+              <DisplayRanking v-if="
                 favorite.data[0].type == 'component' &&
                 favorite.data[0].name == 'ranking' &&
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :sport="favorite.data[0].sport" :apiName="favorite.data[0].apiName"
-              :delButton="true" v-on:delfavorite="delToMyFavorites" />
-            <EsportTeam v-if="
-                favorite.data[0].type == 'team'&&
-                (favorite.data[0].sport == 'CS-GO' ||
-                  favorite.data[0].sport == 'LOL'||
-                  favorite.data[0].sport == 'DOTA2')
-              " :id="favorite._id" :name="favorite.data[0].name" :apiName="favorite.data[0].sport"
-              v-on:delfavorite="delToMyFavorites" />
-
-              <DisplayFavoriteMatch v-if="
-                favorite.data[0].type == 'matches'&&
-                (favorite.data[0].sport == 'CS-GO' ||
-                  favorite.data[0].sport == 'LOL'||
-                  favorite.data[0].sport == 'DOTA2')
-              " :id="favorite._id"
-                :matchId="favorite.data[0].match_id"
-                :sport="favorite.data[0].sport"
-                :apiName="favorite.data[0].apiName"
-              v-on:delfavorite="delToMyFavorites" />
-              <DisplayFavoriteNews v-if="
-                favorite.data[0].type == 'news'"
-               :id="favorite._id" :newsId="favorite.data[0].name"
-              v-on:delfavorite="delToMyFavorites" />
-            <FootballTournament v-if="
-                favorite.data[0].type == 'tournament' &&
-                favorite.data[0].sport == 'football'
-              " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
-              v-on:delfavorite="delToMyFavorites" />
-            <FootballCalendarFav v-if="
-                favorite.data[0].type == 'calendar' &&
-                favorite.data[0].sport == 'football'
-              " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
-              v-on:delfavorite="delToMyFavorites" />
-
-            <FootballTeamFavorite v-if="
-              favorite.data[0].type == 'team' &&
-              favorite.data[0].sport == 'football'
-              " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament" :team_id="favorite.data[0].team_id"
-              v-on:delfavorite="delToMyFavorites" />
-            <FavoriteRanking v-if="
+                :delButton="true" v-on:delfavorite="delToMyFavorites" />
+              <FavoriteRanking v-if="
               favorite.data[0].type == 'component' &&
               favorite.data[0].name == 'favoriteRanking' &&
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
               " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
-              :leagueName="favorite.data[0].leagueName" v-on:delfavorite="delToMyFavorites" />
-            <FootballLiveFavori v-if="
-                favorite.data[0].type == 'live' &&
-                favorite.data[0].sport == 'football'
-              " :id="favorite._id" :league_id="favorite.data[0].league_id" v-on:delfavorite="delToMyFavorites" />
-            <FootballMatchFavori v-if="
+                :leagueName="favorite.data[0].leagueName" v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <EsportTeam v-if="
+                favorite.data[0].type == 'team'&&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
+              " :id="favorite._id" :name="favorite.data[0].name" :apiName="favorite.data[0].sport"
+                v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <FootballTeamFavorite v-if="
+              favorite.data[0].type == 'team' &&
+              favorite.data[0].sport == 'football'
+              " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament" :team_id="favorite.data[0].team_id"
+                v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <DisplayFavoriteMatch v-if="
+                favorite.data[0].type == 'matches'&&
+                (favorite.data[0].sport == 'CS-GO' ||
+                  favorite.data[0].sport == 'LOL'||
+                  favorite.data[0].sport == 'DOTA2')
+              " :id="favorite._id" :matchId="favorite.data[0].match_id" :sport="favorite.data[0].sport"
+                :apiName="favorite.data[0].apiName" v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <FootballMatchFavori v-if="
                 favorite.data[0].type == 'matchFavori' &&
                 favorite.data[0].sport == 'football'
               " :id="favorite._id" :match_id="favorite.data[0].match_id" v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <DisplayFavoriteNews v-if="
+                favorite.data[0].type == 'news'" :id="favorite._id" :newsId="favorite.data[0].name"
+                v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <DisplayFavoriteNews v-if="
+                favorite.data[0].type == 'news'" :id="favorite._id" :newsId="favorite.data[0].name"
+                v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <FootballTournament v-if="
+                favorite.data[0].type == 'tournament' &&
+                favorite.data[0].sport == 'football'
+              " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
+                v-on:delfavorite="delToMyFavorites" />
+            </div>
+          </div>
+          <div class="card-deck m-0">
+            <div v-for="favorite in myFavorites" :key="favorite._id">
+              <FootballCalendarFav v-if="
+                favorite.data[0].type == 'calendar' &&
+                favorite.data[0].sport == 'football'
+              " :id="favorite._id" :id_tournament="favorite.data[0].id_tournament"
+                v-on:delfavorite="delToMyFavorites" />
+            </div>
           </div>
         </div>
       </div>
@@ -130,7 +161,9 @@
 </template>
 
 <script>
-  import ENV, { API_BACKEND } from "../../env.config";
+  import ENV, {
+    API_BACKEND
+  } from "../../env.config";
   import Navbar from "@/components/NavBar.vue";
   import TabBar from "@/components/TabBar.vue";
 
@@ -263,7 +296,9 @@
             body: JSON.stringify({
               sportFavoriteId: id
             }),
-          }).then(()=>{this.$store.dispatch("getMyFavorites")});
+          }).then(() => {
+            this.$store.dispatch("getMyFavorites")
+          });
 
         }
       },
@@ -273,14 +308,4 @@
 
 <style scoped>
   @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
-
-  .card-body {
-    background-color: rgb(72, 99, 255);
-    font-family: "Roboto Mono", monospace;
-  }
-
-  .card-header {
-    background-color: rgba(72, 99, 255, 0.515);
-    font-family: "Roboto Mono", monospace;
-  }
 </style>
