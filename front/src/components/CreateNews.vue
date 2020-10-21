@@ -99,6 +99,8 @@ export default {
        * The v-model for the selected sport
        */
       sportSelected: this.$store.state.sports[0].name,
+      info: false,
+      message: [],
     };
   },
   props: {

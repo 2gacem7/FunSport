@@ -81,7 +81,7 @@
 </template>
 
 <script>
-    import ENV from "../../env.config";
+    import ENV, { API_FOOTBALL } from "../../env.config";
     import Navbar from "@/components/NavBar.vue";
     import TabBar from "@/components/TabBar.vue";
     /**
@@ -123,7 +123,7 @@
                 redirect: 'follow'
             };
             await fetch("https://apiv2.apifootball.com/?action=get_events&match_id=" + this.matchId +
-                    "&APIkey=" + API_BACKEND,
+                    "&APIkey=" + ENV.API_FOOTBALL,
                     requestOptions)
                 .then(response => response.json())
                 .then(result => this.infoMatch = result)

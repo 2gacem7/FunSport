@@ -1,10 +1,10 @@
 <template>
   <div>
     <ul class="nav nav-tabs align-items-center bg-light">
-      <li class="nav-item bg-danger">
+      <li class="nav-item">
         <a
           v-if="$store.state.tabSelected.name == 'News'"
-          class="nav-link active bg-danger"
+          class="nav-link active"
           @click="goToNews"
         >
           News</a
