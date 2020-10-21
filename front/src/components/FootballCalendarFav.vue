@@ -8,7 +8,7 @@
     <div class="card-body m-0 p-0 overflow-auto text-dark">
       <div v-for="item in infos" :key="item.id">
         <p class="text-center font-weight-bold">{{ item.match_round }}</p>
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center m-0">
           <div>
             <p class="font-weight-bold text-center">
               {{ item.match_hometeam_name }}
