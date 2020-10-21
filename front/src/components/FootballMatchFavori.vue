@@ -16,7 +16,7 @@
           {{ item.match_date | moment("MMMM Do YYYY") }}at
           {{ item.match_time | moment("h:mm:ss") }}
         </p>
-        <div class="row d-flex justify-content-center ml-2">
+        <div class="row d-flex justify-content-center p-0 m-0">
           <div>
             <p class="font-weight-bold text-center">
               {{ item.match_hometeam_name }}
@@ -34,7 +34,7 @@
                 {{ goal.time }}' {{ goal.home_scorer }}
                 <img
                   src="../assets/ballon.png"
-                  style="width: 1.5rem; height: 1.5rem"
+                  style="width: 1rem; height: 1.5rem"
                   class="mr-1"
                 />
               </div>

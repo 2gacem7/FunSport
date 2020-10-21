@@ -1,11 +1,11 @@
 <template>
   <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 30rem">
     <div class="card-header d-flex justify-content-between">
-      <h3 class="text-dark text-center m-3" v-if="infos[0]">
+      <h3 class="text-dark text-center m-2" v-if="infos[0]">
         {{ infos[0].league_name }}
       </h3>
     </div>
-    <div class="card-body m-0 p-0 overflow-auto">
+    <div class="card-body m-0 overflow-auto">
       <table class="table">
         <thead>
           <tr>

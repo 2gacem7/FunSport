@@ -26,7 +26,7 @@
             </button>
         </div>
 
-        <div class="card-body m-0 p-0 w-100 overflow-auto">
+        <div class="card-body w-100 m-0 p-0  overflow-auto">
             <table class="table">
                 <thead>
                     <tr>
