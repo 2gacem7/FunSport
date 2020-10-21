@@ -2,10 +2,12 @@
   <div id="competitionEsport">
     <Navbar />
     <TabBar />
-    <button class="btn btn-primary" @click="go">Back</button>
     <div class="card-deck m-2">
       <div class="card" style="width: 30rem">
-        <div class="card-header h3">Competitions</div>
+        <div class="card-header d-flex justify-content-between">
+          <h3>Competition</h3>
+          <button class="btn btn-primary btnCustom" @click="go">Back</button>
+          </div>
         <div class="card-body">
           Name: {{ datas.name }}<br />
 

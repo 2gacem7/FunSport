@@ -218,7 +218,7 @@ export default {
         redirect: "follow",
       };
       await fetch(
-        `https://api.pandascore.co/${this.apiName}/matches?search[name]=${this.searchValue}&sort=-scheduled_at?token=${ENV.API_PANDA_SPORT}`,
+        `https://api.pandascore.co/${this.apiName}/matches?search[name]=${this.searchValue}&sort=-scheduled_at`,
         requestOptions
       )
         .then((response) => response.json())
@@ -254,7 +254,7 @@ export default {
         redirect: "follow",
       };
       this.results = await fetch(
-        `https://api.pandascore.co/${this.apiName}/tournaments?search[slug]=${this.searchValue}&sort=-begin_at?token=${ENV.API_PANDA_SPORT}`,
+        `https://api.pandascore.co/${this.apiName}/tournaments?search[slug]=${this.searchValue}&sort=-begin_at`,
         requestOptions
       )
         .then((response) => response.json())
