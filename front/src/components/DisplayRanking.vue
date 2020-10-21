@@ -144,7 +144,7 @@
                     redirect: "follow",
                 };
                 await fetch(
-                        `https://api.pandascore.co/${this.apiName}/tournaments/past`,
+                        `/pandascore/${this.apiName}/tournaments/past`,
                         requestOptions
                     )
                     .then((response) => response.json())
@@ -184,7 +184,7 @@
                         redirect: "follow",
                     };
 
-                    await fetch(`https://api.pandascore.co/tournaments/` + this.id_tournament + `/standings`,
+                    await fetch(`/pandascore/tournaments/` + this.id_tournament + `/standings`,
                             requestOptions)
                         .then((response) => response.json())
                         .then((result) => (this.infoRanking = result))

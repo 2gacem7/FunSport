@@ -205,7 +205,7 @@
         };
         await this.$store.dispatch("getMyFavorites");
         await fetch(
-            `https://api.pandascore.co/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}`,
+            `/pandascore/${this.apiName}/matches/past?page[size]=10&page[number]=${this.page}`,
             requestOptions
           )
           .then((response) => response.json())

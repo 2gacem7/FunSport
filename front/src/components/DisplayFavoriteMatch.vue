@@ -117,7 +117,7 @@ export default {
         sportName = "lol";
       }
       let infos = [];
-      await fetch("https://api.pandascore.co/matches/" + this.matchId, {
+      await fetch("/pandascore/matches/" + this.matchId, {
         method: "GET",
         headers: {
           authorization: "Bearer " + ENV.API_PANDA_SPORT,

@@ -69,7 +69,7 @@
                     sportName = 'lol'
                 }
                 let infos = [];
-                await fetch("https://api.pandascore.co/" + sportName +
+                await fetch("/pandascore/" + sportName +
                         "/teams?sort=name&per_page=100&search%5Bslug%5D=" + this
                         .name+"?token="+ENV.API_PANDA_SPORT, {
                             "method": "GET",
