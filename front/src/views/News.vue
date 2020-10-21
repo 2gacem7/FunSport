@@ -3,7 +3,7 @@
     <Navbar />
     <TabBar />
     <div id="myCarousel" class="carousel slide border" data-ride="carousel"
-      style="border:none!important;border-bottom:2px solid white!important" v-if="lastNews.length > 0">
+      style="border:none!important;border-bottom:2px solid white!important" v-if="lastNews.length > 2">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img v-if="lastNews[0].sport == 'CSGO'" class="d-block w-100" src="../assets/carroussel_CSGO.png">
@@ -209,7 +209,6 @@
         for (let i = list.length - 1; i > list.length - 4; i--) {
           this.lastNews.push(list[i]);
         }
-        console.log(this.lastNews)
       },
       /**
        * This method is used to add a news in your favorite
@@ -276,7 +275,7 @@
     font-size: 17px;
     padding: 10px 31px;
     text-decoration: none;
-    text-shadow: 0px 2px 0px #662828;
+    text-shadow: 0px 2px 0px #041312;
   }
 
   .newsButton:hover {
