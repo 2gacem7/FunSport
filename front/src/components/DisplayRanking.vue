@@ -172,20 +172,9 @@
                 if (this.id_tournament !== "") {
                     this.isFavorite = true;
                     this.isInMyFavorite();
-                    var myHeaders = new Headers();
-                    myHeaders.append(
-                        "Authorization",
-                        "Bearer " + ENV.API_PANDA_SPORT
-                    );
-
-                    var requestOptions = {
-                        method: "GET",
-                        headers: myHeaders,
-                        redirect: "follow",
-                    };
 
                     await fetch(`https://api.pandascore.co/tournaments/` + this.id_tournament + `/standings?token=${ENV.API_PANDA_SPORT}`,
-                            requestOptions)
+                    )
                         .then((response) => response.json())
                         .then((result) => (this.infoRanking = result))
                         .catch((error) => console.log("error", error));
