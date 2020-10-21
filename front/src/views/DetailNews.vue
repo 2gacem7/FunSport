@@ -7,11 +7,10 @@
         <h2>{{datas.title}}</h2>
         <button class="btn btn-primary btnCustom" @click="go">Back</button>
       </div>
-      <span class="m-2">Create at: {{ datas.createdAt | moment("MMMM Do YYYY, h:mm:ss") }} by:
-        {{ datas.author }} </span><br />
-      <span class="m-2">Sport : {{ datas.sport }} </span>
-      <label class="m-2">Content: </label><br />
+      <h4 class="m-2">Sport : {{ datas.sport }} </h4>
       <v-md-preview :text="datas.content"></v-md-preview>
+      <span class="m-4">Create at: {{ datas.createdAt | moment("MMMM Do YYYY, h:mm:ss") }} by:
+        {{ datas.author }} </span><br />
       <div class="card m-2">
         <h3 class="m-2">Commentaries</h3>
         <div  class="m-2" v-if="commentaries.length == 0">
