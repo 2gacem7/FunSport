@@ -9,7 +9,6 @@ import { HttpException, HttpStatus, HttpCode } from '@nestjs/common'
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 
-import { isNull, isError } from 'util';
 import * as bcrypt from 'bcrypt';
 
 /**
@@ -36,7 +35,7 @@ export class UsersService {
      */
   async isAdmin(id): Promise<boolean> {
     const user = await this.userModel.findById(id);
-    if (!user) {
+    if (user !== null) {
       return user.isAdmin
     }
     return false;
@@ -49,7 +48,7 @@ export class UsersService {
        */
   async userExists(createUserDTO: CreateUserDto): Promise<any> {
     const user = await this.userModel.findOne({ email: createUserDTO.email });
-    if (user) {
+    if (user === null) {
       return false;
     }
     return true;
