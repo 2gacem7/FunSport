@@ -68,10 +68,10 @@ Aller à l'intérieur du dossier cloné
 `cd FunSport`  
 Renommer le fichier env.config.js.example en env.config.js et remplacer les 2 champs "Your CLIENT_ID" par votre client_id apifootball et client_id pandascore 
 Egalement, vous pouvez remplacer BACK_URL en fonction de votre configuration. 
-`module.exports = {
-    API_PANDA_SPORT:"Your CLIEND_ID",
-    API_FOOTBALL:"Your CLIEND_ID",
-    API_BACKEND:"BACK_URL"
+`module.exports = {  
+    API_PANDA_SPORT:"Your CLIEND_ID",  
+    API_FOOTBALL:"Your CLIEND_ID",  
+    API_BACKEND:"BACK_URL"  
 };`
 
 Installer les dépendances de Nodejs (commande à exécuter dans le dossier back et front)  
