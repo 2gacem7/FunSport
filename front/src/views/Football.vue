@@ -1,8 +1,11 @@
 <template>
-  <div id="football" style="background-color:#06D530;height:100%">
+  <div id="football" class="pb-5" style="background-color:#06D530;height:100%">
     <Navbar />
     <TabBar />
-    <div id="bannerFootball">
+    <div id="bannerFootball" v-if="windowWidth > 1000">
+      <AddMySport />
+    </div>
+    <div v-else class="addFOOTBALL w-100 mx-auto">
       <AddMySport />
     </div>
     <div class="card-deck m-0 p-0">
@@ -33,6 +36,16 @@
       FootballRanking,
       FootballCalendar,
       FootballLive,
+    },
+    data() {
+      return {
+        windowWidth: window.innerWidth
+      };
+    },
+    mounted() {
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
     },
   }
 </script>
@@ -130,10 +143,37 @@
 
   #bannerFootball div button:hover {
     background: linear-gradient(to bottom, rgb(0, 130, 4) 5%, rgb(48, 255, 55) 100%);
-    background-color: #ff0505;
+    background-color: rgb(48, 255, 55);
   }
 
   #banner div button:active {
+    position: relative;
+    top: 1px;
+  }
+
+  .addFOOTBALL div button {
+    margin-top: 10px;
+    box-shadow: 4px 0px 29px 9px rgb(1, 112, 4);
+    background: linear-gradient(to bottom, rgb(48, 255, 55) 5%, rgb(0, 130, 4) 100%);
+    background-color: rgb(0, 130, 4);
+    border-radius: 34px;
+    border: 1px solid rgb(48, 255, 55);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 10px 31px;
+    text-decoration: none;
+    text-shadow: 0px 2px 0px rgb(0, 130, 4);
+  }
+
+  .addFOOTBALL div button:hover {
+    background: linear-gradient(to bottom, rgb(0, 130, 4) 5%, rgb(48, 255, 55) 100%);
+    background-color: rgb(48, 255, 55);
+  }
+
+  .addFOOTBALL div button:active {
     position: relative;
     top: 1px;
   }

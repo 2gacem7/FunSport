@@ -5,10 +5,9 @@
         <div class="card m-2">
             <div class="card-header d-flex justify-content-between" v-if="infoMatch[0]">
                 <h2 class="m-3">{{ infoMatch[0].league_name }}</h2>
-                <img class="p-3" :src="return_Link(infoMatch[0].league_logo)" alt="No image league" height="100" width="100" style="background-color:white;border-radius: 34px;"/>
                 <button class="btn btn-primary btnCustom" @click="go">Back</button>
             </div>
-
+            <img class="row mx-auto m-3" :src="return_Link(infoMatch[0].league_logo)" alt="No image league" height="100" width="100" />
             <h4 v-if="infoMatch[0]" class="m-3">Begin at: {{ infoMatch[0].match_date | moment("MMMM Do YYYY") }},
                 {{ infoMatch[0].match_time | moment("h:mm:ss")}}</h4>
             <div class="row justify-content-center">
@@ -26,8 +25,8 @@
                             style="max-width: 4rem" />
                     </p>
                 </div>
-                <p class="row justify-content-center font-weight-bold">Actual pronostics</p>
-                <div class="row justify-content-center"
+                <p class="row m-0 justify-content-center font-weight-bold">Actual pronostics</p>
+                <div class="row m-0 justify-content-center"
                     v-if="resultPronostic[0] && resultPronostic[0].count || resultPronostic[1] && resultPronostic[1].count">
                     <p>Winner:{{Math.round((resultPronostic[0].count/ totalPronostic) * 100)}}%</p>
                     <p class="ml-5" v-if="resultPronostic[1]">
@@ -49,7 +48,7 @@
                         <div class="card-header d-flex">
                             <span>Post the {{ commentary.createdAt  | moment("MMMM Do YYYY, h:mm  ")}} by
                                 {{ commentary.authorName.firstName }}: Winner {{ commentary.winnerId }}</span>
-                            <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto report"
+                            <button v-if="!commentary.isReported" class="btn btn-primary m-5 report"
                                 @click="reportCommentary(commentary._id)">Report this commentary</button>
                         </div>
                         <div class="card-body">
