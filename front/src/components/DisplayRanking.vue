@@ -151,7 +151,6 @@
                     .then((result) => {
                         this.info = result
                     })
-                    .catch((error) => console.log("error", error));
                 this.isLoading = false;
             },
             /**
@@ -188,7 +187,6 @@
                             requestOptions)
                         .then((response) => response.json())
                         .then((result) => (this.infoRanking = result))
-                        .catch((error) => console.log("error", error));
                 }
             },
             /**

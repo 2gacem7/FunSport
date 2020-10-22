@@ -145,7 +145,6 @@
         await fetch(`https://api.pandascore.co/${this.apiName}/matches`, requestOptions)
           .then((response) => response.json())
           .then((result) => (this.info = result))
-          .catch((error) => console.log("error", error));
       },
       /**
        * Return link to img for display in card

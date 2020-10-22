@@ -130,7 +130,6 @@
                     requestOptions)
                 .then(response => response.json())
                 .then(result => this.infoMatch = result)
-                .catch(error => console.log('error', error));
             this.getPronostics();
         },
 

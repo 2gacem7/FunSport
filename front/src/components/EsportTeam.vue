@@ -79,9 +79,7 @@
                         })
                     .then(response => response.json())
                     .then(result => infos = result)
-                    .catch(err => {
-                        console.error(err);
-                    });
+
                 this.infos = infos;
             }
         },

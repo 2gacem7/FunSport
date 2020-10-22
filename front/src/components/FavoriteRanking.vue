@@ -72,7 +72,6 @@
                     requestOptions)
                 .then((response) => response.json())
                 .then((result) => (this.infoRanking = result))
-                .catch((error) => console.log("error", error));
         },
         methods: {
             /**
