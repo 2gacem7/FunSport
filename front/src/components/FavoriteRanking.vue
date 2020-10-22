@@ -3,7 +3,7 @@
         <div class="card-header d-flex justify-content-between">
             <h3 class="text-center m-3"> {{ leagueName }} </h3>
         </div>
-        <div class="card-body m-0 overflow-auto">
+        <div class="card-body m-0 p-0 overflow-auto">
             <table class="table">
                 <thead>
                     <tr>
@@ -72,7 +72,6 @@
                     requestOptions)
                 .then((response) => response.json())
                 .then((result) => (this.infoRanking = result))
-                .catch((error) => console.log("error", error));
         },
         methods: {
             /**

@@ -224,7 +224,6 @@
             }
             this.info = response;
           })
-          .catch((error) => console.log("error", error));
       },
       /**
        * Return link to img for display in card

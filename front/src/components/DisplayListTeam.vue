@@ -168,7 +168,6 @@
             }
             this.info = response;
           })
-          .catch((error) => console.log("error", error));
       },
     },
   };

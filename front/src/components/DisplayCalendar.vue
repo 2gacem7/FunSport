@@ -142,10 +142,9 @@
           redirect: "follow",
         };
 
-        await fetch(`/pandascore/${this.apiName}/matches?token=${ENV.API_PANDA_SPORT}`, requestOptions)
+        await fetch(`/pandascore/${this.apiName}/matches`, requestOptions)
           .then((response) => response.json())
           .then((result) => (this.info = result))
-          .catch((error) => console.log("error", error));
       },
       /**
        * Return link to img for display in card

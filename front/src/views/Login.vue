@@ -124,9 +124,7 @@
           })
           .then((res) => res.clone().json())
           .then((json) => (response = json))
-          .catch(err => {
-            console.error(err);
-          });
+
         if (response.statusCode == 500) {
          this.msg["general"] = "Login Fail invalid credential";
          this.info = true;
