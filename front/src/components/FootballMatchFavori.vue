@@ -1,12 +1,12 @@
 <template>
-  <div class="m-3 card" style="max-height: 40rem; min-width: 30rem; max-width: 50rem">
+  <div class="m-3 card" style="max-height: 40rem;max-width: 50rem">
     <div class="card-header d-flex justify-content-between">
       <h3 v-if="info[0]" class="text-dark text-center">
         {{ info[0].match_hometeam_name }} vs {{ info[0].match_awayteam_name }}
       </h3>
     </div>
     <h3 class="card-header text-center text-dark">Match</h3>
-    <div class="card-body m-0 p-0 w-100 overflow-auto text-dark">
+    <div class="card-body m-0 p-5 w-100 overflow-auto text-dark">
       <div v-for="item in info" :key="item.id">
         <p class="text-center font-weight-bold">{{ item.match_round }}</p>
         <p class="text-center"><router-link v-bind:to="'/football/' + item.match_id">

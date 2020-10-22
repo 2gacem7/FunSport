@@ -4,8 +4,9 @@
       <h3>{{ sport }}</h3>
       {{ infos.name }}
     </div>
-    <div class="card-body m-0 p-0 w-100 ">
-      <table class="table">
+    <div class="card-body m-0 p-0 w-100">
+      <div class="w-100 overflow-auto">
+        <table class="table">
         <thead>
           <tr>
             <th class="h5 font-weight-bold text-center">Dates</th>
@@ -41,7 +42,7 @@
           </tr>
         </tbody>
       </table>
-
+      </div>
       <div class="card-footer d-flex text-dark">
         <button
           class="btn btn-danger m-0 p-0"
