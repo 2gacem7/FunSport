@@ -41,12 +41,10 @@ Pour chaque championnat Possibilité de trier les classements en fonction des in
 #### Informations
 création d'articles en texte riche, avec la possibilité d’inclure les données sportives dansses articles en les récupérant de l’API)ex: article sur les 10 meilleurs buteurs de Ligue 1 Uber Eats en récupérant les info viaAPI.
 
-### API proposée
-
--https://www.api-football.com/pricing  
--https://developer.sportradar.com/docs/read/Home#getting-started  
--https://rapidapi.com/api-sports/api/api-nba  
--https://rapidapi.com/sportcontentapi/api/tennis-live-data/endpoints  
+### API retenues
+ 
+-https://apifootball.com/ 
+-https://pandascore.co/ 
 
 ## Délai
 
