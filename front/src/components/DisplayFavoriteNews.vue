@@ -11,8 +11,10 @@
       ><br />
 
       <span>{{ extract }}</span>
-      <button class="btn btn-primary btnCustom" @click="goNews">View</button>
     </div>
+    <div class="card-body text-center">
+          <button class=" w-50 btn btn-primary btnCustom" @click="goNews">View</button>
+</div>
 
     <div class="card-footer d-flex text-dark">
       <button
