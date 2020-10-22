@@ -43,7 +43,6 @@
         },
         async mounted() {
             this.getInfo();
-            console.log('widget')
         },
         methods: {
             /**
