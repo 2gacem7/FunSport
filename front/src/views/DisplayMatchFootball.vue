@@ -7,7 +7,8 @@
                 <h2 class="m-3">{{ infoMatch[0].league_name }}</h2>
                 <button class="btn btn-primary btnCustom" @click="go">Back</button>
             </div>
-            <img class="row mx-auto m-3" :src="return_Link(infoMatch[0].league_logo)" alt="No image league" height="100" width="100" />
+            <img class="row mx-auto m-3" :src="return_Link(infoMatch[0].league_logo)" alt="No image league" height="100"
+                width="100" />
             <h4 v-if="infoMatch[0]" class="m-3">Begin at: {{ infoMatch[0].match_date | moment("MMMM Do YYYY") }},
                 {{ infoMatch[0].match_time | moment("h:mm:ss")}}</h4>
             <div class="row justify-content-center">
@@ -148,7 +149,9 @@
              * @public
              */
             go() {
-                this.$router.push("/football");
+                this.$router.push({
+                    name: this.$store.state.tabSelected.name
+                });
             },
             /**
              * This method is used to send the pronostic in database
