@@ -48,7 +48,7 @@ création d'articles en texte riche, avec la possibilité d’inclure les donné
 
 ### API retenues
  
--https://apifootball.com/ 
+-https://apifootball.com/   
 -https://pandascore.co/ 
 
 ## Délai
