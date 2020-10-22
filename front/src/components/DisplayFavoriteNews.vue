@@ -12,6 +12,9 @@
 
       <span>{{ extract }}</span>
     </div>
+    <div class="card-body text-center">
+          <button class=" w-50 btn btn-primary btnCustom" @click="goNews">View</button>
+</div>
 
     <div class="card-footer d-flex text-dark">
       <button
@@ -69,6 +72,16 @@ export default {
     }
   },
   methods: {
+    /**
+     * Redirect from detailNews
+     * @public
+     */
+    goNews(){
+      this.$router.push({
+        name: "detailNews",params:{
+        newsId:this.newsId}
+      });
+    },
     /**
      * Delete this components in my favorites
      * @public
