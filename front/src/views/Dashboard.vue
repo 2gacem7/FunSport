@@ -227,6 +227,7 @@
       }
       this.$store.dispatch("getMySports");
       this.$store.dispatch("getMyFavorites");
+      console.log(this.$store.state.MyFavorites)
     },
     computed: {
       mySports: function () {
