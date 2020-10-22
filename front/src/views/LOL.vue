@@ -1,8 +1,11 @@
 <template>
-  <div id="lol" style="background-color:rgba(131, 58, 180, 1)">
+  <div id="lol" class="pb-5" style="background-color:rgba(131, 58, 180, 1)">
     <Navbar />
     <TabBar />
-    <div id="bannerLOL">
+    <div id="bannerLOL" v-if="windowWidth > 1000">
+      <AddMySport />
+    </div>
+    <div v-else class="addLOL w-100 mx-auto">
       <AddMySport />
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
@@ -13,7 +16,7 @@
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
       <DisplayCalendar sport="LOL" apiName="lol" />
-      <img class="mb-5 mr-5 ml-5" style="margin-top: -35px" src="../assets/lol_logo.png">
+      <img v-if="windowWidth > 1000" class="mb-5 mr-5 ml-5" style="margin-top: -35px" src="../assets/lol_logo.png">
       <DisplayLastResults sport="LOL" apiName="lol" />
     </div>
   </div>
@@ -34,10 +37,10 @@
   import DisplaySearch from "@/components/DisplaySearch.vue";
 
 
-/**
- * View where you can find all components for the LOL game
- * @displayName LOL
- */
+  /**
+   * View where you can find all components for the LOL game
+   * @displayName LOL
+   */
   export default {
     name: "Lol",
     components: {
@@ -51,10 +54,21 @@
       DisplayRanking,
       DisplaySearch
     },
+    data() {
+      return {
+        windowWidth: window.innerWidth
+      };
+    },
+    mounted() {
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
+    },
   };
 </script>
 <style>
-@import url(//db.onlinewebfonts.com/c/5522a80b4a47626c01fb49f6fad2de65?family=ITC+Friz+Quadrata);
+  @import url(//db.onlinewebfonts.com/c/5522a80b4a47626c01fb49f6fad2de65?family=ITC+Friz+Quadrata);
+
   @font-face {
     font-family: "ITC Friz Quadrata";
     src: url("//db.onlinewebfonts.com/t/5522a80b4a47626c01fb49f6fad2de65.eot");
@@ -164,6 +178,33 @@
   }
 
   #bannerLOL div button:active {
+    position: relative;
+    top: 1px;
+  }
+
+  .addLOL div button {
+    margin-top: 10px;
+    box-shadow: 4px 0px 29px 9px #ba1bc2;
+    background: linear-gradient(to bottom, #cdb2f7 5%, #ff05b8 100%);
+    background-color: #f75ccb;
+    border-radius: 34px;
+    border: 1px solid #ba1bc2;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 10px 31px;
+    text-decoration: none;
+    text-shadow: 0px 2px 0px #490a4d;
+  }
+
+  .addLOL div button:hover {
+    background: linear-gradient(to bottom, #ff05b8 5%, #cdb2f7 100%);
+    background-color: #f75ccb;
+  }
+
+  .addLOL div button:active {
     position: relative;
     top: 1px;
   }

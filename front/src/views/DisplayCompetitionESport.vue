@@ -3,7 +3,7 @@
     <Navbar />
     <TabBar />
     <div class="card-deck m-2">
-      <div class="card" style="width: 30rem">
+      <div class="card">
         <div class="card-header d-flex justify-content-between">
           <h3>Competition</h3>
           <button class="btn btn-primary btnCustom" @click="go">Back</button>
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="card" style="width: 30rem">
+      <div class="card">
         <div class="card-header h3">League</div>
         <div class="card-body">
           <h4 v-if="datas.league">
@@ -66,7 +66,7 @@
           class="card m-4 bg-light p-2"
           v-for="match in datas.matches"
           :key="match.id"
-          style="min-width: 30rem"
+          style="min-width:10rem;max-width: 30rem"
         >
           <h4>{{ match.name }}</h4>
           <br />

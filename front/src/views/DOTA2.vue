@@ -1,8 +1,11 @@
 <template>
-  <div id="dota2" style="background-color:rgb(255, 174, 145)">
+  <div id="dota2" class="pb-5" style="background-color:rgb(255, 174, 145)">
     <Navbar />
     <TabBar />
-    <div id="bannerDOTA">
+    <div id="bannerDOTA" v-if="windowWidth > 1000">
+      <AddMySport />
+    </div>
+    <div v-else class="addDOTA2 w-100 mx-auto">
       <AddMySport />
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
@@ -13,7 +16,7 @@
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
       <DisplayCalendar sport="DOTA2" apiName="dota2" />
-      <img class="m-5 p-5" style="margin-top: -35px" src="../assets/dota2_logo.png">
+      <img v-if="windowWidth > 1000" class="m-5 p-5" style="margin-top: -35px" src="../assets/dota2_logo.png">
       <DisplayLastResults sport="DOTA2" apiName="dota2" />
     </div>
   </div>
@@ -34,10 +37,10 @@
   import DisplaySearch from "@/components/DisplaySearch.vue";
 
 
-/**
- * View where you can find all components for the DOTA2 game
- * @displayName DOTA2
- */
+  /**
+   * View where you can find all components for the DOTA2 game
+   * @displayName DOTA2
+   */
   export default {
     name: "DOTA2",
     components: {
@@ -50,6 +53,16 @@
       DisplayLastResults,
       DisplayRanking,
       DisplaySearch
+    },
+    data() {
+      return {
+        windowWidth: window.innerWidth
+      };
+    },
+    mounted() {
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
     },
   }
 </script>
@@ -69,11 +82,11 @@
   #dota2 .card-header {
     font-family: "dota2";
     font-weight: bolder;
-    text-shadow: 0px 0px 10px rgba(253,156,29,1);
+    text-shadow: 0px 0px 10px rgba(253, 156, 29, 1);
     color: #ffffff !important;
-    border-bottom: 1px solid rgba(253,156,29,1);
-    background: rgb(255,90,0);
-background: linear-gradient(90deg, rgba(255,90,0,1) 0%, rgba(253,156,29,1) 76%, rgba(239,252,69,1) 100%);
+    border-bottom: 1px solid rgba(253, 156, 29, 1);
+    background: rgb(255, 90, 0);
+    background: linear-gradient(90deg, rgba(255, 90, 0, 1) 0%, rgba(253, 156, 29, 1) 76%, rgba(239, 252, 69, 1) 100%);
   }
 
   #dota2 .card-header button {
@@ -144,16 +157,45 @@ background: linear-gradient(90deg, rgba(255,90,0,1) 0%, rgba(253,156,29,1) 76%, 
     font-size: 17px;
     padding: 10px 31px;
     text-decoration: none;
-    text-shadow: 0px 2px 0px  #ffbc57;
+    text-shadow: 0px 2px 0px #ffbc57;
   }
 
   #bannerDOTA div button:hover {
     background: linear-gradient(to bottom, #ff6905 5%, #ffbc57 100%);
-    background-color:#ffbc57;
+    background-color: #ffbc57;
   }
 
   #bannerDOTA div button:active {
     position: relative;
     top: 1px;
   }
+
+  .addDOTA2 div button{
+    margin-top: 10px;
+    box-shadow: 4px 0px 29px 9px #ffa856;
+    background: linear-gradient(to bottom, #ffbc57 5%, #ff6905 100%);
+    background-color: #ffbc57;
+    border-radius: 34px;
+    border: 1px solid #ff6905;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 10px 31px;
+    text-decoration: none;
+    text-shadow: 0px 2px 0px #ffbc57;
+  }
+
+   .addDOTA2 div button:hover{
+    background: linear-gradient(to bottom, #ff6905 5%, #ffbc57 100%);
+    background-color: #ffbc57;
+  }
+
+    .addDOTA2 div button:active {
+    position: relative;
+    top: 1px;
+  }
+
+
 </style>

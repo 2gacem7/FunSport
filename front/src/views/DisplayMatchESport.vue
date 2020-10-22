@@ -65,7 +65,7 @@
             <div class="card-header d-flex">
               <span>Post the {{ commentary.createdAt  | moment("MMMM Do YYYY, h:mm  ")}} by
                 {{ commentary.authorName.firstName }}: Winner {{ commentary.winnerId }}</span>
-              <button v-if="!commentary.isReported" class="btn btn-primary mr-2 ml-auto report"
+              <button v-if="!commentary.isReported" class="btn btn-primary m-5 report"
                 @click="reportCommentary(commentary._id)">Report this commentary</button>
 
             </div>
