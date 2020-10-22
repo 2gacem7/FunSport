@@ -88,12 +88,14 @@
           <div class="card-deck m-0">
             <div v-for="favorite in myFavorites" :key="favorite._id">
               <EsportTeam v-if="
-                favorite.data[0].type == 'team'&&
+                favorite.data[0].type == 'team' &&
                 (favorite.data[0].sport == 'CS-GO' ||
                   favorite.data[0].sport == 'LOL'||
                   favorite.data[0].sport == 'DOTA2')
-              " :id="favorite._id" :name="favorite.data[0].name" :apiName="favorite.data[0].sport"
-                v-on:delfavorite="delToMyFavorites" />
+              " :id="favorite._id" 
+              :name="favorite.data[0].name" 
+              :apiName="favorite.data[0].sport"
+              v-on:delfavorite="delToMyFavorites" />
             </div>
           </div>
           <div class="card-deck m-0">

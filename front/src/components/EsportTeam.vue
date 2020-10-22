@@ -1,5 +1,5 @@
 <template>
-    <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 30rem" v-if="infos[0]">
+    <div class="card m-3 bg-light" style="max-height:30rem;max-width: 30rem" v-if="infos[0]">
         <div class="card-header d-flex justify-content-between">
             <h3 class="text-dark text-center m-3"> {{ apiName }} TEAM : {{ infos[0].name }} </h3>
             <img v-if="infos[0].image_url != null" :src="infos[0].image_url" alt="" class="mx-auto" style="width:05rem">
@@ -43,6 +43,7 @@
         },
         async mounted() {
             this.getInfo();
+            console.log('widget')
         },
         methods: {
             /**
@@ -71,7 +72,7 @@
                 let infos = [];
                 await fetch("https://api.pandascore.co/" + sportName +
                         "/teams?sort=name&per_page=100&search%5Bslug%5D=" + this
-                        .name+"?token="+ENV.API_PANDA_SPORT, {
+                        .name, {
                             "method": "GET",
                             "headers": {
                                 "authorization": "Bearer " + ENV.API_PANDA_SPORT
