@@ -2,7 +2,7 @@
 
 ## Aperçu
 <p align="center">
-  <img src="exemple.gif" alt="Sublime's custom image"/>
+  <img src="documentations/preview.gif" alt="Preview's custom image"/>
 </p>
 
 ## Cahier des charges
