@@ -85,6 +85,10 @@ Lancer le serveur back
 `cd back`  
 `npm start`  
 
+## Documentations
+
+La documentation technique du back, du front et de la base de donnée ainsi que la documentation utilisateur sont dans le dossier documentations
+
 ## L'équipe
 
 Vous êtes curieux de savoir qui a travaillé sur le projet  
