@@ -85,8 +85,8 @@ Lancer le serveur back
 Vous êtes curieux de savoir qui a travaillé sur le projet  
 Lotfi Doucanef  
 Gacem Ben ayad  
-YohannEpitech  
-Kevin Bridonneau  
+[YohannEpitech](https://github.com/YohannEpitech)  
+[Kevin Bridonneau](https://github.com/Kevin-Bridonneau) 
 
 ## Licence
 
