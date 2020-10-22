@@ -43,7 +43,6 @@
         },
         async mounted() {
             this.getInfo();
-            console.log('widget')
         },
         methods: {
             /**
@@ -88,6 +87,3 @@
         },
     };
 </script>
-
-<style scoped>
-</style>
