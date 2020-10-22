@@ -27,7 +27,7 @@
               <input required v-model="password" type="password" />
             </div>
             <div class="row mt-3">
-              <button type="submit" class="btn btn-info">Sign In</button>
+              <button type="submit" class="btn btn-info btnCustom">Sign In</button>
             </div>
           </div>
         </div>

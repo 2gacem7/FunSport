@@ -134,7 +134,7 @@
             >
           </div>
           <div class="row mt-2">
-            <button class="btn btn-info" @click="register()">Sign Up</button>
+            <button class="btn btn-info btnCustom" @click="register()">Sign Up</button>
           </div>
         </div>
       </div>
