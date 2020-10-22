@@ -2,8 +2,8 @@
   <div id="news" style="background-color: rgb(29, 28, 28)">
     <Navbar />
     <TabBar />
-    <div id="myCarousel" class="carousel slide border" data-ride="carousel"
-      style="border:none!important;border-bottom:2px solid white!important" v-if="lastNews.length > 2">
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel"
+      style="border:none!important;border-bottom:2px solid white!important" v-if=" windowWidth > 850 && lastNews.length > 2">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img v-if="lastNews[0].sport == 'CSGO'" class="d-block w-100" src="../assets/carroussel_CSGO.png">
@@ -88,11 +88,11 @@
           <v-md-preview class="row" :text="'Preview: '+ getResume(news.content)+'...'"></v-md-preview>
 
           <div class="d-flex justify-content-between">
-            <button class="btn btn-primary w-25 newsButton" @click="goToNews(news)">
+            <button class="btn btn-primary newsButton" @click="goToNews(news)">
               View
             </button>
             <button v-if="$store.state.UserData.id != '' && !isInMyFavorite(news._id)"
-              class="btn btn-primary w-25 newsButton" @click="addToMyFavorites(news)">
+              class="btn btn-primary newsButton" @click="addToMyFavorites(news)">
               Add
             </button>
           </div>
@@ -151,6 +151,7 @@
         DOTA2: "../assets/carroussel_DOTA2.png",
         FOOTBALL: "../assets/carroussel_FOOTBALL.png",
         lastNews: [],
+        windowWidth: window.innerWidth
       };
     },
     /**
@@ -159,6 +160,9 @@
      */
     mounted() {
       this.getNews();
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
     },
     methods: {
       /**
@@ -291,7 +295,7 @@
     box-shadow: 0px 0px 5px 5px #9cfdf9;
   }
 
-  #news .input-group{
+  #news .input-group {
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 5px 5px #9cfdf9;
     -moz-box-shadow: 0px 0px 5px 5px #9cfdf9;

@@ -3,9 +3,9 @@
     <div class="card-header text-dark justify-content-between">
       <h3>Search a match or competition</h3>
     </div>
-    <div class="d-flex m-1">
+    <div class="m-1">
       <select
-        class="py-1"
+        class="py-1 m-2"
         v-model="type"
         required
         name="formSelect"
@@ -16,11 +16,11 @@
         <option value="competitions">Competitions</option>
       </select>
       <input
-        class="mr-2 mr-auto ml-1 p-0"
+        class="m-2 mr-auto ml-1 p-0"
         placeholder="Search value"
         v-model="searchValue"
       />
-      <button class="btn btn-primary mr-2" @click="launchSearch">Search</button>
+      <button class="btn btn-primary m-2" @click="launchSearch">Search</button>
     </div>
     <div class="h5 bg-light text-dark font-weight-bold text-center">
       Results

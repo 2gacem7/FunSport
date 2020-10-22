@@ -1,5 +1,10 @@
 # FunSport
 
+## Aperçu
+<p align="center">
+  <img src="documentations/preview.gif" alt="Preview's custom image"/>
+</p>
+
 ## Cahier des charges
 (ce qui suit est la copie du cahier des charges transmis)
 
@@ -41,43 +46,14 @@ Pour chaque championnat Possibilité de trier les classements en fonction des in
 #### Informations
 création d'articles en texte riche, avec la possibilité d’inclure les données sportives dansses articles en les récupérant de l’API)ex: article sur les 10 meilleurs buteurs de Ligue 1 Uber Eats en récupérant les info viaAPI.
 
-### API proposée
-
--https://www.api-football.com/pricing  
--https://developer.sportradar.com/docs/read/Home#getting-started  
--https://rapidapi.com/api-sports/api/api-nba  
--https://rapidapi.com/sportcontentapi/api/tennis-live-data/endpoints  
+### API retenues
+ 
+-https://apifootball.com/   
+-https://pandascore.co/ 
 
 ## Délai
 
 Le projet est réalisé en 3 semaines
-
-## Méthode utilisée pour le développement : méthode agile en 3 sprints
-### Sprint 1/3 (1 semaine)
-L’utilisateur doit pouvoir créer un compte et se connecter.
-Il a accès à sa page profil (login avec email) ou il peut voir et modifier :
-- ses sports favoris
-- ses équipes/joueurs favoris nom logo (si existant)
-- classement actuel
-- ses informations Nom, Prénom, Email et Phone 
-L’utilisateur non connecté doit avoir accès au minimum au données suivantes pour lesdifférents sports (à vous de choisir les sports minimum 4 en fin de projet, mais 1 seuldemandé pour le sprint 1 // Remarque : un sport feminin = un sport / ex: football masculin +feminin = 2 sports) :
-- Equipes / joueurs○Matches
-- Côtes (si existant)○Classements
-- Calendrier
-Les sports étant de votre choix, vous pouvez ressortir des informations complémentaires quivous semblent importantes.
-
-### Sprint 2/3 (1 semaine)
-Il pourra consulter les résultats des matchs en direct
-- Poster un pronostic accompagné ou non d’un commentaire
-- Consulter les pronostics 
-- Ajouter une compétition/équipes ou match en favoris
-- Gestion du compte Admin
-
-### Sprint 3/3 (1 semaine)
-L’utilisateur aura la capacité d’ajouter un article, modifier supprimé.
-- Il pourra consulter des articles,ajouter au favoris et trier par sport
-- L’utilisateur aura la capacité de classer les informations par nombre depoints,victoires,buts.
-- Gestion des bugs
 
 ## Technologies utilisées
 Backend : Nestjs  
@@ -90,10 +66,13 @@ Clone the repo où vous voulez
 `git clone git@github.com:YohannEpitech/FunSport.git`  
 Aller à l'intérieur du dossier cloné  
 `cd FunSport`  
-Renommer le fichier env.config.js.example en env.config.js et remplacer "Your CLIENT_ID" par votre api_sportradar  
-`module.exports = {
-    CLIENT_ID : "Your CLIENT_ID"
-};`
+Renommer le fichier env.config.js.example en env.config.js et remplacer les 2 champs "Your CLIENT_ID" par votre client_id apifootball et client_id pandascore 
+Egalement, vous pouvez remplacer BACK_URL en fonction de votre configuration. 
+`module.exports = {`  
+    `API_PANDA_SPORT:"Your CLIEND_ID", `   
+    `API_FOOTBALL:"Your CLIEND_ID", `   
+    `API_BACKEND:"BACK_URL"  `  
+`};`
 
 Installer les dépendances de Nodejs (commande à exécuter dans le dossier back et front)  
 `npm install`  
@@ -109,10 +88,10 @@ Lancer le serveur back
 ## L'équipe
 
 Vous êtes curieux de savoir qui a travaillé sur le projet  
-Lotfi Doucanef  
-Gacem Ben ayad  
-YohannEpitech  
-Kevin Bridonneau  
+[Lotfi Doucanef](https://github.com/Lotfi93330)  
+[Gacem Ben ayad](https://github.com/2gacem7)  
+[YohannEpitech](https://github.com/YohannEpitech)   
+[Kevin Bridonneau](https://github.com/Kevin-Bridonneau)  
 
 ## Licence
 

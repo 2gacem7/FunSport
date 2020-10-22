@@ -1,8 +1,11 @@
 <template>
-  <div id="csgo">
+  <div id="csgo" class="pb-5">
     <Navbar />
     <TabBar />
-    <div id="banner">
+    <div id="banner" v-if="windowWidth > 1000">
+      <AddMySport />
+    </div>
+    <div v-else class="addCSGO w-100 mx-auto">
       <AddMySport />
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
@@ -13,7 +16,7 @@
     </div>
     <div class="card-deck m-0 p-0 justify-content-between">
       <DisplayCalendar sport="CS-GO" apiName="csgo" />
-      <img class="m-5" src="../assets/sniper.png">
+      <img  v-if="windowWidth > 1000" class="m-5" src="../assets/sniper.png">
       <DisplayLastResults sport="CS-GO" apiName="csgo" />
     </div>
   </div>
@@ -49,6 +52,16 @@
       DisplayLastResults,
       DisplayRanking,
       DisplaySearch
+    },
+    data() {
+      return {
+        windowWidth: window.innerWidth
+      };
+    },
+    mounted() {
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
     },
   }
 </script>
@@ -157,6 +170,33 @@
   }
 
   #banner div button:active {
+    position: relative;
+    top: 1px;
+  }
+
+  .addCSGO div button{
+    margin-top: 10px;
+    box-shadow: 4px 0px 29px 9px #c21b1b;
+    background: linear-gradient(to bottom, #eb6161 5%, #ff0505 100%);
+    background-color: #eb6161;
+    border-radius: 34px;
+    border: 1px solid #ab1919;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 10px 31px;
+    text-decoration: none;
+    text-shadow: 0px 2px 0px #662828;
+  }
+
+   .addCSGO div button:hover{
+    background: linear-gradient(to bottom, #ff0505 5%, #eb6161 100%);
+    background-color: #ff0505;
+  }
+
+    .addCSGO div button:active {
     position: relative;
     top: 1px;
   }
