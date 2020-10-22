@@ -2,7 +2,7 @@
   <div id="news" style="background-color: rgb(29, 28, 28)">
     <Navbar />
     <TabBar />
-    <div id="myCarousel" class="carousel slide border" data-ride="carousel"
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel"
       style="border:none!important;border-bottom:2px solid white!important" v-if=" windowWidth > 850 && lastNews.length > 2">
       <div class="carousel-inner">
         <div class="carousel-item active">
