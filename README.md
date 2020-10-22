@@ -1,7 +1,9 @@
 # FunSport
 
 ## Aperçu
-https://cdn.discordapp.com/attachments/762656015975448608/768758605221593108/e0db3feeec23488bd6b0d08d2f686b34.gif
+<p align="center">
+  <img src="exemple.gif" alt="Sublime's custom image"/>
+</p>
 
 ## Cahier des charges
 (ce qui suit est la copie du cahier des charges transmis)
