@@ -83,10 +83,10 @@ Lancer le serveur back
 ## L'équipe
 
 Vous êtes curieux de savoir qui a travaillé sur le projet  
-[Lotfi Doucanef](https://github.com/Lotfi93330)
-[Gacem Ben ayad](https://github.com/2gacem7)
-[YohannEpitech](https://github.com/YohannEpitech)  
-[Kevin Bridonneau](https://github.com/Kevin-Bridonneau) 
+[Lotfi Doucanef](https://github.com/Lotfi93330)  
+[Gacem Ben ayad](https://github.com/2gacem7)  
+[YohannEpitech](https://github.com/YohannEpitech)   
+[Kevin Bridonneau](https://github.com/Kevin-Bridonneau)  
 
 ## Licence
 
