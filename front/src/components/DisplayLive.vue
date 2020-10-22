@@ -154,7 +154,7 @@
           cache: "default",
         };
 
-        const datas = await fetch(`https://api.pandascore.co/lives?token=${ENV.API_PANDA_SPORT}`, options);
+        const datas = await fetch(`https://api.pandascore.co/lives`, options);
         const json = await datas.json();
         if (datas.ok) {
           this.infos = [];

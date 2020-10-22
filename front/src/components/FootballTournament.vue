@@ -5,7 +5,7 @@
         {{ infos[0].league_name }}
       </h3>
     </div>
-    <div class="card-body m-0 overflow-auto">
+    <div class="card-body m-0 p-0 overflow-auto">
       <table class="table">
         <thead>
           <tr>
