@@ -1,10 +1,10 @@
 <template>
-  <div class="card m-3 bg-light" style="max-height: 30rem; max-width: 20rem">
+  <div class="card m-3 bg-light" style="max-height: 32rem; max-width: 22rem">
     <div class="card-header text-center">
       <h3>{{ sport }}</h3>
       {{ infos.name }}
     </div>
-    <div class="card-body m-0 p-0 w-100 overflow-auto">
+    <div class="card-body m-0 p-0 w-100 ">
       <table class="table">
         <thead>
           <tr>
@@ -44,7 +44,7 @@
 
       <div class="card-footer d-flex text-dark">
         <button
-          class="btn btn-danger p-1"
+          class="btn btn-danger m-0 p-0"
           style="width: 100%"
           @click="delToMyFavorites()"
         >

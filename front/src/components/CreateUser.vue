@@ -291,13 +291,20 @@
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-    .card-body {
-        background-color: rgb(72, 99, 255);
-        font-family: 'Roboto Mono', monospace;
-    }
+  .card-header {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
+    color: #ffffff !important;
+    border-bottom: 3px solid rgb(255, 255, 255);
+    background: rgb(131, 58, 180);
+    background: linear-gradient(90deg, rgba(194, 6, 62, 0.527) 0%, rgba(6, 188, 194, 0.527) 50%, rgb(69, 252, 124) 100%);
+  }
 
-    .card-header {
-        background-color: rgba(72, 99, 255, 0.515);
-        font-family: 'Roboto Mono', monospace;
-    }
+  .card-body {
+    background: rgb(174, 238, 230);
+    background: -moz-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#aeeee6", endColorstr="#1f79ec", GradientType=1);
+  }
 </style>

@@ -3,7 +3,7 @@
         <div class="card-header d-flex justify-content-between">
             <h3 class="text-center m-3"> {{ leagueName }} </h3>
         </div>
-        <div class="card-body m-0 p-0 overflow-auto">
+        <div class="card-body m-0 overflow-auto">
             <table class="table">
                 <thead>
                     <tr>
@@ -17,15 +17,15 @@
                         <td class="text-center">
                             {{ item.rank }}
                         </td>
-                        <td class="text-center">
+                        <td class="text-center ">
                             <p class="font-weight-bold">{{item.team.name}}</p>
-                            <img :src="return_Link(item)" alt="no team badge" style="max-width: 7rem" />
+                            <img :src="return_Link(item)" alt="no team badge" style="max-width: 6rem" />
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-danger p-1" style="width:100%" @click="delToMyFavorites()">Unfav</button>
+        <button class="btn btn-danger p-0" style="width:100%" @click="delToMyFavorites()">Unfav</button>
     </div>
 </template>
 

@@ -7,7 +7,7 @@
       style="width: 90%; background-color: #f4f4f4e3"
     >
       <div class="card-header d-flex justify-content-between">
-        <h4>Manage Users</h4>
+        <h2>Manage Users</h2>
         <button class="btn btn-warning" @click="createUser">
           Create new user
         </button>
@@ -21,9 +21,9 @@
         >
           <div class="row d-flex justify-content-between" style="width: 100%">
             <h5 class="m-2">
-              <span style="font-style: italic"></span> email : {{ user.email }}
+              <span style="font-style: italic">Email : {{ user.email }}</span>
             </h5>
-            <p class="m-2">Admin: {{ user.isAdmin }}</p>
+            <h5 class="m-2">Admin: {{ user.isAdmin }}</h5>
           </div>
           <button class="btn btn-success mr-2" @click="updateUser(user)">
             Update
@@ -145,13 +145,20 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
-.card-body {
-  background-color: rgb(72, 99, 255);
-  font-family: "Roboto Mono", monospace;
-}
+  .card-header {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.91);
+    color: #ffffff !important;
+    border-bottom: 3px solid rgb(255, 255, 255);
+    background: rgb(131, 58, 180);
+    background: linear-gradient(90deg, rgba(194, 6, 62, 0.527) 0%, rgba(6, 188, 194, 0.527) 50%, rgb(69, 252, 124) 100%);
+  }
 
-.card-header {
-  background-color: rgba(72, 99, 255, 0.515);
-  font-family: "Roboto Mono", monospace;
-}
+  .card-body {
+    background: rgb(174, 238, 230);
+    background: -moz-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    background: radial-gradient(circle, rgba(174, 238, 230, 1) 17%, rgba(31, 121, 236, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#aeeee6", endColorstr="#1f79ec", GradientType=1);
+  }
 </style>
