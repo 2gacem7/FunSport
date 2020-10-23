@@ -66,7 +66,7 @@ Clone the repo où vous voulez
 `git clone git@github.com:YohannEpitech/FunSport.git`  
 Aller à l'intérieur du dossier cloné  
 `cd FunSport`  
-Renommer le fichier env.config.js.example en env.config.js et remplacer les 2 champs "Your CLIENT_ID" par votre client_id apifootball et client_id pandascore 
+Renommer le fichier front/env.config.js.example en front/env.config.js et remplacer les 2 champs "Your CLIENT_ID" par votre client_id apifootball et client_id pandascore 
 Egalement, vous pouvez remplacer BACK_URL en fonction de votre configuration. 
 `module.exports = {`  
     `API_PANDA_SPORT:"Your CLIEND_ID", `   
@@ -74,16 +74,28 @@ Egalement, vous pouvez remplacer BACK_URL en fonction de votre configuration.
     `API_BACKEND:"BACK_URL"  `  
 `};`
 
+### Développement par exemple sur localhost
 Installer les dépendances de Nodejs (commande à exécuter dans le dossier back et front)  
 `npm install`  
+
+Préciser l'url du back dans la variable d'environnement API_BACKEND du fichier front/env.config.js (par exemple, localhost:3000 sur utilisation de NestJS avec les paramètres par défaut)
 
 Lancer le serveur front   
 `cd front`  
 `npm run serve`  
 
 Lancer le serveur back  
-`cd back`  
-`npm start`  
+`cd ../back`  
+`npm start:dev`  
+
+### Déploiement
+Modifier la variable d'environnement API_BACKEND du fichier front/env.config.js en fonction de votre configuration
+Lancer la commande dans le dossier front  
+`npm run build`
+
+copier votre dist à l'endroit voulu.  
+
+Adapter la configuration de votre serveur HTTP en fonction du choix précédent.
 
 ## Documentations
 
